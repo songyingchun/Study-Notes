@@ -116,5 +116,4 @@ Please don't use any `<blink>` tags.
 [id]: url/to/image  "Optional title attribute"
 
    
-
-
+[Markdown 常用语法](https://ouweiya.gitbooks.io/markdown/01/%E6%A0%87%E9%A2%98.html)
