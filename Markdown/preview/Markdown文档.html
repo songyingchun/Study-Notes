@@ -65,68 +65,591 @@
 				</div>
         <div id='readme' style='width:70%;margin-left:20%;'>
           	<article class='markdown-body'>
-            	<h1 id="1-markdown-">1. 安装Markdown主题</h1>
-<h2 id="1-1-markdonw-theme-kit">1.1. Markdonw Theme Kit</h2>
+            	<p>&lt;!DOCTYPE html&gt;
+  <html>
+    <head>
+      <title>Markdown文档</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"></p>
+<pre><code>  &lt;link rel=&quot;stylesheet&quot; href=&quot;file:///C:\Users\Administrator\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.3.4\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css&quot;&gt;
+
+
+
+
+
+
+
+
+
+
+
+  &lt;style&gt; 
+  /**
+</code></pre><ul>
+<li>prism.js Github theme based on GitHub&#39;s theme.</li>
+<li><p>@author Sam Clarke
+<em>/
+code[class</em>=&quot;language-&quot;],
+pre[class*=&quot;language-&quot;] {
+color: #333;
+background: none;
+font-family: Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;
+text-align: left;
+white-space: pre;
+word-spacing: normal;
+word-break: normal;
+word-wrap: normal;
+line-height: 1.4;</p>
+<p>-moz-tab-size: 8;
+-o-tab-size: 8;
+tab-size: 8;</p>
+<p>-webkit-hyphens: none;
+-moz-hyphens: none;
+-ms-hyphens: none;
+hyphens: none;
+}</p>
+</li>
+</ul>
+<p>/<em> Code blocks </em>/
+pre[class<em>=&quot;language-&quot;] {
+  padding: .8em;
+  overflow: auto;
+  /</em> border: 1px solid #ddd; <em>/
+  border-radius: 3px;
+  /</em> background: #fff; */
+  background: #f5f5f5;
+}</p>
+<p>/<em> Inline code </em>/
+:not(pre) &gt; code[class*=&quot;language-&quot;] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}</p>
+<p>.token.comment,
+.token.blockquote {
+  color: #969896;
+}</p>
+<p>.token.cdata {
+  color: #183691;
+}</p>
+<p>.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}</p>
+<p>.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}</p>
+<p>.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}</p>
+<p>.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}</p>
+<p>.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}</p>
+<p>.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}</p>
+<p>.token.entity {
+  cursor: help;
+}</p>
+<p>.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}</p>
+<p>.token.list {
+  color: #ed6a43;
+}</p>
+<p>.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}</p>
+<p>.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}</p>
+<p>.token.bold {
+  font-weight: bold;
+}</p>
+<p>.token.italic {
+  font-style: italic;
+}</p>
+<p>/<em> JSON </em>/
+.language-json .token.property {
+  color: #183691;
+}</p>
+<p>.language-markup .token.tag .token.punctuation {
+  color: #333;
+}</p>
+<p>/<em> CSS </em>/
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}</p>
+<p>/<em> YAML </em>/
+.language-yaml .token.atrule {
+  color: #63a35c;
+}</p>
+<p>code.language-yaml {
+  color: #183691;
+}</p>
+<p>/<em> Ruby </em>/
+.language-ruby .token.function {
+  color: #333;
+}</p>
+<p>/<em> Markdown </em>/
+.language-markdown .token.url {
+  color: #795da3;
+}</p>
+<p>/<em> Makefile </em>/
+.language-makefile .token.symbol {
+  color: #795da3;
+}</p>
+<p>.language-makefile .token.variable {
+  color: #183691;
+}</p>
+<p>.language-makefile .token.builtin {
+  color: #0086b3;
+}</p>
+<p>/<em> Bash </em>/
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:&quot;Helvetica Neue&quot;,Helvetica,&quot;Segoe UI&quot;,Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body&gt;:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body&gt;p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body&gt;ul,html body&gt;ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li&gt;p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote&gt;:first-child{margin-top:0}html body blockquote&gt;:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,&#39;Courier New&#39;,monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:&quot;\00a0&quot;}html body pre&gt;code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers&gt;code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows&gt;span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows&gt;span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for=&quot;preview&quot;]) .code-chunk .btn-group{display:none}.markdown-preview:not([for=&quot;preview&quot;]) .code-chunk .status{display:none}.markdown-preview:not([for=&quot;preview&quot;]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/<em> Please visit the URL below for more information: </em>/
+/<em>   <a href="https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css">https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css</a> </em>/</p>
+<pre><code>  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body for=&quot;html-export&quot;&gt;
+  &lt;div class=&quot;mume markdown-preview   &quot;&gt;
+  &lt;h1 class=&quot;mume-header&quot; id=&quot;1-%E5%AE%89%E8%A3%85markdown%E4%B8%BB%E9%A2%98&quot;&gt;1. 安装Markdown主题&lt;/h1&gt;
+</code></pre><h2 class="mume-header" id="11-markdonw-theme-kit">1.1. Markdonw Theme Kit</h2>
+
 <ul>
 <li>调试-&gt;安装其他调试器-&gt;输入Markdonw Theme Kit</li>
 <li>文件-&gt;首选项-&gt;颜色主题</li>
 </ul>
-<h2 id="1-2-vscode-markdown-css">1.2. vscode-markdown-css</h2>
+<h2 class="mume-header" id="12-vscode-markdown-css">1.2. vscode-markdown-css</h2>
+
 <ul>
 <li>下载<a href="https://github.com/raycon/vscode-markdown-css">vscode-markdown-css</a></li>
 <li>修改文件：文件-&gt;首选项-&gt;设置-&gt;markdown</li>
 <li>&quot;markdown.styles&quot;: [&quot;&quot;]</li>
 </ul>
-<h1 id="2-i5ting">2. 生成左侧导航栏 <a href="https://github.com/i5ting/tocmd.npm">i5ting</a></h1>
-<h2 id="2-1-">2.1. 安装</h2>
-<pre><code class="lang-html">npm install -g i5ting_toc
-</code></pre>
-<h2 id="2-2-">2.2. 生成导航栏</h2>
-<pre><code class="lang-html">i5ting_toc -f sample.md -o
-</code></pre>
-<h1 id="3-">3. （在线）编辑器</h1>
+<h1 class="mume-header" id="2-%E7%94%9F%E6%88%90%E5%B7%A6%E4%BE%A7%E5%AF%BC%E8%88%AA%E6%A0%8F-i5tinghttpsgithubcomi5tingtocmdnpm">2. 生成左侧导航栏 <a href="https://github.com/i5ting/tocmd.npm">i5ting</a></h1>
+
+<h2 class="mume-header" id="21-%E5%AE%89%E8%A3%85">2.1. 安装</h2>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">npm install -g i5ting_toc
+</pre><h2 class="mume-header" id="22-%E7%94%9F%E6%88%90%E5%AF%BC%E8%88%AA%E6%A0%8F">2.2. 生成导航栏</h2>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">i5ting_toc -f sample.md -o
+</pre><h1 class="mume-header" id="3-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91%E5%99%A8">3. （在线）编辑器</h1>
+
 <ul>
 <li><a href="https://www.zybuluo.com/mdeditor">CMD　Markdown编辑器</a></li>
 </ul>
-<h1 id="4-">4. 语法</h1>
-<h2 id="4-1-">4.1. 常用部分</h2>
-<h3 id="4-1-1-">4.1.1. 标题</h3>
-<h4 id="4-1-1-1-">4.1.1.1. 段落标题</h4>
-<pre><code class="lang-html"># h1
+<h1 class="mume-header" id="4-%E8%AF%AD%E6%B3%95">4. 语法</h1>
+
+<h2 class="mume-header" id="41-%E5%B8%B8%E7%94%A8%E9%83%A8%E5%88%86">4.1. 常用部分</h2>
+
+<h3 class="mume-header" id="411-%E6%A0%87%E9%A2%98">4.1.1. 标题</h3>
+
+<h4 class="mume-header" id="4111-%E6%AE%B5%E8%90%BD%E6%A0%87%E9%A2%98">4.1.1.1. 段落标题</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html"># h1
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>h1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+
 ## h2
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>h2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+
 ### h3
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">&gt;</span></span>h3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">&gt;</span></span>
+
 #### h4
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h4</span><span class="token punctuation">&gt;</span></span>h4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h4</span><span class="token punctuation">&gt;</span></span>
+
 ##### h5
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h5</span><span class="token punctuation">&gt;</span></span>h5<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h5</span><span class="token punctuation">&gt;</span></span>
+
 ###### h6
-</code></pre>
-<h4 id="4-1-1-2-">4.1.1.2. 分级标题</h4>
-<pre><code class="lang-html">AAA
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h6</span><span class="token punctuation">&gt;</span></span>h6<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h6</span><span class="token punctuation">&gt;</span></span>
+</pre><h4 class="mume-header" id="4112-%E5%88%86%E7%BA%A7%E6%A0%87%E9%A2%98">4.1.1.2. 分级标题</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">AAA
 ===
 BBB
 ---
-</code></pre>
-<h1 id="aaa">AAA</h1>
-<h2 id="bbb">BBB</h2>
-<h3 id="4-1-2-">4.1.2. 强调</h3>
-<h4 id="4-1-2-1-">4.1.2.1. 斜体</h4>
-<pre><code class="lang-html">*
+</pre><h1>AAA</h1>
+<h2>BBB</h2>
+<h3 class="mume-header" id="412-%E5%BC%BA%E8%B0%83">4.1.2. 强调</h3>
+
+<h4 class="mume-header" id="4121-%E6%96%9C%E4%BD%93">4.1.2.1. 斜体</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html"><em>
 _
-</code></pre>
-<p><em>1</em>
-_1_</p>
-<h4 id="4-1-2-2-">4.1.2.2. 加粗</h4>
-<pre><code class="lang-html">**
-</code></pre>
-<p><strong>1</strong></p>
-<h4 id="4-1-2-3-">4.1.2.3. 删除线</h4>
-<pre><code class="lang-html">~~
-</code></pre>
-<p><del>1</del></p>
-<h2 id="4-2-">4.2. 参考文档</h2>
+</pre><p><em>1</em><br>
+<em>1</em></p>
+<h4 class="mume-header" id="4122-%E5%8A%A0%E7%B2%97">4.1.2.2. 加粗</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">**
+</pre><p><strong>1</strong></p>
+<h4 class="mume-header" id="4123-%E5%88%A0%E9%99%A4%E7%BA%BF">4.1.2.3. 删除线</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">~~
+</pre><p><s>1</s></p>
+<h3 class="mume-header" id="413-%E4%BB%A3%E7%A0%81">4.1.3. 代码</h3>
+
+<h4 class="mume-header" id="4131-%E4%BB%A3%E7%A0%81%E5%9D%97%E6%A0%87%E8%AE%B0">4.1.3.1. 代码块标记</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">    <code>&lt;/pre&gt;&lt;h4 class=&quot;mume-header&quot; id=&quot;4132-%E4%BB%A3%E7%A0%81%E5%9D%97%E7%BC%A9%E8%BF%9B%E8%A1%A8%E7%A4%BA%E6%B3%95&quot;&gt;4.1.3.2. 代码块缩进表示法&lt;/h4&gt;
+
+&lt;pre class=&quot;language-text&quot;&gt;123
+&lt;/pre&gt;
+&lt;h4 class=&quot;mume-header&quot; id=&quot;4133-%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE%E6%98%BE%E7%A4%BA&quot;&gt;4.1.3.3. 语法高亮显示&lt;/h4&gt;
+
+&lt;pre data-role=&quot;codeBlock&quot; data-info=&quot;html&quot; class=&quot;language-html&quot;&gt;</code>javascript
+    <code>`</code>
+</pre><pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">var</span> syc <span class="token operator">=</span> <span class="token string">&quot;syc&quot;</span><span class="token punctuation">;</span>
+</pre><h4 class="mume-header" id="4134-%E5%86%85%E8%81%94%E4%BB%A3%E7%A0%81%E5%9D%97">4.1.3.4. 内联代码块</h4>
+
+<pre class="language-text">`
+</pre>
+<p><code>1</code></p>
+<h3 class="mume-header" id="414-%E8%A1%A8%E6%A0%BC">4.1.4. 表格</h3>
+
+<h4 class="mume-header" id="4141-%E8%A1%A8%E6%A0%BC">4.1.4.1. 表格</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">|     a     |        b        |      c       |
+|:---------:|:--------------- | ------------:|
+|   居中    | 左对齐           |       右对齐 |
+| ========= | =============== | ============ |
+</pre><table>
+<thead>
+<tr>
+<th style="text-align:center">a</th>
+<th style="text-align:left">b</th>
+<th style="text-align:right">c</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">居中</td>
+<td style="text-align:left">左对齐</td>
+<td style="text-align:right">右对齐</td>
+</tr>
+<tr>
+<td style="text-align:center">=========</td>
+<td style="text-align:left">===============</td>
+<td style="text-align:right">============</td>
+</tr>
+</tbody>
+</table>
+<h4 class="mume-header" id="4142-%E7%AE%80%E7%BA%A6%E5%86%99%E6%B3%95">4.1.4.2. 简约写法</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">a  | b | c<br>:-:|:- |-:
+    居中    |     左对齐      |   右对齐<br>============|=================|=============
+</pre><table>
+<thead>
+<tr>
+<th style="text-align:center">a</th>
+<th style="text-align:left">b</th>
+<th style="text-align:right">c</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">居中</td>
+<td style="text-align:left">左对齐</td>
+<td style="text-align:right">右对齐</td>
+</tr>
+<tr>
+<td style="text-align:center">===</td>
+<td style="text-align:left">===</td>
+<td style="text-align:right">===</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Tables</th>
+<th style="text-align:center">Are</th>
+<th style="text-align:right">Cool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>col 1 is</td>
+<td style="text-align:center">left-aligned</td>
+<td style="text-align:right">$1600</td>
+</tr>
+<tr>
+<td>col 2 is</td>
+<td style="text-align:center">centered</td>
+<td style="text-align:right">$12</td>
+</tr>
+<tr>
+<td>col 3 is</td>
+<td style="text-align:center">right-aligned</td>
+<td style="text-align:right">$1</td>
+</tr>
+</tbody>
+</table>
+<h4 class="mume-header" id="4143-html%E8%A1%A8%E6%A0%BC">4.1.4.3. html表格</h4>
+
+<ul>
+<li><a href="http://www.tablesgenerator.com/markdown_tables">表格地址</a></li>
+</ul>
+<h3 class="mume-header" id="415-%E9%93%BE%E6%8E%A5">4.1.5. 链接</h3>
+
+<h4 class="mume-header" id="4151-%E5%86%85%E9%93%BE%E5%BC%8F">4.1.5.1. 内链式</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">    <a href="http://www.baidu.com/&quot;百度一下&quot;">百度1</a>{:target=&quot;_blank&quot;}<br></pre><p><a href="http://www.baidu.com/">百度1</a>{:target=&quot;_blank&quot;}<br>
+{:target=&quot;_blank&quot;}兼容性一般</p>
+<h4 class="mume-header" id="4152-%E5%BC%95%E7%94%A8%E5%BC%8F">4.1.5.2. 引用式</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">I get 10 times more traffic from [Google][1] than from
+[Yahoo][2] or [MSN][3].
+  [1]: <a href="http://google.com/">http://google.com/</a>        &quot;Google&quot;
+  [2]: <a href="http://search.yahoo.com/">http://search.yahoo.com/</a>  &quot;Yahoo Search&quot;
+  [3]: <a href="http://search.msn.com/">http://search.msn.com/</a>    &quot;MSN Search&quot;
+</pre><p>I get 10 times more traffic from <a href="http://google.com/" title="Google">Google</a> than from<br>
+<a href="http://search.yahoo.com/" title="Yahoo Search">Yahoo</a> or <a href="http://search.msn.com/" title="MSN Search">MSN</a>.</p>
+<h4 class="mume-header" id="4153-%E9%82%AE%E7%AE%B1%E9%93%BE%E6%8E%A5">4.1.5.3. 邮箱链接</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><a href="mailto:xxx@outlook.com">xxx@outlook.com</a></span><span class="token punctuation">&gt;</span></span>
+</pre><p><a href="mailto:419973879@qq.com">419973879@qq.com</a></p>
+<h3 class="mume-header" id="416-%E5%9B%BE%E7%89%87">4.1.6. 图片</h3>
+
+<h4 class="mume-header" id="4161-%E5%86%85%E9%93%BE%E5%BC%8F">4.1.6.1. 内链式</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html"><img src="./01.png" alt="name" title="描述">
+</pre><p><img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="name" title="Google"></p>
+<h4 class="mume-header" id="4162-%E5%BC%95%E7%94%A8%E5%BC%8F">4.1.6.2. 引用式</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">![name][01]
+[01]: <a href="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png</a> &#39;描述&#39;
+</pre><p>![name][02]<br>
+[02]: <a href="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png</a> &#39;描述&#39;</p>
+<h4 class="mume-header" id="4163-%E5%9B%BE%E7%89%87%E5%B8%A6%E6%9C%89%E9%93%BE%E6%8E%A5">4.1.6.3. 图片带有链接</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html"><a href="./01.png"><img src="./01.png" alt="name" title="百度"></a>{:target=&quot;_blank&quot;}
+
+[<img src="./01.png" alt="name" title="百度">][5]{:target=&quot;_blank&quot;} 
+[5]: <a href="http://www.baidu.com">http://www.baidu.com</a>
+</pre><p><a href="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"><img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google" title="Google"></a></p>
+<h2 class="mume-header" id="%E5%B8%B8%E7%94%A8%E9%83%A8%E5%88%86">常用部分</h2>
+
+<h3 class="mume-header" id="%E5%BA%8F%E8%A1%A8">序表</h3>
+
+<h4 class="mume-header" id="%E6%97%A0%E5%BA%8F">无序</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html"></em> one
+<em> two
+</em> three
+
++ - 可替代 <em>
+</pre><ul>
+<li>one</li>
+<li>two</li>
+<li>three</li>
+</ul>
+<h4 class="mume-header" id="%E6%9C%89%E5%BA%8F">有序</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">1. one
+2. two
+3. three
+</pre><ol>
+<li>one</li>
+<li>two</li>
+<li>three</li>
+</ol>
+<h4 class="mume-header" id="%E5%BA%8F%E8%A1%A8%E5%B5%8C%E5%A5%97">序表嵌套</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html"></em> one
+    <em> two
+    </em> three
+
+1. one
+    2. two
+    3. three
+</pre><ul>
+<li>one
+<ul>
+<li>two</li>
+<li>three</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>one<br>
+2. two<br>
+3. three</li>
+</ol>
+<h3 class="mume-header" id="%E6%B8%85%E5%8D%95%E9%80%89%E9%A1%B9%E8%A1%A8">清单选项表</h3>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">- [x] 选项一 
+- [ ] 选项二
+</pre><ul>
+<li><input type="checkbox" class="task-list-item-checkbox" checked> 选项一</li>
+<li><input type="checkbox" class="task-list-item-checkbox"> 选项二</li>
+</ul>
+<h3 class="mume-header" id="%E5%BC%95%E7%94%A8">引用</h3>
+
+<h4 class="mume-header" id="%E5%BC%95%E7%94%A8-1">引用</h4>
+
+<pre data-role="codeBlock" data-info="html" class="language-html">hello world! hello world! hello world!
+</pre><p>hello world! hello world! hello world!</p>
+<h2 class="mume-header" id="42-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3">4.2. 参考文档</h2>
+
 <ul>
 <li><a href="https://www.jianshu.com/p/b03a8d7b1719">简书</a></li>
 <li><a href="https://ouweiya.gitbooks.io/markdown/">Markdown 常用语法笔记</a></li>
 </ul>
+
+<pre><code>  &lt;/div&gt;
+  &lt;div class=&quot;md-sidebar-toc&quot;&gt;&lt;ul&gt;
+</code></pre><p><li><a href="#1-%E5%AE%89%E8%A3%85markdown%E4%B8%BB%E9%A2%98">1. 安装Markdown主题</a></p>
+<p><ul></p>
+<p><li><a href="#11-markdonw-theme-kit">1.1. Markdonw Theme Kit</a></li></p>
+<p><li><a href="#12-vscode-markdown-css">1.2. vscode-markdown-css</a></li>
+</ul>
+</li></p>
+<p><li><a href="#2-%E7%94%9F%E6%88%90%E5%B7%A6%E4%BE%A7%E5%AF%BC%E8%88%AA%E6%A0%8F-i5tinghttpsgithubcomi5tingtocmdnpm">2. 生成左侧导航栏 i5ting</a></p>
+<p><ul></p>
+<p><li><a href="#21-%E5%AE%89%E8%A3%85">2.1. 安装</a></li></p>
+<p><li><a href="#22-%E7%94%9F%E6%88%90%E5%AF%BC%E8%88%AA%E6%A0%8F">2.2. 生成导航栏</a></li>
+</ul>
+</li></p>
+<p><li><a href="#3-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91%E5%99%A8">3. （在线）编辑器</a></li></p>
+<p><li><a href="#4-%E8%AF%AD%E6%B3%95">4. 语法</a></p>
+<p><ul></p>
+<p><li><a href="#41-%E5%B8%B8%E7%94%A8%E9%83%A8%E5%88%86">4.1. 常用部分</a></p>
+<p><ul></p>
+<p><li><a href="#411-%E6%A0%87%E9%A2%98">4.1.1. 标题</a></p>
+<p><ul></p>
+<p><li><a href="#4111-%E6%AE%B5%E8%90%BD%E6%A0%87%E9%A2%98">4.1.1.1. 段落标题</a></li></p>
+<p><li><a href="#4112-%E5%88%86%E7%BA%A7%E6%A0%87%E9%A2%98">4.1.1.2. 分级标题</a></li>
+</ul>
+</li></p>
+<p><li><a href="#412-%E5%BC%BA%E8%B0%83">4.1.2. 强调</a></p>
+<p><ul></p>
+<p><li><a href="#4121-%E6%96%9C%E4%BD%93">4.1.2.1. 斜体</a></li></p>
+<p><li><a href="#4122-%E5%8A%A0%E7%B2%97">4.1.2.2. 加粗</a></li></p>
+<p><li><a href="#4123-%E5%88%A0%E9%99%A4%E7%BA%BF">4.1.2.3. 删除线</a></li>
+</ul>
+</li></p>
+<p><li><a href="#413-%E4%BB%A3%E7%A0%81">4.1.3. 代码</a></p>
+<p><ul></p>
+<p><li><a href="#4131-%E4%BB%A3%E7%A0%81%E5%9D%97%E6%A0%87%E8%AE%B0">4.1.3.1. 代码块标记</a></li></p>
+<p><li><a href="#4132-%E4%BB%A3%E7%A0%81%E5%9D%97%E7%BC%A9%E8%BF%9B%E8%A1%A8%E7%A4%BA%E6%B3%95">4.1.3.2. 代码块缩进表示法</a></li></p>
+<p><li><a href="#4133-%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE%E6%98%BE%E7%A4%BA">4.1.3.3. 语法高亮显示</a></li></p>
+<p><li><a href="#4134-%E5%86%85%E8%81%94%E4%BB%A3%E7%A0%81%E5%9D%97">4.1.3.4. 内联代码块</a></li>
+</ul>
+</li></p>
+<p><li><a href="#414-%E8%A1%A8%E6%A0%BC">4.1.4. 表格</a></p>
+<p><ul></p>
+<p><li><a href="#4141-%E8%A1%A8%E6%A0%BC">4.1.4.1. 表格</a></li></p>
+<p><li><a href="#4142-%E7%AE%80%E7%BA%A6%E5%86%99%E6%B3%95">4.1.4.2. 简约写法</a></li></p>
+<p><li><a href="#4143-html%E8%A1%A8%E6%A0%BC">4.1.4.3. html表格</a></li>
+</ul>
+</li></p>
+<p><li><a href="#415-%E9%93%BE%E6%8E%A5">4.1.5. 链接</a></p>
+<p><ul></p>
+<p><li><a href="#4151-%E5%86%85%E9%93%BE%E5%BC%8F">4.1.5.1. 内链式</a></li></p>
+<p><li><a href="#4152-%E5%BC%95%E7%94%A8%E5%BC%8F">4.1.5.2. 引用式</a></li></p>
+<p><li><a href="#4153-%E9%82%AE%E7%AE%B1%E9%93%BE%E6%8E%A5">4.1.5.3. 邮箱链接</a></li>
+</ul>
+</li></p>
+<p><li><a href="#416-%E5%9B%BE%E7%89%87">4.1.6. 图片</a></p>
+<p><ul></p>
+<p><li><a href="#4161-%E5%86%85%E9%93%BE%E5%BC%8F">4.1.6.1. 内链式</a></li></p>
+<p><li><a href="#4162-%E5%BC%95%E7%94%A8%E5%BC%8F">4.1.6.2. 引用式</a></li></p>
+<p><li><a href="#4163-%E5%9B%BE%E7%89%87%E5%B8%A6%E6%9C%89%E9%93%BE%E6%8E%A5">4.1.6.3. 图片带有链接</a></li>
+</ul>
+</li>
+</ul>
+</li></p>
+<p><li><a href="#%E5%B8%B8%E7%94%A8%E9%83%A8%E5%88%86">常用部分</a></p>
+<p><ul></p>
+<p><li><a href="#%E5%BA%8F%E8%A1%A8">序表</a></p>
+<p><ul></p>
+<p><li><a href="#%E6%97%A0%E5%BA%8F">无序</a></li></p>
+<p><li><a href="#%E6%9C%89%E5%BA%8F">有序</a></li></p>
+<p><li><a href="#%E5%BA%8F%E8%A1%A8%E5%B5%8C%E5%A5%97">序表嵌套</a></li>
+</ul>
+</li></p>
+<p><li><a href="#%E6%B8%85%E5%8D%95%E9%80%89%E9%A1%B9%E8%A1%A8">清单选项表</a></li></p>
+<p><li><a href="#%E5%BC%95%E7%94%A8">引用</a></p>
+<p><ul></p>
+<p><li><a href="#%E5%BC%95%E7%94%A8-1">引用</a></li>
+</ul>
+</li>
+</ul>
+</li></p>
+<p><li><a href="#42-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3">4.2. 参考文档</a></li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    </body></p>
+<pre><code>&lt;script&gt;
+</code></pre><p>(function bindTaskListEvent() {
+  var taskListItemCheckboxes = document.body.getElementsByClassName(&#39;task-list-item-checkbox&#39;)
+  for (var i = 0; i &lt; taskListItemCheckboxes.length; i++) {
+    var checkbox = taskListItemCheckboxes[i]
+    var li = checkbox.parentElement
+    if (li.tagName !== &#39;LI&#39;) li = li.parentElement
+    if (li.tagName === &#39;LI&#39;) {
+      li.classList.add(&#39;task-list-item&#39;)
+    }
+  }
+}())<br></script></p>
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+
+<p>  </html></p>
 
           	</article>
         </div>
