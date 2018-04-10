@@ -7,8 +7,8 @@
 * Markdown Preview Enhanced
 让vscode支持markdown
 * Markdown Theme Kit
-提供四款主题
-## brower
+    1. 调试->安装其他调试器->输入Markdonw Theme Kit
+    2. 文件->首选项->颜色主题
 * View In Brower
 打开浏览器
 * view in brower

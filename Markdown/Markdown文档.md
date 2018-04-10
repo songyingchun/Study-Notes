@@ -20,6 +20,8 @@ i5ting_toc -f sample.md -o
 
 # 3. （在线）编辑器
 * [CMD　Markdown编辑器](https://www.zybuluo.com/mdeditor)
+* [dillinger](http://dillinger.io/)
+* [小书匠](http://markdown.xiaoshujiang.com/)
 
 # 4. 语法
 ## 4.1. 常用部分
@@ -48,206 +50,515 @@ i5ting_toc -f sample.md -o
 ```html
 AAA
 ===
+<h1>AAA</h1>
 BBB
 ---
+<h2>BBB</h2>
 ```
-
-AAA
-===
-BBB
----
-
 ### 4.1.2. 强调
 #### 4.1.2.1. 斜体
-```html
-*
-_
-```
 *1*
+```html
+<em>1</em>
+```
 _1_
+```html
+<em>1</em>
+```
 #### 4.1.2.2. 加粗
-```html
-**
-```
 **1**
-#### 4.1.2.3. 删除线
 ```html
-~~
+<strong>1<strong>
 ```
+#### 4.1.2.3. 删除线
 ~~1~~
+```html
+<del>1</del>
+```
 ### 4.1.3. 代码
 #### 4.1.3.1. 代码块标记
+    123
 ```html
-    ```
+<pre>
+    <code>123</code>
+</pre>
 ```
 #### 4.1.3.2. 代码块缩进表示法
     123
-#### 4.1.3.3. 语法高亮显示
 ```html
-    ```javascript
-    ```
+<pre>
+    <code>123</code>
+</pre>
 ```
+#### 4.1.3.3. 语法高亮显示
 ```javascript
 var syc = "syc";
 ```
+```html
+<ol class="linenums">
+    <li class="L0">
+        <code class="language-javascript">
+            <span class="kwd">var</span>
+            <span class="pln"> syc </span>
+            <span class="pun">=</span>
+            <span class="pln"> </span>
+            <span class="str">"syc"</span>
+            <span class="pun">;</span>
+        </code>
+    </li>
+</ol>
+```
 #### 4.1.3.4. 内联代码块
-    `
 `1`
+```html
+<code>1</code>
+```
 ### 4.1.4. 表格
 #### 4.1.4.1. 表格
-```html
 |     a     |        b        |      c       |
 |:---------:|:--------------- | ------------:|
 |   居中    | 左对齐           |       右对齐 |
 | ========= | =============== | ============ |
-```
-
-|     a     |        b        |      c       |
-|:---------:|:--------------- | ------------:|
-|   居中    | 左对齐           |    右对齐 |
-| ========= | =============== | ============ |
-
-#### 4.1.4.2. 简约写法
 ```html
-a  | b | c  
-:-:|:- |-:
-    居中    |     左对齐      |   右对齐    
-============|=================|=============
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:center;">a</th>
+            <th style="text-align:left;">b</th>
+            <th style="text-align:right;">c</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:center;">居中</td>
+            <td style="text-align:left;">左对齐</td>
+            <td style="text-align:right;">右对齐</td>
+        </tr>
+        <tr>
+            <td style="text-align:center;">=========</td>
+            <td style="text-align:left;">===============</td>
+            <td style="text-align:right;">============</td>
+        </tr>
+    </tbody>
+</table>
 ```
+#### 4.1.4.2. 简约写法
 a  | b | c  
 :-:|:-|-:
 居中|左对齐|右对齐
 ===|===|===
 
-| Tables   |      Are      |  Cool |
-|----------|:-------------:|------:|
-| col 1 is |  left-aligned | $1600 |
-| col 2 is |    centered   |   $12 |
-| col 3 is | right-aligned |    $1 |
-
-#### 4.1.4.3. html表格
+```html
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:center;">a</th>
+            <th style="text-align:left;">b</th>
+            <th style="text-align:right;">c</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:center;">居中</td>
+            <td style="text-align:left;">左对齐</td>
+            <td style="text-align:right;">右对齐</td>
+        </tr>
+        <tr>
+            <td style="text-align:center;">===</td>
+            <td style="text-align:left;">===</td>
+            <td style="text-align:right;">===</td>
+        </tr>
+    </tbody>
+</table>
+```
+#### 4.1.4.3. html生成表格地址
 * [表格地址](http://www.tablesgenerator.com/markdown_tables)
 
 ### 4.1.5. 链接
 #### 4.1.5.1. 内链式
+[百度](http://www.baidu.com/"百度一下")  
 ```html
-    [百度1](http://www.baidu.com/"百度一下"){:target="_blank"}   
+<a href="http://www.baidu.com/" title="百度一下" target="_blank">百度</a>   
 ```
-
-[百度1](http://www.baidu.com/){:target="_blank"}
-{:target="_blank"}兼容性一般
 
 #### 4.1.5.2. 引用式
-```html
-I get 10 times more traffic from [Google][1] than from
-[Yahoo][2] or [MSN][3].
-  [1]: http://google.com/        "Google"
-  [2]: http://search.yahoo.com/  "Yahoo Search"
-  [3]: http://search.msn.com/    "MSN Search"
-```
-I get 10 times more traffic from [Google][1] than from
-[Yahoo][2] or [MSN][3].
+[百度][1]
 
-  [1]: http://google.com/        "Google"
-  [2]: http://search.yahoo.com/  "Yahoo Search"
-  [3]: http://search.msn.com/    "MSN Search"
+[1]: http://www.baidu.com/ "百度"
+```html
+<a href="http://www.baidu.com/" title="百度一下" target="_blank">百度</a>  
+```
 
 #### 4.1.5.3. 邮箱链接
-```html
-<xxx@outlook.com>
-```
 <419973879@qq.com>
+```html
+<a href="mailto:419973879@qq.com">419973879@qq.com</a>
+```
 
 ### 4.1.6. 图片
 #### 4.1.6.1. 内链式
+![Google](https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png 'Google')
+
 ```html
-![name](./01.png '描述')
+<img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google">
 ```
-![name](https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png 'Google')
 
 #### 4.1.6.2. 引用式
+![Google][02]
+[02]: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png 
+
 ```html
-![name][01]
-[01]: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png '描述'
+<img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google">
 ```
-![name][02]
-[02]: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png '描述'
+
 
 #### 4.1.6.3. 图片带有链接
-```html
-[![name](./01.png '百度')](./01.png){:target="_blank"}
+[![Google](https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png 'Google')](https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'我的Google')
 
-[![name](./01.png '百度')][5]{:target="_blank"} 
-[5]: http://www.baidu.com
+```html
+<a href="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" title="我的Google" target="_blank">
+<img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google">
+</a>
 ```
-[![Google](https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png 'Google')](https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png)
 
 ## 4.2. 常用部分
 ### 4.2.1. 序表
 #### 4.2.1.1. 无序
+* one
+    * two
+    * three
++ one
+    + two
+    + three
+- one
+    - two
+    - three
 ```html
-* one
-* two
-* three
-
-+ - 可替代 *
+<ul data-anchor-id="lcqq">
+    <li>one <br>
+        <ul>
+            <li>two</li>
+            <li>three</li>
+        </ul>
+    </li>
+    <li>one <br>
+        <ul>
+            <li>two</li>
+            <li>three</li>
+        </ul>
+    </li>
+    <li>one <br>
+        <ul>
+            <li>two</li>
+            <li>three</li>
+        </ul>
+    </li>
+</ul>
 ```
-* one
-* two
-* three
-
 #### 4.2.1.2. 有序
-```html
-1. one
-2. two
-3. three
-```
-1. one
-2. two
-3. three
-
-#### 4.2.1.3. 序表嵌套
-```html
-* one
-    * two
-    * three
-
 1. one
     2. two
     3. three
-```
-* one
-    * two
-    * three
 
-1. one
-    2. two
-    3. three
+```html
+<ol data-anchor-id="lcqq">
+    <li>one <br>
+        <ol>
+            <li>two</li>
+            <li>three</li>
+        </ol>
+    </li>
+</ol>
+```
 
 ### 4.2.2. 清单选项表
+- [x] 选项一 
+- [ ] 选项二
 ```html
-- [x] 选项一 
-- [ ] 选项二
+<ul data-anchor-id="lcqq">
+    <li class="todo-list-item">
+        <i class="icon-check-sign"></i>选项一 
+    </li>
+    <li class="todo-list-item">
+        <i class="icon-check-empty"</i>选项二
+    </li>
+</ul>
 ```
-- [x] 选项一 
-- [ ] 选项二
 
 ### 4.2.3. 引用
-#### 4.2.3.1. 引用
+> hello world!
 ```html
-hello world! hello world! hello world!
+<blockquote data-anchor-id="uy9i" class="white-blockquote">
+    <p>hello world!</p>
+</blockquote>
+```
+> hello world!
+> hello world!
+> hello world!
+```html
+<blockquote data-anchor-id="uy9i" class="white-blockquote">
+  <p>hello world! <br>
+  hello world! <br>
+  hello world!</p>
+</blockquote>
+```
+> aaaaaaaaa
+>> bbbbbbbbb
+>>> cccccccccc
+```html
+<blockquote data-anchor-id="uy9i" class="white-blockquote">
+  <p>aaaaaaaaa</p>
+  <blockquote class="white-blockquote">
+    <p>bbbbbbbbb</p>
+    <blockquote class="white-blockquote">
+      <p>cccccccccc</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+```
+### 4.2.4. 描点
+[公式标题锚点](#1)
+```html
+<a href="#1">公式标题锚点</a>
+```
+```html
+### [需要跳转的目录] {#1}
+```
+```html
+<h3 id="1" data-anchor-id="ijx7">[需要跳转的目录]</h3>
+```
+### 4.2.5. 描点
+Markdown[^1]
+[^1]: Markdown是一种纯文本标记语言。
+```html
+<p data-anchor-id="whgn">
+    Markdown
+    <a href="#fn:1" id="fnref:1" title="查看注脚" class="footnote">[3]</a>
+</p>
+```
+### 4.2.6. 表情
+[表情代码](https://link.jianshu.com/?t=https://www.webpagefx.com/tools/emoji-cheat-sheet/%27GitHub%27)
+
+### 4.2.7. 分隔符
+***
+```html
+<hr>
+```
+---
+```html
+<hr>
 ```
 
-hello world! hello world! hello world!
-
-#### 多层引用
+## 4.3. 其他
+### 4.3.1. 视频插入
+<iframe height=498 width=510 src='http://player.youku.com/embed/XMjgzNzM0NTYxNg==' frameborder=0 'allowfullscreen'></iframe>
 ```html
-hello world!
-    hello world!
-
-        hello world!
+<iframe height=498 width=510 src='http://player.youku.com/embed/XMjgzNzM0NTYxNg==' frameborder=0 'allowfullscreen'></iframe>
 ```
-## 4.3. 参考文档
+
+[![](https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png)](http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&from=y1.3-tv-grid-1007-9910.86804.1-2#paction)
+```html
+
+<a href="http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&amp;from=y1.3-tv-grid-1007-9910.86804.1-2#paction" target="_blank"><img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt=""></a>
+```
+### 4.3.2. 公式
+$$ x \href{why-equal.html}{=} y^2 + 1 $$
+$ x = {-b \pm \sqrt{b^2-4ac} \over 2a}. $
+
+### 4.3.3. 定义型列表
+Markdown 
+:   轻量级文本标记语言，可以转换成html，pdf等格式  //  开头一个`:` + `Tab` 或 四个空格
+
+代码块定义
+:   代码块定义……
+
+        var a = 10;         // 保持空一行与 递进缩进
+```html
+<dl data-anchor-id="c7qz">
+    <dt>Markdown</dt>
+    <dd>轻量级文本标记语言，可以转换成html，pdf等格式  //  开头一个<code>:</code> + <code>Tab</code> 或 四个空格</dd>
+
+        <dt>代码块定义</dt>
+    <dd>
+    <p>代码块定义……</p>
+
+    <pre><code>var a = 10;         // 保持空一行与 递进缩进
+    </code></pre>
+    </dd>
+</dl>
+```
+
+### 4.3.4. [流程图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图)
+```flow
+st=>start: Start
+op=>operation: Your Operation
+cond=>condition: Yes or No?
+e=>end
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+```html
+<svg height="419.73046875" version="1.1" width="187.984375" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;" viewBox="0 0 187.984375 419.73046875" preserveAspectRatio="xMidYMid meet"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block-obj3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><marker id="raphael-marker-endblock33-obj4" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block-obj3" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="0" y="0" width="52.5" height="37" r="20" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="st" transform="matrix(1,0,0,1,56.2422,24.7461)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="stt" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,56.2422,24.7461)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Start</tspan></text><rect x="0" y="0" width="121.34375" height="37" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="op" transform="matrix(1,0,0,1,21.8203,136.4922)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="opt" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,21.8203,136.4922)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Your Operation</tspan></text><path fill="#ffffff" stroke="#000000" d="M39.24609375,19.623046875L0,39.24609375L78.4921875,78.4921875L156.984375,39.24609375L78.4921875,0L0,39.24609375" stroke-width="2" id="cond" class="flowchart" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" transform="matrix(1,0,0,1,4,227.4922)"></path><text x="44.24609375" y="39.24609375" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="condt" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,4,227.4922)" stroke-width="1"><tspan dy="5.51171875" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Yes or No?</tspan></text><rect x="0" y="0" width="46.6875" height="37" r="20" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="e" transform="matrix(1,0,0,1,59.1484,380.7305)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="et" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,59.1484,380.7305)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">End</tspan></text><path fill="none" stroke="#000000" d="M82.4921875,61.74609375C82.4921875,61.74609375,82.4921875,119.5498448451981,82.4921875,133.49274183788748" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj4)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M82.4921875,173.4921875C82.4921875,173.4921875,82.4921875,213.14628744125366,82.4921875,224.49262658460066" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj4)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M82.4921875,305.984375C82.4921875,305.984375,82.4921875,363.7881260951981,82.4921875,377.7310230878875" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj4)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="87.4921875" y="315.984375" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" font-size="15px" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">yes</tspan></text><path fill="none" stroke="#000000" d="M160.984375,266.73828125C160.984375,266.73828125,185.984375,266.73828125,185.984375,266.73828125C185.984375,266.73828125,185.984375,111.4921875,185.984375,111.4921875C185.984375,111.4921875,82.4921875,111.4921875,82.4921875,111.4921875C82.4921875,111.4921875,82.4921875,126.86563205718994,82.4921875,133.50143527425826" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj4)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="165.984375" y="256.73828125" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" font-size="15px" stroke-width="1"><tspan dy="5.50390625" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">no</tspan></text></svg>
+```
+
+<table>
+<thead>
+<tr>
+<th>形参</th>
+<th>实参</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tag</td>
+<td>st</td>
+<td>标签 (可以自定义)</td>
+</tr>
+<tr>
+<td>=&gt;</td>
+<td>=&gt;</td>
+<td>赋值</td>
+</tr>
+<tr>
+<td>type</td>
+<td>start</td>
+<td>类型  (6种类型)</td>
+</tr>
+<tr>
+<td>content</td>
+<td>开始</td>
+<td>描述内容 (可以自定义)</td>
+</tr>
+<tr>
+<td>:&gt;url</td>
+<td><code>http://www.baidu.com[blank]</code></td>
+<td>链接与跳转方式 <strong>兼容性很差</strong>
+</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>6种类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>start</td>
+<td>启动</td>
+</tr>
+<tr>
+<td>end</td>
+<td>结束</td>
+</tr>
+<tr>
+<td>operation</td>
+<td>程序</td>
+</tr>
+<tr>
+<td>subroutine</td>
+<td>子程序</td>
+</tr>
+<tr>
+<td>condition</td>
+<td>条件</td>
+</tr>
+<tr>
+<td>inputoutput</td>
+<td>输出</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>形参</th>
+<th>实参</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-&gt;</td>
+<td>-&gt;</td>
+<td>连接</td>
+</tr>
+<tr>
+<td>condition</td>
+<td>c1</td>
+<td>条件</td>
+</tr>
+<tr>
+<td>(布尔值,方向)</td>
+<td>(yes,right)</td>
+<td>如果满足向右连接，4种方向：right ，left，up ，down 默认为：down</td>
+</tr>
+</tbody>
+</table>
+
+### 4.3.5. [时序图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-序列图)
+```sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
+```html
+<svg height="250" version="1.1" width="426" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block-obj1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><marker id="raphael-marker-endblock55-obj2" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block-obj1" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="10" y="20" width="60" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="30" width="40" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="40" y="38" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &quot;Andale Mono&quot;, monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan dy="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Alice</tspan></text><rect x="10" y="194" width="60" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="204" width="40" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="40" y="212" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &quot;Andale Mono&quot;, monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan dy="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Alice</tspan></text><path fill="none" stroke="#000000" d="M40,56L40,194" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="222" y="20" width="44" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="232" y="30" width="24" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="244" y="38" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &quot;Andale Mono&quot;, monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan dy="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Bob</tspan></text><rect x="222" y="194" width="44" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="232" y="204" width="24" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="244" y="212" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &quot;Andale Mono&quot;, monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan dy="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Bob</tspan></text><path fill="none" stroke="#000000" d="M244,56L244,194" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="50" y="73" width="184" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="142" y="81" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &quot;Andale Mono&quot;, monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan dy="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Hello Bob, how are you?</tspan></text><path fill="none" stroke="#000000" d="M40,92C40,92,207.72355937957764,92,239.00793422479182,92" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj2)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="264" y="112" width="90" height="26" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="269" y="117" width="80" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="309" y="125" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &quot;Andale Mono&quot;, monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan dy="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Bob thinks</tspan></text><rect x="74" y="155" width="136" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="142" y="163" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &quot;Andale Mono&quot;, monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan dy="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">I am good thanks!</tspan></text><path fill="none" stroke="#000000" d="M244,174C244,174,76.27644062042236,174,44.992065775208175,174" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj2)" stroke-dasharray="6,2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg>
+```
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-</code></td>
+<td>实线</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>实心箭头</td>
+</tr>
+<tr>
+<td><code>--</code></td>
+<td>虚线</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>空心箭头</td>
+</tr>
+</tbody>
+</table>
+
+### 4.3.6. [甘特图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#9-甘特图)
+
+```gantt
+    title 项目开发流程
+    section 项目确定
+        需求分析       :a1, 2016-06-22, 3d
+        可行性报告     :after a1, 5d
+        概念验证       : 5d
+    section 项目实施
+        概要设计      :2016-07-05  , 5d
+        详细设计      :2016-07-08, 10d
+        编码          :2016-07-15, 10d
+        测试          :2016-07-22, 5d
+    section 发布验收
+        发布: 2d
+        验收: 3d
+```
+```html
+<svg id="mermaidChart2" width="100%" xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 599 316"><style type="text/css" title="mermaid-svg-internal-css"> .section { stroke: none; opacity: 0.2;} .section0 { fill: rgba(102, 102, 255, 0.490196);} .section2 { fill: rgb(255, 244, 0);} .section1, .section3 { fill: white; opacity: 0.2;} .sectionTitle0 { fill: rgb(51, 51, 51);} .sectionTitle1 { fill: rgb(51, 51, 51);} .sectionTitle2 { fill: rgb(51, 51, 51);} .sectionTitle { text-anchor: start; font-size: 11px;} .grid .tick { stroke: lightgrey; opacity: 0.3; shape-rendering: crispEdges;} .grid path { stroke-width: 0;} .today { fill: none; stroke: red; stroke-width: 2px;} .task { stroke-width: 2;} .taskText { text-anchor: middle; font-size: 11px;} .taskText0, .taskText1, .taskText2, .taskText3 { fill: white;} .task0, .task1, .task2, .task3 { fill: rgb(138, 144, 221); stroke: rgb(83, 79, 188);} .titleText { text-anchor: middle; font-size: 18px; fill: black;} </style><g></g><g class="grid" transform="translate(75, 266)"><g class="tick" transform="translate(56,0)" style="opacity: 1;"><line y2="-231" x2="0"></line><text dy="1em" y="3" x="0" fill="#000" stroke="none" font-size="10" style="text-anchor: middle;">06/27</text></g><g class="tick" transform="translate(135,0)" style="opacity: 1;"><line y2="-231" x2="0"></line><text dy="1em" y="3" x="0" fill="#000" stroke="none" font-size="10" style="text-anchor: middle;">07/04</text></g><g class="tick" transform="translate(213,0)" style="opacity: 1;"><line y2="-231" x2="0"></line><text dy="1em" y="3" x="0" fill="#000" stroke="none" font-size="10" style="text-anchor: middle;">07/11</text></g><g class="tick" transform="translate(292,0)" style="opacity: 1;"><line y2="-231" x2="0"></line><text dy="1em" y="3" x="0" fill="#000" stroke="none" font-size="10" style="text-anchor: middle;">07/18</text></g><g class="tick" transform="translate(370,0)" style="opacity: 1;"><line y2="-231" x2="0"></line><text dy="1em" y="3" x="0" fill="#000" stroke="none" font-size="10" style="text-anchor: middle;">07/25</text></g><g class="tick" transform="translate(449,0)" style="opacity: 1;"><line y2="-231" x2="0"></line><text dy="1em" y="3" x="0" fill="#000" stroke="none" font-size="10" style="text-anchor: middle;">08/01</text></g><path class="domain" d="M0,0V0H449V0"></path></g><g><rect x="0" y="48" width="561.5" height="24" class="section section0"></rect><rect x="0" y="72" width="561.5" height="24" class="section section0"></rect><rect x="0" y="96" width="561.5" height="24" class="section section0"></rect><rect x="0" y="120" width="561.5" height="24" class="section section1"></rect><rect x="0" y="144" width="561.5" height="24" class="section section1"></rect><rect x="0" y="168" width="561.5" height="24" class="section section1"></rect><rect x="0" y="192" width="561.5" height="24" class="section section1"></rect><rect x="0" y="216" width="561.5" height="24" class="section section2"></rect><rect x="0" y="240" width="561.5" height="24" class="section section2"></rect></g><g><rect rx="3" ry="3" x="75" y="50" width="34" height="20" class="task  task0"></rect><rect rx="3" ry="3" x="109" y="74" width="56" height="20" class="task  task0"></rect><rect rx="3" ry="3" x="165" y="98" width="56" height="20" class="task  task0"></rect><rect rx="3" ry="3" x="221" y="122" width="56" height="20" class="task  task1"></rect><rect rx="3" ry="3" x="255" y="146" width="112" height="20" class="task  task1"></rect><rect rx="3" ry="3" x="333" y="170" width="112" height="20" class="task  task1"></rect><rect rx="3" ry="3" x="412" y="194" width="56" height="20" class="task  task1"></rect><rect rx="3" ry="3" x="468" y="218" width="22" height="20" class="task  task2"></rect><rect rx="3" ry="3" x="490" y="242" width="34" height="20" class="task  task2"></rect><text font-size="11" x="114" y="63.5" text-height="20" class="taskTextOutsideRight taskTextOutside0 ">需求分析       </text><text font-size="11" x="170" y="87.5" text-height="20" class="taskTextOutsideRight taskTextOutside0 ">可行性报告     </text><text font-size="11" x="193" y="111.5" text-height="20" class="taskText taskText0 ">概念验证       </text><text font-size="11" x="249" y="135.5" text-height="20" class="taskText taskText1 ">概要设计      </text><text font-size="11" x="311" y="159.5" text-height="20" class="taskText taskText1 ">详细设计      </text><text font-size="11" x="389" y="183.5" text-height="20" class="taskText taskText1 ">编码          </text><text font-size="11" x="440" y="207.5" text-height="20" class="taskText taskText1 ">测试          </text><text font-size="11" x="495" y="231.5" text-height="20" class="taskTextOutsideRight taskTextOutside2 ">发布</text><text font-size="11" x="507" y="255.5" text-height="20" class="taskText taskText2 ">验收</text></g><g><text x="10" y="86" class="sectionTitle sectionTitle0">项目确定</text><text x="10" y="170" class="sectionTitle sectionTitle1">项目实施</text><text x="10" y="242" class="sectionTitle sectionTitle2">发布验收</text></g><g class="today"><line x1="7461" x2="7461" y1="25" y2="291" class="today"></line></g><text x="299.5" y="25" class="titleText">项目开发流程</text></svg>
+```
+## 4.4. 参考文档
 * [简书](https://www.jianshu.com/p/b03a8d7b1719)
 * [Markdown 常用语法笔记](https://ouweiya.gitbooks.io/markdown/)
 
