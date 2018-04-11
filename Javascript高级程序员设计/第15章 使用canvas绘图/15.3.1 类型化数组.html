@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var buffer = new ArrayBuffer(20),
+        view = new DataView(buffer),
+        value;
+    view.setUint16(0, 1);
+    console.log(view);
+
+    view.setUint16(2, 50); //不能从字节 1 开始，因为 16 位整数要用 2B
+    value = view.getUint16(0);
+
+    console.log(view, value);
+</script>
+
+</html>

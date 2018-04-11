@@ -9,7 +9,9 @@
 * Markdown Theme Kit
     1. 调试->安装其他调试器->输入Markdonw Theme Kit
     2. 文件->首选项->颜色主题
+## 1.2. 浏览器
 * View In Brower
 打开浏览器
 * view in brower
 打开浏览器
+

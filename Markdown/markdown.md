@@ -9,11 +9,14 @@
 * "markdown.styles": [""]
 
 # 2. 生成左侧导航栏 [i5ting](https://github.com/i5ting/tocmd.npm)
-## 2.1. 安装
+安装
+
 ```html
 npm install -g i5ting_toc
 ```
-## 2.2. 生成导航栏
+
+生成导航栏
+
 ```html
 i5ting_toc -f Markdown文档.md -o
 ```
@@ -461,7 +464,7 @@ Markdown
 ```html
 <h3 id="1" data-anchor-id="ijx7">[需要跳转的目录]</h3>
 ```
-### 4.1.11. 注脚
+### 4.1.11. 脚注
 Markdown[^1]
 [^1]: Markdown是一种纯文本标记语言。
 
@@ -509,10 +512,10 @@ Markdown[^1]
 <iframe height=498 width=510 src='http://player.youku.com/embed/XMjgzNzM0NTYxNg==' frameborder=0 'allowfullscreen'></iframe>
 ```
 
-[![](https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png)](http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&from=y1.3-tv-grid-1007-9910.86804.1-2#paction)
+[![](https://www.baidu.com/img/bd_logo1.png)](http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&from=y1.3-tv-grid-1007-9910.86804.1-2#paction)
 ```html
 
-<a href="http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&amp;from=y1.3-tv-grid-1007-9910.86804.1-2#paction" target="_blank"><img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt=""></a>
+<a href="http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&amp;from=y1.3-tv-grid-1007-9910.86804.1-2#paction" target="_blank"><img src="https://www.baidu.com/img/bd_logo1.png" alt=""></a>
 ```
 ### 4.2.2. 公式
 $$ x \href{why-equal.html}{=} y^2 + 1 $$
