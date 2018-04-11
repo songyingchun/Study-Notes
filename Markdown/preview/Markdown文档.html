@@ -65,295 +65,113 @@
 				</div>
         <div id='readme' style='width:70%;margin-left:20%;'>
           	<article class='markdown-body'>
-            	<p>&lt;!DOCTYPE html&gt;
-  <html>
-    <head>
-      <title>Markdown文档</title>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"></p>
-<pre><code>  &lt;link rel=&quot;stylesheet&quot; href=&quot;file:///C:\Users\Administrator\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.3.4\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css&quot;&gt;
-
-
-
-
-
-
-
-
-
-
-
-  &lt;style&gt; 
-  /**
-</code></pre><ul>
-<li>prism.js Github theme based on GitHub&#39;s theme.</li>
-<li><p>@author Sam Clarke
-<em>/
-code[class</em>=&quot;language-&quot;],
-pre[class*=&quot;language-&quot;] {
-color: #333;
-background: none;
-font-family: Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;
-text-align: left;
-white-space: pre;
-word-spacing: normal;
-word-break: normal;
-word-wrap: normal;
-line-height: 1.4;</p>
-<p>-moz-tab-size: 8;
--o-tab-size: 8;
-tab-size: 8;</p>
-<p>-webkit-hyphens: none;
--moz-hyphens: none;
--ms-hyphens: none;
-hyphens: none;
-}</p>
-</li>
-</ul>
-<p>/<em> Code blocks </em>/
-pre[class<em>=&quot;language-&quot;] {
-  padding: .8em;
-  overflow: auto;
-  /</em> border: 1px solid #ddd; <em>/
-  border-radius: 3px;
-  /</em> background: #fff; */
-  background: #f5f5f5;
-}</p>
-<p>/<em> Inline code </em>/
-:not(pre) &gt; code[class*=&quot;language-&quot;] {
-  padding: .1em;
-  border-radius: .3em;
-  white-space: normal;
-  background: #f5f5f5;
-}</p>
-<p>.token.comment,
-.token.blockquote {
-  color: #969896;
-}</p>
-<p>.token.cdata {
-  color: #183691;
-}</p>
-<p>.token.doctype,
-.token.punctuation,
-.token.variable,
-.token.macro.property {
-  color: #333;
-}</p>
-<p>.token.operator,
-.token.important,
-.token.keyword,
-.token.rule,
-.token.builtin {
-  color: #a71d5d;
-}</p>
-<p>.token.string,
-.token.url,
-.token.regex,
-.token.attr-value {
-  color: #183691;
-}</p>
-<p>.token.property,
-.token.number,
-.token.boolean,
-.token.entity,
-.token.atrule,
-.token.constant,
-.token.symbol,
-.token.command,
-.token.code {
-  color: #0086b3;
-}</p>
-<p>.token.tag,
-.token.selector,
-.token.prolog {
-  color: #63a35c;
-}</p>
-<p>.token.function,
-.token.namespace,
-.token.pseudo-element,
-.token.class,
-.token.class-name,
-.token.pseudo-class,
-.token.id,
-.token.url-reference .token.variable,
-.token.attr-name {
-  color: #795da3;
-}</p>
-<p>.token.entity {
-  cursor: help;
-}</p>
-<p>.token.title,
-.token.title .token.punctuation {
-  font-weight: bold;
-  color: #1d3e81;
-}</p>
-<p>.token.list {
-  color: #ed6a43;
-}</p>
-<p>.token.inserted {
-  background-color: #eaffea;
-  color: #55a532;
-}</p>
-<p>.token.deleted {
-  background-color: #ffecec;
-  color: #bd2c00;
-}</p>
-<p>.token.bold {
-  font-weight: bold;
-}</p>
-<p>.token.italic {
-  font-style: italic;
-}</p>
-<p>/<em> JSON </em>/
-.language-json .token.property {
-  color: #183691;
-}</p>
-<p>.language-markup .token.tag .token.punctuation {
-  color: #333;
-}</p>
-<p>/<em> CSS </em>/
-code.language-css,
-.language-css .token.function {
-  color: #0086b3;
-}</p>
-<p>/<em> YAML </em>/
-.language-yaml .token.atrule {
-  color: #63a35c;
-}</p>
-<p>code.language-yaml {
-  color: #183691;
-}</p>
-<p>/<em> Ruby </em>/
-.language-ruby .token.function {
-  color: #333;
-}</p>
-<p>/<em> Markdown </em>/
-.language-markdown .token.url {
-  color: #795da3;
-}</p>
-<p>/<em> Makefile </em>/
-.language-makefile .token.symbol {
-  color: #795da3;
-}</p>
-<p>.language-makefile .token.variable {
-  color: #183691;
-}</p>
-<p>.language-makefile .token.builtin {
-  color: #0086b3;
-}</p>
-<p>/<em> Bash </em>/
-.language-bash .token.keyword {
-  color: #0086b3;
-}html body{font-family:&quot;Helvetica Neue&quot;,Helvetica,&quot;Segoe UI&quot;,Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body&gt;:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body&gt;p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body&gt;ul,html body&gt;ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li&gt;p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote&gt;:first-child{margin-top:0}html body blockquote&gt;:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,&#39;Courier New&#39;,monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:&quot;\00a0&quot;}html body pre&gt;code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers&gt;code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows&gt;span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows&gt;span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for=&quot;preview&quot;]) .code-chunk .btn-group{display:none}.markdown-preview:not([for=&quot;preview&quot;]) .code-chunk .status{display:none}.markdown-preview:not([for=&quot;preview&quot;]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=&quot;html-export&quot;]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=&quot;html-export&quot;]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
-/<em> Please visit the URL below for more information: </em>/
-/<em>   <a href="https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css">https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css</a> </em>/</p>
-<pre><code>  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body for=&quot;html-export&quot;&gt;
-  &lt;div class=&quot;mume markdown-preview   &quot;&gt;
-  &lt;h1 class=&quot;mume-header&quot; id=&quot;1-%E5%AE%89%E8%A3%85markdown%E4%B8%BB%E9%A2%98&quot;&gt;1. 安装Markdown主题&lt;/h1&gt;
-</code></pre><h2 class="mume-header" id="11-markdonw-theme-kit">1.1. Markdonw Theme Kit</h2>
-
+            	<h1 id="1-markdown-">1. 安装Markdown主题</h1>
+<h2 id="1-1-markdonw-theme-kit">1.1. Markdonw Theme Kit</h2>
 <ul>
 <li>调试-&gt;安装其他调试器-&gt;输入Markdonw Theme Kit</li>
 <li>文件-&gt;首选项-&gt;颜色主题</li>
 </ul>
-<h2 class="mume-header" id="12-vscode-markdown-css">1.2. vscode-markdown-css</h2>
-
+<h2 id="1-2-vscode-markdown-css">1.2. vscode-markdown-css</h2>
 <ul>
 <li>下载<a href="https://github.com/raycon/vscode-markdown-css">vscode-markdown-css</a></li>
 <li>修改文件：文件-&gt;首选项-&gt;设置-&gt;markdown</li>
 <li>&quot;markdown.styles&quot;: [&quot;&quot;]</li>
 </ul>
-<h1 class="mume-header" id="2-%E7%94%9F%E6%88%90%E5%B7%A6%E4%BE%A7%E5%AF%BC%E8%88%AA%E6%A0%8F-i5tinghttpsgithubcomi5tingtocmdnpm">2. 生成左侧导航栏 <a href="https://github.com/i5ting/tocmd.npm">i5ting</a></h1>
-
-<h2 class="mume-header" id="21-%E5%AE%89%E8%A3%85">2.1. 安装</h2>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">npm install -g i5ting_toc
-</pre><h2 class="mume-header" id="22-%E7%94%9F%E6%88%90%E5%AF%BC%E8%88%AA%E6%A0%8F">2.2. 生成导航栏</h2>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">i5ting_toc -f sample.md -o
-</pre><h1 class="mume-header" id="3-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91%E5%99%A8">3. （在线）编辑器</h1>
-
+<h1 id="2-i5ting">2. 生成左侧导航栏 <a href="https://github.com/i5ting/tocmd.npm">i5ting</a></h1>
+<h2 id="2-1-">2.1. 安装</h2>
+<pre><code class="lang-html">npm install -g i5ting_toc
+</code></pre>
+<h2 id="2-2-">2.2. 生成导航栏</h2>
+<pre><code class="lang-html">i5ting_toc -f Markdown文档.md -o
+</code></pre>
+<h1 id="3-">3. （在线）编辑器</h1>
 <ul>
 <li><a href="https://www.zybuluo.com/mdeditor">CMD　Markdown编辑器</a></li>
+<li><a href="http://dillinger.io/">dillinger</a></li>
+<li><a href="http://markdown.xiaoshujiang.com/">小书匠</a></li>
 </ul>
-<h1 class="mume-header" id="4-%E8%AF%AD%E6%B3%95">4. 语法</h1>
-
-<h2 class="mume-header" id="41-%E5%B8%B8%E7%94%A8%E9%83%A8%E5%88%86">4.1. 常用部分</h2>
-
-<h3 class="mume-header" id="411-%E6%A0%87%E9%A2%98">4.1.1. 标题</h3>
-
-<h4 class="mume-header" id="4111-%E6%AE%B5%E8%90%BD%E6%A0%87%E9%A2%98">4.1.1.1. 段落标题</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html"># h1
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>h1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+<h1 id="4-">4. 语法</h1>
+<h2 id="4-1-">4.1. 常用部分</h2>
+<h3 id="4-1-1-">4.1.1. 标题</h3>
+<h4 id="4-1-1-1-">4.1.1.1. 段落标题</h4>
+<pre><code class="lang-html"># h1
+&lt;h1&gt;h1&lt;/h1&gt;
 
 ## h2
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>h2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+&lt;h2&gt;h2&lt;/h2&gt;
 
 ### h3
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">&gt;</span></span>h3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">&gt;</span></span>
+&lt;h3&gt;h3&lt;/h3&gt;
 
 #### h4
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h4</span><span class="token punctuation">&gt;</span></span>h4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h4</span><span class="token punctuation">&gt;</span></span>
+&lt;h4&gt;h4&lt;/h4&gt;
 
 ##### h5
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h5</span><span class="token punctuation">&gt;</span></span>h5<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h5</span><span class="token punctuation">&gt;</span></span>
+&lt;h5&gt;h5&lt;/h5&gt;
 
 ###### h6
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h6</span><span class="token punctuation">&gt;</span></span>h6<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h6</span><span class="token punctuation">&gt;</span></span>
-</pre><h4 class="mume-header" id="4112-%E5%88%86%E7%BA%A7%E6%A0%87%E9%A2%98">4.1.1.2. 分级标题</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">AAA
+&lt;h6&gt;h6&lt;/h6&gt;
+</code></pre>
+<h4 id="4-1-1-2-">4.1.1.2. 分级标题</h4>
+<pre><code class="lang-html">AAA
 ===
+&lt;h1&gt;AAA&lt;/h1&gt;
 BBB
 ---
-</pre><h1>AAA</h1>
-<h2>BBB</h2>
-<h3 class="mume-header" id="412-%E5%BC%BA%E8%B0%83">4.1.2. 强调</h3>
-
-<h4 class="mume-header" id="4121-%E6%96%9C%E4%BD%93">4.1.2.1. 斜体</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html"><em>
-_
-</pre><p><em>1</em><br>
-<em>1</em></p>
-<h4 class="mume-header" id="4122-%E5%8A%A0%E7%B2%97">4.1.2.2. 加粗</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">**
-</pre><p><strong>1</strong></p>
-<h4 class="mume-header" id="4123-%E5%88%A0%E9%99%A4%E7%BA%BF">4.1.2.3. 删除线</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">~~
-</pre><p><s>1</s></p>
-<h3 class="mume-header" id="413-%E4%BB%A3%E7%A0%81">4.1.3. 代码</h3>
-
-<h4 class="mume-header" id="4131-%E4%BB%A3%E7%A0%81%E5%9D%97%E6%A0%87%E8%AE%B0">4.1.3.1. 代码块标记</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">    <code>&lt;/pre&gt;&lt;h4 class=&quot;mume-header&quot; id=&quot;4132-%E4%BB%A3%E7%A0%81%E5%9D%97%E7%BC%A9%E8%BF%9B%E8%A1%A8%E7%A4%BA%E6%B3%95&quot;&gt;4.1.3.2. 代码块缩进表示法&lt;/h4&gt;
-
-&lt;pre class=&quot;language-text&quot;&gt;123
+&lt;h2&gt;BBB&lt;/h2&gt;
+</code></pre>
+<h3 id="4-1-2-">4.1.2. 强调</h3>
+<h4 id="4-1-2-1-">4.1.2.1. 斜体</h4>
+<p><em>1</em></p>
+<pre><code class="lang-html">&lt;em&gt;1&lt;/em&gt;
+</code></pre>
+<p>_1_</p>
+<pre><code class="lang-html">&lt;em&gt;1&lt;/em&gt;
+</code></pre>
+<h4 id="4-1-2-2-">4.1.2.2. 加粗</h4>
+<p><strong>1</strong></p>
+<pre><code class="lang-html">&lt;strong&gt;1&lt;strong&gt;
+</code></pre>
+<h4 id="4-1-2-3-">4.1.2.3. 删除线</h4>
+<p><del>1</del></p>
+<pre><code class="lang-html">&lt;del&gt;1&lt;/del&gt;
+</code></pre>
+<h3 id="4-1-3-">4.1.3. 代码</h3>
+<h4 id="4-1-3-1-">4.1.3.1. 代码块标记<code>`</code></h4>
+<pre><code>123
+</code></pre><pre><code class="lang-html">&lt;pre&gt;
+    &lt;code&gt;123&lt;/code&gt;
 &lt;/pre&gt;
-&lt;h4 class=&quot;mume-header&quot; id=&quot;4133-%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE%E6%98%BE%E7%A4%BA&quot;&gt;4.1.3.3. 语法高亮显示&lt;/h4&gt;
-
-&lt;pre data-role=&quot;codeBlock&quot; data-info=&quot;html&quot; class=&quot;language-html&quot;&gt;</code>javascript
-    <code>`</code>
-</pre><pre data-role="codeBlock" data-info="javascript" class="language-javascript"><span class="token keyword">var</span> syc <span class="token operator">=</span> <span class="token string">&quot;syc&quot;</span><span class="token punctuation">;</span>
-</pre><h4 class="mume-header" id="4134-%E5%86%85%E8%81%94%E4%BB%A3%E7%A0%81%E5%9D%97">4.1.3.4. 内联代码块</h4>
-
-<pre class="language-text">`
-</pre>
+</code></pre>
+<h4 id="4-1-3-2-tab-4-">4.1.3.2. 代码块缩进表示法tab键或4空格</h4>
+<pre><code>123
+</code></pre><pre><code class="lang-html">&lt;pre&gt;
+    &lt;code&gt;123&lt;/code&gt;
+&lt;/pre&gt;
+</code></pre>
+<h4 id="4-1-3-3-javascript">4.1.3.3. 语法高亮显示<code>`</code>javascript</h4>
+<pre><code class="lang-javascript">var syc = &quot;syc&quot;;
+</code></pre>
+<pre><code class="lang-html">&lt;ol class=&quot;linenums&quot;&gt;
+    &lt;li class=&quot;L0&quot;&gt;
+        &lt;code class=&quot;language-javascript&quot;&gt;
+            &lt;span class=&quot;kwd&quot;&gt;var&lt;/span&gt;
+            &lt;span class=&quot;pln&quot;&gt; syc &lt;/span&gt;
+            &lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;
+            &lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;
+            &lt;span class=&quot;str&quot;&gt;&quot;syc&quot;&lt;/span&gt;
+            &lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;
+        &lt;/code&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+</code></pre>
+<h4 id="4-1-3-4-">4.1.3.4. 内联代码块</h4>
 <p><code>1</code></p>
-<h3 class="mume-header" id="414-%E8%A1%A8%E6%A0%BC">4.1.4. 表格</h3>
-
-<h4 class="mume-header" id="4141-%E8%A1%A8%E6%A0%BC">4.1.4.1. 表格</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">|     a     |        b        |      c       |
-|:---------:|:--------------- | ------------:|
-|   居中    | 左对齐           |       右对齐 |
-| ========= | =============== | ============ |
-</pre><table>
+<pre><code class="lang-html">&lt;code&gt;1&lt;/code&gt;
+</code></pre>
+<h3 id="4-1-4-">4.1.4. 表格</h3>
+<h4 id="4-1-4-1-">4.1.4.1. 表格</h4>
+<table>
 <thead>
 <tr>
 <th style="text-align:center">a</th>
@@ -374,16 +192,40 @@ _
 </tr>
 </tbody>
 </table>
-<h4 class="mume-header" id="4142-%E7%AE%80%E7%BA%A6%E5%86%99%E6%B3%95">4.1.4.2. 简约写法</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">a  | b | c<br>:-:|:- |-:
-    居中    |     左对齐      |   右对齐<br>============|=================|=============
-</pre><table>
+<pre><code class="lang-html">|     a     |        b        |      c       |
+|:---------:|:--------------- | ------------:|
+|   居中    | 左对齐           |       右对齐 |
+| ========= | =============== | ============ |
+</code></pre>
+<pre><code class="lang-html">&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th style=&quot;text-align:center;&quot;&gt;a&lt;/th&gt;
+            &lt;th style=&quot;text-align:left;&quot;&gt;b&lt;/th&gt;
+            &lt;th style=&quot;text-align:right;&quot;&gt;c&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;text-align:center;&quot;&gt;居中&lt;/td&gt;
+            &lt;td style=&quot;text-align:left;&quot;&gt;左对齐&lt;/td&gt;
+            &lt;td style=&quot;text-align:right;&quot;&gt;右对齐&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;text-align:center;&quot;&gt;=========&lt;/td&gt;
+            &lt;td style=&quot;text-align:left;&quot;&gt;===============&lt;/td&gt;
+            &lt;td style=&quot;text-align:right;&quot;&gt;============&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+<h4 id="4-1-4-2-">4.1.4.2. 简约写法</h4>
+<table>
 <thead>
 <tr>
 <th style="text-align:center">a</th>
 <th style="text-align:left">b</th>
-<th style="text-align:right">c</th>
+<th style="text-align:right">c  </th>
 </tr>
 </thead>
 <tbody>
@@ -399,257 +241,491 @@ _
 </tr>
 </tbody>
 </table>
-<table>
+<pre><code class="lang-html">a|b|c  
+:-:|:-|-:
+居中|左对齐|右对齐
+===|===|===
+</code></pre>
+<pre><code class="lang-html">&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th style=&quot;text-align:center;&quot;&gt;a&lt;/th&gt;
+            &lt;th style=&quot;text-align:left;&quot;&gt;b&lt;/th&gt;
+            &lt;th style=&quot;text-align:right;&quot;&gt;c&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;text-align:center;&quot;&gt;居中&lt;/td&gt;
+            &lt;td style=&quot;text-align:left;&quot;&gt;左对齐&lt;/td&gt;
+            &lt;td style=&quot;text-align:right;&quot;&gt;右对齐&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td style=&quot;text-align:center;&quot;&gt;===&lt;/td&gt;
+            &lt;td style=&quot;text-align:left;&quot;&gt;===&lt;/td&gt;
+            &lt;td style=&quot;text-align:right;&quot;&gt;===&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+<h4 id="4-1-4-3-html-">4.1.4.3. html生成表格地址</h4>
+<ul>
+<li><a href="http://www.tablesgenerator.com/markdown_tables">表格地址</a></li>
+</ul>
+<h3 id="4-1-5-">4.1.5. 链接</h3>
+<h4 id="4-1-5-1-">4.1.5.1. 内链式</h4>
+<p><a href="http://www.baidu.com/&quot;百度一下&quot;">百度</a></p>
+<pre><code class="lang-html">[百度](http://www.baidu.com/&quot;百度一下&quot;)
+</code></pre>
+<pre><code class="lang-html">&lt;a href=&quot;http://www.baidu.com/&quot; title=&quot;百度一下&quot; target=&quot;_blank&quot;&gt;百度&lt;/a&gt;   
+</code></pre>
+<h4 id="4-1-5-2-">4.1.5.2. 引用式</h4>
+<p><a href="http://www.baidu.com/" title="百度">百度</a></p>
+<pre><code class="lang-html">[百度][1]
+
+[1]: http://www.baidu.com/ &quot;百度&quot;
+</code></pre>
+<pre><code class="lang-html">&lt;a href=&quot;http://www.baidu.com/&quot; title=&quot;百度一下&quot; target=&quot;_blank&quot;&gt;百度&lt;/a&gt;  
+</code></pre>
+<h4 id="4-1-5-3-">4.1.5.3. 邮箱链接</h4>
+<p><a href="mailto:&#52;&#x31;&#x39;&#57;&#55;&#x33;&#x38;&#55;&#57;&#64;&#113;&#x71;&#x2e;&#x63;&#x6f;&#109;">&#52;&#x31;&#x39;&#57;&#55;&#x33;&#x38;&#55;&#57;&#64;&#113;&#x71;&#x2e;&#x63;&#x6f;&#109;</a></p>
+<pre><code class="lang-html">&lt;419973879@qq.com&gt;
+</code></pre>
+<pre><code class="lang-html">&lt;a href=&quot;mailto:419973879@qq.com&quot;&gt;419973879@qq.com&lt;/a&gt;
+</code></pre>
+<h3 id="4-1-6-">4.1.6. 图片</h3>
+<h4 id="4-1-6-1-">4.1.6.1. 内链式</h4>
+<p><img src="https://www.baidu.com/img/bd_logo1.png" alt="百度" title="百度"></p>
+<pre><code class="lang-html">![百度](https://www.baidu.com/img/bd_logo1.png &#39;百度&#39;)
+</code></pre>
+<pre><code class="lang-html">&lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; alt=&quot;百度&quot;&gt;
+</code></pre>
+<h4 id="4-1-6-2-">4.1.6.2. 引用式</h4>
+<p><img src="https://www.baidu.com/img/bd_logo1.png" alt="百度"></p>
+<pre><code class="lang-html">![百度][02]
+
+[02]: https://www.baidu.com/img/bd_logo1.png
+</code></pre>
+<pre><code class="lang-html">&lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; alt=&quot;百度&quot;&gt;
+</code></pre>
+<h4 id="4-1-6-3-">4.1.6.3. 图片带有链接</h4>
+<p><a href="https://www.baidu.com/img/bd_logo1.png&#39;我的百度&#39;"><img src="https://www.baidu.com/img/bd_logo1.png" alt="百度" title="百度"></a></p>
+<pre><code class="lang-html">[![百度](https://www.baidu.com/img/bd_logo1.png &#39;百度&#39;)](https://www.baidu.com/img/bd_logo1.png&#39;我的百度&#39;)
+</code></pre>
+<pre><code class="lang-html">&lt;a href=&quot;https://www.baidu.com/img/bd_logo1.png&quot; title=&quot;我的百度&quot; target=&quot;_blank&quot;&gt;
+&lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; alt=&quot;百度&quot;&gt;
+&lt;/a&gt;
+</code></pre>
+<h3 id="4-1-7-">4.1.7. 列表</h3>
+<h4 id="4-1-7-1-">4.1.7.1. 无序列表</h4>
+<ul>
+<li>one<ul>
+<li>two</li>
+<li>three</li>
+</ul>
+</li>
+<li>one<ul>
+<li>two</li>
+<li>three</li>
+</ul>
+</li>
+<li>one<ul>
+<li>two</li>
+<li>three</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-html">* one
+    * two
+    * three
++ one
+    + two
+    + three
+- one
+    - two
+    - three
+</code></pre>
+<pre><code class="lang-html">&lt;ul data-anchor-id=&quot;lcqq&quot;&gt;
+    &lt;li&gt;one &lt;br&gt;
+        &lt;ul&gt;
+            &lt;li&gt;two&lt;/li&gt;
+            &lt;li&gt;three&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;one &lt;br&gt;
+        &lt;ul&gt;
+            &lt;li&gt;two&lt;/li&gt;
+            &lt;li&gt;three&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;one &lt;br&gt;
+        &lt;ul&gt;
+            &lt;li&gt;two&lt;/li&gt;
+            &lt;li&gt;three&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<h4 id="4-1-7-2-">4.1.7.2. 有序列表</h4>
+<ol>
+<li>one<ol start="2">
+<li>two</li>
+<li>three</li>
+</ol>
+</li>
+</ol>
+<pre><code class="lang-html">1. one
+    2. two
+    3. three
+</code></pre>
+<pre><code class="lang-html">&lt;ol data-anchor-id=&quot;lcqq&quot;&gt;
+    &lt;li&gt;one &lt;br&gt;
+        &lt;ol&gt;
+            &lt;li&gt;two&lt;/li&gt;
+            &lt;li&gt;three&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+</code></pre>
+<h4 id="4-1-7-3-">4.1.7.3. 定义型列表</h4>
+<p>Markdown 
+:   轻量级文本标记语言，可以转换成html，pdf等格式  //  开头一个<code>:</code> + <code>Tab</code> 或 四个空格</p>
+<p>代码块定义
+:   代码块定义……</p>
+<pre><code>    var a = 10;         // 保持空一行与 递进缩进
+</code></pre><pre><code class="lang-html">Markdown 
+:   轻量级文本标记语言，可以转换成html，pdf等格式  //  开头一个`:` + `Tab` 或 四个空格
+
+代码块定义
+:   代码块定义……
+
+        var a = 10;         // 保持空一行与 递进缩进
+</code></pre>
+<pre><code class="lang-html">&lt;dl data-anchor-id=&quot;c7qz&quot;&gt;
+    &lt;dt&gt;Markdown&lt;/dt&gt;
+    &lt;dd&gt;轻量级文本标记语言，可以转换成html，pdf等格式  //  开头一个&lt;code&gt;:&lt;/code&gt; + &lt;code&gt;Tab&lt;/code&gt; 或 四个空格&lt;/dd&gt;
+
+        &lt;dt&gt;代码块定义&lt;/dt&gt;
+    &lt;dd&gt;
+    &lt;p&gt;代码块定义……&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;var a = 10;         // 保持空一行与 递进缩进
+    &lt;/code&gt;&lt;/pre&gt;
+    &lt;/dd&gt;
+&lt;/dl&gt;
+</code></pre>
+<h3 id="4-1-8-">4.1.8. 清单选项表</h3>
+<ul>
+<li>[x] 选项一 </li>
+<li>[ ] 选项二</li>
+</ul>
+<pre><code class="lang-html">- [x] 选项一 
+- [ ] 选项二
+</code></pre>
+<pre><code class="lang-html">&lt;ul data-anchor-id=&quot;lcqq&quot;&gt;
+    &lt;li class=&quot;todo-list-item&quot;&gt;
+        &lt;i class=&quot;icon-check-sign&quot;&gt;&lt;/i&gt;选项一 
+    &lt;/li&gt;
+    &lt;li class=&quot;todo-list-item&quot;&gt;
+        &lt;i class=&quot;icon-check-empty&quot;&lt;/i&gt;选项二
+    &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<h3 id="4-1-9-">4.1.9. 引用</h3>
+<h4 id="4-1-9-1-">4.1.9.1. 单行引用</h4>
+<blockquote>
+<p>hello world!</p>
+</blockquote>
+<pre><code class="lang-html">&gt; hello world!
+</code></pre>
+<pre><code class="lang-html">&lt;blockquote data-anchor-id=&quot;uy9i&quot; class=&quot;white-blockquote&quot;&gt;
+    &lt;p&gt;hello world!&lt;/p&gt;
+&lt;/blockquote&gt;
+</code></pre>
+<h4 id="4-1-9-2-">4.1.9.2. 多行引用</h4>
+<blockquote>
+<p>hello world!
+hello world!
+hello world!</p>
+</blockquote>
+<pre><code class="lang-html">&gt; hello world!
+&gt; hello world!
+&gt; hello world!
+</code></pre>
+<pre><code class="lang-html">&lt;blockquote data-anchor-id=&quot;uy9i&quot; class=&quot;white-blockquote&quot;&gt;
+  &lt;p&gt;hello world! &lt;br&gt;
+  hello world! &lt;br&gt;
+  hello world!&lt;/p&gt;
+&lt;/blockquote&gt;
+</code></pre>
+<h4 id="4-1-9-3-">4.1.9.3. 嵌套引用</h4>
+<blockquote>
+<p>aaaaaaaaa</p>
+<blockquote>
+<p>bbbbbbbbb</p>
+<blockquote>
+<p>cccccccccc</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code class="lang-html">&gt; aaaaaaaaa
+&gt;&gt; bbbbbbbbb
+&gt;&gt;&gt; cccccccccc
+</code></pre>
+<pre><code class="lang-html">&lt;blockquote data-anchor-id=&quot;uy9i&quot; class=&quot;white-blockquote&quot;&gt;
+  &lt;p&gt;aaaaaaaaa&lt;/p&gt;
+  &lt;blockquote class=&quot;white-blockquote&quot;&gt;
+    &lt;p&gt;bbbbbbbbb&lt;/p&gt;
+    &lt;blockquote class=&quot;white-blockquote&quot;&gt;
+      &lt;p&gt;cccccccccc&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+</code></pre>
+<h3 id="4-1-10-">4.1.10. 描点</h3>
+<p><a href="#1">公式标题锚点</a></p>
+<pre><code class="lang-html">[公式标题锚点](#1)
+</code></pre>
+<pre><code class="lang-html">&lt;a href=&quot;#1&quot;&gt;公式标题锚点&lt;/a&gt;
+</code></pre>
+<pre><code class="lang-html">### [需要跳转的目录] {#1}
+</code></pre>
+<pre><code class="lang-html">&lt;h3 id=&quot;1&quot; data-anchor-id=&quot;ijx7&quot;&gt;[需要跳转的目录]&lt;/h3&gt;
+</code></pre>
+<h3 id="4-1-11-">4.1.11. 注脚</h3>
+<p>Markdown[^1]
+[^1]: Markdown是一种纯文本标记语言。</p>
+<pre><code class="lang-html">Markdown[^1]
+[^1]: Markdown是一种纯文本标记语言。
+</code></pre>
+<pre><code class="lang-html">&lt;p data-anchor-id=&quot;whgn&quot;&gt;
+    Markdown
+    &lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;查看注脚&quot; class=&quot;footnote&quot;&gt;[3]&lt;/a&gt;
+&lt;/p&gt;
+</code></pre>
+<h3 id="4-1-12-">4.1.12. 表情</h3>
+<p><a href="https://link.jianshu.com/?t=https://www.webpagefx.com/tools/emoji-cheat-sheet/%27GitHub%27">表情代码</a></p>
+<h3 id="4-1-13-">4.1.13. 分隔符</h3>
+<hr>
+<pre><code class="lang-html">***
+</code></pre>
+<pre><code class="lang-html">&lt;hr&gt;
+</code></pre>
+<hr>
+<pre><code class="lang-html">---
+</code></pre>
+<pre><code class="lang-html">&lt;hr&gt;
+</code></pre>
+<h2 id="4-2-">4.2. 其他部分</h2>
+<h3 id="4-2-1-">4.2.1. 视频插入</h3>
+<iframe height=498 width=510 src='http://player.youku.com/embed/XMjgzNzM0NTYxNg==' frameborder=0 'allowfullscreen'></iframe>
+
+<pre><code class="lang-html">&lt;iframe height=498 width=510 src=&#39;http://player.youku.com/embed/XMjgzNzM0NTYxNg==&#39; frameborder=0 &#39;allowfullscreen&#39;&gt;&lt;/iframe&gt;
+</code></pre>
+<p><a href="http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&amp;from=y1.3-tv-grid-1007-9910.86804.1-2#paction"><img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt=""></a></p>
+<pre><code class="lang-html">
+&lt;a href=&quot;http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&amp;amp;from=y1.3-tv-grid-1007-9910.86804.1-2#paction&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png&quot; alt=&quot;&quot;&gt;&lt;/a&gt;
+</code></pre>
+<h3 id="4-2-2-">4.2.2. 公式</h3>
+<p>$$ x \href{why-equal.html}{=} y^2 + 1 $$
+$ x = {-b \pm \sqrt{b^2-4ac} \over 2a}. $</p>
+<pre><code class="lang-html">$$ x \href{why-equal.html}{=} y^2 + 1 $$
+$ x = {-b \pm \sqrt{b^2-4ac} \over 2a}. $
+</code></pre>
+<h3 id="4-2-3-">4.2.3. <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图">流程图</a></h3>
+<pre><code class="lang-flow">st=&gt;start: Start
+op=&gt;operation: Your Operation
+cond=&gt;condition: Yes or No?
+e=&gt;end
+st-&gt;op-&gt;cond
+cond(yes)-&gt;e
+cond(no)-&gt;op
+</code></pre>
+<pre><code class="lang-html">    ```flow
+    st=&gt;start: Start
+    op=&gt;operation: Your Operation
+    cond=&gt;condition: Yes or No?
+    e=&gt;end
+    st-&gt;op-&gt;cond
+    cond(yes)-&gt;e
+    cond(no)-&gt;op
+</code></pre>
+<pre><code>
+```html
+&lt;svg height=&quot;419.73046875&quot; version=&quot;1.1&quot; width=&quot;187.984375&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;overflow: hidden; position: relative;&quot; viewBox=&quot;0 0 187.984375 419.73046875&quot; preserveAspectRatio=&quot;xMidYMid meet&quot;&gt;&lt;desc style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;Created with Raphaël 2.1.2&lt;/desc&gt;&lt;defs style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;path stroke-linecap=&quot;round&quot; d=&quot;M5,0 0,2.5 5,5z&quot; id=&quot;raphael-marker-block-obj3&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/path&gt;&lt;marker id=&quot;raphael-marker-endblock33-obj4&quot; markerHeight=&quot;3&quot; markerWidth=&quot;3&quot; orient=&quot;auto&quot; refX=&quot;1.5&quot; refY=&quot;1.5&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;use xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xlink:href=&quot;#raphael-marker-block-obj3&quot; transform=&quot;rotate(180 1.5 1.5) scale(0.6,0.6)&quot; stroke-width=&quot;1.6667&quot; fill=&quot;black&quot; stroke=&quot;none&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/use&gt;&lt;/marker&gt;&lt;/defs&gt;&lt;rect x=&quot;0&quot; y=&quot;0&quot; width=&quot;52.5&quot; height=&quot;37&quot; r=&quot;20&quot; rx=&quot;20&quot; ry=&quot;20&quot; fill=&quot;#ffffff&quot; stroke=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot; stroke-width=&quot;2&quot; class=&quot;flowchart&quot; id=&quot;st&quot; transform=&quot;matrix(1,0,0,1,56.2422,24.7461)&quot;&gt;&lt;/rect&gt;&lt;text x=&quot;10&quot; y=&quot;18.5&quot; text-anchor=&quot;start&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;&quot; id=&quot;stt&quot; class=&quot;flowchartt&quot; font-size=&quot;15px&quot; transform=&quot;matrix(1,0,0,1,56.2422,24.7461)&quot; stroke-width=&quot;1&quot;&gt;&lt;tspan dy=&quot;5.5&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;Start&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;0&quot; y=&quot;0&quot; width=&quot;121.34375&quot; height=&quot;37&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;#ffffff&quot; stroke=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot; stroke-width=&quot;2&quot; class=&quot;flowchart&quot; id=&quot;op&quot; transform=&quot;matrix(1,0,0,1,21.8203,136.4922)&quot;&gt;&lt;/rect&gt;&lt;text x=&quot;10&quot; y=&quot;18.5&quot; text-anchor=&quot;start&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;&quot; id=&quot;opt&quot; class=&quot;flowchartt&quot; font-size=&quot;15px&quot; transform=&quot;matrix(1,0,0,1,21.8203,136.4922)&quot; stroke-width=&quot;1&quot;&gt;&lt;tspan dy=&quot;5.5&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;Your Operation&lt;/tspan&gt;&lt;/text&gt;&lt;path fill=&quot;#ffffff&quot; stroke=&quot;#000000&quot; d=&quot;M39.24609375,19.623046875L0,39.24609375L78.4921875,78.4921875L156.984375,39.24609375L78.4921875,0L0,39.24609375&quot; stroke-width=&quot;2&quot; id=&quot;cond&quot; class=&quot;flowchart&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot; transform=&quot;matrix(1,0,0,1,4,227.4922)&quot;&gt;&lt;/path&gt;&lt;text x=&quot;44.24609375&quot; y=&quot;39.24609375&quot; text-anchor=&quot;start&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;&quot; id=&quot;condt&quot; class=&quot;flowchartt&quot; font-size=&quot;15px&quot; transform=&quot;matrix(1,0,0,1,4,227.4922)&quot; stroke-width=&quot;1&quot;&gt;&lt;tspan dy=&quot;5.51171875&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;Yes or No?&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;0&quot; y=&quot;0&quot; width=&quot;46.6875&quot; height=&quot;37&quot; r=&quot;20&quot; rx=&quot;20&quot; ry=&quot;20&quot; fill=&quot;#ffffff&quot; stroke=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot; stroke-width=&quot;2&quot; class=&quot;flowchart&quot; id=&quot;e&quot; transform=&quot;matrix(1,0,0,1,59.1484,380.7305)&quot;&gt;&lt;/rect&gt;&lt;text x=&quot;10&quot; y=&quot;18.5&quot; text-anchor=&quot;start&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;&quot; id=&quot;et&quot; class=&quot;flowchartt&quot; font-size=&quot;15px&quot; transform=&quot;matrix(1,0,0,1,59.1484,380.7305)&quot; stroke-width=&quot;1&quot;&gt;&lt;tspan dy=&quot;5.5&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;End&lt;/tspan&gt;&lt;/text&gt;&lt;path fill=&quot;none&quot; stroke=&quot;#000000&quot; d=&quot;M82.4921875,61.74609375C82.4921875,61.74609375,82.4921875,119.5498448451981,82.4921875,133.49274183788748&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#raphael-marker-endblock33-obj4)&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/path&gt;&lt;path fill=&quot;none&quot; stroke=&quot;#000000&quot; d=&quot;M82.4921875,173.4921875C82.4921875,173.4921875,82.4921875,213.14628744125366,82.4921875,224.49262658460066&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#raphael-marker-endblock33-obj4)&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/path&gt;&lt;path fill=&quot;none&quot; stroke=&quot;#000000&quot; d=&quot;M82.4921875,305.984375C82.4921875,305.984375,82.4921875,363.7881260951981,82.4921875,377.7310230878875&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#raphael-marker-endblock33-obj4)&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/path&gt;&lt;text x=&quot;87.4921875&quot; y=&quot;315.984375&quot; text-anchor=&quot;start&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;&quot; font-size=&quot;15px&quot; stroke-width=&quot;1&quot;&gt;&lt;tspan dy=&quot;5.5&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;yes&lt;/tspan&gt;&lt;/text&gt;&lt;path fill=&quot;none&quot; stroke=&quot;#000000&quot; d=&quot;M160.984375,266.73828125C160.984375,266.73828125,185.984375,266.73828125,185.984375,266.73828125C185.984375,266.73828125,185.984375,111.4921875,185.984375,111.4921875C185.984375,111.4921875,82.4921875,111.4921875,82.4921875,111.4921875C82.4921875,111.4921875,82.4921875,126.86563205718994,82.4921875,133.50143527425826&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#raphael-marker-endblock33-obj4)&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/path&gt;&lt;text x=&quot;165.984375&quot; y=&quot;256.73828125&quot; text-anchor=&quot;start&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;&quot; font-size=&quot;15px&quot; stroke-width=&quot;1&quot;&gt;&lt;tspan dy=&quot;5.50390625&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;no&lt;/tspan&gt;&lt;/text&gt;&lt;/svg&gt;
+</code></pre><table>
 <thead>
 <tr>
-<th>Tables</th>
-<th style="text-align:center">Are</th>
-<th style="text-align:right">Cool</th>
+<th style="text-align:center">形参</th>
+<th style="text-align:center">实参</th>
+<th style="text-align:center">含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>col 1 is</td>
-<td style="text-align:center">left-aligned</td>
-<td style="text-align:right">$1600</td>
+<td style="text-align:center">tag</td>
+<td style="text-align:center">st</td>
+<td style="text-align:center">标签 (可以自定义)</td>
 </tr>
 <tr>
-<td>col 2 is</td>
-<td style="text-align:center">centered</td>
-<td style="text-align:right">$12</td>
+<td style="text-align:center">=&gt;</td>
+<td style="text-align:center">=&gt;</td>
+<td style="text-align:center">赋值</td>
 </tr>
 <tr>
-<td>col 3 is</td>
-<td style="text-align:center">right-aligned</td>
-<td style="text-align:right">$1</td>
+<td style="text-align:center">type</td>
+<td style="text-align:center">start</td>
+<td style="text-align:center">类型 (6种类型)</td>
+</tr>
+<tr>
+<td style="text-align:center">content</td>
+<td style="text-align:center">开始</td>
+<td style="text-align:center">描述内容 (可以自定义)</td>
+</tr>
+<tr>
+<td style="text-align:center">:&gt;url</td>
+<td style="text-align:center"><a href="http://www.baidu.com[blank]">http://www.baidu.com[blank]</a></td>
+<td style="text-align:center">链接与跳转方式 兼容性很差</td>
 </tr>
 </tbody>
 </table>
-<h4 class="mume-header" id="4143-html%E8%A1%A8%E6%A0%BC">4.1.4.3. html表格</h4>
-
-<ul>
-<li><a href="http://www.tablesgenerator.com/markdown_tables">表格地址</a></li>
-</ul>
-<h3 class="mume-header" id="415-%E9%93%BE%E6%8E%A5">4.1.5. 链接</h3>
-
-<h4 class="mume-header" id="4151-%E5%86%85%E9%93%BE%E5%BC%8F">4.1.5.1. 内链式</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">    <a href="http://www.baidu.com/&quot;百度一下&quot;">百度1</a>{:target=&quot;_blank&quot;}<br></pre><p><a href="http://www.baidu.com/">百度1</a>{:target=&quot;_blank&quot;}<br>
-{:target=&quot;_blank&quot;}兼容性一般</p>
-<h4 class="mume-header" id="4152-%E5%BC%95%E7%94%A8%E5%BC%8F">4.1.5.2. 引用式</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">I get 10 times more traffic from [Google][1] than from
-[Yahoo][2] or [MSN][3].
-  [1]: <a href="http://google.com/">http://google.com/</a>        &quot;Google&quot;
-  [2]: <a href="http://search.yahoo.com/">http://search.yahoo.com/</a>  &quot;Yahoo Search&quot;
-  [3]: <a href="http://search.msn.com/">http://search.msn.com/</a>    &quot;MSN Search&quot;
-</pre><p>I get 10 times more traffic from <a href="http://google.com/" title="Google">Google</a> than from<br>
-<a href="http://search.yahoo.com/" title="Yahoo Search">Yahoo</a> or <a href="http://search.msn.com/" title="MSN Search">MSN</a>.</p>
-<h4 class="mume-header" id="4153-%E9%82%AE%E7%AE%B1%E9%93%BE%E6%8E%A5">4.1.5.3. 邮箱链接</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><a href="mailto:xxx@outlook.com">xxx@outlook.com</a></span><span class="token punctuation">&gt;</span></span>
-</pre><p><a href="mailto:419973879@qq.com">419973879@qq.com</a></p>
-<h3 class="mume-header" id="416-%E5%9B%BE%E7%89%87">4.1.6. 图片</h3>
-
-<h4 class="mume-header" id="4161-%E5%86%85%E9%93%BE%E5%BC%8F">4.1.6.1. 内链式</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html"><img src="./01.png" alt="name" title="描述">
-</pre><p><img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="name" title="Google"></p>
-<h4 class="mume-header" id="4162-%E5%BC%95%E7%94%A8%E5%BC%8F">4.1.6.2. 引用式</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">![name][01]
-[01]: <a href="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png</a> &#39;描述&#39;
-</pre><p>![name][02]<br>
-[02]: <a href="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png</a> &#39;描述&#39;</p>
-<h4 class="mume-header" id="4163-%E5%9B%BE%E7%89%87%E5%B8%A6%E6%9C%89%E9%93%BE%E6%8E%A5">4.1.6.3. 图片带有链接</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html"><a href="./01.png"><img src="./01.png" alt="name" title="百度"></a>{:target=&quot;_blank&quot;}
-
-[<img src="./01.png" alt="name" title="百度">][5]{:target=&quot;_blank&quot;} 
-[5]: <a href="http://www.baidu.com">http://www.baidu.com</a>
-</pre><p><a href="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"><img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google" title="Google"></a></p>
-<h2 class="mume-header" id="%E5%B8%B8%E7%94%A8%E9%83%A8%E5%88%86">常用部分</h2>
-
-<h3 class="mume-header" id="%E5%BA%8F%E8%A1%A8">序表</h3>
-
-<h4 class="mume-header" id="%E6%97%A0%E5%BA%8F">无序</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html"></em> one
-<em> two
-</em> three
-
-+ - 可替代 <em>
-</pre><ul>
-<li>one</li>
-<li>two</li>
-<li>three</li>
-</ul>
-<h4 class="mume-header" id="%E6%9C%89%E5%BA%8F">有序</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">1. one
-2. two
-3. three
-</pre><ol>
-<li>one</li>
-<li>two</li>
-<li>three</li>
-</ol>
-<h4 class="mume-header" id="%E5%BA%8F%E8%A1%A8%E5%B5%8C%E5%A5%97">序表嵌套</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html"></em> one
-    <em> two
-    </em> three
-
-1. one
-    2. two
-    3. three
-</pre><ul>
-<li>one
-<ul>
-<li>two</li>
-<li>three</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li>one<br>
-2. two<br>
-3. three</li>
-</ol>
-<h3 class="mume-header" id="%E6%B8%85%E5%8D%95%E9%80%89%E9%A1%B9%E8%A1%A8">清单选项表</h3>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">- [x] 选项一 
-- [ ] 选项二
-</pre><ul>
-<li><input type="checkbox" class="task-list-item-checkbox" checked> 选项一</li>
-<li><input type="checkbox" class="task-list-item-checkbox"> 选项二</li>
-</ul>
-<h3 class="mume-header" id="%E5%BC%95%E7%94%A8">引用</h3>
-
-<h4 class="mume-header" id="%E5%BC%95%E7%94%A8-1">引用</h4>
-
-<pre data-role="codeBlock" data-info="html" class="language-html">hello world! hello world! hello world!
-</pre><p>hello world! hello world! hello world!</p>
-<h2 class="mume-header" id="42-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3">4.2. 参考文档</h2>
-
+<table>
+<thead>
+<tr>
+<th style="text-align:center">6种类型</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">start</td>
+<td style="text-align:center">启动</td>
+</tr>
+<tr>
+<td style="text-align:center">end</td>
+<td style="text-align:center">结束</td>
+</tr>
+<tr>
+<td style="text-align:center">operation</td>
+<td style="text-align:center">程序</td>
+</tr>
+<tr>
+<td style="text-align:center">subroutine</td>
+<td style="text-align:center">子程序</td>
+</tr>
+<tr>
+<td style="text-align:center">condition</td>
+<td style="text-align:center">条件</td>
+</tr>
+<tr>
+<td style="text-align:center">inputoutput</td>
+<td style="text-align:center">输出</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">形参</th>
+<th style="text-align:center">实参</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-&gt;</td>
+<td style="text-align:center">-&gt;</td>
+<td style="text-align:center">连接</td>
+</tr>
+<tr>
+<td style="text-align:center">condition</td>
+<td style="text-align:center">c1</td>
+<td style="text-align:center">条件</td>
+</tr>
+<tr>
+<td style="text-align:center">(布尔值,方向)</td>
+<td style="text-align:center">(yes,right)</td>
+<td style="text-align:center">如果满足向右连接，4种方向：right ，left，up ，down 默认为：down</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-2-4-">4.2.4. <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-序列图">时序图</a></h3>
+<pre><code class="lang-sequence">Alice-&gt;Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob--&gt;Alice: I am good thanks!
+</code></pre>
+<pre><code class="lang-html">    ```sequence
+    Alice-&gt;Bob: Hello Bob, how are you?
+    Note right of Bob: Bob thinks
+    Bob--&gt;Alice: I am good thanks!
+</code></pre>
+<pre><code>
+```html
+&lt;svg height=&quot;250&quot; version=&quot;1.1&quot; width=&quot;426&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; style=&quot;overflow: hidden; position: relative;&quot;&gt;&lt;desc style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;Created with Raphaël 2.1.2&lt;/desc&gt;&lt;defs style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;path stroke-linecap=&quot;round&quot; d=&quot;M5,0 0,2.5 5,5z&quot; id=&quot;raphael-marker-block-obj1&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/path&gt;&lt;marker id=&quot;raphael-marker-endblock55-obj2&quot; markerHeight=&quot;5&quot; markerWidth=&quot;5&quot; orient=&quot;auto&quot; refX=&quot;2.5&quot; refY=&quot;2.5&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;use xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xlink:href=&quot;#raphael-marker-block-obj1&quot; transform=&quot;rotate(180 2.5 2.5) scale(1,1)&quot; stroke-width=&quot;1.0000&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/use&gt;&lt;/marker&gt;&lt;/defs&gt;&lt;rect x=&quot;10&quot; y=&quot;20&quot; width=&quot;60&quot; height=&quot;36&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;none&quot; stroke=&quot;#000000&quot; stroke-width=&quot;2&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;20&quot; y=&quot;30&quot; width=&quot;40&quot; height=&quot;16&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;#ffffff&quot; stroke=&quot;none&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/rect&gt;&lt;text x=&quot;40&quot; y=&quot;38&quot; text-anchor=&quot;middle&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &amp;quot;Andale Mono&amp;quot;, monospace;&quot; font-size=&quot;16px&quot; font-family=&quot;Andale Mono, monospace&quot;&gt;&lt;tspan dy=&quot;6&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;Alice&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;10&quot; y=&quot;194&quot; width=&quot;60&quot; height=&quot;36&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;none&quot; stroke=&quot;#000000&quot; stroke-width=&quot;2&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;20&quot; y=&quot;204&quot; width=&quot;40&quot; height=&quot;16&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;#ffffff&quot; stroke=&quot;none&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/rect&gt;&lt;text x=&quot;40&quot; y=&quot;212&quot; text-anchor=&quot;middle&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &amp;quot;Andale Mono&amp;quot;, monospace;&quot; font-size=&quot;16px&quot; font-family=&quot;Andale Mono, monospace&quot;&gt;&lt;tspan dy=&quot;6&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;Alice&lt;/tspan&gt;&lt;/text&gt;&lt;path fill=&quot;none&quot; stroke=&quot;#000000&quot; d=&quot;M40,56L40,194&quot; stroke-width=&quot;2&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/path&gt;&lt;rect x=&quot;222&quot; y=&quot;20&quot; width=&quot;44&quot; height=&quot;36&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;none&quot; stroke=&quot;#000000&quot; stroke-width=&quot;2&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;232&quot; y=&quot;30&quot; width=&quot;24&quot; height=&quot;16&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;#ffffff&quot; stroke=&quot;none&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/rect&gt;&lt;text x=&quot;244&quot; y=&quot;38&quot; text-anchor=&quot;middle&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &amp;quot;Andale Mono&amp;quot;, monospace;&quot; font-size=&quot;16px&quot; font-family=&quot;Andale Mono, monospace&quot;&gt;&lt;tspan dy=&quot;6&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;Bob&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;222&quot; y=&quot;194&quot; width=&quot;44&quot; height=&quot;36&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;none&quot; stroke=&quot;#000000&quot; stroke-width=&quot;2&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;232&quot; y=&quot;204&quot; width=&quot;24&quot; height=&quot;16&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;#ffffff&quot; stroke=&quot;none&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/rect&gt;&lt;text x=&quot;244&quot; y=&quot;212&quot; text-anchor=&quot;middle&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &amp;quot;Andale Mono&amp;quot;, monospace;&quot; font-size=&quot;16px&quot; font-family=&quot;Andale Mono, monospace&quot;&gt;&lt;tspan dy=&quot;6&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;Bob&lt;/tspan&gt;&lt;/text&gt;&lt;path fill=&quot;none&quot; stroke=&quot;#000000&quot; d=&quot;M244,56L244,194&quot; stroke-width=&quot;2&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/path&gt;&lt;rect x=&quot;50&quot; y=&quot;73&quot; width=&quot;184&quot; height=&quot;16&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;#ffffff&quot; stroke=&quot;none&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/rect&gt;&lt;text x=&quot;142&quot; y=&quot;81&quot; text-anchor=&quot;middle&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &amp;quot;Andale Mono&amp;quot;, monospace;&quot; font-size=&quot;16px&quot; font-family=&quot;Andale Mono, monospace&quot;&gt;&lt;tspan dy=&quot;6&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;Hello Bob, how are you?&lt;/tspan&gt;&lt;/text&gt;&lt;path fill=&quot;none&quot; stroke=&quot;#000000&quot; d=&quot;M40,92C40,92,207.72355937957764,92,239.00793422479182,92&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#raphael-marker-endblock55-obj2)&quot; stroke-dasharray=&quot;0&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/path&gt;&lt;rect x=&quot;264&quot; y=&quot;112&quot; width=&quot;90&quot; height=&quot;26&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;none&quot; stroke=&quot;#000000&quot; stroke-width=&quot;2&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;269&quot; y=&quot;117&quot; width=&quot;80&quot; height=&quot;16&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;#ffffff&quot; stroke=&quot;none&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/rect&gt;&lt;text x=&quot;309&quot; y=&quot;125&quot; text-anchor=&quot;middle&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &amp;quot;Andale Mono&amp;quot;, monospace;&quot; font-size=&quot;16px&quot; font-family=&quot;Andale Mono, monospace&quot;&gt;&lt;tspan dy=&quot;6&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;Bob thinks&lt;/tspan&gt;&lt;/text&gt;&lt;rect x=&quot;74&quot; y=&quot;155&quot; width=&quot;136&quot; height=&quot;16&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;#ffffff&quot; stroke=&quot;none&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/rect&gt;&lt;text x=&quot;142&quot; y=&quot;163&quot; text-anchor=&quot;middle&quot; font=&quot;10px &amp;quot;Arial&amp;quot;&quot; stroke=&quot;none&quot; fill=&quot;#000000&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: &amp;quot;Andale Mono&amp;quot;, monospace;&quot; font-size=&quot;16px&quot; font-family=&quot;Andale Mono, monospace&quot;&gt;&lt;tspan dy=&quot;6&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;I am good thanks!&lt;/tspan&gt;&lt;/text&gt;&lt;path fill=&quot;none&quot; stroke=&quot;#000000&quot; d=&quot;M244,174C244,174,76.27644062042236,174,44.992065775208175,174&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#raphael-marker-endblock55-obj2)&quot; stroke-dasharray=&quot;6,2&quot; style=&quot;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>-</code></td>
+<td style="text-align:center">实线</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>&gt;</code></td>
+<td style="text-align:center">实心箭头</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--</code></td>
+<td style="text-align:center">虚线</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>&gt;&gt;</code></td>
+<td style="text-align:center">空心箭头</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-2-5-">4.2.5. <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#9-甘特图">甘特图</a></h3>
+<pre><code class="lang-gantt">    title 项目开发流程
+    section 项目确定
+        需求分析       :a1, 2016-06-22, 3d
+        可行性报告     :after a1, 5d
+        概念验证       : 5d
+    section 项目实施
+        概要设计      :2016-07-05  , 5d
+        详细设计      :2016-07-08, 10d
+        编码          :2016-07-15, 10d
+        测试          :2016-07-22, 5d
+    section 发布验收
+        发布: 2d
+        验收: 3d
+</code></pre>
+<pre><code class="lang-html">    ```gantt
+    title 项目开发流程
+    section 项目确定
+        需求分析       :a1, 2016-06-22, 3d
+        可行性报告     :after a1, 5d
+        概念验证       : 5d
+    section 项目实施
+        概要设计      :2016-07-05  , 5d
+        详细设计      :2016-07-08, 10d
+        编码          :2016-07-15, 10d
+        测试          :2016-07-22, 5d
+    section 发布验收
+        发布: 2d
+        验收: 3d
+</code></pre>
+<pre><code>
+```html
+&lt;svg id=&quot;mermaidChart2&quot; width=&quot;100%&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; height=&quot;100%&quot; viewBox=&quot;0 0 599 316&quot;&gt;&lt;style type=&quot;text/css&quot; title=&quot;mermaid-svg-internal-css&quot;&gt; .section { stroke: none; opacity: 0.2;} .section0 { fill: rgba(102, 102, 255, 0.490196);} .section2 { fill: rgb(255, 244, 0);} .section1, .section3 { fill: white; opacity: 0.2;} .sectionTitle0 { fill: rgb(51, 51, 51);} .sectionTitle1 { fill: rgb(51, 51, 51);} .sectionTitle2 { fill: rgb(51, 51, 51);} .sectionTitle { text-anchor: start; font-size: 11px;} .grid .tick { stroke: lightgrey; opacity: 0.3; shape-rendering: crispEdges;} .grid path { stroke-width: 0;} .today { fill: none; stroke: red; stroke-width: 2px;} .task { stroke-width: 2;} .taskText { text-anchor: middle; font-size: 11px;} .taskText0, .taskText1, .taskText2, .taskText3 { fill: white;} .task0, .task1, .task2, .task3 { fill: rgb(138, 144, 221); stroke: rgb(83, 79, 188);} .titleText { text-anchor: middle; font-size: 18px; fill: black;} &lt;/style&gt;&lt;g&gt;&lt;/g&gt;&lt;g class=&quot;grid&quot; transform=&quot;translate(75, 266)&quot;&gt;&lt;g class=&quot;tick&quot; transform=&quot;translate(56,0)&quot; style=&quot;opacity: 1;&quot;&gt;&lt;line y2=&quot;-231&quot; x2=&quot;0&quot;&gt;&lt;/line&gt;&lt;text dy=&quot;1em&quot; y=&quot;3&quot; x=&quot;0&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; font-size=&quot;10&quot; style=&quot;text-anchor: middle;&quot;&gt;06/27&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;tick&quot; transform=&quot;translate(135,0)&quot; style=&quot;opacity: 1;&quot;&gt;&lt;line y2=&quot;-231&quot; x2=&quot;0&quot;&gt;&lt;/line&gt;&lt;text dy=&quot;1em&quot; y=&quot;3&quot; x=&quot;0&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; font-size=&quot;10&quot; style=&quot;text-anchor: middle;&quot;&gt;07/04&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;tick&quot; transform=&quot;translate(213,0)&quot; style=&quot;opacity: 1;&quot;&gt;&lt;line y2=&quot;-231&quot; x2=&quot;0&quot;&gt;&lt;/line&gt;&lt;text dy=&quot;1em&quot; y=&quot;3&quot; x=&quot;0&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; font-size=&quot;10&quot; style=&quot;text-anchor: middle;&quot;&gt;07/11&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;tick&quot; transform=&quot;translate(292,0)&quot; style=&quot;opacity: 1;&quot;&gt;&lt;line y2=&quot;-231&quot; x2=&quot;0&quot;&gt;&lt;/line&gt;&lt;text dy=&quot;1em&quot; y=&quot;3&quot; x=&quot;0&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; font-size=&quot;10&quot; style=&quot;text-anchor: middle;&quot;&gt;07/18&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;tick&quot; transform=&quot;translate(370,0)&quot; style=&quot;opacity: 1;&quot;&gt;&lt;line y2=&quot;-231&quot; x2=&quot;0&quot;&gt;&lt;/line&gt;&lt;text dy=&quot;1em&quot; y=&quot;3&quot; x=&quot;0&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; font-size=&quot;10&quot; style=&quot;text-anchor: middle;&quot;&gt;07/25&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;tick&quot; transform=&quot;translate(449,0)&quot; style=&quot;opacity: 1;&quot;&gt;&lt;line y2=&quot;-231&quot; x2=&quot;0&quot;&gt;&lt;/line&gt;&lt;text dy=&quot;1em&quot; y=&quot;3&quot; x=&quot;0&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; font-size=&quot;10&quot; style=&quot;text-anchor: middle;&quot;&gt;08/01&lt;/text&gt;&lt;/g&gt;&lt;path class=&quot;domain&quot; d=&quot;M0,0V0H449V0&quot;&gt;&lt;/path&gt;&lt;/g&gt;&lt;g&gt;&lt;rect x=&quot;0&quot; y=&quot;48&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section0&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;72&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section0&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;96&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section0&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;120&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section1&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;144&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section1&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;168&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section1&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;192&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section1&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;216&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section2&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;240&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section2&quot;&gt;&lt;/rect&gt;&lt;/g&gt;&lt;g&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;75&quot; y=&quot;50&quot; width=&quot;34&quot; height=&quot;20&quot; class=&quot;task  task0&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;109&quot; y=&quot;74&quot; width=&quot;56&quot; height=&quot;20&quot; class=&quot;task  task0&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;165&quot; y=&quot;98&quot; width=&quot;56&quot; height=&quot;20&quot; class=&quot;task  task0&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;221&quot; y=&quot;122&quot; width=&quot;56&quot; height=&quot;20&quot; class=&quot;task  task1&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;255&quot; y=&quot;146&quot; width=&quot;112&quot; height=&quot;20&quot; class=&quot;task  task1&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;333&quot; y=&quot;170&quot; width=&quot;112&quot; height=&quot;20&quot; class=&quot;task  task1&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;412&quot; y=&quot;194&quot; width=&quot;56&quot; height=&quot;20&quot; class=&quot;task  task1&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;468&quot; y=&quot;218&quot; width=&quot;22&quot; height=&quot;20&quot; class=&quot;task  task2&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;490&quot; y=&quot;242&quot; width=&quot;34&quot; height=&quot;20&quot; class=&quot;task  task2&quot;&gt;&lt;/rect&gt;&lt;text font-size=&quot;11&quot; x=&quot;114&quot; y=&quot;63.5&quot; text-height=&quot;20&quot; class=&quot;taskTextOutsideRight taskTextOutside0 &quot;&gt;需求分析       &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;170&quot; y=&quot;87.5&quot; text-height=&quot;20&quot; class=&quot;taskTextOutsideRight taskTextOutside0 &quot;&gt;可行性报告     &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;193&quot; y=&quot;111.5&quot; text-height=&quot;20&quot; class=&quot;taskText taskText0 &quot;&gt;概念验证       &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;249&quot; y=&quot;135.5&quot; text-height=&quot;20&quot; class=&quot;taskText taskText1 &quot;&gt;概要设计      &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;311&quot; y=&quot;159.5&quot; text-height=&quot;20&quot; class=&quot;taskText taskText1 &quot;&gt;详细设计      &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;389&quot; y=&quot;183.5&quot; text-height=&quot;20&quot; class=&quot;taskText taskText1 &quot;&gt;编码          &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;440&quot; y=&quot;207.5&quot; text-height=&quot;20&quot; class=&quot;taskText taskText1 &quot;&gt;测试          &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;495&quot; y=&quot;231.5&quot; text-height=&quot;20&quot; class=&quot;taskTextOutsideRight taskTextOutside2 &quot;&gt;发布&lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;507&quot; y=&quot;255.5&quot; text-height=&quot;20&quot; class=&quot;taskText taskText2 &quot;&gt;验收&lt;/text&gt;&lt;/g&gt;&lt;g&gt;&lt;text x=&quot;10&quot; y=&quot;86&quot; class=&quot;sectionTitle sectionTitle0&quot;&gt;项目确定&lt;/text&gt;&lt;text x=&quot;10&quot; y=&quot;170&quot; class=&quot;sectionTitle sectionTitle1&quot;&gt;项目实施&lt;/text&gt;&lt;text x=&quot;10&quot; y=&quot;242&quot; class=&quot;sectionTitle sectionTitle2&quot;&gt;发布验收&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;today&quot;&gt;&lt;line x1=&quot;7461&quot; x2=&quot;7461&quot; y1=&quot;25&quot; y2=&quot;291&quot; class=&quot;today&quot;&gt;&lt;/line&gt;&lt;/g&gt;&lt;text x=&quot;299.5&quot; y=&quot;25&quot; class=&quot;titleText&quot;&gt;项目开发流程&lt;/text&gt;&lt;/svg&gt;
+</code></pre><h2 id="4-3-">4.3. 参考文档</h2>
 <ul>
 <li><a href="https://www.jianshu.com/p/b03a8d7b1719">简书</a></li>
 <li><a href="https://ouweiya.gitbooks.io/markdown/">Markdown 常用语法笔记</a></li>
 </ul>
-
-<pre><code>  &lt;/div&gt;
-  &lt;div class=&quot;md-sidebar-toc&quot;&gt;&lt;ul&gt;
-</code></pre><p><li><a href="#1-%E5%AE%89%E8%A3%85markdown%E4%B8%BB%E9%A2%98">1. 安装Markdown主题</a></p>
-<p><ul></p>
-<p><li><a href="#11-markdonw-theme-kit">1.1. Markdonw Theme Kit</a></li></p>
-<p><li><a href="#12-vscode-markdown-css">1.2. vscode-markdown-css</a></li>
-</ul>
-</li></p>
-<p><li><a href="#2-%E7%94%9F%E6%88%90%E5%B7%A6%E4%BE%A7%E5%AF%BC%E8%88%AA%E6%A0%8F-i5tinghttpsgithubcomi5tingtocmdnpm">2. 生成左侧导航栏 i5ting</a></p>
-<p><ul></p>
-<p><li><a href="#21-%E5%AE%89%E8%A3%85">2.1. 安装</a></li></p>
-<p><li><a href="#22-%E7%94%9F%E6%88%90%E5%AF%BC%E8%88%AA%E6%A0%8F">2.2. 生成导航栏</a></li>
-</ul>
-</li></p>
-<p><li><a href="#3-%E5%9C%A8%E7%BA%BF%E7%BC%96%E8%BE%91%E5%99%A8">3. （在线）编辑器</a></li></p>
-<p><li><a href="#4-%E8%AF%AD%E6%B3%95">4. 语法</a></p>
-<p><ul></p>
-<p><li><a href="#41-%E5%B8%B8%E7%94%A8%E9%83%A8%E5%88%86">4.1. 常用部分</a></p>
-<p><ul></p>
-<p><li><a href="#411-%E6%A0%87%E9%A2%98">4.1.1. 标题</a></p>
-<p><ul></p>
-<p><li><a href="#4111-%E6%AE%B5%E8%90%BD%E6%A0%87%E9%A2%98">4.1.1.1. 段落标题</a></li></p>
-<p><li><a href="#4112-%E5%88%86%E7%BA%A7%E6%A0%87%E9%A2%98">4.1.1.2. 分级标题</a></li>
-</ul>
-</li></p>
-<p><li><a href="#412-%E5%BC%BA%E8%B0%83">4.1.2. 强调</a></p>
-<p><ul></p>
-<p><li><a href="#4121-%E6%96%9C%E4%BD%93">4.1.2.1. 斜体</a></li></p>
-<p><li><a href="#4122-%E5%8A%A0%E7%B2%97">4.1.2.2. 加粗</a></li></p>
-<p><li><a href="#4123-%E5%88%A0%E9%99%A4%E7%BA%BF">4.1.2.3. 删除线</a></li>
-</ul>
-</li></p>
-<p><li><a href="#413-%E4%BB%A3%E7%A0%81">4.1.3. 代码</a></p>
-<p><ul></p>
-<p><li><a href="#4131-%E4%BB%A3%E7%A0%81%E5%9D%97%E6%A0%87%E8%AE%B0">4.1.3.1. 代码块标记</a></li></p>
-<p><li><a href="#4132-%E4%BB%A3%E7%A0%81%E5%9D%97%E7%BC%A9%E8%BF%9B%E8%A1%A8%E7%A4%BA%E6%B3%95">4.1.3.2. 代码块缩进表示法</a></li></p>
-<p><li><a href="#4133-%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE%E6%98%BE%E7%A4%BA">4.1.3.3. 语法高亮显示</a></li></p>
-<p><li><a href="#4134-%E5%86%85%E8%81%94%E4%BB%A3%E7%A0%81%E5%9D%97">4.1.3.4. 内联代码块</a></li>
-</ul>
-</li></p>
-<p><li><a href="#414-%E8%A1%A8%E6%A0%BC">4.1.4. 表格</a></p>
-<p><ul></p>
-<p><li><a href="#4141-%E8%A1%A8%E6%A0%BC">4.1.4.1. 表格</a></li></p>
-<p><li><a href="#4142-%E7%AE%80%E7%BA%A6%E5%86%99%E6%B3%95">4.1.4.2. 简约写法</a></li></p>
-<p><li><a href="#4143-html%E8%A1%A8%E6%A0%BC">4.1.4.3. html表格</a></li>
-</ul>
-</li></p>
-<p><li><a href="#415-%E9%93%BE%E6%8E%A5">4.1.5. 链接</a></p>
-<p><ul></p>
-<p><li><a href="#4151-%E5%86%85%E9%93%BE%E5%BC%8F">4.1.5.1. 内链式</a></li></p>
-<p><li><a href="#4152-%E5%BC%95%E7%94%A8%E5%BC%8F">4.1.5.2. 引用式</a></li></p>
-<p><li><a href="#4153-%E9%82%AE%E7%AE%B1%E9%93%BE%E6%8E%A5">4.1.5.3. 邮箱链接</a></li>
-</ul>
-</li></p>
-<p><li><a href="#416-%E5%9B%BE%E7%89%87">4.1.6. 图片</a></p>
-<p><ul></p>
-<p><li><a href="#4161-%E5%86%85%E9%93%BE%E5%BC%8F">4.1.6.1. 内链式</a></li></p>
-<p><li><a href="#4162-%E5%BC%95%E7%94%A8%E5%BC%8F">4.1.6.2. 引用式</a></li></p>
-<p><li><a href="#4163-%E5%9B%BE%E7%89%87%E5%B8%A6%E6%9C%89%E9%93%BE%E6%8E%A5">4.1.6.3. 图片带有链接</a></li>
-</ul>
-</li>
-</ul>
-</li></p>
-<p><li><a href="#%E5%B8%B8%E7%94%A8%E9%83%A8%E5%88%86">常用部分</a></p>
-<p><ul></p>
-<p><li><a href="#%E5%BA%8F%E8%A1%A8">序表</a></p>
-<p><ul></p>
-<p><li><a href="#%E6%97%A0%E5%BA%8F">无序</a></li></p>
-<p><li><a href="#%E6%9C%89%E5%BA%8F">有序</a></li></p>
-<p><li><a href="#%E5%BA%8F%E8%A1%A8%E5%B5%8C%E5%A5%97">序表嵌套</a></li>
-</ul>
-</li></p>
-<p><li><a href="#%E6%B8%85%E5%8D%95%E9%80%89%E9%A1%B9%E8%A1%A8">清单选项表</a></li></p>
-<p><li><a href="#%E5%BC%95%E7%94%A8">引用</a></p>
-<p><ul></p>
-<p><li><a href="#%E5%BC%95%E7%94%A8-1">引用</a></li>
-</ul>
-</li>
-</ul>
-</li></p>
-<p><li><a href="#42-%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3">4.2. 参考文档</a></li>
-</ul>
-</li>
-</ul>
-</div>
-      <a id="sidebar-toc-btn">≡</a>
-    </body></p>
-<pre><code>&lt;script&gt;
-</code></pre><p>(function bindTaskListEvent() {
-  var taskListItemCheckboxes = document.body.getElementsByClassName(&#39;task-list-item-checkbox&#39;)
-  for (var i = 0; i &lt; taskListItemCheckboxes.length; i++) {
-    var checkbox = taskListItemCheckboxes[i]
-    var li = checkbox.parentElement
-    if (li.tagName !== &#39;LI&#39;) li = li.parentElement
-    if (li.tagName === &#39;LI&#39;) {
-      li.classList.add(&#39;task-list-item&#39;)
-    }
-  }
-}())<br></script></p>
-<script>
-
-var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
-sidebarTOCBtn.addEventListener('click', function(event) {
-  event.stopPropagation()
-  if (document.body.hasAttribute('html-show-sidebar-toc')) {
-    document.body.removeAttribute('html-show-sidebar-toc')
-  } else {
-    document.body.setAttribute('html-show-sidebar-toc', true)
-  }
-})
-</script>
-
-<p>  </html></p>
 
           	</article>
         </div>
