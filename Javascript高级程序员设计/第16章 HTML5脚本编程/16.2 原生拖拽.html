@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖放事件</title>
+</head>
+<body>
+    
+    <script src="util.js"></script>
+    <script>
+    var droptarget = document.getElementById("droptarget");
+    EventUtil.addHandler(droptarget, "dragover", function(event){
+        EventUtil.preventDefault(event);
+    });
+    EventUtil.addHandler(droptarget, "dragenter", function(event){
+        EventUtil.preventDefault(event);
+    });
+    </script>
+</body>
+</html>
