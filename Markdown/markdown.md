@@ -8,28 +8,36 @@
 * 修改文件：文件->首选项->设置->markdown
 * "markdown.styles": [""]
 
-# 2. 生成左侧导航栏 [i5ting](https://github.com/i5ting/tocmd.npm)
-安装
-
-```html
-npm install -g i5ting_toc
-```
-
-生成导航栏
-
-```html
-i5ting_toc -f Markdown文档.md -o
-```
-
-# 3. （在线）编辑器
+# 2. （在线）编辑器
 * [CMD　Markdown编辑器](https://www.zybuluo.com/mdeditor)
 * [dillinger](http://dillinger.io/)
 * [小书匠](http://markdown.xiaoshujiang.com/)
 
-# 4. 语法
-## 4.1. 常用部分
-### 4.1.1. 标题  
-#### 4.1.1.1. 段落标题
+# 3. 语法
+## 特殊字符
+&lt;
+
+```html
+&lt;
+```
+
+```html
+<
+```
+
+&amp;
+
+```html
+&amp;
+```
+
+```html
+&
+```
+
+## 3.1. 常用部分
+### 3.1.1. 标题  
+#### 3.1.1.1. 段落标题
 ```html
 # h1
 <h1>h1</h1>
@@ -49,7 +57,7 @@ i5ting_toc -f Markdown文档.md -o
 ###### h6
 <h6>h6</h6>
 ```
-#### 4.1.1.2. 分级标题
+#### 3.1.1.2. 分级标题
 ```html
 AAA
 ===
@@ -58,8 +66,8 @@ BBB
 ---
 <h2>BBB</h2>
 ```
-### 4.1.2. 强调
-#### 4.1.2.1. 斜体
+### 3.1.2. 强调
+#### 3.1.2.1. 斜体
 *1*
 ```html
 <em>1</em>
@@ -68,18 +76,18 @@ _1_
 ```html
 <em>1</em>
 ```
-#### 4.1.2.2. 加粗
+#### 3.1.2.2. 加粗
 **1**
 ```html
 <strong>1<strong>
 ```
-#### 4.1.2.3. 删除线
+#### 3.1.2.3. 删除线
 ~~1~~
 ```html
 <del>1</del>
 ```
-### 4.1.3. 代码
-#### 4.1.3.1. 代码块标记```
+### 3.1.3. 代码
+#### 3.1.3.1. 代码块标记```
 ```        
 123
 ```
@@ -88,14 +96,14 @@ _1_
     <code>123</code>
 </pre>
 ```
-#### 4.1.3.2. 代码块缩进表示法tab键或4空格
+#### 3.1.3.2. 代码块缩进表示法tab键或4空格
     123
 ```html
 <pre>
     <code>123</code>
 </pre>
 ```
-#### 4.1.3.3. 语法高亮显示```javascript
+#### 3.1.3.3. 语法高亮显示```javascript
 
 ```javascript
 var syc = "syc";
@@ -115,13 +123,13 @@ var syc = "syc";
     </li>
 </ol>
 ```
-#### 4.1.3.4. 内联代码块
+#### 3.1.3.4. 内联代码块
 `1`
 ```html
 <code>1</code>
 ```
-### 4.1.4. 表格
-#### 4.1.4.1. 表格
+### 3.1.4. 表格
+#### 3.1.4.1. 表格
 |     a     |        b        |      c       |
 |:---------:|:--------------- | ------------:|
 |   居中    | 左对齐           |       右对齐 |
@@ -158,7 +166,7 @@ var syc = "syc";
 </table>
 ```
 
-#### 4.1.4.2. 简约写法
+#### 3.1.4.2. 简约写法
 
 a|b|c  
 :-:|:-|-:
@@ -195,11 +203,11 @@ a|b|c
     </tbody>
 </table>
 ```
-#### 4.1.4.3. html生成表格地址
+#### 3.1.4.3. html生成表格地址
 * [表格地址](http://www.tablesgenerator.com/markdown_tables)
 
-### 4.1.5. 链接
-#### 4.1.5.1. 内链式
+### 3.1.5. 链接
+#### 3.1.5.1. 内链式
 [百度](http://www.baidu.com/"百度一下")
 
 ```html
@@ -210,7 +218,7 @@ a|b|c
 <a href="http://www.baidu.com/" title="百度一下" target="_blank">百度</a>   
 ```
 
-#### 4.1.5.2. 引用式
+#### 3.1.5.2. 引用式
 [百度][1]
 
 [1]: http://www.baidu.com/ "百度"
@@ -224,7 +232,7 @@ a|b|c
 <a href="http://www.baidu.com/" title="百度一下" target="_blank">百度</a>  
 ```
 
-#### 4.1.5.3. 邮箱链接
+#### 3.1.5.3. 邮箱链接
 <419973879@qq.com>
 
 ```html
@@ -235,8 +243,8 @@ a|b|c
 <a href="mailto:419973879@qq.com">419973879@qq.com</a>
 ```
 
-### 4.1.6. 图片
-#### 4.1.6.1. 内链式
+### 3.1.6. 图片
+#### 3.1.6.1. 内链式
 ![百度](https://www.baidu.com/img/bd_logo1.png '百度')
 
 ```html
@@ -247,7 +255,7 @@ a|b|c
 <img src="https://www.baidu.com/img/bd_logo1.png" alt="百度">
 ```
 
-#### 4.1.6.2. 引用式
+#### 3.1.6.2. 引用式
 ![百度][02]
 
 [02]: https://www.baidu.com/img/bd_logo1.png
@@ -260,7 +268,7 @@ a|b|c
 <img src="https://www.baidu.com/img/bd_logo1.png" alt="百度">
 ```
 
-#### 4.1.6.3. 图片带有链接
+#### 3.1.6.3. 图片带有链接
 [![百度](https://www.baidu.com/img/bd_logo1.png '百度')](https://www.baidu.com/img/bd_logo1.png'我的百度')
 ```html
 [![百度](https://www.baidu.com/img/bd_logo1.png '百度')](https://www.baidu.com/img/bd_logo1.png'我的百度')
@@ -271,8 +279,8 @@ a|b|c
 </a>
 ```
 
-### 4.1.7. 列表
-#### 4.1.7.1. 无序列表
+### 3.1.7. 列表
+#### 3.1.7.1. 无序列表
 * one
     * two
     * three
@@ -317,7 +325,7 @@ a|b|c
     </li>
 </ul>
 ```
-#### 4.1.7.2. 有序列表
+#### 3.1.7.2. 有序列表
 1. one
     2. two
     3. three
@@ -338,7 +346,7 @@ a|b|c
     </li>
 </ol>
 ```
-#### 4.1.7.3. 定义型列表
+#### 3.1.7.3. 定义型列表
 Markdown 
 :   轻量级文本标记语言，可以转换成html，pdf等格式  //  开头一个`:` + `Tab` 或 四个空格
 
@@ -372,7 +380,7 @@ Markdown
 </dl>
 ```
 
-### 4.1.8. 清单选项表
+### 3.1.8. 清单选项表
 - [x] 选项一 
 - [ ] 选项二
 
@@ -392,8 +400,8 @@ Markdown
 </ul>
 ```
 
-### 4.1.9. 引用
-#### 4.1.9.1. 单行引用
+### 3.1.9. 引用
+#### 3.1.9.1. 单行引用
 > hello world!
 
 ```html
@@ -405,7 +413,7 @@ Markdown
     <p>hello world!</p>
 </blockquote>
 ```
-#### 4.1.9.2. 多行引用
+#### 3.1.9.2. 多行引用
 > hello world!
 > hello world!
 > hello world!
@@ -424,7 +432,7 @@ Markdown
 </blockquote>
 ```
 
-#### 4.1.9.3. 嵌套引用
+#### 3.1.9.3. 嵌套引用
 > aaaaaaaaa
 >> bbbbbbbbb
 >>> cccccccccc
@@ -446,7 +454,7 @@ Markdown
   </blockquote>
 </blockquote>
 ```
-### 4.1.10. 描点
+### 3.1.10. 描点
 [公式标题锚点](#1)
 
 ```html
@@ -464,7 +472,7 @@ Markdown
 ```html
 <h3 id="1" data-anchor-id="ijx7">[需要跳转的目录]</h3>
 ```
-### 4.1.11. 脚注
+### 3.1.11. 脚注
 Markdown[^1]
 [^1]: Markdown是一种纯文本标记语言。
 
@@ -479,10 +487,10 @@ Markdown[^1]
     <a href="#fn:1" id="fnref:1" title="查看注脚" class="footnote">[3]</a>
 </p>
 ```
-### 4.1.12. 表情
+### 3.1.12. 表情
 [表情代码](https://link.jianshu.com/?t=https://www.webpagefx.com/tools/emoji-cheat-sheet/%27GitHub%27)
 
-### 4.1.13. 分隔符
+### 3.1.13. 分隔符
 
 ***
 
@@ -504,8 +512,8 @@ Markdown[^1]
 <hr>
 ```
 
-## 4.2. 其他部分
-### 4.2.1. 视频插入
+## 3.2. 其他部分
+### 3.2.1. 视频插入
 <iframe height=498 width=510 src='http://player.youku.com/embed/XMjgzNzM0NTYxNg==' frameborder=0 'allowfullscreen'></iframe>
 
 ```html
@@ -517,7 +525,7 @@ Markdown[^1]
 
 <a href="http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&amp;from=y1.3-tv-grid-1007-9910.86804.1-2#paction" target="_blank"><img src="https://www.baidu.com/img/bd_logo1.png" alt=""></a>
 ```
-### 4.2.2. 公式
+### 3.2.2. 公式
 $$ x \href{why-equal.html}{=} y^2 + 1 $$
 $ x = {-b \pm \sqrt{b^2-4ac} \over 2a}. $
 
@@ -526,7 +534,7 @@ $$ x \href{why-equal.html}{=} y^2 + 1 $$
 $ x = {-b \pm \sqrt{b^2-4ac} \over 2a}. $
 ```
 
-### 4.2.3. [流程图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图)
+### 3.2.3. [流程图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图)
 
 ```flow
 st=>start: Start
@@ -578,7 +586,7 @@ condition|c1|条件
 (布尔值,方向)|(yes,right)|如果满足向右连接，4种方向：right ，left，up ，down 默认为：down
 
 
-### 4.2.4. [时序图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-序列图)
+### 3.2.4. [时序图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-序列图)
 ```sequence
 Alice->Bob: Hello Bob, how are you?
 Note right of Bob: Bob thinks
@@ -604,7 +612,7 @@ Bob-->Alice: I am good thanks!
 <code>--</code>|虚线
 <code>>></code>|空心箭头
 
-### 4.2.5. [甘特图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#9-甘特图)
+### 3.2.5. [甘特图](https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#9-甘特图)
 
 ```gantt
     title 项目开发流程
@@ -644,7 +652,20 @@ Bob-->Alice: I am good thanks!
 <svg id="mermaidChart2" width="100%" xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 599 316"><style type="text/css" title="mermaid-svg-internal-css"> .section { stroke: none; opacity: 0.2;} .section0 { fill: rgba(102, 102, 255, 0.490196);} .section2 { fill: rgb(255, 244, 0);} .section1, .section3 { fill: white; opacity: 0.2;} .sectionTitle0 { fill: rgb(51, 51, 51);} .sectionTitle1 { fill: rgb(51, 51, 51);} .sectionTitle2 { fill: rgb(51, 51, 51);} .sectionTitle { text-anchor: start; font-size: 11px;} .grid .tick { stroke: lightgrey; opacity: 0.3; shape-rendering: crispEdges;} .grid path { stroke-width: 0;} .today { fill: none; stroke: red; stroke-width: 2px;} .task { stroke-width: 2;} .taskText { text-anchor: middle; font-size: 11px;} .taskText0, .taskText1, .taskText2, .taskText3 { fill: white;} .task0, .task1, .task2, .task3 { fill: rgb(138, 144, 221); stroke: rgb(83, 79, 188);} .titleText { text-anchor: middle; font-size: 18px; fill: black;} </style><g></g><g class="grid" transform="translate(75, 266)"><g class="tick" transform="translate(56,0)" style="opacity: 1;"><line y2="-231" x2="0"></line><text dy="1em" y="3" x="0" fill="#000" stroke="none" font-size="10" style="text-anchor: middle;">06/27</text></g><g class="tick" transform="translate(135,0)" style="opacity: 1;"><line y2="-231" x2="0"></line><text dy="1em" y="3" x="0" fill="#000" stroke="none" font-size="10" style="text-anchor: middle;">07/04</text></g><g class="tick" transform="translate(213,0)" style="opacity: 1;"><line y2="-231" x2="0"></line><text dy="1em" y="3" x="0" fill="#000" stroke="none" font-size="10" style="text-anchor: middle;">07/11</text></g><g class="tick" transform="translate(292,0)" style="opacity: 1;"><line y2="-231" x2="0"></line><text dy="1em" y="3" x="0" fill="#000" stroke="none" font-size="10" style="text-anchor: middle;">07/18</text></g><g class="tick" transform="translate(370,0)" style="opacity: 1;"><line y2="-231" x2="0"></line><text dy="1em" y="3" x="0" fill="#000" stroke="none" font-size="10" style="text-anchor: middle;">07/25</text></g><g class="tick" transform="translate(449,0)" style="opacity: 1;"><line y2="-231" x2="0"></line><text dy="1em" y="3" x="0" fill="#000" stroke="none" font-size="10" style="text-anchor: middle;">08/01</text></g><path class="domain" d="M0,0V0H449V0"></path></g><g><rect x="0" y="48" width="561.5" height="24" class="section section0"></rect><rect x="0" y="72" width="561.5" height="24" class="section section0"></rect><rect x="0" y="96" width="561.5" height="24" class="section section0"></rect><rect x="0" y="120" width="561.5" height="24" class="section section1"></rect><rect x="0" y="144" width="561.5" height="24" class="section section1"></rect><rect x="0" y="168" width="561.5" height="24" class="section section1"></rect><rect x="0" y="192" width="561.5" height="24" class="section section1"></rect><rect x="0" y="216" width="561.5" height="24" class="section section2"></rect><rect x="0" y="240" width="561.5" height="24" class="section section2"></rect></g><g><rect rx="3" ry="3" x="75" y="50" width="34" height="20" class="task  task0"></rect><rect rx="3" ry="3" x="109" y="74" width="56" height="20" class="task  task0"></rect><rect rx="3" ry="3" x="165" y="98" width="56" height="20" class="task  task0"></rect><rect rx="3" ry="3" x="221" y="122" width="56" height="20" class="task  task1"></rect><rect rx="3" ry="3" x="255" y="146" width="112" height="20" class="task  task1"></rect><rect rx="3" ry="3" x="333" y="170" width="112" height="20" class="task  task1"></rect><rect rx="3" ry="3" x="412" y="194" width="56" height="20" class="task  task1"></rect><rect rx="3" ry="3" x="468" y="218" width="22" height="20" class="task  task2"></rect><rect rx="3" ry="3" x="490" y="242" width="34" height="20" class="task  task2"></rect><text font-size="11" x="114" y="63.5" text-height="20" class="taskTextOutsideRight taskTextOutside0 ">需求分析       </text><text font-size="11" x="170" y="87.5" text-height="20" class="taskTextOutsideRight taskTextOutside0 ">可行性报告     </text><text font-size="11" x="193" y="111.5" text-height="20" class="taskText taskText0 ">概念验证       </text><text font-size="11" x="249" y="135.5" text-height="20" class="taskText taskText1 ">概要设计      </text><text font-size="11" x="311" y="159.5" text-height="20" class="taskText taskText1 ">详细设计      </text><text font-size="11" x="389" y="183.5" text-height="20" class="taskText taskText1 ">编码          </text><text font-size="11" x="440" y="207.5" text-height="20" class="taskText taskText1 ">测试          </text><text font-size="11" x="495" y="231.5" text-height="20" class="taskTextOutsideRight taskTextOutside2 ">发布</text><text font-size="11" x="507" y="255.5" text-height="20" class="taskText taskText2 ">验收</text></g><g><text x="10" y="86" class="sectionTitle sectionTitle0">项目确定</text><text x="10" y="170" class="sectionTitle sectionTitle1">项目实施</text><text x="10" y="242" class="sectionTitle sectionTitle2">发布验收</text></g><g class="today"><line x1="7461" x2="7461" y1="25" y2="291" class="today"></line></g><text x="299.5" y="25" class="titleText">项目开发流程</text></svg>
 ```
 
-## 4.3. 参考文档
+# 4. 生成左侧导航栏 [i5ting](https://github.com/i5ting/tocmd.npm)
+安装
+
+```html
+npm install -g i5ting_toc
+```
+
+生成导航栏
+
+```html
+i5ting_toc -f Markdown文档.md -o
+```
+
+## 4.1. 参考文档
 * [简书](https://www.jianshu.com/p/b03a8d7b1719)
 * [Markdown 常用语法笔记](https://ouweiya.gitbooks.io/markdown/)
 

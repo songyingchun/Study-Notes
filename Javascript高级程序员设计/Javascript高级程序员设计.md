@@ -29,6 +29,161 @@ JavaScript 是一种专为与网页交互而设计的脚本语言，由下列三
 > * 文档对象模型（DOM），提供访问和操作网页内容的方法和接口；
 > * 浏览器对象模型（BOM），提供与浏览器交互的方法和接口。
 
+# 第2章 在HTML中使用JavaScript
+
+HTML 4.01 为&lt;script> 定义了下列 6 个属性：
+> * async ：可选。表示应该立即下载脚本，但不应妨碍页面中的其他操作，比如下载其他资源或
+等待加载其他脚本。只对外部脚本文件有效。
+> * charset ：可选。表示通过 src 属性指定的代码的字符集。
+> * defer ：可选。表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本文件有
+效。IE7 及更早版本对嵌入脚本也支持这个属性。
+> * language ：已废弃。
+> * src ：可选。表示包含要执行代码的外部文件。
+> * type ：可选。可以看成是 language 的替代属性。
+
+通过 &lt;script> 元素的 src 属性还可以包含来自外部域的 JavaScript 文件。在这一点上， &lt;script> 与 <img> 元素非常相似，即它的 src属性可以是指向当前 HTML 页面所在域之外的某个域中的完整URL。
+
+## 标签的位置
+浏览器在遇到 &lt;body> 标签时才开始呈现内容。会导致浏览器在呈现页面时出现明显的延迟，而延迟期间的浏览器窗口中将是一片空白。为了避免这个问题，现代 Web 应用程序一般都把全部 JavaScript 引用放在 &lt;body> 元素中页面内容的后面。
+
+## 延迟脚本
+
+在 &lt;script> 元素中设置defer 属性，相当于告诉浏览器立即下载，但延迟执行。
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Example HTML Page</title>
+        <script type="text/javascript" defer="defer" src="example1.js"></script>
+        <script type="text/javascript" defer="defer" src="example2.js"></script>
+    </head>
+    <body>
+    <!-- 这里放内容 -->
+    </body>
+</html>
+```
+
+## 异步脚本
+
+async 只适用于外部脚本文件，并告诉浏览器立即下载文件。但与 defer不同的是，标记为 async 的脚本并不保证按照指定它们的先后顺序执行。
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Example HTML Page</title>
+        <script type="text/javascript" async src="example1.js"></script>
+        <script type="text/javascript" async src="example2.js"></script>
+    </head>
+    <body>
+    <!-- 这里放内容 -->
+    </body>
+</html>
+```
+
+## 嵌入代码与外部文件
+
+> * 可维护性
+> * 可缓存
+> * 适应未来
+
+## 文档模式
+
+标准模式：
+
+```html
+<!-- HTML 4.01 严格型 -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<!-- XHTML 1.0 严格型 -->
+<!DOCTYPE html PUBLIC
+"-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- HTML 5 -->
+<!DOCTYPE html>
+```
+
+准标准模式：
+
+```html
+<!-- HTML 4.01 过渡型 -->
+<!DOCTYPE HTML PUBLIC
+"-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- HTML 4.01 框架集型 -->
+<!DOCTYPE HTML PUBLIC
+"-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<!-- XHTML 1.0 过渡型 -->
+
+<!DOCTYPE html PUBLIC
+"-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- XHTML 1.0 框架集型 -->
+
+<!DOCTYPE html PUBLIC
+"-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+```
+
+## &lt;noscript> 元素
+当浏览器不支持 JavaScript 时如何让页面平稳地退化。这个元素可以包含能够出现在文档 &lt;body> 中的任何 HTML 元素&lt;script> 元素除外。
+
+
+# 第3章 基本概念
+
+## 区分大小写
+
+变量区分大小写
+
+## 标识符
+
+标识符，就是指变量、函数、属性的名字，或者函数的参数。
+
+> * 第一个字符必须是一个字母、下划线（ _ ）或一个美元符号（ $ ）；
+> * 其他字符可以是字母、下划线、美元符号或数字。
+
+标识符中的字母也可以包含扩展的 ASCII或 Unicode字母字符（如 À和 Æ）。
+
+## 注释
+
+```html
+// 单行注释
+
+/*
+* 这是一个多行
+* （块级）注释
+*/
+```
+
+## 语句
+语句以一个分号结尾；如果省略分号，则由解析器确定语句的结尾。
+
+## 关键字和保留字
+
+**关键字：**
+
+```
+break do instanceof typeof
+case else new var
+catch finally return void
+continue for switch while
+debugger* function this with
+default if throw
+delete in try
+```
+
+**保留字：**
+
+```
+abstract enum int short
+boolean export interface static
+byte extends long super
+char final native synchronized
+class float package throws
+const goto private transient
+debugger implements protected volatile
+double import public
+```
+
 # 2. 第15章 使用Canvas绘图
 检测getContext方法
 
@@ -87,10 +242,10 @@ if (drawing.getContext){
     // 开始路径
     context.beginPath();
     // 绘制外圆
-    context.arc(100, 100, 99, 0, 2 * Math.PI, false);
+    context.arc(100, 100, 99, 0, 2 > * Math.PI, false);
     // 绘制内圆
     context.moveTo(194, 100);
-    context.arc(100, 100, 94, 0, 2 * Math.PI, false);
+    context.arc(100, 100, 94, 0, 2 > * Math.PI, false);
     // 绘制分针
     context.moveTo(100, 100);
     context.lineTo(100, 15);
@@ -346,9 +501,9 @@ var uint16s = new Uint16Array(buffer, 9, 10);
 
 ```javascript
 //需要 10 个元素空间
-var int8s = new Int8Array(buffer, 0, 10 * Int8Array.BYTES_PER_ELEMENT);
+var int8s = new Int8Array(buffer, 0, 10 > * Int8Array.BYTES_PER_ELEMENT);
 //需要 5 个元素空间
-var uint16s = new Uint16Array(buffer, int8s.byteOffset + int8s.byteLength, 5 * Uint16Array.BYTES_PER_ELEMENT);
+var uint16s = new Uint16Array(buffer, int8s.byteOffset + int8s.byteLength, 5 > * Uint16Array.BYTES_PER_ELEMENT);
 ```
 
 ```javascript
