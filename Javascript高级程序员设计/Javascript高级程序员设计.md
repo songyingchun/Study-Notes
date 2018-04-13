@@ -971,11 +971,15 @@ var expression = / pattern / flags ;
 
 字面量模式|等价的字符串
 :-:|:-:
-/\[bc\]at/|"\\[bc\\]at"
-/\.at/|"\\[bc\\]at"
 /name\/age/|"name\\/age"
 /\d.\d{1,2}/|"\\d.\\d{1,2}"
 /\w\\hello\\123/|"\\w\\\\hello\\\\123"
+
+### RegExp 实例方法
+
+> * exec()：为捕获组而设计的。接受一个参数，即要应用模式的字符串，然后返回包含第一个匹配项信息的数组；或者在没有匹配项的情况下返回 null 。返回的数组虽然是 Array 的实例，但包含两个额外的属性： index 和 input 。其中，index 表示匹配项在字符串中的位置，而 input 表示应用正则表达式的字符串。
+
+
 
 # 第15章 使用Canvas绘图
 检测getContext方法
