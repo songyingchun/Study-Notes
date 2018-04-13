@@ -1,4 +1,4 @@
-# 1. 第1章 JavaScript简介
+# 第1章 JavaScript简介
 一个完整的JavaScript由三部分组成：核心（ECMAScript）、文档对象模型（DOM）、浏览对象模型（BOM）。
 
 ECMA-262规定了语法、类型、语句、关键字、保留字、操作符、对象
@@ -28,7 +28,7 @@ JavaScript 是一种专为与网页交互而设计的脚本语言，由下列三
 > * 文档对象模型（DOM），提供访问和操作网页内容的方法和接口；
 > * 浏览器对象模型（BOM），提供与浏览器交互的方法和接口。
 
-# 2. 第2章 在HTML中使用JavaScript
+# 第2章 在HTML中使用JavaScript
 
 HTML 4.01 为&lt;script> 定义了下列 6 个属性：
 > * async ：可选。表示应该立即下载脚本，但不应妨碍页面中的其他操作，比如下载其他资源或
@@ -42,10 +42,10 @@ HTML 4.01 为&lt;script> 定义了下列 6 个属性：
 
 通过 &lt;script> 元素的 src 属性还可以包含来自外部域的 JavaScript 文件。在这一点上， &lt;script> 与 <img> 元素非常相似，即它的 src属性可以是指向当前 HTML 页面所在域之外的某个域中的完整URL。
 
-## 2.1. 标签的位置
+## 标签的位置
 浏览器在遇到 &lt;body> 标签时才开始呈现内容。会导致浏览器在呈现页面时出现明显的延迟，而延迟期间的浏览器窗口中将是一片空白。为了避免这个问题，现代 Web 应用程序一般都把全部 JavaScript 引用放在 &lt;body> 元素中页面内容的后面。
 
-## 2.2. 延迟脚本
+## 延迟脚本
 
 在 &lt;script> 元素中设置defer 属性，相当于告诉浏览器立即下载，但延迟执行。
 
@@ -63,7 +63,7 @@ HTML 4.01 为&lt;script> 定义了下列 6 个属性：
 </html>
 ```
 
-## 2.3. 异步脚本
+## 异步脚本
 
 async 只适用于外部脚本文件，并告诉浏览器立即下载文件。但与 defer不同的是，标记为 async 的脚本并不保证按照指定它们的先后顺序执行。
 
@@ -81,13 +81,13 @@ async 只适用于外部脚本文件，并告诉浏览器立即下载文件。�
 </html>
 ```
 
-## 2.4. 嵌入代码与外部文件
+## 嵌入代码与外部文件
 
 > * 可维护性
 > * 可缓存
 > * 适应未来
 
-## 2.5. 文档模式
+## 文档模式
 
 标准模式：
 
@@ -123,18 +123,18 @@ async 只适用于外部脚本文件，并告诉浏览器立即下载文件。�
 "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 ```
 
-## 2.6. &lt;noscript> 元素
+## &lt;noscript> 元素
 当浏览器不支持 JavaScript 时如何让页面平稳地退化。这个元素可以包含能够出现在文档 &lt;body> 中的任何 HTML 元素&lt;script> 元素除外。
 
 
-# 3. 第3章 基本概念
+# 第3章 基本概念
 
-## 3.1. 语法
-### 3.1.1. 区分大小写
+## 语法
+### 区分大小写
 
 变量区分大小写
 
-### 3.1.2. 标识符
+### 标识符
 
 标识符，就是指变量、函数、属性的名字，或者函数的参数。
 
@@ -143,7 +143,7 @@ async 只适用于外部脚本文件，并告诉浏览器立即下载文件。�
 
 标识符中的字母也可以包含扩展的 ASCII或 Unicode字母字符（如 À和 Æ）。
 
-### 3.1.3. 注释
+### 注释
 
 ```html
 // 单行注释
@@ -154,10 +154,10 @@ async 只适用于外部脚本文件，并告诉浏览器立即下载文件。�
 */
 ```
 
-### 3.1.4. 语句
+### 语句
 语句以一个分号结尾；如果省略分号，则由解析器确定语句的结尾。
 
-### 3.1.5. 关键字和保留字
+### 关键字和保留字
 
 **关键字：**
 
@@ -199,12 +199,12 @@ interface private static
 let protected yield
 ```
 
-## 3.2. 数据类型
+## 数据类型
 
 5 种简单数据类型Undefined 、 Null 、 Boolean 、 Number和 String。
 复杂数据类型—— Object，Object 本质上是由一组无序的名值对组成的。
 
-### 3.2.1. typeof
+### typeof
 
 > * "undefined" ——如果这个值未定义；
 > * "boolean" ——如果这个值是布尔值；
@@ -213,10 +213,10 @@ let protected yield
 > * "object" ——如果这个值是对象或null；
 > * "function" ——如果这个值是函数。
 
-### 3.2.2. Undefined 类型
+### Undefined 类型
 因为未经初始化的值默认就会取得 undefined 值。
 
-### 3.2.3. Null 类型
+### Null 类型
 null 值表示一个空对象指针，而这也正是使用 typeof 操作符检测 null 值时会返回 "object" 的原因。
 
 undefined 值是派生自 null 值的，因此 ECMA-262规定对它们的相等性测试要返回 true 。
@@ -225,7 +225,7 @@ undefined 值是派生自 null 值的，因此 ECMA-262规定对它们的相等�
 alert(null == undefined); //true
 ```
 
-### 3.2.4. Boolean 类型
+### Boolean 类型
 要将一个值转换为其对应的 Boolean 值，可以调用转型函数 Boolean()。
 
 数据类型|true|false  
@@ -236,7 +236,7 @@ Number|任何非零数字值（包括无穷大）|0和 NaN
 Object|任何对象|null
 Undefined|n/a|undefined
 
-### 3.2.5. Number 类型
+### Number 类型
 
 八进制|十六进制
 :-:|:-:
@@ -319,7 +319,7 @@ var num3 = parseInt("10", 10); //10 （按十进制解析）
 var num4 = parseInt("10", 16); //16 （按十六进制解析）
 ```
 
-### 3.2.6. String 类型
+### String 类型
 
 String 类型用于表示由零或多个 16 位 Unicode 字符组成的字符序列
 
@@ -348,7 +348,7 @@ String 类型用于表示由零或多个 16 位 Unicode 字符组成的字符序
 > * 如果值是 null ，则返回 "null" ；
 > * 如果值是 undefined ，则返回 "undefined" 。
 
-### 3.2.7. Object 类型
+### Object 类型
 ECMAScript 中的对象其实就是一组数据和功能的集合。
 
 Object 的每个实例都具有下列属性和方法。
@@ -361,9 +361,9 @@ Object 的每个实例都具有下列属性和方法。
 > * 返回对象的字符串、数值或布尔值表示。通常与 toString() 方法的返回值
 相同。
 
-## 3.3. 操作符
+## 操作符
 
-### 3.3.1. ~~一元操作符~~
+### ~~一元操作符~~
 只能操作一个值的操作符叫做一元操作符。
 
 **递增和递减操作符**
@@ -786,20 +786,53 @@ toString() 方法会返回由数组中每个值的字符串形式拼接而成的
 
 valueOf() 返回的还是数组。
 
-# 4. 第15章 使用Canvas绘图
+当调用数组的 toLocaleString() 方法时，它也会创建一个数组值的以逗号分隔的字符串。为了取得每一项的值，调用的是每一项的 toLocaleString() 方法，而不是 toString() 方法。
+
+### 栈方法
+
+栈是一种 LIFO（Last-In-First-Out，后进先出）的数据结构，也就是最新添加的项最早被移除。
+
+> * push(item1[, item2, ...])：可以接收任意数量的参数，把它们逐个添加到数组末尾，并**返回修改后数组的长度**。
+> * pop()：从数组末尾移除最后一项，减少数组的 length 值，然后**返回移除的项**。
+
+### 队列方法
+
+队列数据结构的访问规则是 FIFO（First-In-First-Out，先进先出）。
+
+> * unshift(item1[, item2, ...])：在数组前端添加任意个项并返回新数组的长度。
+> * shift()：它能够移除数组中的第一个项并返回该项。
+
+### 重排序方法
+
+> * reverse()：反转数组项的顺序。
+> * sort()：按升序排列数组项——即最小的值位于最前面，最大的值排在最后面。 sort() 方法会调用每个数组项的 toString() 转型方法，然后比较得到的字符串，以确定如何排序。
+
+```javascript
+function compare(value1, value2) {
+    if (value1 < value2) {
+        return -1;
+    } else if (value1 > value2) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+```
+
+# 第15章 使用Canvas绘图
 检测getContext方法
 
 ```javascript
 if (canvas.getContext){}
 ```
 
-## 4.1. 上下文
+## 上下文
 
-### 4.1.1. 填充和描边
+### 填充和描边
 > * context.fillStyle：填充
 > * context.strokeStyle：描边
 
-### 4.1.2. 绘制矩形
+### 绘制矩形
 矩形是唯一一种可以直接在 2D 上下文中绘制的形状。
 包括三个方法：
 > * fillRect(x, y, width, height) 
@@ -817,7 +850,7 @@ context.fillRect(30, 30, 50, 50);
 context.clearRect(40, 40, 10, 10);
 ```
 
-### 4.1.3. 绘制路径
+### 绘制路径
 1. 调用 beginPath() 方法，表示要开始绘制新路径
 
 2. 绘制方法:
@@ -859,7 +892,7 @@ if (drawing.getContext){
 }
 ```
 
-### 4.1.4. 绘制文本
+### 绘制文本
 绘制方法：
 > * fillText(font, textAlign, textBaseline)
 > * strokeText(font, textAlign, textBaseline)
@@ -876,7 +909,7 @@ context.textBaseline = "middle";
 context.fillText("12", 100, 20);
 ```
 
-### 4.1.5. 变换
+### 变换
 方法：
 > * rotate(angle) ：围绕原点旋转图像 angle 弧度。
 > *  scale(scaleX, scaleY) ：缩放图像，在 x 方向乘以 scaleX ，在 y 方向乘以 scaleY 。 scaleX和 scaleY 的默认值都是 1.0。
@@ -902,11 +935,11 @@ context.lineTo(-65, 0);
 > * save()：所有设置都会进入一个栈结构，得以妥善保管。
 > * restore()：在保存设置的栈结构中向前返回一级。
 
-### 4.1.6. 绘制图像
+### 绘制图像
 > * drawImage(image, x, y, w, h, tx, ty, tw, th)：x,y,w,h表示源图像的x,y坐标，宽度和高度。tx,ty,tw,th表示目标图像的x,y坐标，宽度和高度。
 > * canvas.toDataURL()：获取操作结果。会存在跨域问题。
 
-### 4.1.7. 阴影
+### 阴影
 属性：
 > * shadowColor：用 CSS 颜色格式表示的阴影颜色，默认为黑色。
 > * shadowOffsetX：形状或路径 x 轴方向的阴影偏移量，默认为 0。
@@ -920,7 +953,7 @@ context.shadowOffsetY = 5;
 context.shadowBlur = 4;
 context.shadowColor = "rgba(0, 0, 0, 0.5)";
 ```
-### 4.1.8. 渐变
+### 渐变
 
 **线性渐变：**
 > * createLinearGradient(sx, sy, ex, ey)：起点的 x 坐标、起点的 y 坐
@@ -955,7 +988,7 @@ context.fillStyle = gradient;
 context.fillRect(30, 30, 50, 50);
 ```
 
-### 4.1.9. 模式
+### 模式
 > * createPattern(image, pattern)：第二个参数包括 "repeat" 、 "repeat-x" 、
 "repeat-y" 和 "no-repeat" 。
 
@@ -968,7 +1001,7 @@ context.fillStyle = pattern;
 context.fillRect(10, 10, 150, 150);
 ```
 
-### 4.1.10. 使用图像数据
+### 使用图像数据
 > * getImageData(x, y, w, h)：取得其数据的画面区域的 x 和 y 坐标以及该区域的像素宽度和高度。
 
 ```javascript
@@ -1010,7 +1043,7 @@ if (drawing.getContext){
 }
 ```
 
-### 4.1.11. 合成
+### 合成
 属性：
 > * globalAlpha：一个介于 0 和 1 之间的值，用于指定所有绘制的透
 明度。
@@ -1051,10 +1084,10 @@ context.fillStyle = "rgba(0,0,255,1)";
 context.fillRect(30, 30, 50, 50);
 ```
 
-## 4.2. WebGL
+## WebGL
 WebGL是针对Canvas的3D上下文。WebGL 并不是 W3C 制定的标准。
 
-### 4.2.1. 类型化数组
+### 类型化数组
 
 类型化数组的核心就是一个名为 ArrayBuffer 的类型
 
@@ -1133,7 +1166,7 @@ var uint16s = new Uint16Array(10),
     sub = uint16s.subarray(2, 5);
 ```
 
-### 4.2.2. WebGL上下文
+### WebGL上下文
 ```javascript
 var drawing = document.getElementById("drawing");
 //确定浏览器支持<canvas>元素
@@ -1249,8 +1282,8 @@ WebGL 只能绘制三种形状：点、线和三角。
 点，则第一个三角形连接 ABC，而第二个三角形连接 BCD。
 > * gl. TRIANGLES_FAN ：除了将前三个顶点之后的顶点当作第三个顶点与前一个顶点及第一个顶点共同构成一个新三角形外，其他都与 gl.TRIANGLES 相同。例如，如果数组中包含 A、B、C、D 四个顶点，则第一个三角形连接 ABC，而第二个三角形连接 ACD。
 
-# 5. 第16章 HTML脚本编程
-## 5.1. [跨文档消息传递](https://html.spec.whatwg.org/multipage/web-messaging.html#web-messaging)
+# 第16章 HTML脚本编程
+## [跨文档消息传递](https://html.spec.whatwg.org/multipage/web-messaging.html#web-messaging)
 
 跨文档消息传送（cross-document messaging），有时候简称为 XDM。XDM 的核心是 postMessage() 方法。
 
@@ -1285,9 +1318,9 @@ EventUtil.addHandler(window, "message", function(event){
 });
 ```
 
-## 5.2. 原生拖放
+## 原生拖放
 
-### 5.2.1. 拖放事件
+### 拖放事件
 
 拖动某元素时，将依次触发下列事件：
 
