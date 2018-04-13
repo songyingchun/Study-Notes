@@ -973,6 +973,9 @@ var expression = / pattern / flags ;
 :-:|:-:
 /\[bc\]at/|"\\[bc\\]at"
 /\.at/|"\\[bc\\]at"
+/name\/age/|"name\\/age"
+/\d.\d{1,2}/|"\\d.\\d{1,2}"
+/\w\\hello\\123/|"\\w\\\\hello\\\\123"
 
 # 第15章 使用Canvas绘图
 检测getContext方法
