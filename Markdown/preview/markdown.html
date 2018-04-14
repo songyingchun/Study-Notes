@@ -65,35 +65,39 @@
 				</div>
         <div id='readme' style='width:70%;margin-left:20%;'>
           	<article class='markdown-body'>
-            	<h1 id="1-markdown-">1. 安装Markdown主题</h1>
-<h2 id="1-1-markdonw-theme-kit">1.1. Markdonw Theme Kit</h2>
+            	<h1 id="-markdown-">安装Markdown主题</h1>
+<h2 id="markdonw-theme-kit">Markdonw Theme Kit</h2>
 <ul>
 <li>调试-&gt;安装其他调试器-&gt;输入Markdonw Theme Kit</li>
 <li>文件-&gt;首选项-&gt;颜色主题</li>
 </ul>
-<h2 id="1-2-vscode-markdown-css">1.2. vscode-markdown-css</h2>
+<h2 id="vscode-markdown-css">vscode-markdown-css</h2>
 <ul>
 <li>下载<a href="https://github.com/raycon/vscode-markdown-css">vscode-markdown-css</a></li>
 <li>修改文件：文件-&gt;首选项-&gt;设置-&gt;markdown</li>
 <li>&quot;markdown.styles&quot;: [&quot;&quot;]</li>
 </ul>
-<h1 id="2-i5ting">2. 生成左侧导航栏 <a href="https://github.com/i5ting/tocmd.npm">i5ting</a></h1>
-<p>安装</p>
-<pre><code class="lang-html">npm install -g i5ting_toc
-</code></pre>
-<p>生成导航栏</p>
-<pre><code class="lang-html">i5ting_toc -f Markdown文档.md -o
-</code></pre>
-<h1 id="3-">3. （在线）编辑器</h1>
+<h1 id="-">（在线）编辑器</h1>
 <ul>
 <li><a href="https://www.zybuluo.com/mdeditor">CMD　Markdown编辑器</a></li>
 <li><a href="http://dillinger.io/">dillinger</a></li>
 <li><a href="http://markdown.xiaoshujiang.com/">小书匠</a></li>
 </ul>
-<h1 id="4-">4. 语法</h1>
-<h2 id="4-1-">4.1. 常用部分</h2>
-<h3 id="4-1-1-">4.1.1. 标题</h3>
-<h4 id="4-1-1-1-">4.1.1.1. 段落标题</h4>
+<h1 id="-">语法</h1>
+<h2 id="-">特殊字符</h2>
+<p>&lt;</p>
+<pre><code class="lang-html">&amp;lt;
+</code></pre>
+<pre><code class="lang-html">&lt;
+</code></pre>
+<p>&amp;</p>
+<pre><code class="lang-html">&amp;amp;
+</code></pre>
+<pre><code class="lang-html">&amp;
+</code></pre>
+<h2 id="-">常用部分</h2>
+<h3 id="-">标题</h3>
+<h4 id="-">段落标题</h4>
 <pre><code class="lang-html"># h1
 &lt;h1&gt;h1&lt;/h1&gt;
 
@@ -112,7 +116,7 @@
 ###### h6
 &lt;h6&gt;h6&lt;/h6&gt;
 </code></pre>
-<h4 id="4-1-1-2-">4.1.1.2. 分级标题</h4>
+<h4 id="-">分级标题</h4>
 <pre><code class="lang-html">AAA
 ===
 &lt;h1&gt;AAA&lt;/h1&gt;
@@ -120,36 +124,36 @@ BBB
 ---
 &lt;h2&gt;BBB&lt;/h2&gt;
 </code></pre>
-<h3 id="4-1-2-">4.1.2. 强调</h3>
-<h4 id="4-1-2-1-">4.1.2.1. 斜体</h4>
+<h3 id="-">强调</h3>
+<h4 id="-">斜体</h4>
 <p><em>1</em></p>
 <pre><code class="lang-html">&lt;em&gt;1&lt;/em&gt;
 </code></pre>
 <p>_1_</p>
 <pre><code class="lang-html">&lt;em&gt;1&lt;/em&gt;
 </code></pre>
-<h4 id="4-1-2-2-">4.1.2.2. 加粗</h4>
+<h4 id="-">加粗</h4>
 <p><strong>1</strong></p>
 <pre><code class="lang-html">&lt;strong&gt;1&lt;strong&gt;
 </code></pre>
-<h4 id="4-1-2-3-">4.1.2.3. 删除线</h4>
+<h4 id="-">删除线</h4>
 <p><del>1</del></p>
 <pre><code class="lang-html">&lt;del&gt;1&lt;/del&gt;
 </code></pre>
-<h3 id="4-1-3-">4.1.3. 代码</h3>
-<h4 id="4-1-3-1-">4.1.3.1. 代码块标记<code>`</code></h4>
+<h3 id="-">代码</h3>
+<h4 id="-">代码块标记<code>`</code></h4>
 <pre><code>123
 </code></pre><pre><code class="lang-html">&lt;pre&gt;
     &lt;code&gt;123&lt;/code&gt;
 &lt;/pre&gt;
 </code></pre>
-<h4 id="4-1-3-2-tab-4-">4.1.3.2. 代码块缩进表示法tab键或4空格</h4>
+<h4 id="-tab-4-">代码块缩进表示法tab键或4空格</h4>
 <pre><code>123
 </code></pre><pre><code class="lang-html">&lt;pre&gt;
     &lt;code&gt;123&lt;/code&gt;
 &lt;/pre&gt;
 </code></pre>
-<h4 id="4-1-3-3-javascript">4.1.3.3. 语法高亮显示<code>`</code>javascript</h4>
+<h4 id="-javascript">语法高亮显示<code>`</code>javascript</h4>
 <pre><code class="lang-javascript">var syc = &quot;syc&quot;;
 </code></pre>
 <pre><code class="lang-html">&lt;ol class=&quot;linenums&quot;&gt;
@@ -165,12 +169,12 @@ BBB
     &lt;/li&gt;
 &lt;/ol&gt;
 </code></pre>
-<h4 id="4-1-3-4-">4.1.3.4. 内联代码块</h4>
+<h4 id="-">内联代码块</h4>
 <p><code>1</code></p>
 <pre><code class="lang-html">&lt;code&gt;1&lt;/code&gt;
 </code></pre>
-<h3 id="4-1-4-">4.1.4. 表格</h3>
-<h4 id="4-1-4-1-">4.1.4.1. 表格</h4>
+<h3 id="-">表格</h3>
+<h4 id="-">表格</h4>
 <table>
 <thead>
 <tr>
@@ -219,7 +223,7 @@ BBB
     &lt;/tbody&gt;
 &lt;/table&gt;
 </code></pre>
-<h4 id="4-1-4-2-">4.1.4.2. 简约写法</h4>
+<h4 id="-">简约写法</h4>
 <table>
 <thead>
 <tr>
@@ -268,18 +272,18 @@ BBB
     &lt;/tbody&gt;
 &lt;/table&gt;
 </code></pre>
-<h4 id="4-1-4-3-html-">4.1.4.3. html生成表格地址</h4>
+<h4 id="html-">html生成表格地址</h4>
 <ul>
 <li><a href="http://www.tablesgenerator.com/markdown_tables">表格地址</a></li>
 </ul>
-<h3 id="4-1-5-">4.1.5. 链接</h3>
-<h4 id="4-1-5-1-">4.1.5.1. 内链式</h4>
+<h3 id="-">链接</h3>
+<h4 id="-">内链式</h4>
 <p><a href="http://www.baidu.com/&quot;百度一下&quot;">百度</a></p>
 <pre><code class="lang-html">[百度](http://www.baidu.com/&quot;百度一下&quot;)
 </code></pre>
 <pre><code class="lang-html">&lt;a href=&quot;http://www.baidu.com/&quot; title=&quot;百度一下&quot; target=&quot;_blank&quot;&gt;百度&lt;/a&gt;   
 </code></pre>
-<h4 id="4-1-5-2-">4.1.5.2. 引用式</h4>
+<h4 id="-">引用式</h4>
 <p><a href="http://www.baidu.com/" title="百度">百度</a></p>
 <pre><code class="lang-html">[百度][1]
 
@@ -287,20 +291,20 @@ BBB
 </code></pre>
 <pre><code class="lang-html">&lt;a href=&quot;http://www.baidu.com/&quot; title=&quot;百度一下&quot; target=&quot;_blank&quot;&gt;百度&lt;/a&gt;  
 </code></pre>
-<h4 id="4-1-5-3-">4.1.5.3. 邮箱链接</h4>
-<p><a href="mailto:&#x34;&#49;&#x39;&#57;&#55;&#x33;&#x38;&#55;&#x39;&#64;&#x71;&#113;&#46;&#x63;&#x6f;&#x6d;">&#x34;&#49;&#x39;&#57;&#55;&#x33;&#x38;&#55;&#x39;&#64;&#x71;&#113;&#46;&#x63;&#x6f;&#x6d;</a></p>
+<h4 id="-">邮箱链接</h4>
+<p><a href="mailto:&#x34;&#49;&#x39;&#57;&#x37;&#x33;&#x38;&#55;&#x39;&#64;&#113;&#113;&#x2e;&#99;&#x6f;&#109;">&#x34;&#49;&#x39;&#57;&#x37;&#x33;&#x38;&#55;&#x39;&#64;&#113;&#113;&#x2e;&#99;&#x6f;&#109;</a></p>
 <pre><code class="lang-html">&lt;419973879@qq.com&gt;
 </code></pre>
 <pre><code class="lang-html">&lt;a href=&quot;mailto:419973879@qq.com&quot;&gt;419973879@qq.com&lt;/a&gt;
 </code></pre>
-<h3 id="4-1-6-">4.1.6. 图片</h3>
-<h4 id="4-1-6-1-">4.1.6.1. 内链式</h4>
+<h3 id="-">图片</h3>
+<h4 id="-">内链式</h4>
 <p><img src="https://www.baidu.com/img/bd_logo1.png" alt="百度" title="百度"></p>
 <pre><code class="lang-html">![百度](https://www.baidu.com/img/bd_logo1.png &#39;百度&#39;)
 </code></pre>
 <pre><code class="lang-html">&lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; alt=&quot;百度&quot;&gt;
 </code></pre>
-<h4 id="4-1-6-2-">4.1.6.2. 引用式</h4>
+<h4 id="-">引用式</h4>
 <p><img src="https://www.baidu.com/img/bd_logo1.png" alt="百度"></p>
 <pre><code class="lang-html">![百度][02]
 
@@ -308,7 +312,7 @@ BBB
 </code></pre>
 <pre><code class="lang-html">&lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; alt=&quot;百度&quot;&gt;
 </code></pre>
-<h4 id="4-1-6-3-">4.1.6.3. 图片带有链接</h4>
+<h4 id="-">图片带有链接</h4>
 <p><a href="https://www.baidu.com/img/bd_logo1.png&#39;我的百度&#39;"><img src="https://www.baidu.com/img/bd_logo1.png" alt="百度" title="百度"></a></p>
 <pre><code class="lang-html">[![百度](https://www.baidu.com/img/bd_logo1.png &#39;百度&#39;)](https://www.baidu.com/img/bd_logo1.png&#39;我的百度&#39;)
 </code></pre>
@@ -316,8 +320,8 @@ BBB
 &lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; alt=&quot;百度&quot;&gt;
 &lt;/a&gt;
 </code></pre>
-<h3 id="4-1-7-">4.1.7. 列表</h3>
-<h4 id="4-1-7-1-">4.1.7.1. 无序列表</h4>
+<h3 id="-">列表</h3>
+<h4 id="-">无序列表</h4>
 <ul>
 <li>one<ul>
 <li>two</li>
@@ -366,7 +370,7 @@ BBB
     &lt;/li&gt;
 &lt;/ul&gt;
 </code></pre>
-<h4 id="4-1-7-2-">4.1.7.2. 有序列表</h4>
+<h4 id="-">有序列表</h4>
 <ol>
 <li>one<ol start="2">
 <li>two</li>
@@ -387,7 +391,7 @@ BBB
     &lt;/li&gt;
 &lt;/ol&gt;
 </code></pre>
-<h4 id="4-1-7-3-">4.1.7.3. 定义型列表</h4>
+<h4 id="-">定义型列表</h4>
 <p>Markdown 
 :   轻量级文本标记语言，可以转换成html，pdf等格式  //  开头一个<code>:</code> + <code>Tab</code> 或 四个空格</p>
 <p>代码块定义
@@ -414,7 +418,7 @@ BBB
     &lt;/dd&gt;
 &lt;/dl&gt;
 </code></pre>
-<h3 id="4-1-8-">4.1.8. 清单选项表</h3>
+<h3 id="-">清单选项表</h3>
 <ul>
 <li>[x] 选项一 </li>
 <li>[ ] 选项二</li>
@@ -431,8 +435,8 @@ BBB
     &lt;/li&gt;
 &lt;/ul&gt;
 </code></pre>
-<h3 id="4-1-9-">4.1.9. 引用</h3>
-<h4 id="4-1-9-1-">4.1.9.1. 单行引用</h4>
+<h3 id="-">引用</h3>
+<h4 id="-">单行引用</h4>
 <blockquote>
 <p>hello world!</p>
 </blockquote>
@@ -442,7 +446,7 @@ BBB
     &lt;p&gt;hello world!&lt;/p&gt;
 &lt;/blockquote&gt;
 </code></pre>
-<h4 id="4-1-9-2-">4.1.9.2. 多行引用</h4>
+<h4 id="-">多行引用</h4>
 <blockquote>
 <p>hello world!
 hello world!
@@ -458,7 +462,7 @@ hello world!</p>
   hello world!&lt;/p&gt;
 &lt;/blockquote&gt;
 </code></pre>
-<h4 id="4-1-9-3-">4.1.9.3. 嵌套引用</h4>
+<h4 id="-">嵌套引用</h4>
 <blockquote>
 <p>aaaaaaaaa</p>
 <blockquote>
@@ -482,7 +486,7 @@ hello world!</p>
   &lt;/blockquote&gt;
 &lt;/blockquote&gt;
 </code></pre>
-<h3 id="4-1-10-">4.1.10. 描点</h3>
+<h3 id="-">描点</h3>
 <p><a href="#1">公式标题锚点</a></p>
 <pre><code class="lang-html">[公式标题锚点](#1)
 </code></pre>
@@ -492,7 +496,7 @@ hello world!</p>
 </code></pre>
 <pre><code class="lang-html">&lt;h3 id=&quot;1&quot; data-anchor-id=&quot;ijx7&quot;&gt;[需要跳转的目录]&lt;/h3&gt;
 </code></pre>
-<h3 id="4-1-11-">4.1.11. 脚注</h3>
+<h3 id="-">脚注</h3>
 <p>Markdown[^1]
 [^1]: Markdown是一种纯文本标记语言。</p>
 <pre><code class="lang-html">Markdown[^1]
@@ -503,9 +507,9 @@ hello world!</p>
     &lt;a href=&quot;#fn:1&quot; id=&quot;fnref:1&quot; title=&quot;查看注脚&quot; class=&quot;footnote&quot;&gt;[3]&lt;/a&gt;
 &lt;/p&gt;
 </code></pre>
-<h3 id="4-1-12-">4.1.12. 表情</h3>
+<h3 id="-">表情</h3>
 <p><a href="https://link.jianshu.com/?t=https://www.webpagefx.com/tools/emoji-cheat-sheet/%27GitHub%27">表情代码</a></p>
-<h3 id="4-1-13-">4.1.13. 分隔符</h3>
+<h3 id="-">分隔符</h3>
 <hr>
 <pre><code class="lang-html">***
 </code></pre>
@@ -516,23 +520,23 @@ hello world!</p>
 </code></pre>
 <pre><code class="lang-html">&lt;hr&gt;
 </code></pre>
-<h2 id="4-2-">4.2. 其他部分</h2>
-<h3 id="4-2-1-">4.2.1. 视频插入</h3>
+<h2 id="-">其他部分</h2>
+<h3 id="-">视频插入</h3>
 <iframe height=498 width=510 src='http://player.youku.com/embed/XMjgzNzM0NTYxNg==' frameborder=0 'allowfullscreen'></iframe>
 
 <pre><code class="lang-html">&lt;iframe height=498 width=510 src=&#39;http://player.youku.com/embed/XMjgzNzM0NTYxNg==&#39; frameborder=0 &#39;allowfullscreen&#39;&gt;&lt;/iframe&gt;
 </code></pre>
-<p><a href="http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&amp;from=y1.3-tv-grid-1007-9910.86804.1-2#paction"><img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt=""></a></p>
+<p><a href="http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&amp;from=y1.3-tv-grid-1007-9910.86804.1-2#paction"><img src="https://www.baidu.com/img/bd_logo1.png" alt=""></a></p>
 <pre><code class="lang-html">
-&lt;a href=&quot;http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&amp;amp;from=y1.3-tv-grid-1007-9910.86804.1-2#paction&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png&quot; alt=&quot;&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;http://v.youku.com/v_show/id_XMjgzNzM0NTYxNg==.html?spm=a2htv.20009910.contentHolderUnit2.A&amp;amp;from=y1.3-tv-grid-1007-9910.86804.1-2#paction&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://www.baidu.com/img/bd_logo1.png&quot; alt=&quot;&quot;&gt;&lt;/a&gt;
 </code></pre>
-<h3 id="4-2-2-">4.2.2. 公式</h3>
+<h3 id="-">公式</h3>
 <p>$$ x \href{why-equal.html}{=} y^2 + 1 $$
 $ x = {-b \pm \sqrt{b^2-4ac} \over 2a}. $</p>
 <pre><code class="lang-html">$$ x \href{why-equal.html}{=} y^2 + 1 $$
 $ x = {-b \pm \sqrt{b^2-4ac} \over 2a}. $
 </code></pre>
-<h3 id="4-2-3-">4.2.3. <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图">流程图</a></h3>
+<h3 id="-"><a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图">流程图</a></h3>
 <pre><code class="lang-flow">st=&gt;start: Start
 op=&gt;operation: Your Operation
 cond=&gt;condition: Yes or No?
@@ -649,7 +653,7 @@ cond(no)-&gt;op
 </tr>
 </tbody>
 </table>
-<h3 id="4-2-4-">4.2.4. <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-序列图">时序图</a></h3>
+<h3 id="-"><a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-序列图">时序图</a></h3>
 <pre><code class="lang-sequence">Alice-&gt;Bob: Hello Bob, how are you?
 Note right of Bob: Bob thinks
 Bob--&gt;Alice: I am good thanks!
@@ -688,7 +692,7 @@ Bob--&gt;Alice: I am good thanks!
 </tr>
 </tbody>
 </table>
-<h3 id="4-2-5-">4.2.5. <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#9-甘特图">甘特图</a></h3>
+<h3 id="-"><a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#9-甘特图">甘特图</a></h3>
 <pre><code class="lang-gantt">    title 项目开发流程
     section 项目确定
         需求分析       :a1, 2016-06-22, 3d
@@ -721,7 +725,14 @@ Bob--&gt;Alice: I am good thanks!
 <pre><code>
 ```html
 &lt;svg id=&quot;mermaidChart2&quot; width=&quot;100%&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; height=&quot;100%&quot; viewBox=&quot;0 0 599 316&quot;&gt;&lt;style type=&quot;text/css&quot; title=&quot;mermaid-svg-internal-css&quot;&gt; .section { stroke: none; opacity: 0.2;} .section0 { fill: rgba(102, 102, 255, 0.490196);} .section2 { fill: rgb(255, 244, 0);} .section1, .section3 { fill: white; opacity: 0.2;} .sectionTitle0 { fill: rgb(51, 51, 51);} .sectionTitle1 { fill: rgb(51, 51, 51);} .sectionTitle2 { fill: rgb(51, 51, 51);} .sectionTitle { text-anchor: start; font-size: 11px;} .grid .tick { stroke: lightgrey; opacity: 0.3; shape-rendering: crispEdges;} .grid path { stroke-width: 0;} .today { fill: none; stroke: red; stroke-width: 2px;} .task { stroke-width: 2;} .taskText { text-anchor: middle; font-size: 11px;} .taskText0, .taskText1, .taskText2, .taskText3 { fill: white;} .task0, .task1, .task2, .task3 { fill: rgb(138, 144, 221); stroke: rgb(83, 79, 188);} .titleText { text-anchor: middle; font-size: 18px; fill: black;} &lt;/style&gt;&lt;g&gt;&lt;/g&gt;&lt;g class=&quot;grid&quot; transform=&quot;translate(75, 266)&quot;&gt;&lt;g class=&quot;tick&quot; transform=&quot;translate(56,0)&quot; style=&quot;opacity: 1;&quot;&gt;&lt;line y2=&quot;-231&quot; x2=&quot;0&quot;&gt;&lt;/line&gt;&lt;text dy=&quot;1em&quot; y=&quot;3&quot; x=&quot;0&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; font-size=&quot;10&quot; style=&quot;text-anchor: middle;&quot;&gt;06/27&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;tick&quot; transform=&quot;translate(135,0)&quot; style=&quot;opacity: 1;&quot;&gt;&lt;line y2=&quot;-231&quot; x2=&quot;0&quot;&gt;&lt;/line&gt;&lt;text dy=&quot;1em&quot; y=&quot;3&quot; x=&quot;0&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; font-size=&quot;10&quot; style=&quot;text-anchor: middle;&quot;&gt;07/04&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;tick&quot; transform=&quot;translate(213,0)&quot; style=&quot;opacity: 1;&quot;&gt;&lt;line y2=&quot;-231&quot; x2=&quot;0&quot;&gt;&lt;/line&gt;&lt;text dy=&quot;1em&quot; y=&quot;3&quot; x=&quot;0&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; font-size=&quot;10&quot; style=&quot;text-anchor: middle;&quot;&gt;07/11&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;tick&quot; transform=&quot;translate(292,0)&quot; style=&quot;opacity: 1;&quot;&gt;&lt;line y2=&quot;-231&quot; x2=&quot;0&quot;&gt;&lt;/line&gt;&lt;text dy=&quot;1em&quot; y=&quot;3&quot; x=&quot;0&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; font-size=&quot;10&quot; style=&quot;text-anchor: middle;&quot;&gt;07/18&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;tick&quot; transform=&quot;translate(370,0)&quot; style=&quot;opacity: 1;&quot;&gt;&lt;line y2=&quot;-231&quot; x2=&quot;0&quot;&gt;&lt;/line&gt;&lt;text dy=&quot;1em&quot; y=&quot;3&quot; x=&quot;0&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; font-size=&quot;10&quot; style=&quot;text-anchor: middle;&quot;&gt;07/25&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;tick&quot; transform=&quot;translate(449,0)&quot; style=&quot;opacity: 1;&quot;&gt;&lt;line y2=&quot;-231&quot; x2=&quot;0&quot;&gt;&lt;/line&gt;&lt;text dy=&quot;1em&quot; y=&quot;3&quot; x=&quot;0&quot; fill=&quot;#000&quot; stroke=&quot;none&quot; font-size=&quot;10&quot; style=&quot;text-anchor: middle;&quot;&gt;08/01&lt;/text&gt;&lt;/g&gt;&lt;path class=&quot;domain&quot; d=&quot;M0,0V0H449V0&quot;&gt;&lt;/path&gt;&lt;/g&gt;&lt;g&gt;&lt;rect x=&quot;0&quot; y=&quot;48&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section0&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;72&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section0&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;96&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section0&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;120&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section1&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;144&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section1&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;168&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section1&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;192&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section1&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;216&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section2&quot;&gt;&lt;/rect&gt;&lt;rect x=&quot;0&quot; y=&quot;240&quot; width=&quot;561.5&quot; height=&quot;24&quot; class=&quot;section section2&quot;&gt;&lt;/rect&gt;&lt;/g&gt;&lt;g&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;75&quot; y=&quot;50&quot; width=&quot;34&quot; height=&quot;20&quot; class=&quot;task  task0&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;109&quot; y=&quot;74&quot; width=&quot;56&quot; height=&quot;20&quot; class=&quot;task  task0&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;165&quot; y=&quot;98&quot; width=&quot;56&quot; height=&quot;20&quot; class=&quot;task  task0&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;221&quot; y=&quot;122&quot; width=&quot;56&quot; height=&quot;20&quot; class=&quot;task  task1&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;255&quot; y=&quot;146&quot; width=&quot;112&quot; height=&quot;20&quot; class=&quot;task  task1&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;333&quot; y=&quot;170&quot; width=&quot;112&quot; height=&quot;20&quot; class=&quot;task  task1&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;412&quot; y=&quot;194&quot; width=&quot;56&quot; height=&quot;20&quot; class=&quot;task  task1&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;468&quot; y=&quot;218&quot; width=&quot;22&quot; height=&quot;20&quot; class=&quot;task  task2&quot;&gt;&lt;/rect&gt;&lt;rect rx=&quot;3&quot; ry=&quot;3&quot; x=&quot;490&quot; y=&quot;242&quot; width=&quot;34&quot; height=&quot;20&quot; class=&quot;task  task2&quot;&gt;&lt;/rect&gt;&lt;text font-size=&quot;11&quot; x=&quot;114&quot; y=&quot;63.5&quot; text-height=&quot;20&quot; class=&quot;taskTextOutsideRight taskTextOutside0 &quot;&gt;需求分析       &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;170&quot; y=&quot;87.5&quot; text-height=&quot;20&quot; class=&quot;taskTextOutsideRight taskTextOutside0 &quot;&gt;可行性报告     &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;193&quot; y=&quot;111.5&quot; text-height=&quot;20&quot; class=&quot;taskText taskText0 &quot;&gt;概念验证       &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;249&quot; y=&quot;135.5&quot; text-height=&quot;20&quot; class=&quot;taskText taskText1 &quot;&gt;概要设计      &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;311&quot; y=&quot;159.5&quot; text-height=&quot;20&quot; class=&quot;taskText taskText1 &quot;&gt;详细设计      &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;389&quot; y=&quot;183.5&quot; text-height=&quot;20&quot; class=&quot;taskText taskText1 &quot;&gt;编码          &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;440&quot; y=&quot;207.5&quot; text-height=&quot;20&quot; class=&quot;taskText taskText1 &quot;&gt;测试          &lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;495&quot; y=&quot;231.5&quot; text-height=&quot;20&quot; class=&quot;taskTextOutsideRight taskTextOutside2 &quot;&gt;发布&lt;/text&gt;&lt;text font-size=&quot;11&quot; x=&quot;507&quot; y=&quot;255.5&quot; text-height=&quot;20&quot; class=&quot;taskText taskText2 &quot;&gt;验收&lt;/text&gt;&lt;/g&gt;&lt;g&gt;&lt;text x=&quot;10&quot; y=&quot;86&quot; class=&quot;sectionTitle sectionTitle0&quot;&gt;项目确定&lt;/text&gt;&lt;text x=&quot;10&quot; y=&quot;170&quot; class=&quot;sectionTitle sectionTitle1&quot;&gt;项目实施&lt;/text&gt;&lt;text x=&quot;10&quot; y=&quot;242&quot; class=&quot;sectionTitle sectionTitle2&quot;&gt;发布验收&lt;/text&gt;&lt;/g&gt;&lt;g class=&quot;today&quot;&gt;&lt;line x1=&quot;7461&quot; x2=&quot;7461&quot; y1=&quot;25&quot; y2=&quot;291&quot; class=&quot;today&quot;&gt;&lt;/line&gt;&lt;/g&gt;&lt;text x=&quot;299.5&quot; y=&quot;25&quot; class=&quot;titleText&quot;&gt;项目开发流程&lt;/text&gt;&lt;/svg&gt;
-</code></pre><h2 id="4-3-">4.3. 参考文档</h2>
+</code></pre><h1 id="-i5ting">生成左侧导航栏 <a href="https://github.com/i5ting/tocmd.npm">i5ting</a></h1>
+<p>安装</p>
+<pre><code class="lang-html">npm install -g i5ting_toc
+</code></pre>
+<p>生成导航栏</p>
+<pre><code class="lang-html">i5ting_toc -f Markdown文档.md -o
+</code></pre>
+<h2 id="-">参考文档</h2>
 <ul>
 <li><a href="https://www.jianshu.com/p/b03a8d7b1719">简书</a></li>
 <li><a href="https://ouweiya.gitbooks.io/markdown/">Markdown 常用语法笔记</a></li>
