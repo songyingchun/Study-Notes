@@ -792,20 +792,22 @@ valueOf() 返回的还是数组。
 
 栈是一种 LIFO（Last-In-First-Out，后进先出）的数据结构，也就是最新添加的项最早被移除。
 
-> * push(item1[, item2, ...])：可以接收任意数量的参数，把它们逐个添加到数组末尾，并**返回修改后数组的长度**。
+> * push([item1[, item2 [, . . . [, itemN]]]])：可以接收任意数量的参数，把它们逐个添加到数组末尾，并**返回修改后数组的长度**。
 > * pop()：从数组末尾移除最后一项，减少数组的 length 值，然后**返回移除的项**。
 
 ### 队列方法
 
 队列数据结构的访问规则是 FIFO（First-In-First-Out，先进先出）。
 
-> * unshift(item1[, item2, ...])：在数组前端添加任意个项并返回新数组的长度。
-> * shift()：它能够移除数组中的第一个项并返回该项。
+> * unshift([item1[, item2 [, . . . [, itemN]]]])：在数组前端添加任意个项并**返回新数组的长度**。
+> * shift()：它能够移除数组中的第一个项并**返回该项**。
 
 ### 重排序方法
 
 > * reverse()：反转数组项的顺序。
-> * sort()：按升序排列数组项——即最小的值位于最前面，最大的值排在最后面。 sort() 方法会调用每个数组项的 toString() 转型方法，然后比较得到的字符串，以确定如何排序。
+> * sort([sortFunction])：按升序排列数组项——即最小的值位于最前面，最大的值排在最后面。 sort() 方法会调用每个数组项的 toString() 转型方法，然后比较得到的字符串，以确定如何排序。
+
+正序顺序：
 
 ```javascript
 function compare(value1, value2) {
@@ -818,6 +820,166 @@ function compare(value1, value2) {
     }
 }
 ```
+
+### 操作方法
+
+> * concat([item1[, item2 [, . . . [, itemN]]]])：这个方法会先创建当前数组一个副本，然后将接收到的参数
+添加到这个副本的末尾，最后返回新构建的数组。在没有给 concat() 方法传递参数的情况下，它只是复制当前数组并返回副本。如果传递给 concat() 方法的是一或多个数组，则该方法会将这些数组中的每一项都添加到结果数组中。
+> * slice([start, end])：基于当前数组中的一或多个项创建一个新数组。
+> * splice(start, deleteCount, [item1[, item2[, . . . [,itemN]]]])：向数组的中部插入项。
+
+### 位置方法
+
+> * indexOf([searchElement[, fromIndex]])：返回某个值在数组中的第一个匹配项的索引。两个参数分为是要查找的项和（可选的）表示查找起点位置的索引。
+> * lastIndexOf(searchElement[, fromIndex])：返回指定的值在数组中的最后一个匹配项的索引。两个参数分为是要查找的项和（可选的）表示查找起点位置的索引。
+
+### 迭代方法
+
+> * every(fn[, context])：对数组中的每一项运行给定函数，如果该函数对每一项都返回 true ，则返回 true 。
+> * filter(fn[, context])：对数组中的每一项运行给定函数，返回该函数会返回 true 的项组成的数组。
+> * forEach(fn[, context])：对数组中的每一项运行给定函数。这个方法没有返回值。
+> * map(fn[, context])：对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。
+> * some(fn[, context])：对数组中的每一项运行给定函数，如果该函数对任一项返回 true ，则返回 true 。
+
+### 归并方法
+
+> * reduce(callbackfn[, initialValue])：从数组的第一项开始，逐个遍历到最后。迭代数组的所有项，然后构建一个最终返回的值。
+> * reduceRight(callbackfn[, initialValue])：从数组的最后一项开始，向前遍历到第一项。迭代数组的所有项，然后构建一个最终返回的值。
+
+```javascript
+var values = [1,2,3,4,5];
+    var sum = values.reduce(function(prev, cur, index, array){
+    return prev + cur;
+});
+alert(sum); //15
+```
+
+方法|参数|作用|返回|是否改变原数组
+:-|:-|:-|:-|:-
+push|([item1[, item2 [, . . . [, itemN]]]])|逐个添加到数组末尾|修改后数组的长度|是
+pop|无|从数组末尾移除最后一项|移除的项|是
+unshift|([item1[, item2 [, . . . [, itemN]]]])|在数组前端添加任意个项|新数组的长度|是
+shift|无|移除的项|添加的项|是
+reverse|无|反转数组项的顺序|排序后的数组|是
+sort|([sortFunction])|没有参数时，每个数组项调用toString() 转型方法，然后比较得到的字符串，以确定如何排序。有参数时，按函数返回值确定如何排序，小于0为正序，大于0为反序。|排序后的数组|是
+concat|([item1[, item2 [, . . . [, itemN]]]])|创建当前数组一个副本，然后将接收到的参数添加到这个副本的末尾，最后返回新构建的数组。如果参数是数组，则把每一项添加到结果数组中。|新数组。|否
+slice|([start, end])|基于当前数组中的一或多个项创建一个新数组。|新数组|否
+splice|(start, deleteCount, [item1[, item2[, . . . [,itemN]]]])|向数组的中部插入项。|原数组改变。返回删除的数组|是
+indexOf|([searchElement[, fromIndex]])|某个值在数组中的第一个匹配项的索引|匹配项的索引|否
+lastIndexOf|([searchElement[, fromIndex]])|某个值在数组中的最后一个匹配项的索引|匹配项的索引|否
+every|(fn[, context])|检测每一项是否满足条件|布尔值|否
+filter|(fn[, context])|过滤数组|筛选的数组|否
+forEach|(fn[, context])|每一项运行给定函数|无|否
+map|(fn[, context])|每次函数调用的结果组成的数组|新数组|否
+some|(fn[, context])|检测某一项是否满足条件|布尔值|否
+reduce|(callbackfn[, initialValue])|顺序迭代数组的所有项，然后构建一个最终返回的值。|根据返回值|否
+reduceRight|(callbackfn[, initialValue])|反序迭代数组的所有项，然后构建一个最终返回的值。|根据返回值|否
+
+
+## Date 类型
+
+UTC 时间 1970 年 1 月 1 日午夜起至该日期止经过的毫秒数。
+
+> * Date.parse(dateVal)：分析一个包含日期的字符串，并返回该日期与 1970 年 1 月 1 日午夜之间相差的毫秒数。
+
+dateVal参数：
+> * 月/日/年”，如 6/13/2004；
+> * “英文月名 日,年”，如 January 12,2004；
+> * 英文星期几 英文月名 日 年 时:分:秒 时区”，如 Tue May 25 2004 00:00:00 GMT-0700。
+> * ISO 8601 扩展格式 YYYY-MM-DDTHH:mm:ss.sssZ（例如 2004-05-25T00:00:00）。只有兼容ECMAScript 5的实现支持这种格式。
+
+> * Date.UTC(year, month, day[, hours[, minutes[, seconds[,ms]]]])：返回协调通用时间 (UTC)（或 GMT）1970 年 1 月 1 日午夜与所指定的日期之间相差的毫秒数。
+
+参数：
+> * year必需。为了确保跨世纪日期的精确性，需要指定完整的年份。如果year 处于0 到 99 之间，则 year 就被假定为 1900 + year。
+> * month必需。月份，用从 0 到 11 的整数表示（1 月至 12 月）。 
+> * day必需。日期，用从 1 到 31 的整数表示。   
+> * hours可选。如果提供了 minutes，则必须提供此参数。一个指定小时的，从 0 到 23 的整数（午夜到 11pm）。
+> * minutes可选。如果提供了 seconds，则必须提供此参数。  一个指定分钟的，从 0 到 59 的整数。
+> * seconds可选。如果提供了 milliseconds，则必须提供此参数。  一个指定秒的，从 0 到 59 的整数。  
+> * ms可选。一个指定毫秒的，从 0 到 999 的整数。
+
+> *  Data.now()：返回表示调用这个方法时的日期和时间的毫秒数。
+
+### ~~继承的方法~~
+Date 类型也重写了 toLocaleString() 、 toString() 和 valueOf() 方法。
+
+Date 类型的 toLocaleString() 方法会按照与浏览器设置的地区相适应的格式返回日期和时间。这大致意味着时间格式中会包含 AM 或 PM，但不会包含时区信息（当然，具体的格式会因浏览器而异）。
+
+而 toString() 方法则通常返回带有时区信息的日期和时间，其中时间一般以军用时间（即小时的范围是 0 到 23）表示。
+
+Date 类型的 valueOf() 方法，则根本不返回字符串，而是返回日期的毫秒表示。
+
+### ~~日期格式化方法~~
+
+> * Date.toDateString()：以特定于实现的格式显示星期几、月、日和年；
+> * Date.toTimeString()：以特定于实现的格式显示时、分、秒和时区；
+> * Date.toLocaleDateString()：以特定于地区的格式显示星期几、月、日和年；
+> * Date.toLocaleTimeString()：以特定于实现的格式显示时、分、秒；
+> * Date.toUTCString()：以特定于实现的格式完整的 UTC 日期。
+
+与 toLocaleString() 和 toString() 方法一样，以上这些字符串格式方法的输出也是因浏览器而异的，因此没有哪一个方法能够用来在用户界面中显示一致的日期信息。
+
+### ~~日期/时间组件方法~~
+
+> * getTime()：返回表示日期的毫秒数；与 valueOf() 方法返回的值相同。
+> * setTime(毫秒)：以毫秒数设置日期，会改变整个日期。
+> * getFullYear()：取得4位数的年份（如2007而非仅07）。
+> * getUTCFullYear()：返回UTC日期的4位数年份。
+> * setFullYear(年)：设置日期的年份。传入的年份值必须是4位数字（如2007而非仅07）。
+> * setUTCFullYear(年)：返回表示日期的毫秒数；与 valueOf() 方法返回的值相同。
+> * getMonth()：返回日期中的月份，其中0表示一月，11表示十二月。
+> * getUTCMonth()：返回UTC日期中的月份，其中0表示一月，11表示十二月。
+> * setMonth(月)：设置日期的月份。传入的月份值必须大于0，超过11则增加年份。
+> * setUTCMonth(月)：设置UTC日期的月份。传入的月份值必须大于0，超过11则增加年份。
+> * getDate()：返回日期月份中的天数（1到31）。
+> * getUTCDate()：返回UTC日期月份中的天数（1到31）。
+> * setDate(日)：设置日期月份中的天数。如果传入的值超过了该月中应有的天数，则增加月份。
+> * setUTCDate(日)：设置UTC日期月份中的天数。如果传入的值超过了该月中应有的天数，则增加月份。
+> * getDay()：返回日期中星期的星期几（其中0表示星期日，6表示星期六）。
+> * getUTCDay()：返回UTC日期中星期的星期几（其中0表示星期日，6表示星期六）。
+> * getHours()：返回日期中的小时数（0到23）。
+> * getUTCHours()：返回UTC日期中的小时数（0到23）。
+> * setHours(时)：设置日期中的小时数。传入的值超过了23则增加月份中的天数。
+> * setUTCHours(时)：设置UTC日期中的小时数。传入的值超过了23则增加月份中的天数。
+> * getMinutes()：返回日期中的分钟数（0到59）。
+> * getUTCMinutes()：返回UTC日期中的分钟数（0到59）。
+> * setMinutes(分)：设置日期中的分钟数。传入的值超过59则增加小时数。
+> * setUTCMinutes(分)：设置UTC日期中的分钟数。传入的值超过59则增加小时数。
+> * getSeconds()：返回日期中的秒数（0到59）。
+> * getUTCSeconds()：返回UTC日期中的秒数（0到59）。
+> * setSeconds(秒)：设置日期中的秒数。传入的值超过了59会增加分钟数。
+> * setUTCSeconds(秒)：设置UTC日期中的秒数。传入的值超过了59会增加分钟数。
+> * getMilliseconds()：返回日期中的毫秒数。
+> * getUTCMilliseconds()：返回UTC日期中的毫秒数。
+> * setMilliseconds(毫秒)：设置日期中的毫秒数。
+> * setUTCMilliseconds(毫秒)：设置UTC日期中的毫秒数。
+> * getTimezoneOffset()：返回本地时间与UTC时间相差的分钟数。例如，美国东部标准时间返回300。在某地进入夏令时的情况下，这个值会有所变化。
+
+## RegExp 类型
+
+var expression = / pattern / flags ;
+
+~~标志：~~
+> * g ：表示全局（global）模式，即模式将被应用于所有字符串，而非在发现第一个匹配项时立即停止；
+> * i ：表示不区分大小写（case-insensitive）模式，即在确定匹配项时忽略模式与字符串的大小写；
+> * m ：表示多行（multiline）模式，即在到达一行文本末尾时还会继续查找下一行中是否存在与模式匹配的项。
+
+使用RegExp 构造函数，它接收两个参数：一个是要匹配的字符串模式，另一个是可选的标志字符串。
+
+由于 RegExp 构造函数的模式参数是字符串，所以在某些情况下要对字符进行双重转义。所有元字符必须双重转义，那些已经转义过的字符也是如此。
+
+字面量模式|等价的字符串
+:-:|:-:
+/name\/age/|"name\\/age"
+/\d.\d{1,2}/|"\\d.\\d{1,2}"
+/\w\\hello\\123/|"\\w\\\\hello\\\\123"
+
+### RegExp 实例方法
+
+> * exec()：为捕获组而设计的。接受一个参数，即要应用模式的字符串，然后返回包含第一个匹配项信息的数组；或者在没有匹配项的情况下返回 null 。返回的数组虽然是 Array 的实例，但包含两个额外的属性： index 和 input 。其中，index 表示匹配项在字符串中的位置，而 input 表示应用正则表达式的字符串。
+
+
 
 # 第15章 使用Canvas绘图
 检测getContext方法
@@ -1327,8 +1489,3 @@ EventUtil.addHandler(window, "message", function(event){
 > * dragstart
 > * drag
 > * dragend
-
-
-
-
-
