@@ -958,8 +958,6 @@ Date 类型的 valueOf() 方法，则根本不返回字符串，而是返回日�
 
 ## RegExp 类型
 
-var expression = / pattern / flags ;
-
 ~~标志：~~
 > * g ：表示全局（global）模式，即模式将被应用于所有字符串，而非在发现第一个匹配项时立即停止；
 > * i ：表示不区分大小写（case-insensitive）模式，即在确定匹配项时忽略模式与字符串的大小写；
@@ -977,9 +975,23 @@ var expression = / pattern / flags ;
 
 ### RegExp 实例方法
 
-> * exec()：为捕获组而设计的。接受一个参数，即要应用模式的字符串，然后返回包含第一个匹配项信息的数组；或者在没有匹配项的情况下返回 null 。返回的数组虽然是 Array 的实例，但包含两个额外的属性： index 和 input 。其中，index 表示匹配项在字符串中的位置，而 input 表示应用正则表达式的字符串。
+> * exec(str)：在没有匹配项的情况下返回 null 。返回的数组虽然是 Array 的实例，但包含两个额外的属性： index 和 input 。index 表示匹配项在字符串中的位置，而 input 表示应用正则表达式的字符串。数组中的第一项是匹配的整个字符串，第二项包含与第一个捕获组匹配的内容，第三项包含与第二个捕获组匹配的内容。即使在模式中设置了全局标志（ g ），它每次也只会返回一个匹配项。在不设置全局标志的情况下，在同一个字符串上多次调用 exec() 将始终返回第一个匹配项的信息。而在设置全局标志的情况下，每次调用 exec() 则都会在字符串中继续查找新匹配项，如下面的例子所示。
 
+> * ~~test(str)：在模式与该参数匹配的情况下返回true ；否则，返回 false 。~~
 
+### RegExp 构造函数属性
+
+长属性名|短属性名|说明
+input|$_|最近一次要匹配的字符串。Opera未实现此属性
+lastMatch|$&|最近一次的匹配项。Opera未实现此属性
+lastParen|$+|最近一次匹配的捕获组。Opera未实现此属性
+leftContext|$`|input字符串中lastMatch之前的文本
+multiline|$*|布尔值，表示是否所有表达式都使用多行模式。IE和Opera未实现此属性
+rightContext|$'|Input字符串中lastMatch之后的文本
+
+> * input：属性返回了原始字符串；
+> * lastMatch：属性返回最近一次与整个正则表达式匹配的字符串；
+> * lastParen：属性返回最近一次匹配的捕获组。
 
 # 第15章 使用Canvas绘图
 检测getContext方法
