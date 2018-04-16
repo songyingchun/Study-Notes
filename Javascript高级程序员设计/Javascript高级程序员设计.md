@@ -993,6 +993,46 @@ rightContext|$'|Input字符串中lastMatch之后的文本
 > * lastMatch：属性返回最近一次与整个正则表达式匹配的字符串；
 > * lastParen：属性返回最近一次匹配的捕获组。
 
+## Function 类型
+
+```javascript
+var sum = new Function("num1", "num2", "return num1 + num2"); // 不推荐
+```
+这种语法会导致解析两次代码（第一次是解析常规 ECMAScript代码，第二次是解析传入构造函数中的字符串），从而影响性能。
+
+### 函数声明与函数表达式
+
+解析器会率先读取函数声明，并使其在执行任何代码之前可用（可以访问）；至于函数表达式，则必须等到解析器执行到它所在的代码行，才会真正被解释执行。
+
+### 作为值的函数
+
+根据某个对象属性对数组进行排序：
+
+```javascript
+function createComparisonFunction(propertyName) {
+    return function(object1, object2){
+        var value1 = object1[propertyName];
+        var value2 = object2[propertyName];
+        
+        if (value1 < value2){
+            return -1;
+        } else if (value1 > value2){
+            return 1;
+        } else {
+            return 0;
+        }
+    };
+}
+```
+
+### 函数内部属性
+
+> * caller：这个属性中保存着调用当前函数的函数的引用，如果是在全局作用域中调用当前函数，它的值为 null 。
+
+### 函数属性和方法
+
+
+
 # 第15章 使用Canvas绘图
 检测getContext方法
 
