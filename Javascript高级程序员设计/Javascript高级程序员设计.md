@@ -1031,7 +1031,146 @@ function createComparisonFunction(propertyName) {
 
 ### 函数属性和方法
 
+每个函数都包含两个属性： length 和 prototype 。其中， length 属性表示函数希望接收的命名参数的个数。length属性默认writable为false。prototype 属性是不可枚举的，因此使用 for-in 无法发现。
 
+每个函数继承的 toLocaleString() 和 toString() 方法始终都返回函数的代码。另外一个继承的valueOf() 方法同样也只返回函数代码。
+
+## 基本包装类型
+
+### Number 类型
+
+Number 类型也重写了 valueOf() 、 toLocaleString() 和 toString()方法。
+
+> * toString(num)：传递一个表示基数的参数，告诉它返回几进制数值的字符串形式。
+> * toLocaleString()：返回字符串。
+> * valueOf()：对象表示的基本类型的数值。
+> * toFixed()：按照指定的小数位返回数值的字符串表示。
+> * toExponential()：以指数表示法（也称 e 表示法）表示的数值的字符串形式。
+> * toPrecision()：表示某个数值的最合适的格式。这个方法接收一个参数，即表示数值的所有数字的位数（不包括指数部分）。
+
+```javascript
+var num = 99;
+alert(num.toPrecision(1)); //"1e+2"
+alert(num.toPrecision(2)); //"99"
+alert(num.toPrecision(3)); //"99.0"
+```
+
+### String 类型
+
+继承的 valueOf() 、 toLocaleString() 和 toString() 方法，都返回对象所表示的基本字符串值。
+
+字符串中包含双字节字符（不是占一个字节的 ASCII 字符），每个字符也仍然算一个字符。
+
+**字符方法**
+
+> * charAt(index)：返回索引的字符。
+> * charCodeAt(index)：返回索引的字符字符编码。
+
+
+**字符串操作方法**
+
+> * concat([item1[, item2 [, . . . [, itemN]]]])：拼接任意多个字符串。
+> * slice([start[, end]])：slice() 方法会将传入的负值与字符串的长度相加。
+> * substring([start[, end]])：所有负值参数都转换为 0。
+> * substr([start[, length]])：substr() 方法将负的第一个参数加上字符串的长度，而将负的第二个参数转换为 0。
+
+**字符串位置方法**
+
+> * indexOf(string)：返子字符串的位置（如果没有找到该子字符串，则返回 -1 ）。字符串的开头向后搜索子字符串。
+> * lastIndexOf(string)：返子字符串的位置（如果没有找到该子字符串，则返回 -1 ）。从字符串的末尾向前搜索子字符串。
+
+**字符串大小写转换方法**
+
+> * toLowerCase()：转为小写。
+> * toLocaleLowerCase()：针对特定地区。
+> * toUpperCase()：转为大写。
+> * toLocaleUpperCase()：针对特定地区。
+
+**字符串的模式匹配方法**
+
+> * match(pattern)：返回了一个数组。数组的第一项是与整个模式匹配的字符串，之后的每一项（如果有）保存着与正则表达式中的捕获组匹配的字符串。
+> * search(string/pattern)：返回字符串中第一个匹配项的索引；如果没有找到匹配项，则返回 -1 。
+> * replace(string/pattern, string/function)：返回字符串中第一个匹配项的索引；如果没有找到匹配项，则返回 -1 。
+
+replace() 方法的第二个参数也可以是一个函数。在只有一个匹配项（即与模式匹配的字符串）的情况下，会向这个函数传递 3 个参数：模式的匹配项、模式匹配项在字符串中的位置和原始字符串。在正则表达式中定义了多个捕获组的情况下，传递给函数的参数依次是模式的匹配项、第一个捕获组的匹配项、第二个捕获组的匹配项……，但最后两个参数仍然分别是模式的匹配项在字符串中的位置和原始字符串。这个函数应该返回一个字符串，表示应该被替换的匹配项。
+
+字符序列|替换文本
+:-|:-
+$$|$
+$&|匹配整个模式的子字符串。与 RegExp.lastMatch 的值相同
+$'|匹配的子字符串之前的子字符串。与 RegExp.leftContext 的值相同
+$`|匹配的子字符串之后的子字符串。与 RegExp.rightContext 的值相同
+$n|匹配第n个捕获组的子字符串，其中n等于0～9。
+$nn|匹配第nn个捕获组的子字符串，其中nn等于01～99。
+
+> * split(string/pattern[, length])：基于指定的分隔符将一个字符串分割成多个子字符串，并将结果放在一个数组中。接受可选的第二个参数，用于指定数组的大小，
+以便确保返回的数组不会超过既定大小。
+> * localeCompare()：比较两个字符串。
+
+localeCompare(string)返回下列值中的一个：
+> * 如果字符串在字母表中应该排在字符串参数之前，则返回一个负数（大多数情况下是 -1 ，具体的值要视实现而定）；
+> * 如果字符串等于字符串参数，则返回 0 ；
+> * 如果字符串在字母表中应该排在字符串参数之后，则返回一个正数（大多数情况下是 1 ，具体的值同样要视实现而定）。
+
+> * fromCharCode(string)：接收一或多个字符编码，然后将它们转换成一个字符串。
+
+ 
+方法|参数|作用|返回|是否改变原字符串
+:-|:-|:-|:-|:-
+concat|([item1[, item2 [, . . . [, itemN]]]])|拼接任意多个字符串|新字符串|否
+slice|([start[, end]])|创建新字符串|新字符串|否
+substring|([start[, end]])|创建新字符串|新字符串|否
+substr|([start[, length]])|创建新字符串|新字符串|否
+indexOf|(string)|查找字符串|字符串的位置|否
+lastIndexOf|(string])|查找字符串|字符串的位置|否
+toLowerCase|无|转为小写|新字符串|否
+toLocaleLowerCase|无|转为小写|新字符串|否
+toUpperCase|无|转为大写|新字符串|否
+toLocaleUpperCase|无|转为大写|新字符串|否
+match|(pattern)|匹配字符串|匹配数组|否
+search|(string/pattern)|查找字符串|第一个匹配项的索引|否
+replace|(string/pattern, string/function)|替换字符串|新的字符串|否
+split|(string/pattern[, length])|分割字符串|分割字符串数组|否
+localeCompare|(string)|比较两个字符串|-1/0/1|否
+fromCharCode|(string)|将一个或多个字符编码转成一个字符串|新的字符串|否
+
+## 单体内置对象
+
+### Global 对象
+
+**URI 编码方法**
+
+> * encodeURI(uri)：用于整个 URI。不会对本身属于 URI 的特殊字符进行编码，例如冒号、正斜杠、问号和井字号。
+> * encodeURIComponent(uri)：用于对 URI 中的某一段。任何非标准字符进行编码。
+> * decodeURI(uri)：对使用 encodeURI() 替换的字符进行解码。
+> * encodeURIComponent(uri)：解码使用 encodeURIComponent() 编码的所有字符。
+
+**eval() 方法**
+
+被执行的代码具有与该执行环境相同的作用域链。这意味着通过 eval() 执行的代码可以引用在包含环境中定义的变量。
+
+在 eval() 中创建的任何变量或函数都不会被提升，因为在解析代码的时候，它们被包含在一个字符串中；它们只在 eval() 执行的时候创建。
+
+**window 对象**
+
+```javascript
+var global = function(){
+    return this;
+}();
+```
+
+### Math 对象
+
+> * Math.min()：求最小值。
+> * Math.max()：求最大值。
+> * Math.ceil()：向上舍入。
+> * Math.floor()：向下舍入。
+> * Math.round()：标准舍入。
+> * Math.random()：返回大于等于 0 小于 1 的一个随机数。
+
+```javascript
+值 = Math.floor(Math.random() * 可能值的总数 + 第一个可能的值)
+```
 
 # 第15章 使用Canvas绘图
 检测getContext方法
