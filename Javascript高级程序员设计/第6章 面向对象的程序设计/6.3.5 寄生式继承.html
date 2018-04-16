@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function object(o) {
+            function F() { }
+            F.prototype = o;
+            return new F();
+        }
+        function createAnother(original) {
+            var clone = object(original); //通过调用函数创建一个新对象
+            clone.sayHi = function () { //以某种方式来增强这个对象
+                alert("hi");
+            };
+            return clone; //返回这个对象
+        }
+
+        var person = {
+            name: "Nicholas",
+            friends: ["Shelby", "Court", "Van"]
+        };
+
+        var anotherPerson = createAnother(person);
+        anotherPerson.friends.push("4");
+        var yetAnotherPerson = createAnother(person);
+        anotherPerson.friends.push("5");
+
+        console.log(person);
+    </script>
+</body>
+
+</html>

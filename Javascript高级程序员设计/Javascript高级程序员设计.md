@@ -1172,6 +1172,424 @@ var global = function(){
 值 = Math.floor(Math.random() * 可能值的总数 + 第一个可能的值)
 ```
 
+# 第6章 面向对象的程序设计
+
+通过类可以创建任意多个具有相同属性和方法的对象。
+
+ECMA-262 把对象定义为：“无序属性的集合，其属性可以包含基本值、对象或者函数。”
+
+## 理解对象
+
+### 属性类型
+
+**数据属性**
+
+> * [[Configurable]]：表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性。设置为 false 之后无法设置回true。
+> * [[Enumerable]]：表示能否通过 for-in 循环返回属性。
+> * [[Writable]]：表示能否修改属性的值。
+> * [[Value]]：包含这个属性的数据值。
+
+修改属性默认的特性，要用Object.defineProperty() 方法。
+> * Object.defineProperty(object, propertyname, descriptor)：修改属性描述符。返回已修改对象。
+
+```javascript
+var person = {};
+Object.defineProperty(person, "name", {
+    configurable: false,
+    value: "Nicholas"
+});
+```
+
+**访问器属性**
+
+> * [[Configurable]]：表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为数据属性。对于直接在对象上定义的属性，这个特性的默认值为true 。
+> * [[Enumerable]]：表示能否通过 for-in 循环返回属性。对于直接在对象上定义的属性，这个特性的默认值为 true 。
+> * [[Get]]：在读取属性时调用的函数。默认值为 undefined 。
+> * [[Set]]：在写入属性时调用的函数。默认值为 undefined 。
+
+访问器属性不能直接定义，必须使用 Object.defineProperty() 来定义。
+
+```javascript
+var book = {
+    _year: 2004,
+    edition: 1
+};
+
+Object.defineProperty(book, "year", {
+    get: function(){
+        return this._year;
+    },
+    set: function(newValue){
+        if (newValue > 2004) {
+            this._year = newValue;
+            this.edition += newValue - 2004;
+        }
+    }
+})
+```
+
+**定义多个属性**
+
+> * Object.defineProperties(object, descriptors)：批量修改数据属性、访问器属性描述符。
+
+**读取属性的特性**
+
+> * Object.getOwnPropertyDescriptor(object, propertyname)：获取数据属性、访问器属性描述符|描述符对象。
+
+## 创建对象
+
+### 工厂模式 
+
+```javascript
+function createPerson(name, age, job){
+    var o = new Object();
+    o.name = name;
+    o.age = age;
+    o.job = job;
+    o.sayName = function(){
+        alert(this.name);
+    };
+    return o;
+}
+```
+
+解决了创建多个相似对象的问题。但却没有解决对象识别的问题（即怎样知道一个对象的类型）。
+
+### 构造函数模式 
+
+```javascript
+function Person(name, age, job){
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    this.sayName = function(){
+        alert(this.name);
+    };
+}
+```
+
+new 操作符经历四个步骤：
+
+1. 创建一个新对象；
+2. 将构造函数的作用域赋给新对象（因此 this 就指向了这个新对象）；
+3. 执行构造函数中的代码（为这个新对象添加属性）；
+4. 返回新对象。
+
+**构造函数的问题**
+
+每个方法都要在每个实例上重新创建一遍。
+
+
+### 原型模式
+
+```javascript
+function Person(){
+}
+Person.prototype.name = "Nicholas";
+Person.prototype.age = 29;
+Person.prototype.job = "Software Engineer";
+Person.prototype.sayName = function(){
+    alert(this.name);
+};
+```
+
+**理解原型对象**
+
+> * prototype.isPrototypeOf(obj)：object 的原型链中具有 prototype，则isPrototypeOf 方法返回 true。
+
+```javascript
+alert(Person.prototype.isPrototypeOf(person1)); //true
+```
+
+**原型与 in 操作符**
+
+in 操作符会在通过对象能够访问给定属性时返回 true ，无论该属性存在于实例中还是原型中。
+
+> * Object.getPrototypeOf(object)：获取prototype的值。
+> * Object.hasOwnProperty(object, propertyname)：检测自定义属性。
+> * Object.keys(object)：返回一个包含所有可枚举属性的字符串数组。
+
+**更简单的原型语法**
+
+原生的 constructor 属性是不可枚举的。
+
+```javascript
+// 重设构造函数，只适用于 ECMAScript 5  兼容的浏览器
+Object.defineProperty(Person.prototype, "constructor", {
+    enumerable: false,
+    value: Person
+});
+```
+
+**原型的动态性**
+
+实例中的指针仅指向原型，而不指向构造函数。
+
+```javascript  
+function Person(){
+}
+var friend = new Person();
+Person.prototype = {
+    constructor: Person,
+    name : "Nicholas",
+    age : 29,
+    job : "Software Engineer",
+    sayName : function () {
+        alert(this.name);
+    }
+};
+friend.sayName(); //error
+```
+
+**原型对象的问题**
+
+省略了为构造函数传递初始化参数这一环节，结果所有实例在默认情况下都将取得相同的属性值。原型模式的最大问题是由其共享的本性所导致的。
+
+### 组合使用构造函数模式和原型模式
+
+```javascript
+function Person(name, age, job){
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    this.friends = ["Shelby", "Court"];
+}
+Person.prototype = {
+    constructor : Person,
+    sayName : function(){
+        alert(this.name);
+    }
+}
+```
+构造函数模式用于定义实例属性，而原型模式用于定义方法和共享的属性。
+
+### 动态原型模式
+
+检查某个应该存在的方法是否有效，来决定是否需要初始化原型。
+
+```javascript
+function Person(name, age, job){
+    //属性
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    if (typeof this.sayName != "function"){
+        Person.prototype.sayName = function(){
+            alert(this.name);
+        };
+    }
+}
+```
+
+### 寄生构造函数模式
+
+该函数的作用仅仅是封装创建对象的代码，然后再返回新创建的对象。
+
+```javascript
+function Person(name, age, job){
+    var o = new Object();
+    o.name = name;
+    o.age = age;
+    o.job = job;
+    o.sayName = function(){
+        alert(this.name);
+    };
+    return o;
+}
+
+var friend = new Person("Nicholas", 29, "Software Engineer");
+```
+与构造函数模式区别在于它不用this,而是在内部创建一个新的对象。
+
+创建一个具有额外方法的特殊数组。
+
+```javascript
+function SpecialArray(){
+    //创建数组
+    var values = new Array();
+    //添加值
+    values.push.apply(values, arguments);
+    //添加方法
+    values.toPipedString = function(){
+        return this.join("|");
+    };
+    //返回数组
+    return values;
+}
+```
+
+返回的对象与构造函数或者与构造函数的原型属性之间没有关系。
+
+### 稳妥构造函数模式
+
+```javascript
+function Person(name, age, job){
+    //创建要返回的对象
+    var o = new Object();
+    //可以在这里定义私有变量和函数
+    //添加方法
+    o.sayName = function(){
+        alert(name);
+    };
+    //返回对象
+    return o;
+}
+
+var friend = Person("Nicholas", 29, "Software Engineer");
+```
+
+稳妥构造函数模式提供的这种安全性，使得它非常适合在某些安全执行环境。
+
+## 继承
+
+### 原型链
+
+基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法。
+
+构造函数、原型和实例的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个指向原型对象的内部指针。
+
+**确定原型和实例的关系**
+
+```javascript
+alert(instance instanceof Object); //true
+
+alert(Object.prototype.isPrototypeOf(instance)); //true
+```
+
+**原型链的问题**
+
+1. 引用类型值的原型属性会被所有实例共享。
+2. 在创建子类型的实例时，不能向超类型的构造函数中传递参数。
+
+### 借用构造函数
+
+```javascript
+function SuperType(){
+    this.colors = ["red", "blue", "green"];
+}
+function SubType(){
+    // 继承了 SuperType
+    SuperType.call(this);
+}
+```
+
+**借用构造函数的问题**
+
+无法避免构造函数模式存在的问题——方法都在构造函数中定义，因此函数复用就无从谈起了。
+
+### 组合继承
+
+```javascript
+function SuperType(name){
+    this.name = name;
+    this.colors = ["red", "blue", "green"];
+}
+SuperType.prototype.sayName = function(){
+    alert(this.name);
+};
+function SubType(name, age){
+    //继承属性
+    SuperType.call(this, name);
+    this.age = age;
+}
+
+SubType.prototype = new SuperType();
+SubType.prototype.constructor = SubType;
+SubType.prototype.sayAge = function(){
+    alert(this.age);
+};
+```
+
+组合继承避免了原型链和借用构造函数的缺陷，融合了它们的优点，成为JavaScript 中最常用的继承模式。而且， instanceof 和 isPrototypeOf() 也能够用于识别基于组合继承建的对象。
+
+### 原型式继承
+
+```javascript
+function object(o){
+    function F(){}
+    F.prototype = o;
+    return new F();
+}
+```
+
+ECMAScript 5 通过新增 Object.create() 方法规范化了原型式继承。
+
+### 寄生式继承
+
+```javascript
+function createAnother(original){
+    var clone = object(original); //通过调用函数创建一个新对象
+    clone.sayHi = function(){ //以某种方式来增强这个对象
+        alert("hi");
+    };
+    return clone; //返回这个对象
+}
+```
+
+### 寄生组合式继承
+
+```javascript
+function SuperType(name){
+    this.name = name;
+    this.colors = ["red", "blue", "green"];
+}
+SuperType.prototype.sayName = function(){
+    alert(this.name);
+};
+
+function SubType(name, age){
+    SuperType.call(this, name); // 第二次调用 SuperType()
+    this.age = age;
+}
+
+// SubType.prototype = new SuperType(); // 第一次调用 SuperType()
+
+inheritPrototype(SubType, SuperType);
+
+SubType.prototype.sayAge = function(){
+    alert(this.age);
+};
+
+function inheritPrototype(subType, superType){
+    var prototype = object(superType.prototype); //创建对象
+    prototype.constructor = subType; //增强对象
+    subType.prototype = prototype; //指定对象
+}
+```
+
+高效率体现在它只调用了一次 SuperType 构造函数，并且因此避免了在 SubType.
+prototype 上面创建不必要的、多余的属性。
+
+# 第7章 函数表达式
+
+## 递归
+
+
+
+方法|作用|返回|是否改变原对象
+:-|:-|:-|:-|:-
+Object.defineProperty(object, propertyname, descriptor)|修改数据属性、访问器属性描述符|改变后的对象|是
+Object.defineProperties(object, descriptors)|修改数据属性、访问器属性描述符|改变后的对象|是
+Object.getOwnPropertyDescriptor(object, descriptors)|获取数据属性、访问器属性描述符|描述符对象|否
+Object.getPrototypeOf(object)|获取prototype的值|prototype值|否
+Object.hasOwnProperty(object, propertyname)|检测自定义属性|布尔值|否
+Object.keys(object)|返回一个包含所有可枚举属性的字符串数组|数组|否
+Object.create(obj[, descriptors])|返回一个实例，它的[[prototype]]值为obj|对象|否
+
+### 寄生式继承
+
+```javascript
+function createAnother(original){
+    var clone = object(original); //通过调用函数创建一个新对象
+    clone.sayHi = function(){ //以某种方式来增强这个对象
+        alert("hi");
+    };
+    return clone; //返回这个对象
+}
+```
+
+
+
 # 第15章 使用Canvas绘图
 检测getContext方法
 
