@@ -1560,11 +1560,15 @@ function inheritPrototype(subType, superType){
 高效率体现在它只调用了一次 SuperType 构造函数，并且因此避免了在 SubType.
 prototype 上面创建不必要的、多余的属性。
 
-# 第7章 函数表达式
-
-## 递归
-
-
+```javascript
+function createAnother(original){
+    var clone = object(original); //通过调用函数创建一个新对象
+    clone.sayHi = function(){ //以某种方式来增强这个对象
+        alert("hi");
+    };
+    return clone; //返回这个对象
+}
+```
 
 方法|作用|返回|是否改变原对象
 :-|:-|:-|:-|:-
@@ -1576,19 +1580,11 @@ Object.hasOwnProperty(object, propertyname)|检测自定义属性|布尔值|否
 Object.keys(object)|返回一个包含所有可枚举属性的字符串数组|数组|否
 Object.create(obj[, descriptors])|返回一个实例，它的[[prototype]]值为obj|对象|否
 
+# 第7章 函数表达式
+
+## 递归
+
 ### 寄生式继承
-
-```javascript
-function createAnother(original){
-    var clone = object(original); //通过调用函数创建一个新对象
-    clone.sayHi = function(){ //以某种方式来增强这个对象
-        alert("hi");
-    };
-    return clone; //返回这个对象
-}
-```
-
-
 
 # 第15章 使用Canvas绘图
 检测getContext方法
