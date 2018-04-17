@@ -1564,8 +1564,6 @@ prototype 上面创建不必要的、多余的属性。
 
 ## 递归
 
-
-
 方法|作用|返回|是否改变原对象
 :-|:-|:-|:-|:-
 Object.defineProperty(object, propertyname, descriptor)|修改数据属性、访问器属性描述符|改变后的对象|是
