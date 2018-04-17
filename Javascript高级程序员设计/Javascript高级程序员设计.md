@@ -229,7 +229,7 @@ alert(null == undefined); //true
 要将一个值转换为其对应的 Boolean 值，可以调用转型函数 Boolean()。
 
 数据类型|true|false  
-:-:|:-:|:-:
+:-|:-|:-
 Boolean|true|false
 String|任何非空字符串|""
 Number|任何非零数字值（包括无穷大）|0和 NaN 
@@ -1584,7 +1584,769 @@ Object.create(obj[, descriptors])|返回一个实例，它的[[prototype]]值为
 
 ## 递归
 
-### 寄生式继承
+### 闭包
+
+闭包是指有权访问另一个函数作用域中的变量的函数。
+
+当某个函数被调用时，会创建一个执行环境（execution context）及相应的作用域链。
+
+执行环境的作用域链会被销毁，但它的活动对象仍然会留在内存中；直到匿名函数被销毁后，活动对象才会被销毁。
+
+```javascript
+function createComparisonFunction(propertyName) {
+    return function(object1, object2){
+        var value1 = object1[propertyName];
+        var value2 = object2[propertyName];
+        if (value1 < value2){
+            return -1;
+        } else if (value1 > value2){
+            return 1;
+        } else {
+            return 0;
+        }
+    };
+}
+
+var compareNames = createComparisonFunction("name");
+
+var result = compareNames({ name: "Nicholas" }, { name: "Greg" });
+```
+
+匿名函数作用域链：[
+    全局变量对象：[
+        {
+            createComparisonFunction: , 
+        },
+        {
+            result: undefined
+        }
+    ],
+    createComparisonFunction()的活动对象: [
+        {
+            arguments: ["name"]
+        },
+        {
+            propertyName: "name"
+        }
+    ],
+    闭包的活动对象：[
+        {
+            arguments: [{name: "Nicholas"}, {name: "Greg"}]
+        },
+        {
+            object1: {name: "Nicholas"}
+        },
+        {
+            object2: {name: "Greg"}
+        }
+    ]
+]
+
+**闭包与变量**
+
+```javascript
+function createFunctions(){
+    var result = new Array();
+        for (var i=0; i < 10; i++){
+            result[i] = function(){
+            return i;
+        };
+    }
+    return result;
+}
+```
+
+每个函数的作用域链中都保存着 createFunctions() 函数的活动对象，所以它们引用的都是同一个变量i。
+
+```javascript
+function createFunctions(){
+    var result = new Array();
+    for (var i=0; i < 10; i++){
+        result[i] = function(num){
+            return function(){
+                return num;
+            };
+        }(i);
+    }
+    return result;
+}
+```
+
+创建并返回了一个访问 num 的闭包。这样一来， result 数组中的每个函数都有自己num 变量的一个副本，因此就可以返回各自不同的数值了。
+
+### 关于 this对象
+
+匿名函数的执行环境具有全局性，因此其 this 对象通常指向 window。
+
+### 模仿块级作用域
+
+```javascript
+(function(){
+    //这里是块级作用域
+})();
+```
+减少闭包占用的内存问题，因为没有指向匿名函数的引用。只要函数执行完毕，就可以立即销毁其作用域链了。
+
+## 私有变量
+
+有权访问私有变量和私有函数的公有方法称为特权方法。
+
+```javascript
+function MyObject(){
+    //私有变量和私有函数
+    var privateVariable = 10;
+    function privateFunction(){
+        return false;
+    }
+    //特权方法
+    this.publicMethod = function (){
+        privateVariable++;
+        return privateFunction();
+    };
+}
+```
+
+有构造函数模式的缺点。构造函数模式的缺点是针对每个实例都会创建同样一组新方法。
+
+### 模块模式
+
+模块模式通过为单例添加私有变量和特权方法能够使其得到增强。
+
+```javascript
+var application = function(){
+    //私有变量和函数
+    var components = new Array();
+    //初始化
+    components.push(new BaseComponent());
+    //公共
+    return {
+        getComponentCount : function(){
+            return components.length;
+        },
+        registerComponent : function(component){
+            if (typeof component == "object"){
+                components.push(component);
+            }
+        }
+    };
+}()
+```
+
+### 增强的模块模式
+
+```javascript
+var application = function(){
+    //私有变量和函数
+    var components = new Array();
+    //初始化
+    components.push(new BaseComponent());
+    //创建 application 的一个局部副本
+    var app = new BaseComponent();
+    //公共接口
+    app.getComponentCount = function(){
+        return components.length;
+    };
+    app.registerComponent = function(component){
+        if (typeof component == "object"){
+            components.push(component);
+        }
+    };
+    //返回这个副本
+    return app;
+}();
+```
+
+## 小结
+
+闭包还可以用于在对象中创建私有变量，相关概念和要点如下。
+
+> * 即使 JavaScript 中没有正式的私有对象属性的概念，但可以使用闭包来实现公有方法，而通过公
+有方法可以访问在包含作用域中定义的变量。
+> * 有权访问私有变量的公有方法叫做特权方法。
+> * 可以使用构造函数模式、原型模式来实现自定义类型的特权方法，也可以使用模块模式、增强
+的模块模式来实现单例的特权方法。
+
+# 第8章 BOM
+
+## window 对象
+
+### 窗口关系及框架
+
+每个 window 对象都有一个 name 属性，其中包含框架的名称。
+
+top 对象始终指向最高（最外）层的框架，也就是浏览器窗口。
+
+window 对象指向的都是那个框架的特定实例，而非最高层的框架。
+
+parent 对象指向的就是上一层框架。
+
+### 窗口位置
+
+> * screenLeft：表示窗口相对于屏幕左边的位置。
+> * screenTop：表示窗口相对于屏幕上边的位置。
+> * screenX：表示窗口相对于屏幕左边的位置。
+> * screenY：表示窗口相对于屏幕上边的位置。
+> * moveTo(x, y)：将窗口精确地移动到一个新位置。
+> * moveBy(px, py)：将窗口移动到相对的位置。
+
+```javascript
+var leftPos = (typeof window.screenLeft == "number") ?
+    window.screenLeft : window.screenX;
+var topPos = (typeof window.screenTop == "number") ?
+    window.screenTop : window.screenY;
+```
+
+### 窗口大小
+
+> * innerWidth：表示该容器中页面视图区的宽度。
+> * innerHeight：表示该容器中页面视图区的高度。
+> * outerWidth：返回浏览器窗口本身的宽度。
+> * outerHeight：返回浏览器窗口本身的高度。
+> * document.documentElement.clientWidth：页面视口的宽度。
+> * document.documentElement.clientHeight：页面视口的高度。
+> * document.body.clientWidth：页面视口的宽度。
+> * document.body.clientHeight：页面视口的高度。
+> * resizeTo(x, y)：调整浏览器窗口的大小。
+> * resizeBy(px, py)：调整浏览器窗口的相对大小。
+
+```javascript
+var pageWidth = window.innerWidth,
+    pageHeight = window.innerHeight;
+if (typeof pageWidth != "number"){
+    if (document.compatMode == "CSS1Compat"){
+        pageWidth = document.documentElement.clientWidth;
+        pageHeight = document.documentElement.clientHeight;
+    } else {
+        pageWidth = document.body.clientWidth;
+        pageHeight = document.body.clientHeight;
+    }
+}
+```
+
+### 导航和打开窗口
+
+> * open(url[, framename, attribute, boolean])：第二个参数是已有窗口或框架的名称或 _self 、 _parent 、 _top 或 _blank。第三个参数是一个逗号分隔的设置字符串。第四个参数表示新页面是否取代浏览器历史记录中当前加载页面的布尔值。导航到一个特定的 URL。
+> * close()：适用于通过 window.open() 打开的弹出窗口。
+
+### 间歇调用和超时调用
+
+> * setTimeout(fn, time)：执行代码前需要等待多少毫秒。第一个参数传递字符串可能导致性能损失，因此不建议以字符串作为第一个参数。该方法会返回一个数值 ID，表示超时调用。
+> * clearTimeout(id)：取消尚未执行的超时调用计划。
+> * setInterval(fn, time)：按照指定的时间间隔重复执行代码。第一个参数传递字符串可能导致性能损失，因此不建议以字符串作为第一个参数。该方法会返回一个数值 ID，表示超时调用。
+> * clearInterval(id)：取消尚未执行的超时调用计划。
+
+### 系统对话框
+
+> * alert(string)：接受一个字符串并将其显示给用户。
+> * confirm(string)：返回的布尔值： true 表示单击了 OK， false 表示单击了Cancel。
+> * prompt(tips, inputText)：提示框中除了显示 OK 和 Cancel 按钮之外，还会显示一个文本输入域，以供用户在其中输入内容。
+
+## location 对象
+
+location 对象的用处不只表现在它保存着当前文档的信息，还表现在它将 URL 解析为独立的片段，让开发人员可以通过不同的属性访问这些片段。
+
+### 查询字符串参数
+
+```javascript
+function getQueryStringArgs(){
+    //取得查询字符串并去掉开头的问号
+    var qs = (location.search.length > 0 ? location.search.substring(1) : ""),
+        //保存数据的对象
+        args = {},
+        //取得每一项
+        items = qs.length ? qs.split("&") : [],
+        item = null,
+        name = null,
+        value = null,
+        //在 for 循环中使用
+        i = 0,
+        len = items.length;
+        
+    //逐个将每一项添加到 args 对象中
+    for (i=0; i < len; i++){
+        item = items[i].split("=");
+        name = decodeURIComponent(item[0]);
+        value = decodeURIComponent(item[1]);
+        if (name.length) {
+        args[name] = value;
+        }
+    }
+    return args;
+}
+```
+
+### 位置操作
+
+> * location.assign(url)：立即打开新 URL 并在浏览器的历史记录中生成一条记录。
+
+每次修改 location 的属性（ hash 除外），页面都会以新 URL 重新加载。当通过上述任何一种方式修改 URL 之后，浏览器的历史记录中就会生成一条新记录。
+
+> * location.replace(url)：即要导航到的 URL。虽然会导致浏览器位置改变，但不会在历史记录中生成新记
+录。
+> * location.reload([boolean])：不传递任何参数，页面就会从浏览器缓存中重新加载。如果要强制从服务器重新加载，为该方法传递参数 true 。
+
+属性|作用|兼容性
+:-|:-|:-
+screenLeft|窗口相对于屏幕左边的位置|IE、Safari、Opera 和 Chrome
+screenTop|窗口相对于屏幕上边的位置|IE、Safari、Opera 和 Chrome
+screenX|窗口相对于屏幕左边的位置|Firefox、Safari、Chrome
+screenY|窗口相对于屏幕上边的位置|Firefox、Safari、Chrome
+innerWidth|页面视图区的宽度|IE9+
+innerHeight|页面视图区的高度|IE9+
+outerWidth|浏览器窗口本身的宽度|IE9+
+outerHeight|浏览器窗口本身的高度|IE9+
+document.documentElement.clientWidth|页面视口的宽度|IE6+标准模式
+document.documentElement.clientHeight|页面视口的高度|IE6+标准模式
+document.body.clientWidth|页面视口的宽度|混杂模式
+document.body.clientHeight|页面视口的高度|混杂模式
+
+方法|作用
+:-|:-
+moveTo(x, y)|将窗口精确地移动到一个新位置。禁用。
+moveBy(px, py)|将窗口移动到相对的位置。禁用。
+resizeTo(x, y)|调整浏览器窗口的大小。禁用。
+resizeBy(px, py)|调整浏览器窗口的相对大小。禁用。
+open(url[, framename, attribute, boolean])|导航到一个特定的 URL。
+close()|适用于通过 window.open() 打开的弹出窗口。
+setTimeout(fn, time)|超时调用。
+clearTimeout(id)|取消超时调用。
+setInterval(fn, time)|间歇调用。
+clearInterval(id)|取消间歇调用。
+alert(string)|接受一个字符串并将其显示给用户。
+confirm(string)|显示给用户确认弹窗。
+prompt(string)|显示有一个文本输入域的弹窗。
+location.assign(url)|立即打开新 URL 并在浏览器的历史记录中生成一条记录。
+location.replace(url)|即要导航到的 URL。
+location.reload([boolean])|重新加载页面。
+
+# 第9章 客户端检测
+
+## 能力检测
+
+能力检测的目标不是识别特定的浏览器，而是识别浏览器的能力。
+
+## 怪癖检测
+
+怪癖检测的目标是识别浏览器的特殊行为。
+
+## 用户代理检测
+
+```javascript
+var client = function () {
+	//呈现引擎
+	var engine = {
+		ie: 0,
+		gecko: 0,
+		webkit: 0,
+		khtml: 0,
+		opera: 0,
+		//完整的版本号
+		ver: null
+	};
+	//浏览器
+	var browser = {
+		//主要浏览器
+		ie: 0,
+		firefox: 0,
+		safari: 0,
+		konq: 0,
+		opera: 0,
+		chrome: 0,
+		//具体的版本号
+		ver: null
+	};
+	//平台、设备和操作系统
+	var system = {
+		win: false,
+		mac: false,
+		x11: false,
+		//移动设备
+		iphone: false,
+		ipod: false,
+		ipad: false,
+		ios: false,
+		android: false,
+		nokiaN: false,
+		winMobile: false,
+		//游戏系统
+		wii: false,
+		ps: false
+	};
+	//检测呈现引擎和浏览器
+	var ua = navigator.userAgent;
+	if (window.opera) {
+		engine.ver = browser.ver = window.opera.version();
+		engine.opera = browser.opera = parseFloat(engine.ver);
+	} else if (/AppleWebKit\/(\S+)/.test(ua)) {
+		engine.ver = RegExp["$1"];
+		engine.webkit = parseFloat(engine.ver);
+		//确定是 Chrome 还是 Safari
+		if (/Chrome\/(\S+)/.test(ua)) {
+			browser.ver = RegExp["$1"];
+			browser.chrome = parseFloat(browser.ver);
+		} else if (/Version\/(\S+)/.test(ua)) {
+			browser.ver = RegExp["$1"];
+			browser.safari = parseFloat(browser.ver);
+		} else {
+			//近似地确定版本号
+			var safariVersion = 1;
+			if (engine.webkit < 100) {
+				safariVersion = 1;
+			} else if (engine.webkit < 312) {
+				safariVersion = 1.2;
+			} else if (engine.webkit < 412) {
+				safariVersion = 1.3;
+			} else {
+				safariVersion = 2;
+			}
+			browser.safari = browser.ver = safariVersion;
+		}
+	} else if (/KHTML\/(\S+)/.test(ua) || /Konqueror\/([^;]+)/.test(ua)) {
+		engine.ver = browser.ver = RegExp["$1"];
+		engine.khtml = browser.konq = parseFloat(engine.ver);
+	} else if (/rv:([^\)]+)\) Gecko\/\d{8}/.test(ua)) {
+		engine.ver = RegExp["$1"];
+		engine.gecko = parseFloat(engine.ver);
+		//确定是不是 Firefox
+		if (/Firefox\/(\S+)/.test(ua)) {
+			browser.ver = RegExp["$1"];
+			browser.firefox = parseFloat(browser.ver);
+		}
+	} else if (/MSIE ([^;]+)/.test(ua)) {
+		engine.ver = browser.ver = RegExp["$1"];
+		engine.ie = browser.ie = parseFloat(engine.ver);
+	}
+	//检测浏览器
+	browser.ie = engine.ie;
+	browser.opera = engine.opera;
+	//检测平台
+	var p = navigator.platform;
+	system.win = p.indexOf("Win") == 0;
+	system.mac = p.indexOf("Mac") == 0;
+	system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+	//检测 Windows 操作系统
+	if (system.win) {
+		if (/Win(?:dows )?([^do]{2})\s?(\d+\.\d+)?/.test(ua)) {
+			if (RegExp["$1"] == "NT") {
+				switch (RegExp["$2"]) {
+					case "5.0":
+						system.win = "2000";
+						break;
+					case "5.1":
+						system.win = "XP";
+						break;
+					case "6.0":
+						system.win = "Vista";
+						break;
+					case "6.1":
+						system.win = "7";
+						break;
+					default:
+						system.win = "NT";
+						break;
+				}
+			} else if (RegExp["$1"] == "9x") {
+				system.win = "ME";
+			} else {
+				system.win = RegExp["$1"];
+			}
+		}
+	}
+	//移动设备
+	system.iphone = ua.indexOf("iPhone") > -1;
+	system.ipod = ua.indexOf("iPod") > -1;
+	system.ipad = ua.indexOf("iPad") > -1;
+	system.nokiaN = ua.indexOf("NokiaN") > -1;
+	//windows mobile
+	if (system.win == "CE") {
+		system.winMobile = system.win;
+	} else if (system.win == "Ph") {
+		if (/Windows Phone OS (\d+.\d+)/.test(ua)) {
+			;
+			system.win = "Phone";
+			system.winMobile = parseFloat(RegExp["$1"]);
+		}
+	}
+	//检测 iOS 版本
+	if (system.mac && ua.indexOf("Mobile") > -1) {
+		if (/CPU (?:iPhone )?OS (\d+_\d+)/.test(ua)) {
+			system.ios = parseFloat(RegExp.$1.replace("_", "."));
+		} else {
+			system.ios = 2; //不能真正检测出来，所以只能猜测
+		}
+	}
+	//检测 Android 版本
+	if (/Android (\d+\.\d+)/.test(ua)) {
+		system.android = parseFloat(RegExp.$1);
+	}
+	//游戏系统
+	system.wii = ua.indexOf("Wii") > -1;
+	system.ps = /playstation/i.test(ua);
+	//返回这些对象
+	return {
+		engine: engine,
+		browser: browser,
+		system: system
+	};
+}();
+
+```
+
+# 第10章 DOM
+
+## 节点层次
+
+### Node 类型
+
+NodeList 对象的独特之处在于，它实际上是基于 DOM 结构动态执行查询的结果。
+
+所有节点都有的最后一个属性是 ownerDocument ，该属性指向表示整个文档的文档节点。
+
+> * item(index)：返回索引为index的NodeList成员。
+
+**操作节点**
+
+> * appendChild(newElement)：插件新节点。如果节点已经是文档的一部分了，那结果就是将该节点从原来的位置转移到新位置。返回新增的节点。
+> * insertBefore(newChild[, referenceChild])：把节点放在 childNodes 列表中某个特定的位置上。被插入的节点会变成参照节点的前一个同胞节点,同时被方法返回。如果参照节点是null ，则insertBefore() 与 appendChild() 执行相同的操作。
+> * replaceChild(newnode, oldnode)：替换某个节点。
+> * removeChild(newChild, oldChild)：删除某个节点。
+
+**其他方法**
+
+> * cloneNode([deep])：克隆节点。在参数为 true的情况下，执行深复制。
+
+方法|作用|返回
+appendChild(newElement)|插入新节点到最后|插入的节点
+insertBefore(newnode[, referenceChild])|把节点放在 childNodes 列表中某个特定的位置上|插入的节点
+replaceChild(newnode, oldnode)|替换某个节点|被替换的节点
+removeChild(node)|删除某个节点|被删除的节点
+cloneNode(deep)|克隆某个节点|被克隆节点
+
+## Document 类型
+
+**查找元素**
+
+> * getElementById(id):返回对拥有指定 ID 的第一个对象的引用。
+> * getElementsByTagName(tagname):返回元素的顺序是它们在文档中的顺序。
+
+HTMLCollection 对象还有一个方法
+> * namedItem(index):通过元素的 name 特性取得集合中的项。
+
+> * getElementsByName(name):返回带有给定 name 特性的所有元素。
+
+**特殊集合**
+
+> * document.forms:包含文档中所有的 <form> 元素，与 document.getElementsByTagName("form")得到的结果相同；
+> * document.images:包含文档中所有的 <img> 元素，与 document.getElementsByTagName("img") 得到的结果相同；
+> * document.links:包含文档中所有带 href 特性的 <a> 元素。
+
+**文档写入**
+
+> * write(string):将输出流写入到网页中。会执行script标签的javascript语句。
+> * writeln(string):将输出流写入到网页中。会执行script标签的javascript语句。
+> * open():打开网页的输出流。
+> * close():关闭网页的输出流。
+
+### Element 类型
+
+~~**取得特性**~~
+
+> * getAttribute(attributename):返回指定属性名的属性值。
+> * setAttribute(attributename, attributevalue):添加指定的属性，并为其赋指定的值。
+> * removeAttribute(attributename):删除指定的属性。
+
+~~**attributes 属性**~~
+
+> * getNamedItem(name):返回 nodeName 属性等于 name 的节点；
+> * removeNamedItem(name):从列表中移除 nodeName 属性等于 name 的节点；
+> * setNamedItem(node):向列表中添加节点，以节点的 nodeName 属性为索引；
+> * item(pos):返回位于数字 pos 位置处的节点。
+
+### Text 类型
+
+**规范化文本节点**
+
+> * normalize():将所有文本节点合并成一个节点。
+
+## DOM 操作技术
+
+### ~~动态脚本~~
+
+```javascript
+function loadScriptString(code){
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    try {
+        script.appendChild(document.createTextNode(code));
+    } catch (ex){
+        script.text = code;
+    }
+    document.body.appendChild(script);
+}
+```
+
+### ~~动态样式~~
+
+```javascript
+function loadStyleString(css){
+    var style = document.createElement("style");
+    style.type = "text/css";
+    try{
+        style.appendChild(document.createTextNode(css));
+    } catch (ex){
+        style.styleSheet.cssText = css;
+    }
+    var head = document.getElementsByTagName("head")[0];
+    head.appendChild(style);
+}
+```
+
+## 小结
+
+> * 最基本的节点类型是 Node ，用于抽象地表示文档中一个独立的部分；所有其他类型都继承自Node 。
+> * Document 类型表示整个文档，是一组分层节点的根节点。在 JavaScript 中，document 对象是Document 的一个实例。使用 document 对象，有很多种方式可以查询和取得节点。
+> * Element 节点表示文档中的所有 HTML 或 XML 元素，可以用来操作这些元素的内容和特性。
+> * 另外还有一些节点类型，分别表示文本内容、注释、文档类型、CDATA 区域和文档片段。
+
+类型|nodeType|nodeName|nodeValue|parentNode|ownerDocument|子节点|创建方法
+:-|:-|:-|:-|:-|:-|:-|:-
+Document|9|#document|null|null|null|可能是一个DocumentType、 Element、 ProcessingInstruction或 Comment 。
+Element|1|元素的标签名|null| Document 或 Element|Document| Element 、 Text 、 Comment 、 ProcessingInstruction 、 CDATASection 或 EntityReference|createElement(str)
+Text|3|#text|节点所包含的文本|Element|Document|没有子节点|createTextNode("str")
+Comment|8|#comment|注释的内容| Document 或 Element|Document|没有子节点|createComment(str)
+CDATASection|4|#cdata-section| CDATA 区域中的内容|null|null| Document 或 Element|没有子节点|createCDataSection()
+DocumentType|10|doctype 的名称|null|null|Document|没有子节点|
+DocumentFragment|11|#document-fragment|null|null|Document|Element 、ProcessingInstruction 、 Comment 、 Text 、 CDATASection 或EntityReference |createDocumentFragment()
+Attr|2|特性的名称|特性的值|null|Document|没有子节点|createAttribute(str)
+
+# 第11章 DOM 扩展
+
+## 选择符 API
+
+> * querySelector(selector): 返回与该模式匹配的第一个元素。
+> * querySelectorAll(selector): 返回的是一个 NodeList 的实例。
+> * matchesSelector(selector): 检测CSS选择符是否被querySelector、querySelectorAll方法返回。
+
+```javascript
+function matchesSelector(element, selector){
+    if (element.matchesSelector){
+        return element.matchesSelector(selector);
+    } else if (element.msMatchesSelector){
+        return element.msMatchesSelector(selector);
+    } else if (element.mozMatchesSelector){
+        return element.mozMatchesSelector(selector);
+    } else if (element.webkitMatchesSelector){
+        return element.webkitMatchesSelector(selector);
+    } else {
+        throw new Error("Not supported.");
+    }
+}
+```
+
+## 元素遍历
+
+> * getElementsByClassName(className):返回带有指定类的所有元素的 NodeList 。
+
+**classList 属性**
+
+> * add(value) ：将给定的字符串值添加到列表中。如果值已经存在，就不添加了。
+> * contains(value) ：表示列表中是否存在给定的值，如果存在则返回 true ，否则返回 false 。
+> * remove(value) ：从列表中删除给定的字符串。
+> * toggle(value) ：如果列表中已经存在给定的值，删除它；如果列表中没有给定的值，添加它。
+
+### HTMLDocument 的变化
+
+**readyState 属性**
+
+Document 的 readyState 属性有两个可能的值：
+> * loading:正在加载文档；
+> * complete:已经加载完文档。
+
+### 插入标记
+
+> * innerHTML:不支持 innerHTML 的元素有： &lt;col> 、 &lt;colgroup> 、&lt;frameset> 、 &lt;head> 、 &lt;html> 、 &lt;style> 、 &lt;table> 、 &lt;tbody> 、 &lt;thead> 、 &lt;tfoot> 和 &lt;tr> 。
+> * outerHTML: 返回调用它的元素及所有子节点的 HTML 标签。
+> * insertAdjacentHTML():
+    > * "beforebegin":在当前元素之前插入一个紧邻的同辈元素；
+    > * "afterbegin":在当前元素之下插入一个新的子元素或在第一个子元素之前再插入新的子元素；
+    > * "beforeend":在当前元素之下插入一个新的子元素或在最后一个子元素之后再插入新的子元素；
+    > * "afterend":在当前元素之后插入一个紧邻的同辈元素。
+
+### scrollIntoView() 方法
+
+> * scrollIntoView([true]):滚动浏览器窗口或某个容器元素，调用元素就可以出现在视口中。
+
+## 专有扩展
+
+### 文档模式
+
+文档模式决定了你可以使用哪个级别的 CSS，可以在 JavaScript 中使用哪些 API，以及如何对待文档类型（doctype）。
+
+要强制浏览器以某种模式渲染页面，可以使用 HTTP 头部信息 X-UA-Compatible ，或通过等价的&lt;meta> 标签来设置：
+
+```html
+<meta http-equiv="X-UA-Compatible" content="IE=IEVersion">
+```
+
+> * Edge ：始终以最新的文档模式来渲染页面。忽略文档类型声明。
+> * EmulateIE9 ：如果有文档类型声明，则以 IE9 标准模式渲染页面，否则将文档模式设置为 IE5。
+> * EmulateIE8 ：如果有文档类型声明，则以 IE8 标准模式渲染页面，否则将文档模式设置为 IE5。
+> * EmulateIE7 ：如果有文档类型声明，则以 IE7 标准模式渲染页面，否则将文档模式设置为 IE5。
+> * 9 ：强制以 IE9 标准模式渲染页面，忽略文档类型声明。
+> * 8 ：强制以 IE8 标准模式渲染页面，忽略文档类型声明。
+> * 7 ：强制以 IE7 标准模式渲染页面，忽略文档类型声明。
+> * 5 ：强制将文档模式设置为 IE5，忽略文档类型声明。
+
+通过 document.documentMode 属性可以知道给定页面使用的是什么文档模式。
+
+### contains() 方法
+
+> * contains(node)：返回一个表示该关系的位掩码（ bitmask）。
+
+掩码|节点关系
+:-|:-
+1|无关
+2|居前
+4|居后
+8|包含（给定的节点是参考节点的祖先）  
+16|被包含（给定的节点是参考节点的后代）
+
+```javascript
+function contains(refNode, otherNode){
+    if (typeof refNode.contains == "function" &&
+        (!client.engine.webkit || client.engine.webkit >= 522)){
+        return refNode.contains(otherNode);
+    } else if (typeof refNode.compareDocumentPosition == "function"){
+        return !!(refNode.compareDocumentPosition(otherNode) & 16);
+    } else {
+    var node = otherNode.parentNode;
+    do {
+        if (node === refNode){
+            return true;
+        } else {
+            node = node.parentNode;
+        }
+    } while (node !== null);
+        return false;
+    }
+}
+```
+
+### 插入文本
+
+> * innerText：读取值时，它会按照由浅入深的顺序，将子文档树中的所有文本拼接起来。在通过
+innerText 写入值时，结果会删除元素的所有子节点，插入包含相应文本值的文本节点。
+> * textContent：等同于innerText。
+> * outerText：读取文本值时， outerText 与 innerText 的结果完全一样。写模式下，会替换整个元素（包括子节点）。
+
+方法|返回|返回类型
+:-|:-|:-
+getElementById(id)|指定 ID第一对象的引用|HTMLEXXXlement
+getElementsByTagName(id)|指定 ID第一对象的引用|HTMLCollection
+getElementsByName(name)|给定 name 特性的所有元素|NodeList
+querySelector(selector)|返回与该模式匹配的第一个元素|HTMLEXXXlement
+querySelectorAll(selector)|NodeList 的实例|NodeList
+getElementsByClassName(className)|指定类的所有元素|NodeList
 
 # 第15章 使用Canvas绘图
 检测getContext方法

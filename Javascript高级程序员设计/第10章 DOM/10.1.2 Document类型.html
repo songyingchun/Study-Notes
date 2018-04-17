@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="syc"></div>
+
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <input type="text" name="syc">
+    <input type="text" name="syc">
+    <input type="text" name="syc">
+    <input type="text" name="syc">
+    <input type="text" name="syc">
+
+    <script>
+        var syc = document.getElementById("syc");
+        console.log({ syc });
+        var lis = document.getElementsByTagName("li");
+        console.log({ lis });
+        var names = document.getElementsByName("syc");
+        console.log({ names });
+
+        window.onload = function () {
+            document.write("<script type=\"text/javascript\">alert(123)<\/script>");
+        };
+    </script>
+</body>
+
+</html>

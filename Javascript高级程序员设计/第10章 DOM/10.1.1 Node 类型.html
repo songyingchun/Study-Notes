@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="content">
+
+    </div>
+    <script>
+    // appendChild
+    var newElement = document.createElement("div");
+    newElement.className = "new";
+    var newElement2 = document.createElement("div");
+    newElement2.className = "new2";
+    var content = document.querySelector(".content");
+
+    var returnElement = content.appendChild(newElement);
+    console.log(returnElement === newElement);
+
+    var returnElement = content.insertBefore(newElement, null);    
+    console.log(returnElement === newElement);
+
+    var returnElement = content.replaceChild(newElement2, newElement);    
+    console.log(returnElement === newElement);
+    
+    var returnElement = content.removeChild(newElement2);    
+    console.log(returnElement === newElement2);
+
+    </script>
+</body>
+</html>
