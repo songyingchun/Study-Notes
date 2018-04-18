@@ -277,6 +277,8 @@ function setInnerText(element, text) {
 	}
 }
 
+var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
 function insertRule(sheet, selectorText, cssText, position) {
 	if (sheet.insertRule) {
 		sheet.insertRule(selectorText + "{" + cssText + "}", position);

@@ -2348,6 +2348,442 @@ querySelector(selector)|返回与该模式匹配的第一个元素|HTMLEXXXlemen
 querySelectorAll(selector)|NodeList 的实例|NodeList
 getElementsByClassName(className)|指定类的所有元素|NodeList
 
+# 第12章 DOM2和DOM3
+
+## DOM 变化
+
+### 针对XML命名空间的变化
+
+**Node 类型的变化**
+
+在 DOM2 级中， Node 类型包含下列特定于命名空间的属性。
+
+> * localName ：不带命名空间前缀的节点名称。
+> * namespaceURI ：命名空间 URI 或者（在未指定的情况下是） null 。
+> * prefix ：命名空间前缀或者（在未指定的情况下是） null 。
+
+```html
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Example XHTML page</title>
+    </head>
+    <body>
+        <s:svg xmlns:s="http://www.w3.org/2000/svg" version="1.1"
+        viewBox="0 0 100 100" style="width:100%; height:100%">
+        <s:rect x="0" y="0" width="100" height="100" style="fill:red"/>
+        </s:svg>
+    </body>
+</html>
+```
+
+对于 &lt;s:svg> 元素而言，它的 localName 是 "svg" ，tagName 是 "s:svg" ， namespaceURI 是 "http://www.w3.org/2000/svg" ，而 prefix 是 "s" 。
+
+DOM3 级在此基础上更进一步，又引入了下列与命名空间有关的方法。
+
+> * isDefaultNamespace(namespaceURI) ：在指定的 namespaceURI 是当前节点的默认命名空间的情况下返回 true 。
+> * lookupNamespaceURI(prefix) ：返回给定 prefix 的命名空间。
+> * lookupPrefix(namespaceURI) ：返回给定 namespaceURI 的前缀。
+
+**Document 类型的变化**
+
+DOM2 级中的 Document 类型也发生了变化，包含了下列与命名空间有关的方法。
+
+> * createElementNS(namespaceURI, tagName) ：使用给定的 tagName 创建一个属于命名空间 namespaceURI 的新元素。
+> * createAttributeNS(namespaceURI, attributeName) ：使用给定的 attributeName 创建一个属于命名空间 namespaceURI 的新特性。
+> * getElementsByTagNameNS(namespaceURI, tagName) ：返回属于命名空间 namespaceURI的 tagName 元素的 NodeList 。
+
+**Element 类型的变化**
+
+“DOM2 级核心”中有关 Element 的变化，主要涉及操作特性。
+
+> * getAttributeNS(namespaceURI,localName) ：取得属于命名空间namespaceURI 且名为localName 的特性。
+> * getAttributeNodeNS(namespaceURI,localName) ：取得属于命名空间 namespaceURI 且名为 localName 的特性节点。
+> * getElementsByTagNameNS(namespaceURI, tagName) ：返回属于命名空间 namespaceURI的 tagName 元素的 NodeList 。
+> * hasAttributeNS(namespaceURI,localName) ：确定当前元素是否有一个名为 localName的特性，而且该特性的命名空间是 namespaceURI 。
+> * removeAttriubteNS(namespaceURI,localName) ：删除属于命名空间 namespaceURI 且名为 localName 的特性。
+> * setAttributeNS(namespaceURI,qualifiedName,value) ：设置属于命名空间 namespaceURI 且名为 qualifiedName 的特性的值为 value 。
+> * setAttributeNodeNS(attNode) ：设置属于命名空间 namespaceURI 的特性节点。
+
+**NamedNodeMap 类型的变化**
+
+> * getNamedItemNS(namespaceURI,localName) ：取得属于命名空间 namespaceURI 且名为localName 的项。
+> * removeNamedItemNS(namespaceURI,localName) ：移除属于命名空间 namespaceURI 且名为 localName 的项。
+> * setNamedItemNS(node) ：添加 node ，这个节点已经事先指定了命名空间信息。
+
+### 其他方面的变化
+
+**DocumentType 类型的变化**
+
+DocumentType 类型新增了 3 个属性： publicId 、 systemId 和internalSubset 。其中，前两个属性表示的是文档类型声明中的两个信息段。最后一个属性 internalSubset ，用于访问包含在文档类型声明中的额外定义。
+
+```html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd" [<!ELEMENT name (#PCDATA)>]>
+```
+
+```javascript
+alert(document.doctype.publicId);   // "-//W3C//DTD HTML 4.01//EN"
+alert(document.doctype.systemId);   // "http://www.w3.org/TR/html4/strict.dtd"
+alert(document.doctype.internalSubset);    // "<!ELEMENT name (#PCDATA)>"
+```
+
+**Document 类型的变化**
+DOM2 级 HTML”模块也为 document.implementation 新增了一个方法
+
+> * createHTMLDocument(title)：创建一个完整的 HTML 文档。
+
+**Node 类型的变化**
+
+DOM3级引入了两个辅助比较节点的方法。
+> * isSameNode(node)：比较引用的节点相同。
+> * isEqualNode(node)：比较引用的节点相等。
+
+**框架的变化**
+
+```javascript
+var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+```
+
+## 样式
+
+### 访问元素的样式
+
+**DOM 样式属性和方法**
+
+float 是 JavaScript 中的保留字，因此不能用作属性名。“DOM2 级样式”规范规定样式对象上相应的属性名应该是 cssFloat ；Firefox、Safari、Opera 和 Chrome 都支持这个属性，而 IE支持的则是 styleFloat 。
+
+~~**DOM 样式属性和方法**~~
+
+> * cssText ：访问到 style 特性中的 CSS 代码。
+> * length ：给元素的 CSS 属性的数量。
+> * parentRule ：表示 CSS 信息的 CSSRule 对象。
+> * getPropertyCSSValue(propertyName) ：返回包含给定属性值的 CSSValue 对象。
+> * getPropertyPriority(propertyName) ：如果给定的属性使用了 !important 设置，则返回"important" ；否则，返回空字符串。
+> * getPropertyValue(propertyName) ：返回给定属性的字符串值。
+> * item(index) ：返回给定位置的 CSS 属性的名称。
+> * removeProperty(propertyName) ：从样式中删除给定属性。
+> * setProperty(propertyName,value,priority) ：将给定属性设置为相应的值，并加上优先权标志（ "important" 或者一个空字符串）。
+
+**计算的样式**
+
+> * getComputedStyle(elt, pseudoElt)：返回一个 CSSStyleDeclaration 对象。
+
+~~**操作样式表**~~
+
+> * disabled ：表示样式表是否被禁用的布尔值。
+> * href ：如果样式表是通过 <link> 包含的，则是样式表的 URL；否则，是 null 。
+> * media ：当前样式表支持的所有媒体类型的集合。
+> * ownerNode ：指向拥有当前样式表的节点的指针，样式表可能是在 HTML 中通过 &lt;link> 或&lt;style/> 引入的（在 XML 中可能是通过处理指令引入的）。
+> * parentStyleSheet ：在当前样式表是通过 @import 导入的情况下，这个属性是一个指向导入它的样式表的指针。
+> * title ： ownerNode 中 title 属性的值。
+> * type ：表示样式表类型的字符串。
+> * cssRules ：样式表中包含的样式规则的集合。IE 不支持这个属性，但有一个类似的 rules 属性。
+> * ownerRule ：如果样式表是通过@import 导入的，这个属性就是一个指针，指向表示导入的规则；否则，值为 null 。IE不支持这个属性。
+> * deleteRule(index) ：删除 cssRules 集合中指定位置的规则。IE 不支持这个方法，但支持一个类似的 removeRule() 方法。
+> * insertRule(rule, index) ：向 cssRules 集合中指定的位置插入 rule 字符串。IE 不支持这个方法，但支持一个类似的 addRule() 方法。
+
+**CSS 规则**
+
+CSSStyleRule 对象包含下列属性。
+
+> * cssText ：返回整条规则对应的文本。只读
+> * parentRule ：如果当前规则是导入的规则，这个属性引用的就是导入规则；否则，这个值为null 。
+> * parentStyleSheet ：当前规则所属的样式表。
+> * selectorText ：返回当前规则的选择符文本。
+> * style ：一个 CSSStyleDeclaration 对象，可以通过它设置和取得规则中特定的样式值。style.cssText可读可写。
+> * type ：表示规则类型的常量值。
+
+### 元素大小
+
+**偏移量**
+
+> * offsetHeight：元素在垂直方向上占用的空间大小，以像素计。包括元素的高度、（可见的）水平滚动条的高度、上边框高度和下边框高度。
+> * offsetWidth：元素在水平方向上占用的空间大小，以像素计。包括元素的宽度、（可见的）垂直滚动条的宽度、左边框宽度和右边框宽度。
+> * offsetLeft ：元素的左外边框至offsetParent的距离，包含元素的左内边框之间的像素距离。
+> * offsetTop ：元素的上外边框至至offsetParent的距离，包含元素的上内边框之间的像素距离。
+
+**客户区大小**
+
+> * clientWidth：元素内容区宽度加上左右内边距宽度。
+> * clientHeight：元素内容区高度加上上下内边距高度。
+
+**滚动大小**
+
+> * scrollWidth ：在没有滚动条的情况下，元素内容的总宽度。
+> * scrollHeight ：在没有滚动条的情况下，元素内容的总高度。
+> * scrollLeft ：被隐藏在内容区域左侧的像素数。
+> * scrollTop ：被隐藏在内容区域上方的像素数。
+
+**确定元素大小**
+
+> * getBoundingClientRect()：返回会一个矩形对象，包含 4 个属性： left 、 top 、right 和 bottom 。
+
+属性|作用|兼容性
+:-|:-|:-
+screenLeft|窗口相对于屏幕左边的位置|IE、Safari、Opera 和 Chrome
+screenTop|窗口相对于屏幕上边的位置|IE、Safari、Opera 和 Chrome
+screenX|窗口相对于屏幕左边的位置|Firefox、Safari、Chrome
+screenY|窗口相对于屏幕上边的位置|Firefox、Safari、Chrome
+innerWidth|页面视图区的宽度|IE9+
+innerHeight|页面视图区的高度|IE9+
+outerWidth|浏览器窗口本身的宽度|IE9+
+outerHeight|浏览器窗口本身的高度|IE9+
+document.documentElement.clientWidth|页面视口的宽度|IE6+标准模式
+document.documentElement.clientHeight|页面视口的高度|IE6+标准模式
+document.body.clientWidth|页面视口的宽度|混杂模式
+document.body.clientHeight|页面视口的高度|混杂模式
+offsetWidth|元素在水平方向上占用的空间大小，以像素计|好
+offsetHeight|元素在垂直方向上占用的空间大小，以像素计|好
+offsetLeft|元素的左外边框至offsetParent的距离|好
+offsetTop|元素的上外边框至至offsetParent的距离|好
+clientWidth|元素内容区宽度加上左右内边距宽度|好
+clientHeight|元素内容区高度加上上下内边距高度|好
+scrollWidth|在没有滚动条的情况下，元素内容的总宽度|好
+scrollHeight|在没有滚动条的情况下，元素内容的总高度。|好
+scrollLeft|被隐藏在内容区域左侧的像素数|好
+scrollTop|被隐藏在内容区域上方的像素数|好
+
+## 遍历
+
+### ~~NodeIterator~~
+
+> * document.createNodeIterator(root, whatToShow, filter, entityReferenceExpansion)：
+    > * root：想要作为搜索起点的树中的节点。
+    > * whatToShow：表示要访问哪些节点的数字代码。
+    > * filter：是一个 NodeFilter 对象，或者一个表示应该接受还是拒绝某种特定节点的函数。
+    > * entityReferenceExpansion：布尔值，表示是否要扩展实体引用。
+
+NodeIterator 类型的两个主要方法是 nextNode() 和 previousNode() 
+
+> * nextNode()：向前前进一步。
+> * previousNode()：向后后退一步。
+
+### ~~TreeWalker~~
+
+> * parentNode()：遍历到当前节点的父节点；
+> * firstChild()：遍历到当前节点的第一个子节点；
+> * lastChild()：遍历到当前节点的最后一个子节点；
+> * nextSibling()：遍历到当前节点的下一个同辈节点；
+> * previousSibling()：遍历到当前节点的上一个同辈节点。
+
+## 范围
+
+### DOM中的范围
+
+> * document.createRange()：创建 DOM 范围。
+
+实例拥有很多属性和方法。
+
+> * startContainer：包含范围起点的节点（即选区中第一个节点的父节点）。
+> * startOffset：范围在 startContainer 中起点的偏移量。如果 startContainer 是文本节点、注释节点或 CDATA 节点，那么 startOffset 就是范围起点之前跳过的字符数量。否则，startOffset 就是范围中第一个子节点的索引。
+> * endContainer：包含范围终点的节点（即选区中最后一个节点的父节点）。
+> * endOffset：范围在 endContainer 中终点的偏移量（与 startOffset 遵循相同的取值规则）。
+> * commonAncestorContainer：startContainer 和 endContainer 共同的祖先节点在文档树中位置最深的那个。
+
+**用 DOM 范围实现简单选择**
+
+> * range.selectNode(node)： 选择整个节点，包括其子节点；
+> * range.selectNodeContents(node)： 只选择节点的子节点。
+
+更精细地控制将哪些节点包含在范围中，还可以使用下列方法。自动会设置container和offset。
+> * range.setStartBefore(refNode) ：将范围的起点设置在 refNode 之前，因此 refNode 也就是范围选区中的第一个子节点。
+> * range.setStartAfter(refNode) ：将范围的起点设置在 refNode 之后，因此 refNode 也就不在范围之内了，其下一个同辈节点才是范围选区中的第一个子节点。
+> * range.setEndBefore(refNode) ：将范围的终点设置在 refNode 之前，因此 refNode 也就不在范围之内了，其上一个同辈节点才是范围选区中的最后一个子节点。
+> * range.setEndAfter(refNode) ：将范围的终点设置在 refNode 之后，因此 refNode 也就是范围选区中的最后一个子节点。
+
+**用 DOM 范围实现复杂选择**
+
+> * range.setStart(startContainer, startOffset)：参照节点会变成 startContainer ，而偏移量值会变成startOffset 。
+> * range.setEnd(endContainer, endOffset)：参照节点会变成 endContainer ，而偏移量值会变成 endOffset 。
+
+**操作 DOM 范围中的内容**
+
+> * range.deleteContents()：从文档中删除范围所包含的内容。
+
+**插入 DOM 范围中的内容**
+
+> * range.insertNode(node)：向范围选区的开始处插入一个节点。
+
+**复制 DOM 范围**
+
+> * range.cloneRange()：复制范围。
+
+**清理 DOM 范围**
+
+> * range.detach()：分离范围。
+
+### IE8 及更早版本中的范围
+
+> * document.body.createTextRange()：创建文本范围。
+
+**用 IE 范围实现简单的选择**
+
+> * range.findText(string, boolean)：找到第一次出现的给定文本，并将范围移过来以环绕该文本。如果没有找到文本，这个方法返回 false ；否则返回true 。第二个参数为负值表示应该从当前位置向后搜索，而正值表示应该从当前位置向前搜索。
+> * moveToElementText(node)：选择该元素的所有文本,包括 HTML 标签。
+
+**使用 IE 范围实现复杂的选择**
+
+> * range.move(unit, unitNumber)：首先会折叠当前范围（让起点和终点相等），然后再将范围移动指定的单位数量。必须再使用 moveStart() 或 moveEnd() 创建新的选区。
+> * range.moveStart(unit, unitNumber)：移动范围的起点。
+> * range.moveEnd(unit, unitNumber)：移动范围的终点。
+> * range.expand(unit, unitNumber)：将任何部分选择的文本全部选中。
+
+unit：移动单位。移动的幅度由单位数量指定。
+> * "character" ：逐个字符地移动。
+> * "word" ：逐个单词（一系列非空格字符）地移动。
+> * "sentence" ：逐个句子（一系列以句号、问号或叹号结尾的字符）地移动。
+> * "textedit" ：移动到当前范围选区的开始或结束位置。
+
+**操作 IE 范围中的内容**
+
+> * range.pasteHTML()：向范围中插入 HTML 代码。
+
+**复制 IE 范围**
+
+> * range.duplicate()：复制文本范围。
+
+# 第13章 事件
+
+## 事件流
+
+事件流描述的是从页面中接收事件的顺序。
+
+### 事件冒泡
+
+事件冒泡（event bubbling），即事件开始时由最具体的元素（文档中嵌套层次最深
+的那个节点）接收，然后逐级向上传播到较为不具体的节点（文档）。
+
+### 事件捕获
+
+不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。
+
+### DOM事件流
+
+事件流包括三个阶段：事件捕获阶段、处于目标阶段和事件冒泡阶段。
+
+## 事件处理程序
+
+### DOM2 级事件处理程序
+
+> * addEventListener(event, fn, capture)：布尔值参数如果是 true ，表示在捕获阶段调用事件处理程序；如果是 false ，表示在冒泡阶段调用事件处理程序。
+> * removeEventListener(event, fn, capture)：移除事件。
+
+### IE事件处理程序
+
+> * attachEvent(event, fn)：添加一个事件处理程序。第一个参数"on"+事件名。
+> * detachEvent(event, fn)：移除一个事件处理程序。
+
+## 事件对象
+
+### DOM中的事件对象
+
+可用的属性和方法。
+属性/方法|类 型|读/写|说 明
+:-|:-|:-|:-
+bubbles|Boolean|只读|表明事件是否冒泡
+cancelable|Boolean|只读|表明是否可以取消事件的默认行为
+currentTarget|Element|只读|其事件处理程序当前正在处理事件的那个元素
+defaultPrevented|Boolean|只读|为 true 表 示 已 经 调 用 了 preventDefault()
+detail|Integer|只读|与事件相关的细节信息
+detail|Integer|只读|与事件相关的细节信息
+eventPhase|Integer|只读|调用事件处理程序的阶段：1表示捕获阶段，2表示“处于目标”，3表示冒泡阶段
+preventDefault()|Function|只读|取消事件的默认行为。如果 cancelable 是true ，则可以使用这个方法
+stopImmediatePropagation()|Function|只读|取消事件的进一步捕获或冒泡，同时阻止任何事件处理程序被调用
+stopPropagation()|Function|只读|取消事件的进一步捕获或冒泡。如果 bubbles为 true ，则可以使用这个方法
+target|Element|只读|事件的目标
+trusted|Boolean|只读|为 true 表示事件是浏览器生成的。
+type|String|只读|被触发的事件的类型
+view|AbstractView|只读|与事件关联的抽象视图。等同于发生事件的window 对象
+
+### IE中的事件对象
+
+可用的属性和方法。
+属性/方法|类 型|读/写|说 明
+:-|:-|:-|:-
+cancelBubble|Boolean|只读|默认值为 false ，但将其设置为 true 就可以取消事件冒泡（与DOM中的 stopPropagation() 方法的作用相同）
+returnValue|Boolean|只读|默认值为 true ，但将其设置为 false 就可以取消事件的默认行为（与DOM中的 preventDefault() 方法的作用相同）
+srcElement|Element|只读|事件的目标（与DOM中的 target 属性相同）
+type|String|只读|被触发的事件的类型
+
+## 事件类型
+
+### UI事件
+
+> * load ：当页面完全加载后在 window 上面触发，当所有框架都加载完毕时在框架集上面触发，当图像加载完毕时在 <img> 元素上面触发，或者当嵌入的内容加载完毕时在 <object> 元素上面触发。
+> * unload ：当页面完全卸载后在 window 上面触发，当所有框架都卸载后在框架集上面触发，或者当嵌入的内容卸载完毕后在 <object> 元素上面触发。
+> * abort ：在用户停止下载过程时，如果嵌入的内容没有加载完，则在 <object> 元素上面触发。
+> * error ：当发生 JavaScript 错误时在 window 上面触发，当无法加载图像时在 <img> 元素上面触发，当无法加载嵌入内容时在 <object> 元素上面触发，或者当有一或多个框架无法加载时在框架集上面触发。第 17 章将继续讨论这个事件。
+> * select ：当用户选择文本框（ <input> 或 <texterea> ）中的一或多个字符时触发。
+> * resize ：当窗口或框架的大小变化时在 window 或框架上面触发。
+> * scroll ：当用户滚动带滚动条的元素中的内容时，在该元素上面触发。 <body> 元素中包含所加载页面的滚动条。
+
+### 焦点事件
+
+> * blur ：在元素失去焦点时触发。这个事件不会冒泡；所有浏览器都支持它。
+> * DOMFocusIn ：在元素获得焦点时触发。这个事件与 HTML 事件 focus 等价，但它冒泡。只有Opera 支持这个事件。DOM3 级事件废弃了 DOMFocusIn ，选择了 focusin 。
+> * DOMFocusOut ：在元素失去焦点时触发。这个事件是 HTML 事件 blur 的通用版本。只有 Opera支持这个事件。DOM3 级事件废弃了 DOMFocusOut ，选择了 focusout 。
+> * focus ：在元素获得焦点时触发。这个事件不会冒泡；所有浏览器都支持它。
+> * focusin ：在元素获得焦点时触发。这个事件与 HTML 事件 focus 等价，但它冒泡。
+> * focusout ：在元素失去焦点时触发。这个事件是 HTML 事件 blur 的通用版本。
+
+当焦点从页面中的一个元素移动到另一个元素，会依次触发下列事件：
+(1) focusout 在失去焦点的元素上触发；
+(2)  focusin 在获得焦点的元素上触发；
+(3)  blur 在失去焦点的元素上触发；
+(4)  DOMFocusOut 在失去焦点的元素上触发；
+(5)  focus 在获得焦点的元素上触发；
+(6)  DOMFocusIn 在获得焦点的元素上触发
+
+### 鼠标与滚轮事件
+
+> * click ：在用户单击主鼠标按钮（一般是左边的按钮）或者按下回车键时触发。
+> * dblclick ：在用户双击主鼠标按钮（一般是左边的按钮）时触发。
+> * mousedown ：在用户按下了任意鼠标按钮时触发。
+> * mouseenter ：在鼠标光标从元素外部首次移动到元素范围之内时触发。
+> * mouseleave ：在位于元素上方的鼠标光标移动到元素范围之外时触发。
+> * mousemove ：当鼠标指针在元素内部移动时重复地触发。
+> * mouseout ：在鼠标指针位于一个元素上方，然后用户将其移入另一个元素时触发。又移入的另一个元素可能位于前一个元素的外部，也可能是这个元素的子元素。
+> * mouseover ：在鼠标指针位于一个元素外部，然后用户将其首次移入另一个元素边界之内时触发。
+> * mouseup ：在用户释放鼠标按钮时触发。
+
+触发的顺序。
+(1) mousedown
+(2)  mouseup
+(3)  click
+(4)  mousedown
+(5)  mouseup
+(6)  click
+(7)  dblclick
+
+**客户区坐标位置**
+
+
+属性|作用|兼容性
+:-|:-|:-
+window.screenLeft|窗口相对于屏幕左边的位置|IE、Safari、Opera 和 Chrome
+window.screenTop|窗口相对于屏幕上边的位置|IE、Safari、Opera 和 Chrome
+window.screenX|窗口相对于屏幕左边的位置|Firefox、Safari、Chrome
+window.screenY|窗口相对于屏幕上边的位置|Firefox、Safari、Chrome
+window.innerWidth|页面视图区的宽度|IE9+
+window.innerHeight|页面视图区的高度|IE9+
+window.outerWidth|浏览器窗口本身的宽度|IE9+
+window.outerHeight|浏览器窗口本身的高度|IE9+
+document.documentElement.clientWidth|页面视口的宽度|IE6+标准模式
+document.documentElement.clientHeight|页面视口的高度|IE6+标准模式
+document.body.clientWidth|页面视口的宽度|混杂模式
+document.body.clientHeight|页面视口的高度|混杂模式
+node.offsetWidth|元素在水平方向上占用的空间大小，以像素计|好
+node.offsetHeight|元素在垂直方向上占用的空间大小，以像素计|好
+node.offsetLeft|元素的左外边框至offsetParent的距离|好
+node.offsetTop|元素的上外边框至至offsetParent的距离|好
+node.clientWidth|元素内容区宽度加上左右内边距宽度|好
+node.clientHeight|元素内容区高度加上上下内边距高度|好
+node.scrollWidth|在没有滚动条的情况下，元素内容的总宽度|好
+node.scrollHeight|在没有滚动条的情况下，元素内容的总高度。|好
+node.scrollLeft|被隐藏在内容区域左侧的像素数|好
+node.scrollTop|被隐藏在内容区域上方的像素数|好
+
+
 # 第15章 使用Canvas绘图
 检测getContext方法
 
