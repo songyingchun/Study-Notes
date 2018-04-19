@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../util.js"></script>
+    <script>
+        setTimeout(function () {
+            history.pushState({name:"Nicholas"}, "Nicholas' page", "nicholas.html");
+            console.log("ok");
+
+            history.replaceState({name:"Nicholas2"}, "Nicholas' page", "nicholas2.html");
+        }, 5000);
+        EventUtil.addHandler(window, "popstate", function (event) {
+            var state = event.state;
+            if (state) { //第一个页面加载时 state 为空
+                console.log(state.toString());
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .src {
+            width: 300px;
+            height: 300px;
+            background: green;
+        }
+
+        .target {
+            width: 300px;
+            height: 300px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="src">
+
+    </div>
+    <div id="drop">
+        121231
+    </div>
+    <div class="target" id="droptarget">
+
+    </div>
+    <script src="../util.js"></script>
+    <script>
+        var drop = document.getElementById("drop");
+        var droptarget = document.getElementById("droptarget");
+
+        EventUtil.addHandler(drop, "dragstart", function (event) {
+            // EventUtil.preventDefault(event);
+            console.log("dragstart");
+        });
+
+        EventUtil.addHandler(drop, "dragend", function (event) {
+            EventUtil.preventDefault(event);
+            console.log("dragend");
+        });
+
+        EventUtil.addHandler(droptarget, "dragover", function (event) {
+            EventUtil.preventDefault(event);
+            console.log("dragover");
+        });
+        EventUtil.addHandler(droptarget, "dragenter", function (event) {
+            EventUtil.preventDefault(event);
+            console.log("dragenter");
+        });
+
+        EventUtil.addHandler(droptarget, "drop", function (event) {
+            EventUtil.preventDefault(event);
+            console.log("drop");
+        });
+
+        // EventUtil.addHandler(droptarget, "dropleave", function (event) {
+        //     EventUtil.preventDefault(event);
+        //     console.log("dropleave");
+        // });
+    </script>
+</body>
+
+</html>
