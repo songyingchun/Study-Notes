@@ -647,3 +647,188 @@ function createXHR() {
 		throw new Error("No XHR object available.");
 	}
 }
+
+// var xhr = createXHR();
+// xhr.onreadystatechange = function () {
+// 	if (xhr.readyState == 4) {
+// 		if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+// 			alert(xhr.responseText);
+// 		} else {
+// 			alert("Request was unsuccessful: " + xhr.status);
+// 		}
+// 	}
+// };
+// xhr.open("get", "example.txt", true);
+// xhr.send(null);
+
+function createCORSRequest(method, url) {
+	var xhr = new XMLHttpRequest();
+	if ("withCredentials" in xhr) {
+		xhr.open(method, url, true);
+	} else if (typeof XDomainRequest != "undefined") {
+		vxhr = new XDomainRequest();
+		xhr.open(method, url);
+	} else {
+		xhr = null;
+	}
+	return xhr;
+}
+
+function createStreamingClient(url, progress, finished) {
+	var xhr = new XMLHttpRequest(),
+		received = 0;
+	xhr.open("get", url, true);
+	xhr.onreadystatechange = function () {
+		var result;
+		if (xhr.readyState == 3) {
+			//只取得最新数据并调整计数器
+			result = xhr.responseText.substring(received);
+			received += result.length;
+			//调用 progress 回调函数
+			progress(result);
+		} else if (xhr.readyState == 4) {
+			finished(xhr.responseText);
+		}
+	};
+	xhr.send(null);
+	return xhr;
+}
+
+var CookieUtil = {
+	get: function (name) {
+		var cookieName = encodeURIComponent(name) + "=",
+			cookieStart = document.cookie.indexOf(cookieName),
+			cookieValue = null;
+		if (cookieStart > -1) {
+			var cookieEnd = document.cookie.indexOf(";", cookieStart);
+			if (cookieEnd == -1) {
+				cookieEnd = document.cookie.length;
+			}
+			cookieValue = decodeURIComponent(document.cookie.substring(cookieStart
+				+ cookieName.length, cookieEnd));
+		}
+		return cookieValue;
+	},
+	set: function (name, value, expires, path, domain, secure) {
+		var cookieText = encodeURIComponent(name) + "=" +
+			encodeURIComponent(value);
+		if (expires instanceof Date) {
+			cookieText += "; expires=" + expires.toGMTString();
+		}
+		if (path) {
+			cookieText += "; path=" + path;
+		}
+		if (domain) {
+			cookieText += "; domain=" + domain;
+		}
+		if (secure) {
+			cookieText += "; secure";
+		}
+		document.cookie = cookieText;
+	},
+	unset: function (name, path, domain, secure) {
+		this.set(name, "", new Date(0), path, domain, secure);
+	}
+};
+
+var SubCookieUtil = {
+	get: function (name, subName) {
+		var subCookies = this.getAll(name);
+		if (subCookies) {
+			return subCookies[subName];
+		} else {
+			return null;
+		}
+	},
+	getAll: function (name) {
+		var cookieName = encodeURIComponent(name) + "=",
+			cookieStart = document.cookie.indexOf(cookieName),
+			cookieValue = null,
+			cookieEnd,
+			subCookies,
+			i,
+			parts,
+			result = {};
+		if (cookieStart > -1) {
+			cookieEnd = document.cookie.indexOf(";", cookieStart);
+			if (cookieEnd == -1) {
+				cookieEnd = document.cookie.length;
+			}
+			cookieValue = document.cookie.substring(cookieStart +
+				cookieName.length, cookieEnd);
+			if (cookieValue.length > 0) {
+				subCookies = cookieValue.split("&");
+				for (i = 0, len = subCookies.length; i < len; i++) {
+					parts = subCookies[i].split("=");
+					result[decodeURIComponent(parts[0])] =
+						decodeURIComponent(parts[1]);
+				}
+				return result;
+			}
+		}
+		return null;
+	},
+	set: function (name, subName, value, expires, path, domain, secure) {
+		var subcookies = this.getAll(name) || {};
+		subcookies[subName] = value;
+		this.setAll(name, subcookies, expires, path, domain, secure);
+	},
+	setAll: function (name, subcookies, expires, path, domain, secure) {
+		var cookieText = encodeURIComponent(name) + "=",
+			subcookieParts = new Array(),
+			subName;
+		for (subName in subcookies) {
+			if (subName.length > 0 && subcookies.hasOwnProperty(subName)) {
+				subcookieParts.push(encodeURIComponent(subName) + "=" +
+					encodeURIComponent(subcookies[subName]));
+			}
+		}
+		if (cookieParts.length > 0) {
+			cookieText += subcookieParts.join("&");
+			if (expires instanceof Date) {
+				cookieText += "; expires=" + expires.toGMTString();
+			}
+			if (path) {
+				cookieText += "; path=" + path;
+			}
+			if (domain) {
+				cookieText += "; domain=" + domain;
+			}
+			if (secure) {
+				cookieText += "; secure";
+			}
+		} else {
+			cookieText += "; expires=" + (new Date(0)).toGMTString();
+		}
+		document.cookie = cookieText;
+	},
+	unset: function (name, subName, path, domain, secure) {
+		var subcookies = this.getAll(name);
+		if (subcookies) {
+			delete subcookies[subName];
+			this.setAll(name, subcookies, null, path, domain, secure);
+		}
+	},
+	unsetAll: function (name, path, domain, secure) {
+		this.setAll(name, null, new Date(0), path, domain, secure);
+	}
+};
+
+(function () {
+	function draw(timestamp) {
+		//计算两次重绘的时间间隔
+		var drawStart = (timestamp || Date.now()),
+			diff = drawStart - startTime;
+		//使用 diff 确定下一步的绘制时间
+		//把 startTime 重写为这一次的绘制时间
+		startTime = drawStart;
+		//重绘 UI
+		requestAnimationFrame(draw);
+	}
+	var requestAnimationFrame = window.requestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||
+		window.msRequestAnimationFrame,
+		startTime = window.mozAnimationStartTime || Date.now();
+	requestAnimationFrame(draw);
+})();

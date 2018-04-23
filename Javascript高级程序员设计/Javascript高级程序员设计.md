@@ -3936,5 +3936,632 @@ function createXHR() {
 
 ### XHR 的用法
 
-> * open()：要发送的请求的类型（ "get" 、 "post" 等）、请求的 URL 和表示是否异步发送请求的布尔值。open() 方法并不会真正发送请求，而只是启动一个请求以备发送。
-> * send()：
+> * open(method, url, async)：规定请求的类型、URL 以及是否异步处理请求。
+    > * method：请求的类型；GET 或 POST。
+    > * url：文件在服务器上的位置。
+    > * async：true(异步)或false(同步)。
+> * send(string)：将请求发送到服务器。如果不需要通过请求主体发送数据，则必须传入 null ，因为这个参数对有些浏览器来说是必需的。
+    > * string：仅用于 POST 请求。
+
+然而，在以下情况中，请使用 POST 请求：
+> * 无法使用缓存文件（更新服务器上的文件或数据库）。
+> * 向服务器发送大量数据（POST 没有数据量限制）。
+> * 发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠。
+
+在收到响应后，响应的数据会自动填充 XHR 对象的属性，相关的属性简介如下。
+> * responseText：作为响应主体被返回的文本。
+> * responseXML：如果响应的内容类型是 "text/xml" 或 "application/xml" ，这个属性中将保
+存包含着响应数据的 XML DOM 文档。
+> * status ：响应的 HTTP 状态。
+> * statusText ：HTTP 状态的说明。
+
+检测 XHR 对象的 readyState 属性，该属性表示请求/响应过程的当前活动阶段。
+> * 0 ：未初始化。尚未调用 open() 方法。
+> * 1 ：启动。已经调用 open() 方法，但尚未调用 send() 方法。
+> * 2 ：发送。已经调用 send() 方法，但尚未接收到响应。
+> * 3 ：接收。已经接收到部分响应数据。
+> * 4 ：完成。已经接收到全部响应数据，而且已经可以在客户端使用了。
+
+在接收到响应之前还可以调用 abort() 方法来取消异步请求。
+> * abort()：取消异步请求。
+
+### HTTP头部信息
+默认情况下，在发送 XHR 请求的同时，还会发送下列头部信息。
+> * Accept ：浏览器能够处理的内容类型。
+> * Accept-Charset ：浏览器能够显示的字符集。
+> * Accept-Encoding ：浏览器能够处理的压缩编码。
+> * Accept-Language ：浏览器当前设置的语言。
+> * Connection ：浏览器与服务器之间连接的类型。
+> * Cookie ：当前页面设置的任何 Cookie。
+> * Host ：发出请求的页面所在的域 。
+> * Referer ：发出请求的页面的 URI。注意，HTTP 规范将这个头部字段拼写错了，而为保证与规
+范一致，也只能将错就错了。（这个英文单词的正确拼法应该是 referrer。）
+> * User-Agent ：浏览器的用户代理字符串。
+
+> * xhr.setRequestHeader(header, value)：方法可以设置自定义的请求头部信息。这个方法接受两个参数：头部字段。必须在调用 open() 方法之后且调用 send() 方法之前调用。
+    > * header：规定头的名称。
+    > * value：规定头的值。
+> * xhr.getResponseHeader(header)：取得相应的响应头部信息。
+    > * header：规定头的名称。
+> * xhr.getAllResponseHeaders()：取得一个包含所有头部信息的长字符串。
+
+### GET 请求
+询字符串中每个参数的名称和值都必须使用 encodeURIComponent() 进行编码，然后才能放到 URL 的末尾；而且所有名-值对儿都必须由和号（&）分隔。
+
+## XMLHttpRequest 2 级
+
+### FormData
+FormData 为序列化表单以及创建与表单格式相同的数据（用于通过 XHR 传输）提供了便利。
+
+```javascript
+var data = new FormData();
+data.append("name", "Nicholas");
+```
+
+> * append(key, value)：
+    > * key：表单字段的名字。
+    > * value：表单字段的值。
+
+```javascript
+var form = document.getElementById("user-info");
+xhr.send(new FormData(form));
+```
+
+### 超时设定
+
+```javascript
+xhr.timeout = 1000; // 将超时设置为 1  秒钟（仅适用于 IE8+ ）
+xhr.ontimeout = function(){
+    alert("Request did not return in a second.");
+};
+```
+
+### overrideMimeType
+
+> * xhr.overrideMimeType(mineType)：用于重写 XHR 响应的 MIME 类型。
+
+## 进度事件
+
+> * loadstart ：在接收到响应数据的第一个字节时触发。
+> * progress ：在接收响应期间持续不断地触发。
+> * error ：在请求发生错误时触发。
+> * abort ：在因为调用 abort() 方法而终止连接时触发。
+> * load ：在接收到完整的响应数据时触发。
+> * loadend ：在通信完成或者触发 error 、 abort 或 load 事件后触发。 
+
+每个请求都从触发 loadstart 事件开始，接下来是一或多个 progress 事件，然后触发 error 、sabort 或 load 事件中的一个，最后以触发 loadend 事件结束。
+
+### load 事件
+
+> * xhr.onload:  onload 事件处理程序会接收到一个 event 对象，其 target 属性就指向 XHR 对象实例，因而可以访问到 XHR 对象的所有方法和属性。
+
+```javascript
+var xhr = createXHR();
+xhr.onload = function(){
+    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+        alert(xhr.responseText);
+    } else {
+        alert("Request was unsuccessful: " + xhr.status);
+    }
+};
+xhr.open("get", "altevents.php", true);
+xhr.send(null);
+```
+
+### progress 事件
+
+> * xhr.onprogress：浏览器接收新数据期间周期性地触发。 onprogress 事件处理程序会接收到一个event 对象，其 target 属性是 XHR 对象，但包含着三个额外的属性：
+    > * lengthComputable：进度信息是否可用的布尔值
+    > * position：已经接收的字节数
+    > * totalSize：根据Content-Length 响应头部确定的预期字节数
+
+```javascript
+xhr.onprogress = function(event){
+    var divStatus = document.getElementById("status");
+    if (event.lengthComputable){
+        divStatus.innerHTML = "Received " + event.position + " of " +
+        event.totalSize +" bytes";
+    }
+};
+```
+
+## 跨源资源共享
+
+Access-Control-Allow-Origin: http://www.nczonline.net
+
+### IE对CORS的实现
+
+这个对象与 XHR 类似，但能实现安全可靠的跨域通信。XDR 对象的安全机制部分实现了 W3C 的 CORS 规范。
+
+> * cookie 不会随请求发送，也不会随响应返回。
+> * 只能设置请求头部信息中的 Content-Type 字段。
+> * 不能访问响应头部信息。
+> * 只支持 GET 和 POST 请求。
+
+### 其他浏览器对CORS的实现
+
+通过跨域 XHR 对象可以访问 status 和 statusText 属性，而且还支持同步请求。跨域 XHR 对象也有一些限制，但为了安全这些限制是必需的。要请求位于另一个域中的资源，使用标准的 XHR对象并在 open() 方法中传入绝对 URL即可。
+
+> * 不能使用 setRequestHeader() 设置自定义头部。
+> * 不能发送和接收 cookie。
+> * 调用 getAllResponseHeaders() 方法总会返回空字符串。
+
+### Preflighted Reqeusts
+
+CORS 通过一种叫做 Preflighted Requests 的透明服务器验证机制支持开发人员使用自定义的头部、GET 或 POST之外的方法，以及不同类型的主体内容。在使用下列高级选项来发送请求时，就会向服务器发送一个 Preflight 请求。这种请求使用 OPTIONS 方法，发送下列头部。
+
+> * Origin ：与简单的请求相同。
+> * Access-Control-Request-Method ：请求自身使用的方法。
+> * Access-Control-Request-Headers ：（可选）自定义的头部信息，多个头部以逗号分隔。
+
+### 带凭据的请求
+withCredentials 属性设置为 true，以指定某个请求应该发送凭据。
+
+```javascript
+Access-Control-Allow-Credentials: true
+```
+
+### 跨浏览器的CORS
+
+```javascript
+function createCORSRequest(method, url) {
+	var xhr = new XMLHttpRequest();
+	if ("withCredentials" in xhr) {
+		xhr.open(method, url, true);
+	} else if (typeof XDomainRequest != "undefined") {
+		vxhr = new XDomainRequest();
+		xhr.open(method, url);
+	} else {
+		xhr = null;
+	}
+	return xhr;
+}
+```
+
+这两个对象共同的属性/方法如下。
+
+> * abort() ：用于停止正在进行的请求。
+> * onerror ：用于替代 onreadystatechange 检测错误。
+> * onload ：用于替代 onreadystatechange 检测成功。
+> * responseText ：用于取得响应内容。
+> * send() ：用于发送请求。
+
+## 其他跨域技术
+
+### 图像Ping
+
+```javascript
+var img = new Image();
+img.onload = img.onerror = function(){
+    alert("Done!");
+};
+img.src = "http://www.example.com/test?name=Nicholas";
+```
+
+图像 Ping 最常用于跟踪用户点击页面或动态广告曝光次数。图像 Ping 有两个主要的缺点，一是只
+能发送 GET 请求，二是无法访问服务器的响应文本。因此，图像 Ping 只能用于浏览器与服务器间的单
+向通信。
+
+### JSONP
+
+JSONP 是 JSON with padding（填充式 JSON 或参数式 JSON）的简写。
+
+优点：
+> * 与图像 Ping 相比，它的优点在于能够直接访问响应文本，支持在浏览器与服务器之间双向通信。
+
+缺点：
+> * 如果其他域不安全，很可能会在响应中夹带一些恶意代码，而此时除了完全放弃 JSONP 调用之外，没有办法追究。
+> * 其次，要确定 JSONP 请求是否失败并不容易。
+
+### Comet
+
+Ajax 是一种从页面向服务器请求数据的技术，而 Comet 则是一种服务器向页面推送数据的技术。
+
+短轮询：浏览器定时向服务器发送请求，看有没有更新的数据。短轮询是服务器立即发送响应，无论数据是否有效。
+
+有两种实现 Comet 的方式：长轮询和流。
+> * 长轮询：页面发起一个到服务器的请求，然后服务器一直保持连接打开，直到有数据可发送。发送完数据之后，浏览器关闭连接，随即又发起一个到服务器的新请求。等待发送响应。轮询的优势是所有浏览器都支持，因为使用 XHR 对象和 setTimeout() 就能实现。
+> * HTTP 流：具体来说，就是浏览器向服务器发送一个请求，而服务器保持连接打开，然后周
+期性地向浏览器发送数据。
+
+```javascript
+function createStreamingClient(url, progress, finished) {
+	var xhr = new XMLHttpRequest(),
+		received = 0;
+	xhr.open("get", url, true);
+	xhr.onreadystatechange = function () {
+		var result;
+		if (xhr.readyState == 3) {
+			//只取得最新数据并调整计数器
+			result = xhr.responseText.substring(received);
+			received += result.length;
+			//调用 progress 回调函数
+			progress(result);
+		} else if (xhr.readyState == 4) {
+			finished(xhr.responseText);
+		}
+	};
+	xhr.send(null);
+	return xhr;
+}
+```
+
+### 服务器发送事件
+SSE（Server-Sent Events，服务器发送事件）是围绕只读 Comet 交互推出的 API 或者模式。SSE API
+用于创建到服务器的单向连接，服务器通过这个连接可以发送任意数量的数据。服务器响应的 MIME类型必须是 text/event-stream 。
+
+**SSE API**
+```javascript
+var source = new EventSource("myevents.php");
+```
+
+EventSource 的实例有一个 readyState 属性，值为 0 表示正连接到服务器，值为 1 表示打开了连接，值为 2 表示关闭了连接。还有以下三个事件。
+> * open ：在建立连接时触发。
+> * message ：在从服务器接收到新事件时触发。
+> * error ：在无法建立连接时触发。
+
+**事件流**
+所谓的服务器事件会通过一个持久的 HTTP 响应发送，这个响应的 MIME 类型为 text/event-stream。响应的格式是纯文本，最简单的情况是每个数据项都带有前缀 data:。
+
+### Web Sockets
+Web Sockets的目标是在一个单独的持久连接上提供全双工、双向通信。在取得服务器响应后，建立的连接会使用 HTTP 升级从 HTTP 协议交换为 WebSocket 协议。
+
+**Web Sockets API**
+```javascript
+var socket = new WebSocket("ws://www.example.com/server.php");
+```
+
+WebSocket 也有一个表示当前状态的 readyState 属性。
+> * WebSocket.OPENING  (0)：正在建立连接。
+> * WebSocket.OPEN  (1)：已经建立连接。
+> * WebSocket.CLOSING  (2)：正在关闭连接。
+> * WebSocket.CLOSE  (3)：已经关闭连接。
+
+WebSocket 没有 readystatechange 事件；不过，它有其他事件，对应着不同的状态。 readyState的值永远从 0 开始。
+
+> * socket.close()：调用了 close() 之后， readyState 的值立即变为 2。
+
+**发送和接收数据**
+因为 Web Sockets只能通过连接发送纯文本数据，所以对于复杂的数据结构，在通过连接发送之前，必须进行序列化。
+
+```javascript
+// 发送数据
+var socket = new WebSocket("ws://www.example.com/server.php");
+socket.send("Hello world!");
+
+// 接收数据
+socket.onmessage = function(event){
+    var data = event.data;
+    // 处理数据
+};
+```
+
+**其他事件**
+
+> * open ：在成功建立连接时触发。
+> * error ：在发生错误时触发，连接不能持续。
+> * close ：在连接关闭时触发。
+
+WebSocket 对象不支持 DOM 2 级事件侦听器，因此必须使用 DOM 0 级语法分别定义每个事件处理程序。
+
+### SSE与Web Sockets
+在考虑是使用 SSE 还是使用 Web Sockets 时，可以考虑如下几个因素。
+> * 你是否有自由度建立和维护 Web Sockets服务器？因为 Web Socket 协议不同于 HTTP，所以现有服务器不能用于 Web Socket 通信。SSE 倒是通过常规 HTTP 通信，因此现有服务器就可以满足需求。
+> * 到底需不需要双向通信。如果用例只需读取服务器数据（如比赛成绩），那么 SSE 比较容易实现。如果用例必须双向通信（如聊天室），那么 Web Sockets 显然更好。
+
+## 小结
+
+Ajax 是无需刷新页面就能够从服务器取得数据的一种方法。同源策略是对 XHR 的一个主要约束，它为通信设置了“相同的域、相同的端口、相同的协议”这一限制。这个解决方案叫做 CORS（Cross-Origin Resource Sharing，跨源资源共享），IE8 通过 XDomainRequest 对象支持CORS，其他浏览器通过 XHR 对象原生支持 CORS。图像 Ping 和 JSONP 是另外两种跨域通信的技术，但不如 CORS 稳妥。
+
+Comet 是对 Ajax 的进一步扩展，让服务器几乎能够实时地向客户端推送数据。实现 Comet 的手段主要有两个：长轮询和 HTTP 流。所有浏览器都支持长轮询，而只有部分浏览器原生支持 HTTP 流。SSE（Server-Sent Events，服务器发送事件）是一种实现 Comet 交互的浏览器 API，既支持长轮询，也支持HTTP 流。
+
+Web Sockets是一种与服务器进行全双工、双向通信的信道。
+
+# 第22章 高级技巧
+
+## 高级函数
+
+### 安全的类型检测
+
+```javascript
+function Person(name, age, job){
+    if (this instanceof Person){
+        this.name = name;
+        this.age = age;
+        this.job = job;
+    } else {
+        return new Person(name, age, job);
+    }
+}
+```
+
+### 惰性载入函数
+
+两种实现惰性载入的方式，第一种就是在函数被调用时再处理函数。在第一次调用的过程中，该函数会被覆盖为另外一个按合适方式执行的函数，这样任何对原函数的调用都不用再经过执行的分支了。
+
+### 函数绑定
+
+```javascript
+function bind(fn, context){
+    return function(){
+        return fn.apply(context, arguments);
+    };
+}
+```
+
+### 函数柯里化
+
+用于创建已经设置好了一个或多个参数的函数。函数柯里化的基本方法和函数绑定是一样的：使用一个闭包返回一个函数。两者的区别在于，当函数被调用时，返回的函数还需要设置一些传入的参数。
+
+```javascript
+function curry(fn){
+    var args = Array.prototype.slice.call(arguments, 1);
+    return function(){
+        var innerArgs = Array.prototype.slice.call(arguments);
+        var finalArgs = args.concat(innerArgs);
+        return fn.apply(null, finalArgs);
+    };
+}
+```
+
+## 防篡改对象
+
+### 不可扩展对象
+
+> * Object.preventExtensions(object)：仅阻止添加自身的属性。但属性仍然可以添加到对象原型。返回已经不可扩展的对象。
+> * Object.isExtensible(object)：检测对象是否可以扩展。
+
+### 密封的对象
+
+第二个保护级别是密封对象（sealed object）密封对象不可扩展，而且已有成员的 [[Configurable]] 特性将被设置为 false 。这就意味着不能删除属性和方法，因为不能使用 Object.defineProperty() 把数据属性修改为访问器属性，或者相反。
+
+> * Object.seal(object)：密封对象。
+> * Object.isSealed(object)：检测对象是否密封。
+
+### 冻结的对象
+
+冻结的对象既不可扩展，又是密封的，而且对象数据属性的 [[Writable]] 特性会被设置为 false 。如果定义 [[Set]] 函数，访问器属性仍然是可写的。
+
+> * Object.freeze(object)：冻结对象。
+> * Object.isFrozen(object)：检测对象是否冻结。
+
+方法|作用|返回|是否改变原对象
+:-|:-|:-|:-|:-
+Object.preventExtensions(object)|阻止添加自身的属性|不可扩展的对象|是
+Object.isExtensible(object)|检测对象是否可以扩展|布尔值|否
+Object.seal(object)|阻止修改现有属性的特性，并阻止添加新属性|密封的对象|否
+Object.isSealed(object)|检测对象是否密封|布尔值|否
+Object.freeze(object)|：冻结对象|冻结的对象|否
+Object.isFrozen(object)|检测对象是否冻结|布尔值|否
+
+# 第23章 离线应用与客户端存储
+
+## 离线检测
+HTML5为此定义了一个 navigator.onLine属性，这个属性值为 true 表示设备能上网，值为 false 表示设备离线
+
+HTML5 还定义了两个事件：online 和 offline 。当网络从离线变为在线或者从在线变为离线时，分别触发这两个事件。
+
+### 应用缓存
+HTML5 的应用缓存（application cache），或者简称为 appcache，是专门为开发离线 Web 应用而设计的。Appcache 就是从浏览器的缓存中分出来的一块缓存区。要想在这个缓存中保存数据，可以使用一个描述文件（manifest file），列出要下载和缓存的资源。
+
+```html 
+<html manifest="/offline.manifest">
+```
+
+这个文件的 MIME 类型必须是text/cache-manifest。
+
+API 的核心是 applicationCache 对象，这个对象有一个 status 属性，属性的值是常量，表示应用缓存的如下当前状态。
+> * 0：无缓存，即没有与页面相关的应用缓存。
+> * 1：闲置，即应用缓存未得到更新。
+> * 2：检查中，即正在下载描述文件并检查更新。
+> * 3：下载中，即应用缓存正在下载描述文件中指定的资源。
+> * 4：更新完成，即应用缓存已经更新了资源，而且所有资源都已下载完毕，可以通过 swapCache()来使用了。
+> * 5：废弃，即应用缓存的描述文件已经不存在了，因此页面无法再访问应用缓存。
+
+应用缓存还有很多相关的事件，表示其状态的改变。以下是这些事件。
+> * checking ：在浏览器为应用缓存查找更新时触发。
+> * error ：在检查更新或下载资源期间发生错误时触发。
+> * noupdate ：在检查描述文件发现文件无变化时触发。
+> * downloading ：在开始下载应用缓存资源时触发。
+> * progress ：在文件下载应用缓存的过程中持续不断地触发。
+> * updateready ：在页面新的应用缓存下载完毕且可以通过 swapCache() 使用时触发。
+> * cached ：在应用缓存完整可用时触发。
+
+```javascript
+EventUtil.addHandler(applicationCache, "updateready", function(){
+    applicationCache.swapCache();
+});
+```
+
+## 数据存储
+
+### Cookie
+cookie 的构成。
+
+> * 名称：一个唯一确定 cookie 的名称。cookie 名称是不区分大小写的，所以 myCookie 和 MyCookie被认为是同一个 cookie。然而，实践中最好将 cookie 名称看作是区分大小写的，因为某些服务器会这样处理 cookie。cookie 的名称必须是经过 URL 编码的。值：储存在 cookie 中的字符串值。值必须被 URL 编码。
+> * 域：cookie 对于哪个域是有效的。所有向该域发送的请求中都会包含这个 cookie 信息。这个值可以包含子域（subdomain，如 www.wrox.com ），也可以不包含它（如. wrox.com ，则对于wrox.com的所有子域都有效）。如果没有明确设定，那么这个域会被认作来自设置 cookie 的那个域。
+> * 路径：对于指定域中的那个路径，应该向服务器发送 cookie。例如，你可以指定 cookie 只有从http://www.wrox.com/books/ 中才能访问，那么http://www.wrox.com 的页面就不会发送 cookie 信息，即使请求都是来自同一个域的。
+> * 失效时间：表示 cookie 何时应该被删除的时间戳（也就是，何时应该停止向服务器发送这个cookie）。默认情况下，浏览器会话结束时即将所有 cookie 删除；不过也可以自己设置删除时间。这个值是个 GMT 格式的日期（Wdy, DD-Mon-YYYY HH:MM:SS GMT），用于指定应该删除cookie 的准确时间。因此，cookie 可在浏览器关闭后依然保存在用户的机器上。如果你设置的失效日期是个以前的时间，则 cookie 会被立刻删除。
+> * 安全标志：指定后，cookie 只有在使用 SSL 连接的时候才发送到服务器。例如，cookie 信息只能发送给  https://www.wrox.com ，而 http://www.wrox.com 的请求则不能发送 cookie。
+
+**子 cookie**
+
+```javascript
+name=name1=value1&name2=value2&name3=value3&name4=value4&name5=value5
+```
+
+### Web存储机制
+
+**Storage 类型**
+
+> * clear() ： 删除所有值；Firefox 中没有实现 。
+> * getItem(name) ：根据指定的名字 name 获取对应的值。
+> * key(index) ：获得 index 位置处的值的名字。
+> * removeItem(name) ：删除由 name 指定的名值对儿。
+> * setItem(name, value) ：为指定的 name 设置一个对应的值。
+
+**sessionStorage 对象**
+
+sessionStorage 对象存储特定于某个会话的数据，也就是该数据只保持到浏览器关闭。
+
+**localStorage 对象**
+
+作为持久保存客户端数据。要访问同一个 localStorage 对象，页面必须来自同一个域名（子域名无效），使用同一种协议，在同一个端口上。
+
+**storage 事件**
+这个事件的 event 对象有以下属性。
+
+> * domain ：发生变化的存储空间的域名。
+> * key ：设置或者删除的键名。
+> * newValue ：如果是设置值，则是新值；如果是删除键，则是 null 。
+> * oldValue ：键被更改之前的值。
+
+# 第24章 最佳实践
+
+## 可维护性
+
+### 什么是可维护的代码
+> * 可理解性——其他人可以接手代码并理解它的意图和一般途径，而无需原开发人员的完整解释。
+> * 直观性——代码中的东西一看就能明白，不管其操作过程多么复杂。
+> * 可适应性——代码以一种数据上的变化不要求完全重写的方法撰写。
+> * 可扩展性——在代码架构上已考虑到在未来允许对核心功能进行扩展。
+> * 可调试性——当有地方出错时，代码可以给予你足够的信息来尽可能直接地确定问题所在。
+
+### 代码约定
+
+**可读性**
+
+> * 函数和方法——每个函数或方法都应该包含一个注释，描述其目的和用于完成任务所可能使用的算法。陈述事先的假设也非常重要，如参数代表什么，函数是否有返回值（因为这不能从函数定义中推断出来）。
+> * 大段代码——用于完成单个任务的多行代码应该在前面放一个描述任务的注释。
+> * 复杂的算法——如果使用了一种独特的方式解决某个问题，则要在注释中解释你是如何做的。这不仅仅可以帮助其他浏览你代码的人，也能在下次你自己查阅代码的时候帮助理解。
+> * Hack——因为存在浏览器差异，JavaScript 代码一般会包含一些 hack。不要假设其他人在看代码的时候能够理解 hack 所要应付的浏览器问题。如果因为某种浏览器无法使用普通的方法，所以你需要用一些不同的方法，那么请将这些信息放在注释中。
+
+**变量和函数命名**
+
+> * 变量名应为名词如 car 或 person 。
+> * 函数名应该以动词开始，如 getName() 。返回布尔类型值的函数一般以 is 开头，如isEnable() 。
+> * 变量和函数都应使用合乎逻辑的名字，不要担心长度。长度问题可以通过后处理和压缩来缓解。
+
+**变量类型透明**
+
+JavaScript 中最传统的匈牙利标记法是用单个字符表示基本类型： "o" 代表对象， "s" 代表字符串， "i"代表整数， "f" 代表浮点数， "b" 代表布尔型。
+
+### 编程实践
+
+**尊重对象所有权**
+
+> * 不要为实例或原型添加属性；
+> * 不要为实例或原型添加方法；
+> * 不要重定义已存在的方法。
+
+**避免与 null 进行比较**
+
+> * 如果值应为一个引用类型，使用 instanceof 操作符检查其构造函数；
+> * 如果值应为一个基本类型，使用 typeof 检查其类型；
+> * 如果是希望对象包含某个特定的方法名，则使用 typeof 操作符确保指定名字的方法存在于对象上。
+
+## 性能
+
+### 注意作用域
+
+**避免全局查找**
+
+**避免 with 语句**
+
+### 选择正确方法
+
+**避免不必要的属性查找**
+
+标记|名称|描述
+:-|:-|:-
+O(1)|常数|不管有多少值，执行的时间都是恒定的。一般表示简单值和存储在变量中的值
+O(log n)|对数|总的执行时间和值的数量相关，但是要完成算法并不一定要获取每个值。例如：二分查找
+O(n)|线性|总执行时间和值的数量直接相关。例如：遍历某个数组中的所有元素
+O(n<sup>2</sup>)|平方|总执行时间和值的数量有关，每个值至少要获取n次。例如：插入排序
+
+使用变量和数组要比访问对象上的属性更有效率，后者是一个 O(n)操作。对象上的任何属性查找都要比访问变量或者数组花费更长时间，因为必须在原型链中对拥有该名称的属性进行一次搜索。
+
+**优化循环**
+
+(1) 减值迭代——大多数循环使用一个从 0 开始、增加到某个特定值的迭代器。在很多情况下，从
+最大值开始，在循环中不断减值的迭代器更加高效。
+(2) 简化终止条件——由于每次循环过程都会计算终止条件，所以必须保证它尽可能快。也就是说
+避免属性查找或其他 O(n)的操作。
+(3) 简化循环体——循环体是执行最多的，所以要确保其被最大限度地优化。确保没有某些可以被
+很容易移出循环的密集计算。
+(4) 使用后测试循环——最常用 for 循环和 while 循环都是前测试循环。而如 do-while 这种后测试循环，可以避免最初终止条件的计算，因此运行更快。
+
+**避免双重解释**
+
+当使用 eval() 函数或者是Function 构造函数以及使用 setTimeout() 传一个字符串参数时都会发生这种情况。
+
+**性能的其他注意事项**
+
+> * 原生方法较快——只要有可能，使用原生方法而不是自己用 JavaScript 重写一个。原生方法是用诸如 C/C++之类的编译型语言写出来的，所以要比 JavaScript 的快很多很多。JavaScript 中最容易被忘记的就是可以在 Math 对象中找到的复杂的数学运算；这些方法要比任何用 JavaScript 写的同样方法如正弦、余弦快的多。
+> * Switch 语句较快 —— 如果有一系列复杂的 if-else 语句，可以转换成单个 switch 语句则可以得到更快的代码。还可以通过将 case 语句按照最可能的到最不可能的顺序进行组织，来进一步优化 switch 语句。
+> * 位运算符较快 —— 当进行数学运算的时候，位运算操作要比任何布尔运算或者算数运算快。选择性地用位运算替换算数运算可以极大提升复杂计算的性能。诸如取模，逻辑与和逻辑或都可以考虑用位运算来替换。
+
+### 最小化语句数
+
+**多个变量声明**
+
+变量声明只用了一个 var 语句，之间由逗号隔开。在大多数情况下这种优化都非常容易做，并且要比单个变量分别声明快很多。
+
+**插入迭代值**
+
+当使用迭代值（也就是在不同的位置进行增加或减少的值）的时候，尽可能合并语句。
+
+**使用数组和对象字面量**
+
+### 优化DOM交互
+
+**最小化现场更新**
+使用文档片段来构建 DOM 结构。
+
+**innerHTML**
+对于大的 DOM 更改，使用 inner HTML 要比使用标准 DOM 方法创建同样的 DOM 结构快得多。
+
+**使用事件代理**
+
+文档级别附加事件处理程序，这样可以处理整个页面的事件。
+
+**注意 HTMLCollection**
+任何时候要访问 HTMLCollection ，不管它是一个属性还是一个方法，都是在文档上进行一个查询，这个查询开销很昂贵。
+
+发生以下情况时会返回 HTMLCollection 对象：
+> * 进行了对 getElementsByTagName() 的调用；
+> * 获取了元素的  childNodes 属性；
+> * 获取了元素的  attributes 属性；
+> * 访问了特殊的集合，如 document.forms 、 document.images 等。
+
+# 第25章 新兴的API
+
+## requestAnimationFrame()
+
+```javascript
+(function () {
+	function draw(timestamp) {
+		//计算两次重绘的时间间隔
+		var drawStart = (timestamp || Date.now()),
+			diff = drawStart - startTime;
+		//使用 diff 确定下一步的绘制时间
+		//把 startTime 重写为这一次的绘制时间
+		startTime = drawStart;
+		//重绘 UI
+		requestAnimationFrame(draw);
+	}
+	var requestAnimationFrame = window.requestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||
+		window.msRequestAnimationFrame,
+		startTime = window.mozAnimationStartTime || Date.now();
+	requestAnimationFrame(draw);
+})();
+```
+
+## Geolocation API
+
+> * getCurrentPosition()：会触发请求用户共享地理定位信息的对话框。
+> * 
+
+

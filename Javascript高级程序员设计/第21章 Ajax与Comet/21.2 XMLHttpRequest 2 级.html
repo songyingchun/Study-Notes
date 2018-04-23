@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../util.js"></script>
+    <script>
+        var xhr = createXHR();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                try {
+                    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                        alert(xhr.responseText);
+                    } else {
+                        // alert("Request was unsuccessful: " + xhr.status);
+                    }
+                } catch (ex) {
+                    //假设由 ontimeout 事件处理程序处理
+                }
+            }
+        };
+        xhr.open("get", "test.html", true);
+        xhr.timeout = 1000; // 将超时设置为 1  秒钟（仅适用于 IE8+ ）
+        xhr.ontimeout = function () {
+            alert("Request did not return in a second.");
+        };
+        xhr.send(null);
+    </script>
+</body>
+
+</html>
