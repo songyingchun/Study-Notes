@@ -1,32 +1,6 @@
 # 第1章 JavaScript简介
-一个完整的JavaScript由三部分组成：核心（ECMAScript）、文档对象模型（DOM）、浏览对象模型（BOM）。
 
-ECMA-262规定了语法、类型、语句、关键字、保留字、操作符、对象
-
-文档对象模型是针对 XML 但经过扩展用于 HTML 的应用程序编程接口。
-
-DOM1 级的目标主要是映射文档的结构。
-
-DOM2 的基础上又扩充了（DHTML 一直都支持的）鼠标和用户界面事件、范围、遍历（迭代 DOM文档的方法）等细分模块：
-> * DOM 视图（DOM Views）：定义了跟踪不同文档（例如，应用 CSS 之前和之后的文档）视图的接口；
-> * DOM 事件（DOM Events）：定义了事件和事件处理的接口；
-> * (DOM 样式（DOM Style）：定义了基于 CSS 为元素应用样式的接口； 
-> * DOM 遍历和范围（DOM Traversal and Range）：定义了遍历和操作文档树的接口。
-
-浏览器对BOM的扩展:
-> * 弹出新浏览器窗口的功能；
-> * 移动、缩放和关闭浏览器窗口的功能；
-> * 提供浏览器详细信息的 navigator 对象；
-> * 提供浏览器所加载页面的详细信息的 location 对象；
-> * 提供用户显示器分辨率详细信息的 screen 对象；
-> * 对 cookies 的支持；
-> * 像 XMLHttpRequest 和 IE的 ActiveXObject 这样的自定义对象。
-
-**小结**
-JavaScript 是一种专为与网页交互而设计的脚本语言，由下列三个不同的部分组成：
-> * ECMAScript，由 ECMA-262 定义，提供核心语言功能；
-> * 文档对象模型（DOM），提供访问和操作网页内容的方法和接口；
-> * 浏览器对象模型（BOM），提供与浏览器交互的方法和接口。
+ECMA-262规定了语法、类型、语句、关键字、保留字、操作符、对象。
 
 # 第2章 在HTML中使用JavaScript
 
@@ -34,58 +8,21 @@ HTML 4.01 为&lt;script> 定义了下列 6 个属性：
 > * async ：可选。表示应该立即下载脚本，但不应妨碍页面中的其他操作，比如下载其他资源或
 等待加载其他脚本。只对外部脚本文件有效。
 > * charset ：可选。表示通过 src 属性指定的代码的字符集。
-> * defer ：可选。表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本文件有
-效。IE7 及更早版本对嵌入脚本也支持这个属性。
+> * defer ：可选。表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本文件有效。IE7 及更早版本对嵌入脚本也支持这个属性。
 > * language ：已废弃。
 > * src ：可选。表示包含要执行代码的外部文件。
 > * type ：可选。可以看成是 language 的替代属性。
 
-通过 &lt;script> 元素的 src 属性还可以包含来自外部域的 JavaScript 文件。在这一点上， &lt;script> 与 <img> 元素非常相似，即它的 src属性可以是指向当前 HTML 页面所在域之外的某个域中的完整URL。
-
 ## 标签的位置
-浏览器在遇到 &lt;body> 标签时才开始呈现内容。会导致浏览器在呈现页面时出现明显的延迟，而延迟期间的浏览器窗口中将是一片空白。为了避免这个问题，现代 Web 应用程序一般都把全部 JavaScript 引用放在 &lt;body> 元素中页面内容的后面。
+现代 Web 应用程序一般都把全部 JavaScript 引用放在 &lt;body> 元素中页面内容的后面。
 
 ## 延迟脚本
 
 在 &lt;script> 元素中设置defer 属性，相当于告诉浏览器立即下载，但延迟执行。
 
-```html
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Example HTML Page</title>
-        <script type="text/javascript" defer="defer" src="example1.js"></script>
-        <script type="text/javascript" defer="defer" src="example2.js"></script>
-    </head>
-    <body>
-    <!-- 这里放内容 -->
-    </body>
-</html>
-```
-
 ## 异步脚本
 
 async 只适用于外部脚本文件，并告诉浏览器立即下载文件。但与 defer不同的是，标记为 async 的脚本并不保证按照指定它们的先后顺序执行。
-
-```html
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Example HTML Page</title>
-        <script type="text/javascript" async src="example1.js"></script>
-        <script type="text/javascript" async src="example2.js"></script>
-    </head>
-    <body>
-    <!-- 这里放内容 -->
-    </body>
-</html>
-```
-
-## 嵌入代码与外部文件
-
-> * 可维护性
-> * 可缓存
-> * 适应未来
 
 ## 文档模式
 
@@ -126,13 +63,9 @@ async 只适用于外部脚本文件，并告诉浏览器立即下载文件。�
 ## &lt;noscript> 元素
 当浏览器不支持 JavaScript 时如何让页面平稳地退化。这个元素可以包含能够出现在文档 &lt;body> 中的任何 HTML 元素&lt;script> 元素除外。
 
-
 # 第3章 基本概念
 
 ## 语法
-### 区分大小写
-
-变量区分大小写
 
 ### 标识符
 
@@ -143,67 +76,6 @@ async 只适用于外部脚本文件，并告诉浏览器立即下载文件。�
 
 标识符中的字母也可以包含扩展的 ASCII或 Unicode字母字符（如 À和 Æ）。
 
-### 注释
-
-```html
-// 单行注释
-
-/*
-* 这是一个多行
-* （块级）注释
-*/
-```
-
-### 语句
-语句以一个分号结尾；如果省略分号，则由解析器确定语句的结尾。
-
-### 关键字和保留字
-
-**关键字：**
-
-```
-break do instanceof typeof
-case else new var
-catch finally return void
-continue for switch while
-debugger* function this with
-default if throw
-delete in try
-```
-
-**保留字：**
-
-```
-abstract enum int short
-boolean export interface static
-byte extends long super
-char final native synchronized
-class float package throws
-const goto private transient
-debugger implements protected volatile
-double import public
-```
-
-第 5 版把在非严格模式下运行时的保留字缩减为下列这些：
-
-```
-class enum extends super
-const export import
-```
-
-在严格模式下，第 5 版还对以下保留字施加了限制：
-
-```
-implements package public
-interface private static
-let protected yield
-```
-
-## 数据类型
-
-5 种简单数据类型Undefined 、 Null 、 Boolean 、 Number和 String。
-复杂数据类型—— Object，Object 本质上是由一组无序的名值对组成的。
-
 ### typeof
 
 > * "undefined" ——如果这个值未定义；
@@ -213,13 +85,8 @@ let protected yield
 > * "object" ——如果这个值是对象或null；
 > * "function" ——如果这个值是函数。
 
-### Undefined 类型
-因为未经初始化的值默认就会取得 undefined 值。
-
 ### Null 类型
-null 值表示一个空对象指针，而这也正是使用 typeof 操作符检测 null 值时会返回 "object" 的原因。
-
-undefined 值是派生自 null 值的，因此 ECMA-262规定对它们的相等性测试要返回 true 。
+null 值表示一个空对象指针，而这也正是使用 typeof 操作符检测 null 值时会返回 "object" 的原因。undefined 值是派生自 null 值的，因此 ECMA-262规定对它们的相等性测试要返回 true 。
 
 ```javascript
 alert(null == undefined); //true
@@ -266,7 +133,7 @@ var floatNum = 3.125e7;
 Number.MIN_VALUE：5e-324
 Number.MAX_VALUE：1.7976931348623157e+308
 
-isFinite() 函数。这个函数在参数位于最小与最大数值之间时会返回 true 。
+> * isFinite()：这个函数在参数位于最小与最大数值之间时会返回 true 。
 
 **NaN**
 
@@ -278,9 +145,7 @@ NaN 与任何值都不相等，包括 NaN 本身。
 alert(NaN == NaN); //false
 ```
 
-isNaN() 帮我们确定这个参数是否“不是数值”。
-
-isNaN() 也适用于对象。
+> * isNaN()：帮我们确定这个参数是否“不是数值”。isNaN() 也适用于对象。
 
 有 3 个函数可以把非数值转换为数值： Number() 、 parseInt() 和 parseFloat() 。
 
@@ -366,7 +231,7 @@ Object 的每个实例都具有下列属性和方法。
 ### ~~一元操作符~~
 只能操作一个值的操作符叫做一元操作符。
 
-**递增和递减操作符**
+**~~递增和递减操作符~~**
 
 递增和递减操作符遵循下列规则。
 > * 在应用于一个包含有效数字字符的字符串时，先将其转换为数字值，再执行加减 1 的操作。字符串变量变成数值变量。
@@ -377,9 +242,9 @@ Object 的每个实例都具有下列属性和方法。
 > * 在应用于对象时，先调用对象的 valueOf() 方法以取得一个可供操作的值。然后对该值应用前述规则。如果结果是 NaN ，则在调用 toString() 方法后再应用前述规则。对象变量变成数值变量。
 
 
-**一元加和减操作符**
+**~~一元加和减操作符~~**
 
-该操作符会像 Number() 转型函数一样对这个值执行转换。
+该操作符会像 Number() 转型函数一样对这个值执行转换。~~
 
 ### 位操作符
 位操作符并不直接操作 64 位的值。先将 64 位的值转换成 32 位的整数，然后执行操作，最后再将结果转换回 64 位。
@@ -509,12 +374,11 @@ false | false | false
 > * 如果两个操作数都是 NaN ，则返回 NaN ；
 > *  如果两个操作数都是 undefined ，则返回 undefined 。
 
-### 乘性操作符
+### ~~乘性操作符~~
 ECMAScript 定义了 3 个乘性操作符：乘法、除法和求模。如果参与乘性计算的某
 个操作数不是数值，后台会先使用 Number() 转型函数将其转换为数值。
 
-**乘法**
-乘法操作符由一个星号（ * ）表示。
+~~**乘法**~~
 
 > * 如果操作数都是数值，执行常规的乘法计算，即两个正数或两个负数相乘的结果还是正数，而如果只有一个操作数有符号，那么结果就是负数。如果乘积超过了 ECMAScript 数值的表示范围，则返回 Infinity 或 -Infinity ；
 > * 如果有一个操作数是 NaN ，则结果是 NaN ；
@@ -523,8 +387,7 @@ ECMAScript 定义了 3 个乘性操作符：乘法、除法和求模。如果参
 > * 如果是 Infinity 与 Infinity 相乘，则结果是 Infinity ；
 > * 如果有一个操作数不是数值，则在后台调用 Number() 将其转换为数值，然后再应用上面的规则。
 
-**除法**
-除法操作符由一个斜线符号（/）表示。
+~~**除法**~~
 
 > * 如果操作数都是数值，执行常规的除法计算，即两个正数或两个负数相除的结果还是正数，而如果只有一个操作数有符号，那么结果就是负数。如果商超过了 ECMAScript 数值的表示范围，则返回 Infinity 或 -Infinity ；
 > * 如果有一个操作数是 NaN ，则结果是 NaN ；
@@ -534,7 +397,7 @@ ECMAScript 定义了 3 个乘性操作符：乘法、除法和求模。如果参
 > * 如果是 Infinity 被任何非零数值除，则结果是 Infinity 或 -Infinity ，取决于有符号操作数的符号；
 > * 如果有一个操作数不是数值，则在后台调用 Number() 将其转换为数值，然后再应用上面的规则。
 
-**求模**
+~~**求模**~~
 求模（余数）操作符由一个百分号（ % ）表示。
 
 > * 如果操作数都是数值，执行常规的除法计算，返回除得的余数；
@@ -545,11 +408,9 @@ ECMAScript 定义了 3 个乘性操作符：乘法、除法和求模。如果参
 > * 如果被除数是零，则结果是零；
 > * 如果有一个操作数不是数值，则在后台调用 Number() 将其转换为数值，然后再应用上面的规则。
 
-### 加性操作符
+### ~~加性操作符~~
 
 ~~**加法**~~
-
-加法操作符（+）。
 
 如果两个操作符都是数值。
 > * 如果有一个操作数是 NaN ，则结果是 NaN ；
@@ -567,8 +428,6 @@ ECMAScript 定义了 3 个乘性操作符：乘法、除法和求模。如果参
 
 ~~**减法**~~
 
-减法操作符（-）。
-
 > * 如果两个操作符都是数值，则执行常规的算术减法操作并返回结果；
 > * 如果有一个操作数是 NaN ，则结果是 NaN ；
 > * 如果是 Infinity 减 Infinity ，则结果是 NaN ；
@@ -581,7 +440,7 @@ ECMAScript 定义了 3 个乘性操作符：乘法、除法和求模。如果参
 > * 如果有一个操作数是字符串、布尔值、 null 或 undefined ，则先在后台调用 Number() 函数将其转换为数值，然后再根据前面的规则执行减法计算。如果转换的结果是 NaN ，则减法的结果就是 NaN ；
 > *  如果有一个操作数是对象，则调用对象的 valueOf() 方法以取得表示该对象的数值。如果得到的值是 NaN ，则减法的结果就是 NaN 。如果对象没有 valueOf() 方法，则调用其 toString()方法并将得到的字符串转换为数值。
 
-### 关系操作符
+### ~~关系操作符~~
 小于（<）、大于（>）、小于等于（<=）和大于等于（>=）
 
 > * 如果两个操作数都是数值，则执行数值比较。
@@ -590,7 +449,7 @@ ECMAScript 定义了 3 个乘性操作符：乘法、除法和求模。如果参
 > *  如果一个操作数是对象，则调用这个对象的 valueOf() 方法，用得到的结果按照前面的规则执行比较。如果对象没有 valueOf() 方法，则调用 toString() 方法，并用得到的结果根据前面的规则执行比较。
 > *  如果一个操作数是布尔值，则先将其转换为数值，然后再执行比较。
 
-### 相等操作符
+### ~~相等操作符~~
 
 **相等和不相等**
 > * 如果有一个操作数是布尔值，则在比较相等性之前先将其转换为数值—— false 转换为 0，而
@@ -711,8 +570,9 @@ ECMAScript 中所有函数的参数都是按值传递的。基本类型值的传
 
 ### 检测类型
 
-instanceof语法：
+```javascript
 result = variable instanceof constructor
+```
 
 ## 执行环境及作用域
 
@@ -4536,7 +4396,7 @@ O(n<sup>2</sup>)|平方|总执行时间和值的数量有关，每个值至少�
 
 # 第25章 新兴的API
 
-## requestAnimationFrame()
+## ~~requestAnimationFrame()~~
 
 ```javascript
 (function () {
@@ -4559,9 +4419,151 @@ O(n<sup>2</sup>)|平方|总执行时间和值的数量有关，每个值至少�
 })();
 ```
 
-## Geolocation API
+## ~~Geolocation API~~
+Geolocation API 在浏览器中的实现是 navigator.geolocation 对象，这个对象包含 3 个方法。
 
-> * getCurrentPosition()：会触发请求用户共享地理定位信息的对话框。
-> * 
+> * getCurrentPosition(success, error, options)：会触发请求用户共享地理定位信息的对话框。
+    > * success：成功回调函数会接收到一个 Position 对象参数，该对象有两个属性： coords 和 timestamp 。而 coords 对象中将包含下列与位置相关的信息。
+        > * latitude ：以十进制度数表示的纬度。
+        > * longitude ：以十进制度数表示的经度。
+        > * accuracy ：经、纬度坐标的精度，以米为单位。有些浏览器还可能会在 coords 对象中提供如下属性。
+        > * altitude ：以米为单位的海拔高度，如果没有相关数据则值为 null 。
+        > * altitudeAccuracy ：海拔高度的精度，以米为单位，数值越大越不精确。
+        > * heading ：指南针的方向，0°表示正北，值为 NaN 表示没有检测到数据。
+        > * speed ：速度，即每秒移动多少米，如果没有相关数据则值为 null 。
+    > * error：即失败回调函数，在被调用的时候也会接收到一个参数。这个参数是一个对象，包含两个属性： message 和  code 。
+        > * message：保存着给人看的文本消息，解释为什么会出错。
+        > * code：保存着一个数值，表示错误的类型：用户拒绝共享（1）、位置无效（2）或者超时（3）。
+    > * options：可以设置的选项有三个：
+        > * enableHighAccuracy：一个布尔值，表示必须尽可能使用最准确的位置信息。
+        > * timeout：毫秒数表示的等待位置信息的最长时间。
+        > * maximumAge： 表示上一次取得的坐标信息的有效时间，以毫秒表示。
+> * watchPosition(success, error, options)：这个方法接收的参数与 getCurrentPosition()方法完全相同。地等待系统发出位置已改变的信号（它不会自己轮询位置）。  
+> * clearWatch(watchId)：于这个返回值可以取消监控操作，只要将其传递给 clearWatch() 方法即可。
 
+## ~~File API~~
 
+File API 在表单中的文件输入字段的基础上，又添加了一些直接访问文件信息的接口。每个 File 对象都有下列只读属性。
+> * name ：本地文件系统中的文件名。
+> * size ：文件的字节大小。
+> * type ：字符串，文件的 MIME 类型。
+> * lastModifiedDate ：字符串，文件上一次被修改的时间（只有 Chrome 实现了这个属性）。
+
+### ~~FileReader 类型~~
+
+FileReader 类型实现的是一种异步文件读取机制。FileReader 提供了如下几个方法。
+> * readAsText(file,encoding) ：以纯文本形式读取文件，将读取到的文本保存在 result 属性中。第二个参数用于指定编码类型，是可选的。
+> * readAsDataURL(file) ：读取文件并将文件以数据 URI 的形式保存在 result 属性中。
+> * readAsBinaryString(file) ：读取文件并将一个字符串保存在 result 属性中，字符串中的每个字符表示一字节。
+> * readAsArrayBuffer(file) ：读取文件并将一个包含文件内容的 ArrayBuffer 保存在result 属性中。
+
+最有用的三个事件。
+> * progress：事件对象可以获得与 XHR 的 progress 事件相同的信息（属性）： lengthComputable 、 loaded 和 total 。每次 progress 事件中都可以通过 FileReader 的 result 属性读取到文件内容。
+> * error：相关的信息将保存到FileReader 的 error 属性中。这个属性中将保存一个对象，该对象只有一个属性 code ，即错误码。
+    > * 1：表示未找到文件。
+    > * 2：表示安全性错误。
+    > * 3：表示读取中断。
+    > * 4：表示文件不可读。
+> * load：成功加载后会触发 load 事件。
+
+### ~~读取部分内容~~
+
+> * slice(start, length)：返回一个 Blob 的实例， Blob 是 File 类型的父类型。
+    > * start：起始字节。
+    > * 读取的字节数。
+
+### ~~对象URL~~
+
+对象 URL 也被称为 blob URL，指的是引用保存在 File 或 Blob 中数据的 URL。使用对象 URL 的好处是可以不必把文件内容读取到 JavaScript 中而直接使用文件内容。
+
+```javascript
+function createObjectURL(blob) {
+	if (window.URL) {
+		return window.URL.createObjectURL(blob);
+	} else if (window.webkitURL) {
+		return window.webkitURL.createObjectURL(blob);
+	} else {
+		return null;
+	}
+}
+```
+
+### ~~读取拖放的文件~~
+
+```javascript
+event.dataTransfer. files
+```
+
+### ~~使用XHR上传文件~~
+
+过它调用 append() 方法并传入相应的 File 对象作为参数。然后，再把 FormData 对象传递给 XHR 的 send() 方法，结果与通过表单上传一模一样。
+
+## ~~Web 计时~~
+
+performance.navigation 属性也是一个对象，包含着与页面导航有关的多个属性。
+> * redirectCount：页面加载前的重定向次数。
+> * type：数值常量，表示刚刚发生的导航类型。
+    > * performance.navigation.TYPE_NAVIGATE (0) ：页面第一次加载。
+    > * performance.navigation.TYPE_RELOAD (1) ：页面重载过。
+    > * performance.navigation.TYPE_BACK_FORWARD (2) ：页面是通过“后退”或“前进”按钮打开的。
+    
+performance.timing 属性也是一个对象，但这个对象的属性都是时间戳。
+> * navigationStart ：开始导航到当前页面的时间。
+> * unloadEventStart ：前一个页面的 unload 事件开始的时间。但只有在前一个页面与当前页
+面来自同一个域时这个属性才会有值；否则，值为 0。
+> * unloadEventEnd ：前一个页面的 unload 事件结束的时间。但只有在前一个页面与当前页面
+来自同一个域时这个属性才会有值；否则，值为 0。
+> * redirectStart ：到当前页面的重定向开始的时间。但只有在重定向的页面来自同一个域时这
+个属性才会有值；否则，值为 0。
+> * redirectEnd ：到当前页面的重定向结束的时间。但只有在重定向的页面来自同一个域时这个
+属性才会有值；否则，值为 0。
+> * fetchStart ：开始通过 HTTP GET 取得页面的时间。
+> * domainLookupStart ：开始查询当前页面 DNS 的时间。
+> * domainLookupEnd ：查询当前页面 DNS 结束的时间。
+> * connectStart ：浏览器尝试连接服务器的时间。
+> * connectEnd ：浏览器成功连接到服务器的时间。
+> * secureConnectionStart ：浏览器尝试以 SSL 方式连接服务器的时间。不使用 SSL 方式连接
+时，这个属性的值为 0。
+> * requestStart ：浏览器开始请求页面的时间。
+> * responseStart ：浏览器接收到页面第一字节的时间。
+> * responseEnd ：浏览器接收到页面所有内容的时间。
+> * domLoading ： document.readyState 变为 "loading" 的时间。
+> * domInteractive ： document.readyState 变为 "interactive" 的时间。
+> * domContentLoadedEventStart ：发生 DOMContentLoaded 事件的时间。
+> * domContentLoadedEventEnd ： DOMContentLoaded 事件已经发生且执行完所有事件处理程
+序的时间。
+> * domComplete ： document.readyState 变为 "complete" 的时间。
+> * loadEventStart ：发生 load 事件的时间。
+> * loadEventEnd ： load 事件已经发生且执行完所有事件处理程序的时间。
+
+## Web Workers
+
+长时间运行的 JavaScript 进程会导致浏览器冻结用户界面，让人感觉屏幕“冻结”了。Web Workers规范通过让 JavaScript 在后台运行解决了这个问题。
+
+### 使用Worker
+
+```javascript
+var worker = new Worker("stufftodo.js");
+```
+
+> * worker.postMessage(message)：给 Worker 传递消息。
+    > * message：任何类型数据。
+> * terminate()：在页面调用，立即停止 Worker 的工作。
+
+事件：
+> * worker.onmessage：来自 Worker的数据保存在 event.data 中
+> * worker.onerror：事件对象中包含三个属性： filename 、lineno 和 message ，分别表示发生错误的文件名、代码行号和完整的错误消息。
+
+### Worker全局作用域
+Web Worker 本身也是一个最小化的运行环境。
+> * 最小化的 navigator 对象，包括 onLine 、 appName 、 appVersion 、 userAgent 和 platform
+属性；
+> * 只读的 location 对象；
+> * setTimeout() 、 setInterval() 、 clearTimeout() 和 clearInterval() 方法；
+> * XMLHttpRequest 构造函数。
+
+> * self.close()：在Worker内部，可以停止工作。
+
+### 包含其他脚本
+
+> * importScripts(url)：每个加载过程都是异步进行的，因此所有脚本加载并执行之后， importScripts() 才会执行。

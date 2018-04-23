@@ -670,7 +670,7 @@ npm install -g i5ting_toc
 生成导航栏
 
 ```html
-i5ting_toc -f Markdown文档.md -o
+i5ting_toc -f file.md -o
 ```
 
 ## 参考文档
