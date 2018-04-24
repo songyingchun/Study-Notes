@@ -1,20 +1,8 @@
-# 第1章 JavaScript简介
+# ~~第1章 JavaScript简介~~
 
 ECMA-262规定了语法、类型、语句、关键字、保留字、操作符、对象。
 
-# 第2章 在HTML中使用JavaScript
-
-HTML 4.01 为&lt;script> 定义了下列 6 个属性：
-> * async ：可选。表示应该立即下载脚本，但不应妨碍页面中的其他操作，比如下载其他资源或
-等待加载其他脚本。只对外部脚本文件有效。
-> * charset ：可选。表示通过 src 属性指定的代码的字符集。
-> * defer ：可选。表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本文件有效。IE7 及更早版本对嵌入脚本也支持这个属性。
-> * language ：已废弃。
-> * src ：可选。表示包含要执行代码的外部文件。
-> * type ：可选。可以看成是 language 的替代属性。
-
-## 标签的位置
-现代 Web 应用程序一般都把全部 JavaScript 引用放在 &lt;body> 元素中页面内容的后面。
+# ~~第2章 在HTML中使用JavaScript~~
 
 ## 延迟脚本
 
@@ -60,9 +48,6 @@ async 只适用于外部脚本文件，并告诉浏览器立即下载文件。�
 "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 ```
 
-## &lt;noscript> 元素
-当浏览器不支持 JavaScript 时如何让页面平稳地退化。这个元素可以包含能够出现在文档 &lt;body> 中的任何 HTML 元素&lt;script> 元素除外。
-
 # 第3章 基本概念
 
 ## 语法
@@ -78,12 +63,7 @@ async 只适用于外部脚本文件，并告诉浏览器立即下载文件。�
 
 ### typeof
 
-> * "undefined" ——如果这个值未定义；
-> * "boolean" ——如果这个值是布尔值；
-> * "string" ——如果这个值是字符串；
-> * "number" ——如果这个值是数值；
 > * "object" ——如果这个值是对象或null；
-> * "function" ——如果这个值是函数。
 
 ### Null 类型
 null 值表示一个空对象指针，而这也正是使用 typeof 操作符检测 null 值时会返回 "object" 的原因。undefined 值是派生自 null 值的，因此 ECMA-262规定对它们的相等性测试要返回 true 。
@@ -109,7 +89,7 @@ Undefined|n/a|undefined
 :-:|:-:
 0|0x
 
-**浮点数值**
+~~**浮点数值**~~
 
 浮点数值需要的内存空间是保存整数值的两倍，因此 ECMAScript会不失时机地将浮点数值转换为整数值。
 
@@ -128,28 +108,24 @@ var floatNum = 3.125e7;
 0.1 + 0.2  ==  0.30000000000000004
 ```
 
-**数值范围**
+~~**数值范围**~~
 
 Number.MIN_VALUE：5e-324
 Number.MAX_VALUE：1.7976931348623157e+308
 
 > * isFinite()：这个函数在参数位于最小与最大数值之间时会返回 true 。
 
-**NaN**
+~~**NaN**~~
 
-这个数值用于表示一个本来要返回数值的操作数未返回数值的情况。
-
-NaN 与任何值都不相等，包括 NaN 本身。
+这个数值用于表示一个本来要返回数值的操作数未返回数值的情况。NaN 与任何值都不相等，包括 NaN 本身。
 
 ```javascript
 alert(NaN == NaN); //false
 ```
 
-> * isNaN()：帮我们确定这个参数是否“不是数值”。isNaN() 也适用于对象。
+> * isNaN()：帮我们确定这个参数是否“不是数值”。如果是非数值，先用Number()方法转成数值。
 
-有 3 个函数可以把非数值转换为数值： Number() 、 parseInt() 和 parseFloat() 。
-
-Number() 函数的转换规则如下。
+~~Number() 函数的转换规则如下。~~
 > * 如果是 Boolean 值， true 和 false 将分别被转换为 1 和 0。
 > * 如果是数字值，只是简单的传入和返回。
 > * 如果是 null 值，返回 0
@@ -161,34 +137,22 @@ Number() 函数的转换规则如下。
 >   * 如果字符串中包含除上述格式之外的字符，则将其转换为 NaN 。
 > * 如果是对象，则调用对象的 valueOf() 方法，然后依照前面的规则转换返回的值。如果转换的结果是 NaN ，则调用对象的 toString() 方法，然后再次依照前面的规则转换返回的字符串值。
 
-parseInt() 它会忽略字符串前面的空格，直至找到第一个非空格字符。如果第一个字符不是数字字符或者负号， parseInt()就会返回 NaN （ Number() 对空字符返回 0）；如果第一个字符是数字字符， parseInt() 会继续解析第二个字符，直到解析完所有后续字符或者遇到了一个非数字字符。
+parseInt()与Number()区别：
+> * 第一个非空格字符必须有效数字字符的字符串。直到解析完所有后续字符或者遇到了一个非数字字符。
+> * 第二个参数是基数。
 
 ```javascript
-var num1 = parseInt("1234blue"); // 1234
-var num2 = parseInt(""); // NaN
-var num3 = parseInt("0xA"); // 10（十六进制数）
-var num4 = parseInt(22.5); // 22
-var num5 = parseInt("070"); // 56（八进制数）
-var num6 = parseInt("70"); // 70（十进制数）
-var num7 = parseInt("0xf"); // 15（十六进制数）
-```
-
-要解析的值是十六进制格式的字符串，那么指定基数 16 作为第二个参数。
-
-```javascript
-var num = parseInt("0xAF", 16); //175
-
 var num1 = parseInt("10", 2); //2 （按二进制解析）
 var num2 = parseInt("10", 8); //8 （按八进制解析）
 var num3 = parseInt("10", 10); //10 （按十进制解析）
-var num4 = parseInt("10", 16); //16 （按十六进制解析）
+var num = parseInt("0xAF", 16); //175
 ```
 
 ### String 类型
 
 String 类型用于表示由零或多个 16 位 Unicode 字符组成的字符序列
 
-**字符字面量**
+~~**字符字面量**~~
 字面量|含义
 :-|:-
 \n|换行
@@ -223,17 +187,17 @@ Object 的每个实例都具有下列属性和方法。
 > * propertyIsEnumerable(propertyName) ：用于检查给定的属性是否能够使用 for-in 语句来枚举。
 > * toLocaleString() ：返回对象的字符串表示，该字符串与执行环境的地区对应。
 > * toString() ：返回对象的字符串表示。
-> * 返回对象的字符串、数值或布尔值表示。通常与 toString() 方法的返回值
+> * valueOf() ：返回对象的字符串、数值或布尔值表示。通常与 toString() 方法的返回值
 相同。
 
-## 操作符
+## ~~操作符~~
 
 ### ~~一元操作符~~
 只能操作一个值的操作符叫做一元操作符。
 
-**~~递增和递减操作符~~**
+~~**递增和递减操作符**~~
 
-递增和递减操作符遵循下列规则。
+递增和递减操作符遵循下列规则。跟Number()方法一样。
 > * 在应用于一个包含有效数字字符的字符串时，先将其转换为数字值，再执行加减 1 的操作。字符串变量变成数值变量。
 > * 在应用于一个不包含有效数字字符的字符串时，将变量的值设置为 NaN。字符串变量变成数值变量。
 > * 在应用于布尔值 false 时，先将其转换为 0 再执行加减 1 的操作。布尔值变量变成数值变量。
@@ -241,8 +205,7 @@ Object 的每个实例都具有下列属性和方法。
 > * 在应用于浮点数值时，执行加减 1 的操作。
 > * 在应用于对象时，先调用对象的 valueOf() 方法以取得一个可供操作的值。然后对该值应用前述规则。如果结果是 NaN ，则在调用 toString() 方法后再应用前述规则。对象变量变成数值变量。
 
-
-**~~一元加和减操作符~~**
+~~**一元加和减操作符**~~
 
 该操作符会像 Number() 转型函数一样对这个值执行转换。~~
 
@@ -268,13 +231,13 @@ alert(num2); // -26
 ```
 
 **按位与（AND）**
-按位与操作符由一个和号字符（ & ）表示。按位或操作在有一个位是 1的情况下就返回1。
+按位与操作符由一个和号字符（ & ）表示。按位与操作只在两个数值的对应位都是 1 时才返回 1。
 
 第一个数值的|第二个数值的位|结 果
 -|-|-
 1 | 1 | 1
-1 | 0 | 1
-0 | 1 | 1
+1 | 0 | 0
+0 | 1 | 0
 0 | 0 | 0
 
 ```javascript
@@ -405,7 +368,7 @@ ECMAScript 定义了 3 个乘性操作符：乘法、除法和求模。如果参
 > * 如果被除数是有限大的数值而除数是零，则结果是 NaN ；
 > * 如果是 Infinity 被 Infinity 除，则结果是 NaN ；
 > * 如果被除数是有限大的数值而除数是无穷大的数值，则结果是被除数；
-> * 如果被除数是零，则结果是零；
+> * 如果被除数是零，则结果是NaN；
 > * 如果有一个操作数不是数值，则在后台调用 Number() 将其转换为数值，然后再应用上面的规则。
 
 ### ~~加性操作符~~
@@ -556,7 +519,7 @@ switch ("hello world") {
 }
 ```
 
-## 第4章 变量、作用域和内存问题
+# 第4章 变量、作用域和内存问题
 
 ### 基本类型和引用类型的值
 
@@ -608,7 +571,6 @@ result = variable instanceof constructor
 ## 小结
 
 ~~基本类型值和引用类型值：~~
-
 > * 基本类型值在内存中占据固定大小的空间，因此被保存在栈内存中；
 > * 从一个变量向另一个变量复制基本类型的值，会创建这个值的一个副本；
 > * 引用类型的值是对象，保存在堆内存中；
@@ -617,7 +579,6 @@ result = variable instanceof constructor
 > * 确定一个值是哪种基本类型可以使用 typeof 操作符，而确定一个值是哪种引用类型可以使用instanceof 操作符。
 
 执行环境：
-
 > * 执行环境有全局执行环境（也称为全局环境）和函数执行环境之分；
 > * 每次进入一个新执行环境，都会创建一个用于搜索变量和函数的作用域链；
 > * 函数的局部环境不仅有权访问函数作用域中的变量，而且有权访问其包含（父）环境，乃至全局环境；
@@ -625,7 +586,6 @@ result = variable instanceof constructor
 > * 变量的执行环境有助于确定应该何时释放内存。
 
 ~~垃圾收集：~~
-
 > * 离开作用域的值将被自动标记为可以回收，因此将在垃圾收集期间被删除。
 > * “标记清除”是目前主流的垃圾收集算法，这种算法的思想是给当前不使用的值加上标记，然后再回收其内存。
 > * 另一种垃圾收集算法是“引用计数”，这种算法的思想是跟踪记录所有值被引用的次数。JavaScript引擎目前都不再使用这种算法；但在 IE 中访问非原生 JavaScript 对象（如 DOM 元素）时，这种算法仍然可能会导致问题。
@@ -714,29 +674,7 @@ var values = [1,2,3,4,5];
 alert(sum); //15
 ```
 
-方法|参数|作用|返回|是否改变原数组
-:-|:-|:-|:-|:-
-push|([item1[, item2 [, . . . [, itemN]]]])|逐个添加到数组末尾|修改后数组的长度|是
-pop|无|从数组末尾移除最后一项|移除的项|是
-unshift|([item1[, item2 [, . . . [, itemN]]]])|在数组前端添加任意个项|新数组的长度|是
-shift|无|移除的项|添加的项|是
-reverse|无|反转数组项的顺序|排序后的数组|是
-sort|([sortFunction])|没有参数时，每个数组项调用toString() 转型方法，然后比较得到的字符串，以确定如何排序。有参数时，按函数返回值确定如何排序，小于0为正序，大于0为反序。|排序后的数组|是
-concat|([item1[, item2 [, . . . [, itemN]]]])|创建当前数组一个副本，然后将接收到的参数添加到这个副本的末尾，最后返回新构建的数组。如果参数是数组，则把每一项添加到结果数组中。|新数组。|否
-slice|([start, end])|基于当前数组中的一或多个项创建一个新数组。|新数组|否
-splice|(start, deleteCount, [item1[, item2[, . . . [,itemN]]]])|向数组的中部插入项。|原数组改变。返回删除的数组|是
-indexOf|([searchElement[, fromIndex]])|某个值在数组中的第一个匹配项的索引|匹配项的索引|否
-lastIndexOf|([searchElement[, fromIndex]])|某个值在数组中的最后一个匹配项的索引|匹配项的索引|否
-every|(fn[, context])|检测每一项是否满足条件|布尔值|否
-filter|(fn[, context])|过滤数组|筛选的数组|否
-forEach|(fn[, context])|每一项运行给定函数|无|否
-map|(fn[, context])|每次函数调用的结果组成的数组|新数组|否
-some|(fn[, context])|检测某一项是否满足条件|布尔值|否
-reduce|(callbackfn[, initialValue])|顺序迭代数组的所有项，然后构建一个最终返回的值。|根据返回值|否
-reduceRight|(callbackfn[, initialValue])|反序迭代数组的所有项，然后构建一个最终返回的值。|根据返回值|否
-
-
-## Date 类型
+## ~~Date类型~~
 
 UTC 时间 1970 年 1 月 1 日午夜起至该日期止经过的毫秒数。
 
@@ -816,24 +754,16 @@ Date 类型的 valueOf() 方法，则根本不返回字符串，而是返回日�
 > * setUTCMilliseconds(毫秒)：设置UTC日期中的毫秒数。
 > * getTimezoneOffset()：返回本地时间与UTC时间相差的分钟数。例如，美国东部标准时间返回300。在某地进入夏令时的情况下，这个值会有所变化。
 
-## RegExp 类型
+## ~~RegExp 类型~~
 
 ~~标志：~~
 > * g ：表示全局（global）模式，即模式将被应用于所有字符串，而非在发现第一个匹配项时立即停止；
 > * i ：表示不区分大小写（case-insensitive）模式，即在确定匹配项时忽略模式与字符串的大小写；
 > * m ：表示多行（multiline）模式，即在到达一行文本末尾时还会继续查找下一行中是否存在与模式匹配的项。
 
-使用RegExp 构造函数，它接收两个参数：一个是要匹配的字符串模式，另一个是可选的标志字符串。
+使用RegExp 构造函数，它接收两个参数：一个是要匹配的字符串模式，另一个是可选的标志字符串。由于 RegExp 构造函数的模式参数是字符串，所以在某些情况下要对字符进行双重转义。所有元字符必须双重转义，那些已经转义过的字符也是如此。
 
-由于 RegExp 构造函数的模式参数是字符串，所以在某些情况下要对字符进行双重转义。所有元字符必须双重转义，那些已经转义过的字符也是如此。
-
-字面量模式|等价的字符串
-:-:|:-:
-/name\/age/|"name\\/age"
-/\d.\d{1,2}/|"\\d.\\d{1,2}"
-/\w\\hello\\123/|"\\w\\\\hello\\\\123"
-
-### RegExp 实例方法
+### ~~RegExp 实例方法~~
 
 > * exec(str)：在没有匹配项的情况下返回 null 。返回的数组虽然是 Array 的实例，但包含两个额外的属性： index 和 input 。index 表示匹配项在字符串中的位置，而 input 表示应用正则表达式的字符串。数组中的第一项是匹配的整个字符串，第二项包含与第一个捕获组匹配的内容，第三项包含与第二个捕获组匹配的内容。即使在模式中设置了全局标志（ g ），它每次也只会返回一个匹配项。在不设置全局标志的情况下，在同一个字符串上多次调用 exec() 将始终返回第一个匹配项的信息。而在设置全局标志的情况下，每次调用 exec() 则都会在字符串中继续查找新匹配项，如下面的例子所示。
 
@@ -864,7 +794,7 @@ var sum = new Function("num1", "num2", "return num1 + num2"); // 不推荐
 
 解析器会率先读取函数声明，并使其在执行任何代码之前可用（可以访问）；至于函数表达式，则必须等到解析器执行到它所在的代码行，才会真正被解释执行。
 
-### 作为值的函数
+### ~~作为值的函数~~
 
 根据某个对象属性对数组进行排序：
 
@@ -897,7 +827,7 @@ function createComparisonFunction(propertyName) {
 
 ## 基本包装类型
 
-### Number 类型
+### ~~Number 类型~~
 
 Number 类型也重写了 valueOf() 、 toLocaleString() 和 toString()方法。
 
@@ -974,31 +904,11 @@ localeCompare(string)返回下列值中的一个：
 
 > * fromCharCode(string)：接收一或多个字符编码，然后将它们转换成一个字符串。
 
- 
-方法|参数|作用|返回|是否改变原字符串
-:-|:-|:-|:-|:-
-concat|([item1[, item2 [, . . . [, itemN]]]])|拼接任意多个字符串|新字符串|否
-slice|([start[, end]])|创建新字符串|新字符串|否
-substring|([start[, end]])|创建新字符串|新字符串|否
-substr|([start[, length]])|创建新字符串|新字符串|否
-indexOf|(string)|查找字符串|字符串的位置|否
-lastIndexOf|(string])|查找字符串|字符串的位置|否
-toLowerCase|无|转为小写|新字符串|否
-toLocaleLowerCase|无|转为小写|新字符串|否
-toUpperCase|无|转为大写|新字符串|否
-toLocaleUpperCase|无|转为大写|新字符串|否
-match|(pattern)|匹配字符串|匹配数组|否
-search|(string/pattern)|查找字符串|第一个匹配项的索引|否
-replace|(string/pattern, string/function)|替换字符串|新的字符串|否
-split|(string/pattern[, length])|分割字符串|分割字符串数组|否
-localeCompare|(string)|比较两个字符串|-1/0/1|否
-fromCharCode|(string)|将一个或多个字符编码转成一个字符串|新的字符串|否
-
 ## 单体内置对象
 
 ### Global 对象
 
-**URI 编码方法**
+~~**URI 编码方法**~~
 
 > * encodeURI(uri)：用于整个 URI。不会对本身属于 URI 的特殊字符进行编码，例如冒号、正斜杠、问号和井字号。
 > * encodeURIComponent(uri)：用于对 URI 中的某一段。任何非标准字符进行编码。
@@ -1011,7 +921,7 @@ fromCharCode|(string)|将一个或多个字符编码转成一个字符串|新的
 
 在 eval() 中创建的任何变量或函数都不会被提升，因为在解析代码的时候，它们被包含在一个字符串中；它们只在 eval() 执行的时候创建。
 
-**window 对象**
+~~**window 对象**~~
 
 ```javascript
 var global = function(){
@@ -1019,7 +929,7 @@ var global = function(){
 }();
 ```
 
-### Math 对象
+### ~~Math 对象~~
 
 > * Math.min()：求最小值。
 > * Math.max()：求最大值。
@@ -1098,7 +1008,7 @@ Object.defineProperty(book, "year", {
 
 ## 创建对象
 
-### 工厂模式 
+### 工厂模式
 
 ```javascript
 function createPerson(name, age, job){
@@ -1115,7 +1025,7 @@ function createPerson(name, age, job){
 
 解决了创建多个相似对象的问题。但却没有解决对象识别的问题（即怎样知道一个对象的类型）。
 
-### 构造函数模式 
+### 构造函数模式
 
 ```javascript
 function Person(name, age, job){
@@ -1138,7 +1048,6 @@ new 操作符经历四个步骤：
 **构造函数的问题**
 
 每个方法都要在每个实例上重新创建一遍。
-
 
 ### 原型模式
 
@@ -1186,8 +1095,7 @@ Object.defineProperty(Person.prototype, "constructor", {
 实例中的指针仅指向原型，而不指向构造函数。
 
 ```javascript  
-function Person(){
-}
+function Person(){}
 var friend = new Person();
 Person.prototype = {
     constructor: Person,
@@ -1417,8 +1325,7 @@ function inheritPrototype(subType, superType){
 }
 ```
 
-高效率体现在它只调用了一次 SuperType 构造函数，并且因此避免了在 SubType.
-prototype 上面创建不必要的、多余的属性。
+高效率体现在它只调用了一次 SuperType 构造函数，并且因此避免了在 SubType.prototype 上面创建不必要的、多余的属性。
 
 ```javascript
 function createAnother(original){
@@ -1429,16 +1336,6 @@ function createAnother(original){
     return clone; //返回这个对象
 }
 ```
-
-方法|作用|返回|是否改变原对象
-:-|:-|:-|:-|:-
-Object.defineProperty(object, propertyname, descriptor)|修改数据属性、访问器属性描述符|改变后的对象|是
-Object.defineProperties(object, descriptors)|修改数据属性、访问器属性描述符|改变后的对象|是
-Object.getOwnPropertyDescriptor(object, descriptors)|获取数据属性、访问器属性描述符|描述符对象|否
-Object.getPrototypeOf(object)|获取prototype的值|prototype值|否
-Object.hasOwnProperty(object, propertyname)|检测自定义属性|布尔值|否
-Object.keys(object)|返回一个包含所有可枚举属性的字符串数组|数组|否
-Object.create(obj[, descriptors])|返回一个实例，它的[[prototype]]值为obj|对象|否
 
 # 第7章 函数表达式
 
@@ -1472,6 +1369,7 @@ var compareNames = createComparisonFunction("name");
 var result = compareNames({ name: "Nicholas" }, { name: "Greg" });
 ```
 
+```javascript
 匿名函数作用域链：[
     全局变量对象：[
         {
@@ -1501,6 +1399,7 @@ var result = compareNames({ name: "Nicholas" }, { name: "Greg" });
         }
     ]
 ]
+```
 
 **闭包与变量**
 
@@ -1745,40 +1644,6 @@ function getQueryStringArgs(){
 录。
 > * location.reload([boolean])：不传递任何参数，页面就会从浏览器缓存中重新加载。如果要强制从服务器重新加载，为该方法传递参数 true 。
 
-属性|作用|兼容性
-:-|:-|:-
-screenLeft|窗口相对于屏幕左边的位置|IE、Safari、Opera 和 Chrome
-screenTop|窗口相对于屏幕上边的位置|IE、Safari、Opera 和 Chrome
-screenX|窗口相对于屏幕左边的位置|Firefox、Safari、Chrome
-screenY|窗口相对于屏幕上边的位置|Firefox、Safari、Chrome
-innerWidth|页面视图区的宽度|IE9+
-innerHeight|页面视图区的高度|IE9+
-outerWidth|浏览器窗口本身的宽度|IE9+
-outerHeight|浏览器窗口本身的高度|IE9+
-document.documentElement.clientWidth|页面视口的宽度|IE6+标准模式
-document.documentElement.clientHeight|页面视口的高度|IE6+标准模式
-document.body.clientWidth|页面视口的宽度|混杂模式
-document.body.clientHeight|页面视口的高度|混杂模式
-
-方法|作用
-:-|:-
-moveTo(x, y)|将窗口精确地移动到一个新位置。禁用。
-moveBy(px, py)|将窗口移动到相对的位置。禁用。
-resizeTo(x, y)|调整浏览器窗口的大小。禁用。
-resizeBy(px, py)|调整浏览器窗口的相对大小。禁用。
-open(url[, framename, attribute, boolean])|导航到一个特定的 URL。
-close()|适用于通过 window.open() 打开的弹出窗口。
-setTimeout(fn, time)|超时调用。
-clearTimeout(id)|取消超时调用。
-setInterval(fn, time)|间歇调用。
-clearInterval(id)|取消间歇调用。
-alert(string)|接受一个字符串并将其显示给用户。
-confirm(string)|显示给用户确认弹窗。
-prompt(string)|显示有一个文本输入域的弹窗。
-location.assign(url)|立即打开新 URL 并在浏览器的历史记录中生成一条记录。
-location.replace(url)|即要导航到的 URL。
-location.reload([boolean])|重新加载页面。
-
 # 第9章 客户端检测
 
 ## 能力检测
@@ -1982,9 +1847,9 @@ replaceChild(newnode, oldnode)|替换某个节点|被替换的节点
 removeChild(node)|删除某个节点|被删除的节点
 cloneNode(deep)|克隆某个节点|被克隆节点
 
-## Document 类型
+## ~~Document 类型~~
 
-**查找元素**
+~~**查找元素**~~
 
 > * getElementById(id):返回对拥有指定 ID 的第一个对象的引用。
 > * getElementsByTagName(tagname):返回元素的顺序是它们在文档中的顺序。
@@ -1994,20 +1859,20 @@ HTMLCollection 对象还有一个方法
 
 > * getElementsByName(name):返回带有给定 name 特性的所有元素。
 
-**特殊集合**
+~~**特殊集合**~~
 
-> * document.forms:包含文档中所有的 <form> 元素，与 document.getElementsByTagName("form")得到的结果相同；
-> * document.images:包含文档中所有的 <img> 元素，与 document.getElementsByTagName("img") 得到的结果相同；
-> * document.links:包含文档中所有带 href 特性的 <a> 元素。
+> * document.forms:包含文档中所有的 &lt;form> 元素，与 document.getElementsByTagName("form")得到的结果相同；
+> * document.images:包含文档中所有的 &lt;img> 元素，与 document.getElementsByTagName("img") 得到的结果相同；
+> * document.links:包含文档中所有带 href 特性的 &lt;a> 元素。
 
-**文档写入**
+~~**文档写入**~~
 
 > * write(string):将输出流写入到网页中。会执行script标签的javascript语句。
 > * writeln(string):将输出流写入到网页中。会执行script标签的javascript语句。
 > * open():打开网页的输出流。
 > * close():关闭网页的输出流。
 
-### Element 类型
+### ~~Element 类型~~
 
 ~~**取得特性**~~
 
@@ -2022,13 +1887,13 @@ HTMLCollection 对象还有一个方法
 > * setNamedItem(node):向列表中添加节点，以节点的 nodeName 属性为索引；
 > * item(pos):返回位于数字 pos 位置处的节点。
 
-### Text 类型
+### ~~Text 类型~~
 
-**规范化文本节点**
+~~**规范化文本节点**~~
 
 > * normalize():将所有文本节点合并成一个节点。
 
-## DOM 操作技术
+## ~~DOM 操作技术~~
 
 ### ~~动态脚本~~
 
@@ -2061,7 +1926,7 @@ function loadStyleString(css){
 }
 ```
 
-## 小结
+## ~~小结~~
 
 > * 最基本的节点类型是 Node ，用于抽象地表示文档中一个独立的部分；所有其他类型都继承自Node 。
 > * Document 类型表示整个文档，是一组分层节点的根节点。在 JavaScript 中，document 对象是Document 的一个实例。使用 document 对象，有很多种方式可以查询和取得节点。
@@ -2081,7 +1946,7 @@ Attr|2|特性的名称|特性的值|null|Document|没有子节点|createAttribut
 
 # 第11章 DOM 扩展
 
-## 选择符 API
+## ~~选择符 API~~
 
 > * querySelector(selector): 返回与该模式匹配的第一个元素。
 > * querySelectorAll(selector): 返回的是一个 NodeList 的实例。
@@ -2103,18 +1968,18 @@ function matchesSelector(element, selector){
 }
 ```
 
-## 元素遍历
+## ~~元素遍历~~
 
 > * getElementsByClassName(className):返回带有指定类的所有元素的 NodeList 。
 
-**classList 属性**
+~~**classList 属性**~~
 
 > * add(value) ：将给定的字符串值添加到列表中。如果值已经存在，就不添加了。
 > * contains(value) ：表示列表中是否存在给定的值，如果存在则返回 true ，否则返回 false 。
 > * remove(value) ：从列表中删除给定的字符串。
 > * toggle(value) ：如果列表中已经存在给定的值，删除它；如果列表中没有给定的值，添加它。
 
-### HTMLDocument 的变化
+### ~~HTMLDocument 的变化~~
 
 **readyState 属性**
 
@@ -2132,7 +1997,7 @@ Document 的 readyState 属性有两个可能的值：
     > * "beforeend":在当前元素之下插入一个新的子元素或在最后一个子元素之后再插入新的子元素；
     > * "afterend":在当前元素之后插入一个紧邻的同辈元素。
 
-### scrollIntoView() 方法
+### ~~scrollIntoView() 方法~~
 
 > * scrollIntoView([true]):滚动浏览器窗口或某个容器元素，调用元素就可以出现在视口中。
 
@@ -2199,16 +2064,7 @@ innerText 写入值时，结果会删除元素的所有子节点，插入包含�
 > * textContent：等同于innerText。
 > * outerText：读取文本值时， outerText 与 innerText 的结果完全一样。写模式下，会替换整个元素（包括子节点）。
 
-方法|返回|返回类型
-:-|:-|:-
-getElementById(id)|指定 ID第一对象的引用|HTMLEXXXlement
-getElementsByTagName(id)|指定 ID第一对象的引用|HTMLCollection
-getElementsByName(name)|给定 name 特性的所有元素|NodeList
-querySelector(selector)|返回与该模式匹配的第一个元素|HTMLEXXXlement
-querySelectorAll(selector)|NodeList 的实例|NodeList
-getElementsByClassName(className)|指定类的所有元素|NodeList
-
-# 第12章 DOM2和DOM3
+# ~~第12章 DOM2和DOM3~~
 
 ## DOM 变化
 
@@ -2377,31 +2233,6 @@ CSSStyleRule 对象包含下列属性。
 **确定元素大小**
 
 > * getBoundingClientRect()：返回会一个矩形对象，包含 4 个属性： left 、 top 、right 和 bottom 。
-
-属性|作用|兼容性
-:-|:-|:-
-screenLeft|窗口相对于屏幕左边的位置|IE、Safari、Opera 和 Chrome
-screenTop|窗口相对于屏幕上边的位置|IE、Safari、Opera 和 Chrome
-screenX|窗口相对于屏幕左边的位置|Firefox、Safari、Chrome
-screenY|窗口相对于屏幕上边的位置|Firefox、Safari、Chrome
-innerWidth|页面视图区的宽度|IE9+
-innerHeight|页面视图区的高度|IE9+
-outerWidth|浏览器窗口本身的宽度|IE9+
-outerHeight|浏览器窗口本身的高度|IE9+
-document.documentElement.clientWidth|页面视口的宽度|IE6+标准模式
-document.documentElement.clientHeight|页面视口的高度|IE6+标准模式
-document.body.clientWidth|页面视口的宽度|混杂模式
-document.body.clientHeight|页面视口的高度|混杂模式
-offsetWidth|元素在水平方向上占用的空间大小，以像素计|好
-offsetHeight|元素在垂直方向上占用的空间大小，以像素计|好
-offsetLeft|元素的左外边框至offsetParent的距离|好
-offsetTop|元素的上外边框至至offsetParent的距离|好
-clientWidth|元素内容区宽度加上左右内边距宽度|好
-clientHeight|元素内容区高度加上上下内边距高度|好
-scrollWidth|在没有滚动条的情况下，元素内容的总宽度|好
-scrollHeight|在没有滚动条的情况下，元素内容的总高度。|好
-scrollLeft|被隐藏在内容区域左侧的像素数|好
-scrollTop|被隐藏在内容区域上方的像素数|好
 
 ## 遍历
 
@@ -2573,9 +2404,9 @@ type|String|只读|被触发的事件的类型
 > * unload ：当页面完全卸载后在 window 上面触发，当所有框架都卸载后在框架集上面触发，或者当嵌入的内容卸载完毕后在 <object> 元素上面触发。
 > * abort ：在用户停止下载过程时，如果嵌入的内容没有加载完，则在 <object> 元素上面触发。
 > * error ：当发生 JavaScript 错误时在 window 上面触发，当无法加载图像时在 <img> 元素上面触发，当无法加载嵌入内容时在 <object> 元素上面触发，或者当有一或多个框架无法加载时在框架集上面触发。第 17 章将继续讨论这个事件。
-> * select ：当用户选择文本框（ <input> 或 <texterea> ）中的一或多个字符时触发。
+> * select ：当用户选择文本框（ &lt;input> 或 &lt;texterea> ）中的一或多个字符时触发。
 > * resize ：当窗口或框架的大小变化时在 window 或框架上面触发。
-> * scroll ：当用户滚动带滚动条的元素中的内容时，在该元素上面触发。 <body> 元素中包含所加载页面的滚动条。
+> * scroll ：当用户滚动带滚动条的元素中的内容时，在该元素上面触发。 &lt;body> 元素中包含所加载页面的滚动条。
 
 ### 焦点事件
 
@@ -2898,31 +2729,6 @@ event.button = 0;
 //触发事件
 btn.fireEvent("onclick", event);
 ```
-
-属性|作用|兼容性
-:-|:-|:-
-window.screenLeft|窗口相对于屏幕左边的位置|IE、Safari、Opera 和 Chrome
-window.screenTop|窗口相对于屏幕上边的位置|IE、Safari、Opera 和 Chrome
-window.screenX|窗口相对于屏幕左边的位置|Firefox、Safari、Chrome
-window.screenY|窗口相对于屏幕上边的位置|Firefox、Safari、Chrome
-window.innerWidth|页面视图区的宽度|IE9+
-window.innerHeight|页面视图区的高度|IE9+
-window.outerWidth|浏览器窗口本身的宽度|IE9+
-window.outerHeight|浏览器窗口本身的高度|IE9+
-document.documentElement.clientWidth|页面视口的宽度|IE6+标准模式
-document.documentElement.clientHeight|页面视口的高度|IE6+标准模式
-document.body.clientWidth|页面视口的宽度|混杂模式
-document.body.clientHeight|页面视口的高度|混杂模式
-node.offsetWidth|元素在水平方向上占用的空间大小，以像素计|好
-node.offsetHeight|元素在垂直方向上占用的空间大小，以像素计|好
-node.offsetLeft|元素的左外边框至offsetParent的距离|好
-node.offsetTop|元素的上外边框至至offsetParent的距离|好
-node.clientWidth|元素内容区宽度加上左右内边距宽度|好
-node.clientHeight|元素内容区高度加上上下内边距高度|好
-node.scrollWidth|在没有滚动条的情况下，元素内容的总宽度|好
-node.scrollHeight|在没有滚动条的情况下，元素内容的总高度。|好
-node.scrollLeft|被隐藏在内容区域左侧的像素数|好
-node.scrollTop|被隐藏在内容区域上方的像素数|好
 
 # 第14章 表单脚本
 
@@ -3329,7 +3135,7 @@ context.fillStyle = "rgba(0,0,255,1)";
 context.fillRect(30, 30, 50, 50);
 ```
 
-## WebGL
+## ~~WebGL~~
 WebGL是针对Canvas的3D上下文。WebGL 并不是 W3C 制定的标准。
 
 ### 类型化数组
@@ -4185,15 +3991,6 @@ function curry(fn){
 > * Object.freeze(object)：冻结对象。
 > * Object.isFrozen(object)：检测对象是否冻结。
 
-方法|作用|返回|是否改变原对象
-:-|:-|:-|:-|:-
-Object.preventExtensions(object)|阻止添加自身的属性|不可扩展的对象|是
-Object.isExtensible(object)|检测对象是否可以扩展|布尔值|否
-Object.seal(object)|阻止修改现有属性的特性，并阻止添加新属性|密封的对象|否
-Object.isSealed(object)|检测对象是否密封|布尔值|否
-Object.freeze(object)|：冻结对象|冻结的对象|否
-Object.isFrozen(object)|检测对象是否冻结|布尔值|否
-
 # 第23章 离线应用与客户端存储
 
 ## 离线检测
@@ -4567,3 +4364,236 @@ Web Worker 本身也是一个最小化的运行环境。
 ### 包含其他脚本
 
 > * importScripts(url)：每个加载过程都是异步进行的，因此所有脚本加载并执行之后， importScripts() 才会执行。
+
+# 总结：
+
+**Number()方法：**
+类型|数值|转化
+:-|:-|:-
+Boolean|true<br>false|1<br>0
+Number|任意数|原值
+Null|null|0
+Undefined|undefined|NaN
+String|"+1"<br>"-1"<br>"011"<br>"1.1"<br>"01.1"<br>"0xf"<br>|1<br>1<br>11<br>1.1<br>1.1<br>15<br>NaN
+Object|先调用valueOf()，没有则调用toString()，依照前面的规则转换返回值。|转换后的结果
+
+**parseInt()方法：**
+类型|数值|转化
+:-|:-|:-
+Boolean|true<br>false|NaN<br>NaN
+Number|+1<br>-1<br>11<br>1.1<br>0xf|1<br>-1<br>11<br>1<br>1<br>15
+Null|null|NaN
+Undefined|undefined|NaN
+String|"1234blue"<br>""<br>"0xA"<br>"070"<br>"70"<br>"0xf"|1234<br>NaN<br>10<br>56<br>70<br>15
+Object|先调用valueOf()，没有则调用toString()，依照前面的规则转换返回值。|转换后的结果
+
+操作符|名称|表示|结果|例子
+:-|:-|:-|:-|:-
+一元|递增|++|Number()转换加1|
+一元|递减|--|Number()转换减1|
+一元|加|+|Number()转换|
+一元|减|-|Number()转换|
+位|按位非（NOT）|~|数值的反码|var num1 = 25; // 二进制 00000000000000000000000000011001<br>var num2 = ~num1; // 二进制 11111111111111111111111111100110<br>alert(num2); // -26
+位|按位与（AND）|&|两个数值的对应位都是 1 时才返回 1|25  = 0000 0000 0000 0000 0000 0000 0001 1001<br>3   = 0000 0000 0000 0000 0000 0000 0000 0011<br>---------------------------------------------<br>AND = 0000 0000 0000 0000 0000 0000 0000 0001
+位|按位或（OR）|&#124;|有一个位是 1的情况下就返回1|25  = 0000 0000 0000 0000 0000 0000 0001 1001<br>3   = 0000 0000 0000 0000 0000 0000 0000 0011<br>---------------------------------------------<br>OR = 0000 0000 0000 0000 0000 0000 0001 1011
+位|按位异或（XOR）|^|两个数值对应位上只有一个 1 时才返回 1|25  = 0000 0000 0000 0000 0000 0000 0001 1001<br>3   = 0000 0000 0000 0000 0000 0000 0000 0011<br>---------------------------------------------<br>XOR = 0000 0000 0000 0000 0000 0000 0001 1010
+位|左移|<<|将数值的所有位向左移动指定的位数|-80<<2 // -320
+位|右移|>>|将数值的所有位向右移动指定的位数|-10>>2 // -3
+位|无符号右移|>>>|忽略符号位，空位都以0补齐|-10>>>2 // 1073741821<br>80>>>2 // 20
+布尔|逻辑非|!|Boolean()转换|
+布尔|逻辑与|&&|两个为true返回true，否则返回Boolean()转为false的值|
+布尔|逻辑或|&#124;&#124;|两个为false返回false，否则返回Boolean()转为true的值|
+乘性|乘法|*|略| NaN * 1 // NaN <br> Infinity * 0 // NaN<br>Infinity * -1 // -Infinity
+乘性|除法|/|略| NaN / 1 // NaN <br> Infinity / Infinity // NaN<br>0 / 0  // NaN <br> -1 / 0 // -Infinity <br> -1 / Infinity // -0
+乘性|求模|%|略| Infinity % 2 // NaN <br> 1 % 0 // NaN<br>Infinity / Infinity  // NaN <br> -2 % Infinity // -2 <br> -1 % 0 // NaN
+加性|加法|+|如果有一个数是字符串，另一个数要转成字符串。布尔，Null，Undefind要转成数值。对象要调用valueOf()，否则调用toString()。| -Infinity + Infinity // NaN
+加性|减法|-|如果有一个数是字符串，、布尔值、 null 或 undefined ，则先在后台调用 Number() 函数将其转换为数值。对象要调用valueOf()，否则调用toString()。| Infinity - Infinity // NaN <br> -Infinity - -Infinity // NaN
+关系|小于|<|如果两个操作数都是字符串，则比较两个字符串对应的字符编码值。如果一个操作数是数值，则将另一个操作数转换为一个数值，然后执行数值比较。对象要调用valueOf()，否则调用toString()。|
+关系|大于|>|如果两个操作数都是字符串，则比较两个字符串对应的字符编码值。如果一个操作数是数值，则将另一个操作数转换为一个数值，然后执行数值比较。|
+关系|小于等于|<=|如果两个操作数都是字符串，则比较两个字符串对应的字符编码值。如果一个操作数是数值，则将另一个操作数转换为一个数值，然后执行数值比较。|
+关系|大于等于|>=|如果两个操作数都是字符串，则比较两个字符串对应的字符编码值。如果一个操作数是数值，则将另一个操作数转换为一个数值，然后执行数值比较。|
+相等|相等|==|有一个操作数是布尔值、字符串，则在比较相等性之前先将其转换为数值。一个对象要调用valueOf()，否则调用toString()。两个对象要比较引用。null与undefined相等|null == undefined // true 
+相等|不相等|!=|有一个操作数是布尔值、字符串，则在比较相等性之前先将其转换为数值。一个对象要调用valueOf()，否则调用toString()。两个对象要比较引用。null与undefined相等|null != undefined // false
+相等|全等|===|略|
+相等|全等|!==|略|
+条件|三目|? :|略|
+赋值|乘/赋值|*=|略|
+赋值|除/赋值|/=|略|
+赋值|模/赋值|%=|略|
+赋值|加/赋值|+=|略|
+赋值|减/赋值|-=|略|
+赋值|左移/赋值|<<=|略|
+赋值|有符号右移/赋值|>>=|略|
+赋值|无符号右移/赋值|>>>=|略|
+逗号|逗号|,|略|
+
+**Object静态方法**
+方法|作用|返回值|改变原值|例子
+:-|:-|:-|:-|:-|:-
+Object.defineProperty(object, propertyname, descriptor)|修改数据属性、访问器属性描述符|改变后的对象|是
+Object.defineProperties(object, descriptors)|修改数据属性、访问器属性描述符|改变后的对象|是
+Object.getOwnPropertyDescriptor(object, descriptors)|获取数据属性、访问器属性描述符|描述符对象|否
+Object.getPrototypeOf(object)|获取prototype的值|prototype值|否
+Object.hasOwnProperty(object, propertyname)|检测自定义属性|布尔值|否
+Object.keys(object)|返回一个包含所有可枚举属性的字符串数组|数组|否
+Object.create(obj[, descriptors])|返回一个实例，它的[[prototype]]值为obj|对象|否
+Object.preventExtensions(object)|阻止添加自身的属性|不可扩展的对象|是
+Object.isExtensible(object)|检测对象是否可以扩展|布尔值|否
+Object.seal(object)|阻止修改现有属性的特性，并阻止添加新属性|密封的对象|否
+Object.isSealed(object)|检测对象是否密封|布尔值|否
+Object.freeze(object)|：冻结对象|冻结的对象|否
+Object.isFrozen(object)|检测对象是否冻结|布尔值|否
+
+**Object实例属性和方法**
+属性和方法|作用|返回值|改变原值|例子
+:-|:-|:-|:-|:-
+constructor|保存着用于创建当前对象的函数|构造函数|否|
+hasOwnProperty(propertyName)|检查实例属性是否存在|布尔值|否|
+isPrototypeOf(object)|检查传入的对象是否是传入对象的原型|布尔值|否|function Baz() {}<br>var baz = new Baz();<br>console.log(Baz.prototype.isPrototypeOf(baz)); // true
+propertyIsEnumerable(propertyName)|检查给定的属性是否能够使用 for-in 语句来枚举,通过原型链继承的属性除外。|布尔值|否|var o = {prop: "is enumerable"};<br>o.propertyIsEnumerable('prop');   //  返回 true
+toLocaleString()|返回对象的字符串表示，该字符串与执行环境的地区对应。|字符串|否|
+toString()|返回对象的字符串表示。|字符串|否
+valueOf()|返回对象的字符串、数值或布尔值表示。通常与 toString() 方法的返回值 相同。|字符串|否
+
+**Array数组方法**
+方法|名称|作用|返回|改变原数组
+:-|:-|:-|:-|:-|:-
+转换方法|toString()|返回由数组中每个值的字符串形式拼接而成的一个以逗号分隔的字符串。|字符串|否
+转换方法|valueOf()||数组|否
+转换方法|toLocaleString()|创建一个数组值的以逗号分隔的字符串。为了取得每一项的值，调用的是每一项的 toLocaleString() 方法|字符串|否
+栈方法|push([item1[, item2 [, . . . [, itemN]]]])|逐个添加到数组末尾|修改后数组的长度|是
+栈方法|pop()|从数组末尾移除最后一项|移除的项|是
+队列方法|unshift([item1[, item2 [, . . . [, itemN]]]])|在数组前端添加任意个项|新数组的长度|是
+队列方法|shift()|移除的项|添加的项|是
+重排序方法|reverse()|反转数组项的顺序|排序后的数组|是
+重排序方法|sort([sortFunction])|没有参数时，每个数组项调用toString() 转型方法，然后比较得到的字符串，以确定如何排序。有参数时，按函数返回值确定如何排序，小于0为正序，大于0为反序。|排序后的数组|是
+操作方法|concat([item1[, item2 [, . . . [, itemN]]]])|创建当前数组一个副本，然后将接收到的参数添加到这个副本的末尾，最后返回新构建的数组。如果参数是数组，则把每一项添加到结果数组中。|新数组。|否
+操作方法|slice([start, end])|基于当前数组中的一或多个项创建一个新数组。|新数组|否
+操作方法|splice(start, deleteCount, [item1[, item2[, . . . [,itemN]]]])|向数组的中部插入项。|原数组改变。返回删除的数组|是
+位置方法|indexOf([searchElement[, fromIndex]])|某个值在数组中的第一个匹配项的索引|匹配项的索引|否
+位置方法|lastIndexOf([searchElement[, fromIndex]])|某个值在数组中的最后一个匹配项的索引|匹配项的索引|否
+迭代方法|every(fn[, context])|检测每一项是否满足条件|布尔值|否
+迭代方法|filter(fn[, context])|过滤数组|筛选的数组|否
+迭代方法|forEach(fn[, context])|每一项运行给定函数|无|否
+迭代方法|map(fn[, context])|每次函数调用的结果组成的数组|新数组|否
+迭代方法|some(fn[, context])|检测某一项是否满足条件|布尔值|否
+归并方法|reduce(callbackfn[, initialValue])|顺序迭代数组的所有项，然后构建一个最终返回的值。|根据返回值|否
+归并方法|reduceRight(callbackfn[, initialValue])|反序迭代数组的所有项，然后构建一个最终返回的值。|根据返回值|否
+
+**RegExp 构造函数属性**
+长属性名|短属性名|说明
+input|$_|最近一次要匹配的字符串。Opera未实现此属性
+lastMatch|$&|最近一次的匹配项。Opera未实现此属性
+lastParen|$+|最近一次匹配的捕获组。Opera未实现此属性
+leftContext|$`|input字符串中lastMatch之前的文本
+multiline|$*|布尔值，表示是否所有表达式都使用多行模式。IE和Opera未实现此属性
+rightContext|$'|Input字符串中lastMatch之后的文本
+
+**String字符串方法**
+方法|名称|作用|返回|是否改变原字符串
+:-|:-|:-|:-|:-
+字符方法|charAt(index)|返回索引的字符|字符|否
+字符方法|charCodeAt(index)|返回索引的字符字符编码|编码|否
+字符串操作方法|concat([item1[, item2 [, . . . [, itemN]]]])|拼接任意多个字符串|新字符串|否
+字符串操作方法|slice([start[, end]])|创建新字符串|新字符串|否
+字符串操作方法|substring([start[, end]])|创建新字符串|新字符串|否
+字符串操作方法|substr([start[, length]])|创建新字符串|新字符串|否
+字符串位置方法|indexOf(string)|查找字符串|字符串的位置|否
+字符串位置方法|lastIndexOf(string])|查找字符串|字符串的位置|否
+字符串大小写转换方法|toLowerCase()|转为小写|新字符串|否
+字符串大小写转换方法|toLocaleLowerCase()|转为小写|新字符串|否
+字符串大小写转换方法|toUpperCase()|转为大写|新字符串|否
+字符串大小写转换方法|toLocaleUpperCase()|转为大写|新字符串|否
+字符串的模式匹配方法|match(pattern)|匹配字符串|匹配数组|否
+字符串的模式匹配方法|search(string/pattern)|查找字符串|第一个匹配项的索引|否
+字符串的模式匹配方法|replace(string/pattern, string/function)|替换字符串|新的字符串|否
+字符串分割方法|split(string/pattern[, length])|分割字符串|分割字符串数组|否
+字符串比较方法|localeCompare(string)|比较两个字符串|-1/0/1|否
+字符串fromCharCode()方法|fromCharCode(string)|将一个或多个字符编码转成一个字符串|新的字符串|否
+
+**字符串方法replace()第二个参数是字符串时，可以用下面的符号代替**
+字符序列|替换文本
+:-|:-
+$$|$
+$&|匹配整个模式的子字符串。与 RegExp.lastMatch 的值相同
+$'|匹配的子字符串之前的子字符串。与 RegExp.leftContext 的值相同
+$`|匹配的子字符串之后的子字符串。与 RegExp.rightContext 的值相同
+$n|匹配第n个捕获组的子字符串，其中n等于0～9。
+$nn|匹配第nn个捕获组的子字符串，其中nn等于01～99。
+
+**模式**
+模式|作用|优点|缺点|例子
+:-|:-|:-|:-|:-
+工厂模式|解决了创建多个相似对象的问题|解决了创建多个相似对象的问题|没有解决对象识别的问题|<pre>function createPerson(name, age, job){<br>   var o = new Object();<br>   o.name = name;<br>   o.age = age;<br>   o.job = job;<br>   o.sayName = function(){<br>      alert(this.name);<br>   };<br>   return o;<br>}</pre>
+构造函数模式||对象识别的问题|每个方法都要在每个实例上重新创建一遍|<pre>function Person(name, age, job){<br>   this.name = name;<br>   this.age = age;<br>   this.job = job;<br>   this.sayName = function(){<br>      alert(this.name);<br>   };<br>}</pre>
+原型模式||每个方法都要在每个实例上重新创建一遍|所有实例在默认情况下都将取得相同的属性值|<pre><br>function Person(){}<br>var friend = new Person();<br>Person.prototype = {<br>   constructor: Person,<br>   name : "Nicholas",<br>   age : 29,<br>   job : "Software Engineer",<br>   sayName = function(){<br>      alert(this.name);<br>   };<br>}<br>friend.sayName(); //error</pre>
+组合使用构造函数模式和原型模式||构造函数模式用于定义实例属性，而原型模式用于定义方法和共享的属性。||<pre>function Person(name, age, job){<br>   this.name = name;<br>   this.age = age;<br>   this.job = job;<br>}<br>Person.prototype = {<br>   constructor: Person,<br>   sayName = function(){<br>      alert(this.name);<br>   };<br>}</pre>
+动态原型模式|检查某个应该存在的方法是否有效，来决定是否需要初始化原型。|||<pre>function Person(name, age, job){<br>   this.name = name;<br>   this.age = age;<br>   this.job = job;<br>   if (typeof this.sayName != "function"){<br>       Person.prototype.sayName = function(){<br>          alert(this.name);<br>       };<br>   }<br>}</pre>
+寄生构造函数模式|封装创建对象的代码，然后再返回新创建的对象。|与构造函数模式区别在于它不用this,而是在内部创建一个新的对象。创建一个具有额外方法的特殊数组。||<pre>function Person(name, age, job){<br>   this.name = name;<br>   this.age = age;<br>   this.job = job;<br>   o.sayName = function(){<br>     alert(this.name);<br>   };<br>  return o;<br>}<br>var friend = new Person("Nicholas", 29, "Software Engineer");</pre>
+稳妥构造函数模式|稳妥构造函数模式提供的这种安全性，使得它非常适合在某些安全执行环境。|安全||<pre>function Person(name, age, job){<br>   var o = new Object();<br>   o.sayName = function(){<br>     alert(name);<br>   };<br>  return o;<br>}<br>var friend = Person("Nicholas", 29, "Software Engineer");</pre>
+
+**继承**
+继承|作用|优点|缺点|例子
+:-|:-|:-|:-|:-
+借用构造函数|||每个方法都要在每个实例上重新创建一遍|<pre>function SuperType(){<br>   this.colors = ["red", "blue", "green"];<br>}<br>function SubType(){<br>    SuperType.call(this);<br>}</pre>
+组合继承||组合继承避免了原型链和借用构造函数的缺陷。instanceof 和 isPrototypeOf() 也能够用于识别基于组合继承建的对象。||<pre>function SuperType(){<br>    this.name = name;<br>   this.colors = ["red", "blue", "green"];<br>}<br>SuperType.prototype.sayName = function(){<br>    alert(this.name);    <br>};<br>function SubType(name, age){<br>    SuperType.call(this);<br>   this.age = age;<br>}<br>SubType.prototype = new SuperType();<br>    SubType.prototype.constructor = SubType;<br>    SubType.prototype.sayAge = function(){<br>    alert(this.age);<br>};</pre>
+原型式继承||||<pre>function object(o){<br>    function F(){}<br>   F.prototype = o;<br>   return new F();<br>}</pre>
+寄生式继承||||<pre>function createAnother(original){<br>    var clone = object(original); //通过调用函数创建一个新对象<br>   clone.sayHi = function(){ //以某种方式来增强这个对象<br>        alert("hi");<br>   };<br>   return clone;<br>}</pre>
+寄生组合式继承||高效率体现在它只调用了一次 SuperType 构造函数，并且因此避免了在 SubType.prototype 上面创建不必要的、多余的属性。||<pre>function SuperType(name){<br>    this.name = name;<br>   this.colors = ["red", "blue", "green"];<br>}<br>SuperType.prototype.sayName = function(){<br>    alert(this.name);<br>};<br>function SubType(name, age){<br>   SuperType.call(this, name); // 第二次调用 SuperType()<br>   this.age = age;<br>}<br>inheritPrototype(SubType, SuperType);<br>inheritPrototype(SubType, SuperType);<br>SubType.prototype.sayAge = function(){<br>   alert(this.age);<br>};<br>function inheritPrototype(subType, superType){<br>   var prototype = object(superType.prototype); //创建对象<br>   prototype.constructor = subType; //增强对象<br>   subType.prototype = prototype; //指定对象<br>}</pre>
+
+**window方法**
+名称|方法|作用
+:-|:-|:-
+窗口位置|moveTo(x, y)|将窗口精确地移动到一个新位置。禁用。
+窗口位置|moveBy(px, py)|将窗口移动到相对的位置。禁用。
+窗口大小|resizeTo(x, y)|调整浏览器窗口的大小。禁用。
+窗口大小|resizeBy(px, py)|调整浏览器窗口的相对大小。禁用。
+窗口打开|open(url[, framename, attribute, boolean])|导航到一个特定的 URL。
+窗口关闭|close()|适用于通过 window.open() 打开的弹出窗口。
+间歇调用|setTimeout(fn, time)|超时调用。
+取消间歇调用|clearTimeout(id)|取消超时调用。
+超时调用|setInterval(fn, time)|间歇调用。
+取消超时调用|clearInterval(id)|取消间歇调用。
+系统对话框|alert(string)|接受一个字符串并将其显示给用户。
+系统对话框|confirm(string)|显示给用户确认弹窗。
+系统对话框|prompt(string)|显示有一个文本输入域的弹窗。
+location对象|location.assign(url)|立即打开新 URL 并在浏览器的历史记录中生成一条记录。
+location对象|location.replace(url)|即要导航到的 URL。    
+location对象|location.reload([boolean])|重新加载页面。
+
+**获取DOM方法**
+方法|返回|返回类型
+:-|:-|:-
+getElementById(id)|指定 ID第一对象的引用|HTMLEXXXlement
+getElementsByTagName(id)|指定 ID第一对象的引用|HTMLCollection
+getElementsByName(name)|给定 name 特性的所有元素|NodeList
+querySelector(selector)|返回与该模式匹配的第一个元素|HTMLEXXXlement
+querySelectorAll(selector)|NodeList 的实例|NodeList
+getElementsByClassName(className)|指定类的所有元素|NodeList
+
+**窗口属性**
+名称|属性|作用|兼容性
+:-|:-|:-|:-
+窗口位置|window.screenLeft|窗口相对于屏幕左边的位置|IE、Safari、Opera 和 Chrome
+窗口位置|window.screenTop|窗口相对于屏幕上边的位置|IE、Safari、Opera 和 Chrome
+窗口位置|window.screenX|窗口相对于屏幕左边的位置|Firefox、Safari、Chrome
+窗口位置|window.screenY|窗口相对于屏幕上边的位置|Firefox、Safari、Chrome
+窗口大小|window.innerWidth|页面视图区的宽度|IE9+
+窗口大小|window.innerHeight|页面视图区的高度|IE9+
+窗口大小|window.outerWidth|浏览器窗口本身的宽度|IE9+
+窗口大小|window.outerHeight|浏览器窗口本身的高度|IE9+
+窗口大小|document.documentElement.clientWidth|页面视口的宽度|IE6+标准模式
+窗口大小|document.documentElement.clientHeight|页面视口的高度|IE6+标准模式
+窗口大小|document.body.clientWidth|页面视口的宽度|混杂模式
+窗口大小|document.body.clientHeight|页面视口的高度|混杂模式
+元素偏移量|element.offsetWidth|元素在水平方向上占用的空间大小，以像素计|
+元素偏移量|element.offsetHeight|元素在垂直方向上占用的空间大小，以像素计|
+元素偏移量|element.offsetLeft|元素的左外边框至offsetParent的距离|
+元素偏移量|element.offsetTop|元素的上外边框至至offsetParent的距离|
+元素客户区大小|element.clientWidth|元素内容区宽度加上左右内边距宽度|
+元素客户区大小|element.clientHeight|元素内容区高度加上上下内边距高度|
+元素滚动大小|element.scrollWidth|在没有滚动条的情况下，元素内容的总宽度|
+元素滚动大小|element.scrollHeight|在没有滚动条的情况下，元素内容的总高度。|
+元素滚动大小|element.scrollLeft|被隐藏在内容区域左侧的像素数|
+元素滚动大小|element.scrollTop|被隐藏在内容区域上方的像素数|
+确定元素大小|element.getBoundingClientRect()|返回元素大小信息对象|IE9以下要处理
