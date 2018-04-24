@@ -21,7 +21,7 @@ git config --global user.email "your_email@youremail.com"
 
 ```vim
 git config --global credential.helper store
-```
+``` 
 
 ## 使用SSH协议
 初次使用git的用户要使用git协议大概需要三个步骤：
