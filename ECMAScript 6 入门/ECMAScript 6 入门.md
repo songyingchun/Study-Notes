@@ -247,4 +247,126 @@ String.raw({ raw: 'test' }, 0, 1, 2);
 String.raw({ raw: ['t','e','s','t'] }, 0, 1, 2);
 ```
 
+# 正则的扩展
 
+- RegExp构造函数第一个参数是一个正则对象，那么可以使用第二个参数指定修饰符。正则对象的修饰符是ig，它会被第二个参数i覆盖。
+```javascript
+var regex = new RegExp(/xyz/i);
+// 等价于
+var regex = /xyz/i;
+// ES6
+var regex = new RegExp(/xyz/, 'i');
+```
+
+- ES6 将这 4 个方法，在语言内部全部调用RegExp的实例方法，从而做到所有与正则相关的方法，全都定义在RegExp对象上。
+
+```javascript
+String.prototype.match 调用 RegExp.prototype[Symbol.match]
+String.prototype.replace 调用 RegExp.prototype[Symbol.replace]
+String.prototype.search 调用 RegExp.prototype[Symbol.search]
+String.prototype.split 调用 RegExp.prototype[Symbol.split]
+```
+
+- u 修饰符：ES6 对正则表达式添加了u修饰符，含义为“Unicode 模式”，用来正确处理大于\uFFFF的 Unicode 字符。
+- y 修饰符：叫做“粘连”（sticky）修饰符。g修饰符只要剩余位置中存在匹配就可，而y修饰符确保匹配必须从剩余的第一个位置开始。
+
+```javascript
+var s = 'aaa_aa_a';
+var r1 = /a+/g;
+var r2 = /a+/y;
+
+r1.exec(s) // ["aaa"]
+r2.exec(s) // ["aaa"]
+
+r1.exec(s) // ["aa"]
+r2.exec(s) // null
+```
+
+- sticky 属性：表示是否设置了y修饰符。
+- flags 属性：返回正则表达式的修饰符。
+- s 修饰符：dotAll 模式。.不匹配两个字符：一个是四个字节的 UTF-16 字符，这个可以用u修饰符解决；另一个是行终止符（line terminator character）。引入s修饰符，使得.可以匹配任意单个字符。
+
+以下四个字符属于”行终止符“。
+
+名称|表示法|字符串|Unicode
+-|-|-|-
+换行符|U+000A|"\n"|"\u000A"
+回车符|U+000D|"\r"|"\u000D"
+行分隔符|U+2028||"\u2028"
+段分隔符|U+2029||"\u2029"
+
+- 后行断言：ES2018支持后行断言（lookbehind）和后行否定断言（negative lookbehind）。
+
+```javascript
+// 先行断言：x只有在y前面才匹配，/x(?=y)/。
+/\d+(?=%)/.exec('100% of US presidents have been male') // [100]
+// 先行否定断言：x只有在y前面才匹配，/x(?=y)/。
+/\d+(?!%)/.exec('that’s all 44 of them')                 // ["44"]
+// 后行断言：x只有在y后面才匹配，/(?<=y)x/。
+/(?<=\$)\d+/.exec('Benjamin Franklin is on the $100 bill')  // ["100"]
+// 后行否定断言：x只有不在y后面才匹配，/(?<!y)x/。
+/(?<!\$)\d+/.exec('it’s is worth about €90')                // ["90"]
+```
+断言|作用|公式|例子
+-|-|-|-
+先行断言|x只有在y前面才匹配|/x(?=y)/|/\d+(?=%)/.exec('100% of US presidents have been male') // [100]
+先行否定断言|x只有不在y前面才匹配|/x(?!y)/|/\d+(?!%)/.exec('that’s all 44 of them') // ["44"]
+后行断言|x只有在y后面才匹配|/(?<=y)x/|/(?<=\$)\d+/.exec('Benjamin Franklin is on the $100 bill')  // ["100"]
+后行否定断言|x只有不在y后面才匹配|/(?<!y)x/|/(?<!\$)\d+/.exec('it’s is worth about €90')         // ["90"]
+
+后行断言需要先匹配/(?<=y)x/的x，然后再回到左边，匹配y的部分。
+
+后行断言由于执行顺序是从右到左，第二个括号是贪婪模式，第一个括号只能捕获一个字符，所以结果是1和053。
+```javascript
+/(?<=(\d+)(\d+))$/.exec('1053') // ["", "1", "053"]
+```
+
+后行断言反斜杠引用，也与通常的顺序相反，必须放在对应的那个括号之前。
+```javascript
+/(?<=\1d(o))r/.exec('hodor')  // ["r", "o"]
+```
+
+- Unicode 属性类：ES2018 引入了一种新的类的写法\p{...}和\P{...}，允许正则表达式匹配符合Unicode 某种属性的所有字符。\P{…}是\p{…}的反向匹配，即匹配不满足条件的字符。使用的时候一定要加上u修饰符。
+
+```javascript
+// 匹配所有十进制字符
+const regex = /^\p{Decimal_Number}+$/u;
+regex.test('𝟏𝟐𝟑𝟜𝟝𝟞𝟩𝟪𝟫𝟬𝟭𝟮𝟯𝟺𝟻𝟼') // true
+
+// \p{Number}甚至能匹配罗马数字。
+const regex = /^\p{Number}+$/u;
+regex.test('²³¹¼½¾') // true
+regex.test('㉛㉜㉝') // true
+regex.test('ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ') // true
+
+// 匹配所有空格
+\p{White_Space}
+
+// 匹配各种文字的所有字母，等同于 Unicode 版的 \w
+[\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Connector_Punctuation}\p{Join_Control}]
+
+// 匹配各种文字的所有非字母的字符，等同于 Unicode 版的 \W
+[^\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Connector_Punctuation}\p{Join_Control}]
+
+// 匹配 Emoji
+/\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?|\p{Emoji_Presentation}|\p{Emoji}\uFE0F/gu
+
+// 匹配所有的箭头字符
+const regexArrows = /^\p{Block=Arrows}+$/u;
+regexArrows.test('←↑→↓↔↕↖↗↘↙⇏⇐⇑⇒⇓⇔⇕⇖⇗⇘⇙⇧⇩') // true
+```
+
+- 具名组匹配：允许为每一个组匹配指定一个名字，既便于阅读代码，又便于引用。
+
+```javascript
+const RE_DATE = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
+
+const matchObj = RE_DATE.exec('1999-12-31');
+const year = matchObj.groups.year; // 1999
+const month = matchObj.groups.month; // 12
+const day = matchObj.groups.day; // 31
+```
+
+引用：如果要在正则表达式内部引用某个“具名组匹配”，可以使用\k<组名>的写法。
+
+- String.prototype.matchAll(regex)：可以一次性取出所有匹配。不过，它返回的是一个遍历器（Iterator），而不是数组。
