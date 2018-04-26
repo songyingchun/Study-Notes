@@ -1939,7 +1939,7 @@ Document|9|#document|null|null|null|可能是一个DocumentType、 Element、 Pr
 Element|1|元素的标签名|null| Document 或 Element|Document| Element 、 Text 、 Comment 、 ProcessingInstruction 、 CDATASection 或 EntityReference|createElement(str)
 Text|3|#text|节点所包含的文本|Element|Document|没有子节点|createTextNode("str")
 Comment|8|#comment|注释的内容| Document 或 Element|Document|没有子节点|createComment(str)
-CDATASection|4|#cdata-section| CDATA 区域中的内容|null|null| Document 或 Element|没有子节点|createCDataSection()
+CDATASection|4|#cdata-section| CDATA 区域中的内容|null|Document 或 Element|没有子节点|createCDataSection()
 DocumentType|10|doctype 的名称|null|null|Document|没有子节点|
 DocumentFragment|11|#document-fragment|null|null|Document|Element 、ProcessingInstruction 、 Comment 、 Text 、 CDATASection 或EntityReference |createDocumentFragment()
 Attr|2|特性的名称|特性的值|null|Document|没有子节点|createAttribute(str)
