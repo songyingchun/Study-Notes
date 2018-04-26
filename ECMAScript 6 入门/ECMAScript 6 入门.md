@@ -166,3 +166,85 @@ matchAll(regex)|一次性取出所有匹配|遍历器|否|
 
 ## 模板字符串
 
+- 反引号（`）标识。
+- 可以用来定义多行字符串，所有模板字符串的空格和换行，都是被保留的。
+- 在字符串中嵌入变量，将变量名写在${}之中。大括号内部可以放入任意的 JavaScript 表达式，可以进行运算，以及引用对象属性。模板字符串之中还能调用函数。大括号中的值不是字符串，将按照一般的规则转为字符串。如果是对象，将默认调用对象的toString。
+- 在模板字符串中需要使用反引号，则前面要用反斜杠转义。
+- 模板字符串甚至还能嵌套。
+
+**不用模板字符串**
+
+```javascript
+let template = `
+<ul>
+  <% for(let i=0; i < data.supplies.length; i++) { %>
+    <li><%= data.supplies[i] %></li>
+  <% } %>
+</ul>
+`;
+
+let evalExpr = /<%=(.+?)%>/g;
+let expr = /<%([\s\S]+?)%>/g;
+
+template = template
+  .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
+  .replace(expr, '`); \n $1 \n  echo(`');
+
+template = 'echo(`' + template + '`);';
+
+function compile(template){
+  const evalExpr = /<%=(.+?)%>/g;
+  const expr = /<%([\s\S]+?)%>/g;
+
+  template = template
+    .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
+    .replace(expr, '`); \n $1 \n  echo(`');
+
+  template = 'echo(`' + template + '`);';
+
+  let script =
+  `(function parse(data){
+    let output = "";
+
+    function echo(html){
+      output += html;
+    }
+
+    ${ template }
+
+    return output;
+  })`;
+
+  return script;
+}
+
+let parse = eval(compile(template));
+div.innerHTML = parse({ supplies: [ "broom", "mop", "cleaner" ] });
+```
+
+- 标签模板：紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。如果模板字符里面有变量，就不是简单的调用了，而是会将模板字符串先处理成多个参数，再调用函数。“标签模板”的一个重要应用，就是过滤 HTML 字符串，防止用户输入恶意内容。标签模板的另一个应用，就是多语言转换（国际化处理）。
+
+```javascript
+let a = 5;
+let b = 10;
+
+tag`Hello ${ a + b } world ${ a * b }`;
+// 等同于
+tag(['Hello ', ' world ', ''], 15, 50);
+```
+
+**String.raw()方法**
+
+模板处理函数的第一个参数（模板字符串数组），还有一个raw属性。
+
+> * String.raw：可以作为正常的函数使用。这时，它的第一个参数，应该是一个具有raw属性的对象，且raw属性的值应该是一个数组。
+
+```javascript
+String.raw({ raw: 'test' }, 0, 1, 2);
+// 't0e1s2t'
+
+// 等同于
+String.raw({ raw: ['t','e','s','t'] }, 0, 1, 2);
+```
+
+
