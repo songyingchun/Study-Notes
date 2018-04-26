@@ -138,15 +138,6 @@ s.codePointAt(0) // 134071
 // parseInt("1101111110110111", 2).toString(10)     // 57271
 ```
 
-## String.fromCodePoint()
-
-- 可以识别大于0xFFFF的字符。
-
-```javascript
-String.fromCodePoint(0x20BB7)
-// "𠮷"
-```
-
 字符串方法|作用|返回|改变原值|例子
 :-|:-|:-|:-|:-
 charPointAt(index)|能够正确处理 2 个字节储存的字符|字符编码|否
@@ -370,3 +361,153 @@ const day = matchObj.groups.day; // 31
 引用：如果要在正则表达式内部引用某个“具名组匹配”，可以使用\k<组名>的写法。
 
 - String.prototype.matchAll(regex)：可以一次性取出所有匹配。不过，它返回的是一个遍历器（Iterator），而不是数组。
+
+# 数值的扩展
+
+**二进制和八进制表示法**
+
+二进制和八进制数值的新的写法, 分别用前缀0b（或0B）和0o（或0O）表示。
+
+进制|写法|例子
+-|-|-
+二进制|0b|0b10  // 2
+八进制|0o|0o10  // 8
+十六进制|0x|0x10  // 16
+
+**Number.isInteger()**
+
+- 如果数值的精度超过这个限度，第54位及后面的位就会被丢弃，这种情况下，Number.isInteger可能会误判。
+
+```javascript
+Number.isInteger(3.0000000000000002) // true
+```
+- 小于 JavaScript 能够分辨的最小值，会被自动转为 0。
+```javascript
+Number.isInteger(5E-325) // true
+```
+
+JavaScript 采用 IEEE 754 标准，数值存储为64位双精度格式，数值精度最多可以达到 53 个二进制位（1 个隐藏位与 52 个有效位）。如果数值的精度超过这个限度，第54位及后面的位就会被丢弃。
+
+```javascript
+Number.isInteger(3.0000000000000002) // true
+
+// 原因:
+// 3.0000000000000002.toString(2)   // "11.000000000000000000000000000000000000000000000000101"
+
+// 3.0000000000000002.toString(2).length  // 54
+```
+
+**Number.EPSILON**
+
+用来设置“能够接受的误差范围”。两个浮点数的差小于这个值，我们就认为这两个浮点数相等。
+
+```javascript
+function withinErrorMargin (left, right) {
+  return Math.abs(left - right) < Number.EPSILON * Math.pow(2, 2);
+}
+0.1 + 0.2 === 0.3 // false
+withinErrorMargin(0.1 + 0.2, 0.3) // true
+```
+
+**Number.isSafeInteger()**
+
+JavaScript 能够准确表示的整数范围在-2^53到2^53之间（不含两个端点）。
+
+**Math.sign()**
+
+参数为正数，返回+1；
+参数为负数，返回-1；
+参数为 0，返回0；
+参数为-0，返回-0;
+其他值，返回NaN。
+
+**指数运算符**
+
+ES2016 新增了一个指数运算符（**）。
+指数运算符可以与等号结合，形成一个新的赋值运算符（**=）。
+
+```javascript
+2 ** 2 // 4
+2 ** 3 // 8
+```
+
+数值属性和方法|作用|返回|改变原值|例子
+:-|:-|:-|:-|:-
+Number.isFinite(number)|检查一个数值是否为有限的|布尔值|否|
+Number.isNaN(number)|检查一个数值是否为NaN|布尔值|否|
+Number.parseInt(number)|与parseInt(number)一样|数值|否
+Number.parseFloat(number)|parseFloat(number)一样|数值|否
+Number.isInteger(number)|判断一个数值是否为整数|布尔值|否
+Number.EPSILON(number)|表示 1 与大于 1 的最小浮点数之间的差|数值|否|Number.EPSILON === Math.pow(2, -52)// true
+Number.MAX_SAFE_INTEGER|最大安全数|9007199254740991||
+Number.MIN_SAFE_INTEGER|最小安全数|-9007199254740991||
+Number.isSafeInteger(number)|用来判断一个整数是否安全范围之内|布尔值|否|
+Math.trunc(number)|用于去除一个数的小数部分，返回整数部分。不是数值，先用Number()转成数值|数值|否|
+Math.sign(number)|判断一个数到底是正数、负数、还是零|数值|否|Math.sign(NaN) // NaN
+Math.cbrt(number)|用于计算一个数的立方根|数值|否|Math.cbrt(2)  // 1.2599210498948734
+Math.clz32(number)|一个数的 32 位无符号整数形式有多少个前导 0|数值|否|Math.clz32(0) // 32
+Math.imul(number)|一个 32 位的带符号整数|数值|否|Math.imul(2, 4)   // 8
+Math.fround(number)|一个数的32位单精度浮点数形式|数值|否|Math.fround(0)   // 0
+Math.hypot(number1, number2)|所有参数的平方和的平方根|数值|否|Math.hypot(3, 4);        // 5
+Math.expm1(x)||数值|否|Math.expm1(x);        // e<sup>x</sup> - 1
+Math.log1p(x)|返回1 + x的自然对数,即 Math.log(1 + x)。如果x小于-1，返回NaN。|数值|否|Math.log(x)        // Math.log1p(1)  // 0.6931471805599453
+Math.log10(x)|以 10 为底的x的对数，如果x小于 0，则返回 NaN|数值|否|Math.log10(2)      // 0.3010299956639812
+Math.log2(x)|以 2 为底的x的对数，如果x小于 0，则返回 NaN|数值|否|Math.log2(3)      // 1.584962500721156
+Math.sinh(x)|x的双曲正弦|数值|否|
+Math.cosh(x)|x的双曲余弦|数值|否|
+Math.tanh(x)|x的双曲正切|数值|否|
+Math.asinh(x)|x的反曲正弦|数值|否|
+Math.acosh(x)|x的反曲余弦|数值|否|
+Math.atanh(x)|x的反曲正切|数值|否|
+
+
+
+# 总结
+
+**字符串方法扩展**
+字符串方法|作用|返回|改变原值|例子
+:-|:-|:-|:-|:-
+charPointAt(index)|能够正确处理 2 个字节储存的字符|字符编码|否
+codePointAt(index)|能够正确处理 4 个字节储存的字符|字符编码|否|"𠮷".codePointAt(0) // 134071
+String.fromCharCode(code)|识别 16 位的 UTF-16 字符|字符|否
+String.fromCodePoint(code)|识别 32 位的 UTF-16 字符|字符|否|String.fromCodePoint(0x20BB7)// "𠮷"
+charAt(index)|字符串给定位置的字符|字符|否
+at(index)|可以识别 Unicode 编号大于0xFFFF的字符|字符|否
+normalize()|用来将字符的不同表示方法统一为同样的形式|布尔值|否|'\u01D1'.normalize() === '\u004F\u030C'.normalize()  // true
+includes(str)|表示是否找到了参数字符串|布尔值|否
+startsWith(str)|表示参数字符串是否在原字符串的头部|布尔值|否
+endsWith(str)|表示参数字符串是否在原字符串的尾部|布尔值|否
+repeat(time)|用于头部补全|新字符串|否|'x'.padStart(5, 'ab') // 'ababx'
+padStart(length, str)|用于头部补全|新字符串|否|'x'.padStart(5, 'ab') // 'ababx'
+padEnd(length, str)|用于尾部补全|新字符串|否|'x'.padEnd(5, 'ab') // 'xabab'
+matchAll(regex)|一次性取出所有匹配|遍历器|否|
+
+**数值方法扩展**
+数值属性和方法|作用|返回|改变原值|例子
+:-|:-|:-|:-|:-
+Number.isFinite(number)|检查一个数值是否为有限的|布尔值|否|
+Number.isNaN(number)|检查一个数值是否为NaN|布尔值|否|
+Number.parseInt(number)|与parseInt(number)一样|数值|否
+Number.parseFloat(number)|parseFloat(number)一样|数值|否
+Number.isInteger(number)|判断一个数值是否为整数|布尔值|否
+Number.EPSILON(number)|表示 1 与大于 1 的最小浮点数之间的差|数值|否|Number.EPSILON === Math.pow(2, -52)// true
+Number.MAX_SAFE_INTEGER|最大安全数|9007199254740991||
+Number.MIN_SAFE_INTEGER|最小安全数|-9007199254740991||
+Number.isSafeInteger(number)|用来判断一个整数是否安全范围之内|布尔值|否|
+Math.trunc(number)|用于去除一个数的小数部分，返回整数部分。不是数值，先用Number()转成数值|数值|否|
+Math.sign(number)|判断一个数到底是正数、负数、还是零|数值|否|Math.sign(NaN) // NaN
+Math.cbrt(number)|用于计算一个数的立方根|数值|否|Math.cbrt(2)  // 1.2599210498948734
+Math.clz32(number)|一个数的 32 位无符号整数形式有多少个前导 0|数值|否|Math.clz32(0) // 32
+Math.imul(number)|一个 32 位的带符号整数|数值|否|Math.imul(2, 4)   // 8
+Math.fround(number)|一个数的32位单精度浮点数形式|数值|否|Math.fround(0)   // 0
+Math.hypot(number1, number2)|所有参数的平方和的平方根|数值|否|Math.hypot(3, 4);        // 5
+Math.expm1(x)||数值|否|Math.expm1(x);        // e<sup>x</sup> - 1
+Math.log1p(x)|返回1 + x的自然对数,即 Math.log(1 + x)。如果x小于-1，返回NaN。|数值|否|Math.log(x)        // Math.log1p(1)  // 0.6931471805599453
+Math.log10(x)|以 10 为底的x的对数，如果x小于 0，则返回 NaN|数值|否|Math.log10(2)      // 0.3010299956639812
+Math.log2(x)|以 2 为底的x的对数，如果x小于 0，则返回 NaN|数值|否|Math.log2(3)      // 1.584962500721156
+Math.sinh(x)|x的双曲正弦|数值|否|
+Math.cosh(x)|x的双曲余弦|数值|否|
+Math.tanh(x)|x的双曲正切|数值|否|
+Math.asinh(x)|x的反曲正弦|数值|否|
+Math.acosh(x)|x的反曲余弦|数值|否|
+Math.atanh(x)|x的反曲正切|数值|否|
