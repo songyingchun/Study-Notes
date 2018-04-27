@@ -1118,7 +1118,6 @@ fproxy.foo === "Hello, foo" // true
 ```
 
 下面是 Proxy 支持的拦截操作一览，一共 13 种。
-
 拦截方法|作用|返回|改变原值|例子
 :-|:-|:-|:-|:-
 get(target, propKey, receiver)|拦截对象属性的读取|属性|否|proxy.foo
@@ -1155,6 +1154,30 @@ proxy.foo // TypeError: Revoked
 **this 问题**
 
 - Proxy 代理的情况下，目标对象内部的this关键字会指向 Proxy 代理。
+
+# Reflect
+目的：
+- 将Object对象的一些明显属于语言内部的方法（比如Object.defineProperty），放到Reflect对象上。
+- 修改某些Object方法的返回结果，让其变得更合理。
+- 让Object操作都变成函数行为。某些Object操作是命令式，比如name in obj和delete obj[name]，而Reflect.has(obj, name)和Reflect.deleteProperty(obj, name)让它们变成了函数行为。
+- Reflect对象的方法与Proxy对象的方法一一对应，只要是Proxy对象的方法，就能在Reflect对象上找到对应的方法。
+
+**Reflect静态方法**
+拦截方法|作用|返回|改变原值|例子
+:-|:-|:-|:-|:-
+Reflect.get(target, propKey, receiver)|查找并返回target对象的name属性。如果没有该属性，则返回undefined。|属性|否|Reflect.get(myObject, 'foo') // 1
+Reflect.set(target, propKey, value, receiver)|设置target对象的name属性等于value|布尔值|否|Reflect.set(myObject, 'foo', 2);
+Reflect.has(target, propKey)|等同于propKey in target|布尔值|否|Reflect.has(myObject, 'foo') // true
+Reflect.deleteProperty(target, propKey)|用于删除对象的属性|布尔值|否|Reflect.deleteProperty(myObj, 'foo');
+Reflect.ownKeys(target)|拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for...in的操作|数组|否|
+Reflect.getOwnPropertyDescriptor(target, propKey)|基本等同于Object.getOwnPropertyNames与Object.getOwnPropertySymbols之和|对象的所有属性|否|
+Reflect.defineProperty(target, proxy, propDesc)|等同于Object.defineProperty|布尔值|否|
+Reflect.preventExtensions(target)|等同于Object.preventExtensions|布尔值|否|Reflect.preventExtensions(myObject) // true
+Reflect.getPrototypeOf(target)|用于读取对象的__proto__属性|对象|否|Reflect.getPrototypeOf(myObj)
+Reflect.isExtensible(target)|等同于Object.isExtensible|布尔值|否|Reflect.isExtensible(myObject) // true
+Reflect.setPrototypeOf(target, proto)|设置对象的__proto__属性|第一个参数对象|否|Reflect.setPrototypeOf(myObj, OtherThing.prototype);
+Reflect.apply(target, object, args)|等同于Function.prototype.apply.call(target, object, args)||否|const youngest = Reflect.apply(Math.min, Math, ages);
+Reflect.construct(target, args)|等同于new target(...args)||否|const instance = Reflect.construct(Greeting, ['张三']);
 
 # 总结
 
@@ -1246,3 +1269,37 @@ Object.create(obj)|生成一个原型为obj的对象|对象|否|
 Object.keys(obj)|返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键名|数组|否|
 Object.values(obj)|返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值|对象|否|
 Object.entries(obj)|返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组|对象|否|
+
+**Proxy拦截操作**
+拦截方法|作用|返回|改变原值|例子
+:-|:-|:-|:-|:-
+get(target, propKey, receiver)|拦截对象属性的读取|属性|否|proxy.foo
+set(target, propKey, value, receiver)|拦截对象属性的设置|布尔值|否|proxy.foo = v
+has(target, propKey)|拦截propKey in proxy的操作|布尔值|否|propKey in proxy
+deleteProperty(target, propKey)|拦截delete proxy[propKey]的操作|布尔值|否|delete proxy[propKey]
+ownKeys(target)|拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for...in的操作|数组|否|
+getOwnPropertyDescriptor(target, propKey)|拦截Object.getOwnPropertyDescriptor(proxy, propKey)|属性的描述对象|否|
+Object.defineProperty(target, proxy, propDesc)|拦截Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)|布尔值|否|
+preventExtensions(target)|拦截Object.preventExtensions(proxy)|布尔值|否|
+getPrototypeOf(target)|拦截Object.getPrototypeOf(proxy)|对象|否|
+isExtensible(target)|拦截Object.isExtensible(proxy)|布尔值|否|
+setPrototypeOf(target, proto)|拦截Object.setPrototypeOf(proxy, proto)|布尔值|否|
+apply(target, object, args)|拦截 Proxy 实例作为函数调用的操作||否|proxy(...args)、proxy.call(object, ...args)、proxy.apply(...)
+construct(target, args)|拦截 Proxy 实例作为构造函数调用的操作||否|new proxy(...args)
+
+**Reflect静态方法**
+拦截方法|作用|返回|改变原值|例子
+:-|:-|:-|:-|:-
+Reflect.get(target, propKey, receiver)|查找并返回target对象的name属性。如果没有该属性，则返回undefined。|属性|否|Reflect.get(myObject, 'foo') // 1
+Reflect.set(target, propKey, value, receiver)|设置target对象的name属性等于value|布尔值|否|Reflect.set(myObject, 'foo', 2);
+Reflect.has(target, propKey)|等同于propKey in target|布尔值|否|Reflect.has(myObject, 'foo') // true
+Reflect.deleteProperty(target, propKey)|用于删除对象的属性|布尔值|否|Reflect.deleteProperty(myObj, 'foo');
+Reflect.ownKeys(target)|拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for...in的操作|数组|否|
+Reflect.getOwnPropertyDescriptor(target, propKey)|基本等同于Object.getOwnPropertyNames与Object.getOwnPropertySymbols之和|对象的所有属性|否|
+Reflect.defineProperty(target, proxy, propDesc)|等同于Object.defineProperty|布尔值|否|
+Reflect.preventExtensions(target)|等同于Object.preventExtensions|布尔值|否|Reflect.preventExtensions(myObject) // true
+Reflect.getPrototypeOf(target)|用于读取对象的__proto__属性|对象|否|Reflect.getPrototypeOf(myObj)
+Reflect.isExtensible(target)|等同于Object.isExtensible|布尔值|否|Reflect.isExtensible(myObject) // true
+Reflect.setPrototypeOf(target, proto)|设置对象的__proto__属性|第一个参数对象|否|Reflect.setPrototypeOf(myObj, OtherThing.prototype);
+Reflect.apply(target, object, args)|等同于Function.prototype.apply.call(target, object, args)||否|const youngest = Reflect.apply(Math.min, Math, ages);
+Reflect.construct(target, args)|等同于new target(...args)||否|const instance = Reflect.construct(Greeting, ['张三']);
