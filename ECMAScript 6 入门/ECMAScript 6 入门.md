@@ -1080,6 +1080,82 @@ WeakMap与Map的区别有两点。
 - 只接受对象作为键名（null除外），不接受其他类型的值作为键名。
 - 它的键名所引用的对象都是弱引用，即垃圾回收机制不将该引用考虑在内。因此，只要所引用的对象的其他引用都被清除，垃圾回收机制就会释放该对象所占用的内存。
 
+# Proxy
+
+Proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改。target参数表示所要拦截的目标对象，handler参数也是一个对象，用来定制拦截行为。
+
+```javascript
+var proxy = new Proxy(target, handler);
+```
+
+- handler没有设置任何拦截，那就等同于直接通向原对象。
+```javascript
+var handler = {
+  get: function(target, name) {
+    if (name === 'prototype') {
+      return Object.prototype;
+    }
+    return 'Hello, ' + name;
+  },
+
+  apply: function(target, thisBinding, args) {
+    return args[0];
+  },
+
+  construct: function(target, args) {
+    return {value: args[1]};
+  }
+};
+
+var fproxy = new Proxy(function(x, y) {
+  return x + y;
+}, handler);
+
+fproxy(1, 2) // 1
+new fproxy(1, 2) // {value: 2}
+fproxy.prototype === Object.prototype // true
+fproxy.foo === "Hello, foo" // true
+```
+
+下面是 Proxy 支持的拦截操作一览，一共 13 种。
+
+拦截方法|作用|返回|改变原值|例子
+:-|:-|:-|:-|:-
+get(target, propKey, receiver)|拦截对象属性的读取|属性|否|proxy.foo
+set(target, propKey, value, receiver)|拦截对象属性的设置|布尔值|否|proxy.foo = v
+has(target, propKey)|拦截propKey in proxy的操作|布尔值|否|propKey in proxy
+deleteProperty(target, propKey)|拦截delete proxy[propKey]的操作|布尔值|否|delete proxy[propKey]
+ownKeys(target)|拦截Object.getOwnPropertyNames(proxy)、Object.getOwnPropertySymbols(proxy)、Object.keys(proxy)、for...in的操作|数组|否|
+getOwnPropertyDescriptor(target, propKey)|拦截Object.getOwnPropertyDescriptor(proxy, propKey)|属性的描述对象|否|
+Object.defineProperty(target, proxy, propDesc)|拦截Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)|布尔值|否|
+preventExtensions(target)|拦截Object.preventExtensions(proxy)|布尔值|否|
+getPrototypeOf(target)|拦截Object.getPrototypeOf(proxy)|对象|否|
+isExtensible(target)|拦截Object.isExtensible(proxy)|布尔值|否|
+setPrototypeOf(target, proto)|拦截Object.setPrototypeOf(proxy, proto)|布尔值|否|
+apply(target, object, args)|拦截 Proxy 实例作为函数调用的操作||否|proxy(...args)、proxy.call(object, ...args)、proxy.apply(...)
+construct(target, args)|拦截 Proxy 实例作为构造函数调用的操作||否|new proxy(...args)
+
+**Proxy.revocable()**
+
+> * Proxy.revocable()：方法返回一个可取消的 Proxy 实例。返回一个对象，该对象的proxy属性是Proxy实例，revoke属性是一个函数，可以取消Proxy实例。
+
+```javascript
+let target = {};
+let handler = {};
+
+let {proxy, revoke} = Proxy.revocable(target, handler);
+
+proxy.foo = 123;
+proxy.foo // 123
+
+revoke();
+proxy.foo // TypeError: Revoked
+```
+
+**this 问题**
+
+- Proxy 代理的情况下，目标对象内部的this关键字会指向 Proxy 代理。
+
 # 总结
 
 **字符串方法扩展**
