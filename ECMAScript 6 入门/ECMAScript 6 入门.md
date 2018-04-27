@@ -1179,6 +1179,35 @@ Reflect.setPrototypeOf(target, proto)|设置对象的__proto__属性|第一个�
 Reflect.apply(target, object, args)|等同于Function.prototype.apply.call(target, object, args)||否|const youngest = Reflect.apply(Math.min, Math, ages);
 Reflect.construct(target, args)|等同于new target(...args)||否|const instance = Reflect.construct(Greeting, ['张三']);
 
+# Promise
+
+- Promise对象代表一个异步操作，有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）。
+- 一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。
+
+> - then(onFulfilled[, onRejected])：第一个参数是resolved状态的回调函数，第二个参数（可选）是rejected状态的回调函数。返回的是一个新的Promise实例。因此可以采用链式写法。
+> - catch(onRejected)：用于指定发生错误时的回调函数。如果没有报错，则会跳过catch方法。
+> - finally()：不管 Promise 对象最后状态如何，都会执行的操作
+> - Promise.all([promise1[, promise2[, ...[, promiseN]]]])：用于将多个 Promise 实例，包装成一个新的 Promise 实例。
+  > - 如果不是 Promise 实例，就会先调用下面讲到的Promise.resolve方法，将参数转为 Promise 实例。
+  > - 全部参数实例的状态都变成fulfilled，新实例的状态才会变成fulfilled。
+  > - 某个参数实例的状态都变成rejected，新实例的状态会变成rejected。
+```javascript
+const p = Promise.all([p1, p2, p3]);
+```
+> - Promise.race([promise1[, promise2[, ...[, promiseN]]]])：将多个 Promise 实例，包装成一个新的 Promise 实例。
+  > - 如果不是 Promise 实例，就会先调用下面讲到的Promise.resolve方法，将参数转为 Promise 实例。
+  > - 有一个实例率先改变状态，新实例的状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给新实例的回调函数。 
+```javascript
+const p = Promise.race([p1, p2, p3]);
+```
+> - Promise.resolve(obj)：将现有对象转为 Promise 对象。
+  > - obj是 Promise 实例，那么Promise.resolve将不做任何修改、原封不动地返回这个实例。
+  > - thenable对象：具有then方法的对象。先将这个对象转为 Promise 对象，然后就立即执行thenable对象的then方法。
+  > - 原始值返回一个新的 Promise 对象，状态为resolved。
+  > - 不带有任何参数返回一个resolved状态的 Promise 对象。
+> - Promise.reject(reason)：返回一个新的 Promise 实例，该实例的状态为rejected。
+> - Promise.try()：统一同步异步操作。
+
 # 总结
 
 **字符串方法扩展**
