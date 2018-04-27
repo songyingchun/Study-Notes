@@ -945,6 +945,141 @@ with (MyClass.prototype) {
 
 上面代码通过指定Symbol.unscopables属性，使得with语法块不会在当前作用域寻找foo属性，即foo将指向外层作用域的变量。
 
+# Set 和 Map 数据结构
+
+**Set**
+
+它类似于数组，但是成员的值都是唯一的，没有重复的值。
+
+```javascript
+// 例一
+const set = new Set([1, 2, 3, 4, 4]);
+[...set]
+// [1, 2, 3, 4]
+```
+
+- 去除数组的重复成员。
+
+> * constructor：构造函数，默认就是Set函数。
+> * size：返回Set实例的成员总数。
+> * add(value)：添加某个值，返回 Set 结构本身。
+> * delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。
+> * has(value)：返回一个布尔值，表示该值是否为Set的成员。
+> * clear()：清除所有成员，没有返回值。
+> * keys()：返回键名的遍历器。
+> * values()：返回键值的遍历器。
+> * entries()：返回键值对的遍历器 。
+> * forEach()：使用回调函数遍历每个成员。
+
+- 扩展运算符（...）内部使用for...of循环，所以也可以用于 Set 结构。
+
+**WeakSet**
+
+WeakSet与Set的区别有两点。
+- WeakSet 的成员只能是对象，而不能是其他类型的值。
+- WeakSet 中的对象都是弱引用，即垃圾回收机制不考虑 WeakSet 对该对象的引用，也就是说，如果其他对象都不再引用该对象，那么垃圾回收机制会自动回收该对象所占用的内存，不考虑该对象还存在于 WeakSet 之中。
+
+**Map**
+
+“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。
+
+```javascript
+const m = new Map();
+const o = {p: 'Hello World'};
+```
+
+> * constructor：构造函数，默认就是Map函数。
+> * size：返回Map实例的成员总数。
+> * set(key, value)：添加某个值，返回 Map 结构。
+> * get(key)：读取key对应的键值，如果找不到key，返回undefined。
+> * has(key)：返回一个布尔值，表示某个键是否在当前 Map 对象之中。
+> * delete(key)：返回true。如果删除失败，返回false。
+> * clear()：清除所有成员，没有返回值。
+> * keys()：返回键名的遍历器。
+> * values()：返回键值的遍历器。
+> * entries()：返回键值对的遍历器 。
+> * forEach()：使用回调函数遍历每个成员。
+
+与其他数据结构的互相转换
+
+- Map 转为数组。用扩展运算符。
+```javascript
+const myMap = new Map()
+  .set(true, 7)
+  .set({foo: 3}, ['abc']);
+[...myMap]
+```
+- 数组 转为 Map。用Map构造函数。
+```javascript
+new Map([
+  [true, 7],
+  [{foo: 3}, ['abc']]
+])
+```
+- Map 转为对象。用for...of。
+```javascript
+function strMapToObj(strMap) {
+  let obj = Object.create(null);
+  for (let [k,v] of strMap) {
+    obj[k] = v;
+  }
+  return obj;
+}
+
+const myMap = new Map()
+  .set('yes', true)
+  .set('no', false);
+strMapToObj(myMap)
+```
+- 对象转为 Map。用set方法。
+```javascript
+function objToStrMap(obj) {
+  let strMap = new Map();
+  for (let k of Object.keys(obj)) {
+    strMap.set(k, obj[k]);
+  }
+  return strMap;
+}
+
+objToStrMap({yes: true, no: false})
+```
+- Map 转为 JSON
+  - Map 的键名都是字符串。用JSON.stringify转。
+  - Map 的键名有非字符串。用...转成数组，再用JSON.stringify转。
+```javascript
+function strMapToJson(strMap) {
+  return JSON.stringify(strMapToObj(strMap));
+}
+
+let myMap = new Map().set('yes', true).set('no', false);
+strMapToJson(myMap)
+// '{"yes":true,"no":false}'
+
+function mapToArrayJson(map) {
+  return JSON.stringify([...map]);
+}
+
+let myMap = new Map().set(true, 7).set({foo: 3}, ['abc']);
+mapToArrayJson(myMap)
+// '[[true,7],[{"foo":3},["abc"]]]'
+```
+
+- JSON 转为 Map：用JSON.parse转。
+```javascript
+function jsonToStrMap(jsonStr) {
+  return objToStrMap(JSON.parse(jsonStr));
+}
+
+jsonToStrMap('{"yes": true, "no": false}')
+// Map {'yes' => true, 'no' => false}
+```
+
+**WeakMap**
+
+WeakMap与Map的区别有两点。
+- 只接受对象作为键名（null除外），不接受其他类型的值作为键名。
+- 它的键名所引用的对象都是弱引用，即垃圾回收机制不将该引用考虑在内。因此，只要所引用的对象的其他引用都被清除，垃圾回收机制就会释放该对象所占用的内存。
+
 # 总结
 
 **字符串方法扩展**
