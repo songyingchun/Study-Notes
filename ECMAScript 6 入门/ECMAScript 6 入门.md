@@ -8,6 +8,8 @@
 - Stage 3 - Candidate（候选人阶段）
 - Stage 4 - Finished（定案阶段）
 
+# ECMAScript6简介
+
 # let和const命令
 
 **let**
@@ -763,6 +765,185 @@ Object.create(obj)|生成一个原型为obj的对象|对象|否|
 Object.keys(obj)|返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键名|数组|否|
 Object.values(obj)|返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值|对象|否|
 Object.entries(obj)|返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组|对象|否|
+
+# Symbol
+
+表示独一无二的值。它是 JavaScript 语言的第七种数据类型。
+
+```javascript
+let s1 = Symbol('foo');
+let s2 = Symbol('foo');
+
+s1 === s2 // false
+```
+
+- 如果 Symbol 的参数是一个对象，就会调用该对象的toString方法，将其转为字符串，然后才生成一个 Symbol 值。
+- Symbol函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的Symbol函数的返回值是不相等的。
+- Symbol 值不能与其他类型的值进行运算，会报错。
+- Symbol 值可以显式转为字符串。
+
+```javascript
+let sym = Symbol('My symbol');
+
+String(sym) // 'Symbol(My symbol)'
+sym.toString() // 'Symbol(My symbol)'
+```
+- Symbol 值也可以转为布尔值，但是不能转为数值。
+```javascript
+let sym = Symbol();
+Boolean(sym) // true
+!sym  // false
+```
+
+**作为属性名的 Symbol**
+
+- Symbol 值作为对象属性名时，不能用点运算符。
+- Symbol 值作为属性名时，该属性还是公开属性，不是私有属性。
+
+**属性名的遍历**
+
+> * Object.getOwnPropertySymbols(obj)：返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值。
+> * Reflect.ownKeys(obj)：可以返回所有类型的键名，包括常规键名和 Symbol 键名。
+
+**Symbol.for()，Symbol.keyFor()**
+
+> * Symbol.for(str)：返回一个新的 Symbol 类型的值，而是会先检查给定的key是否已经存在，如果不存在才会新建一个值。
+> * Symbol.keyFor(symbol)：返回一个已登记的 Symbol 类型值的key。Symbol.for为 Symbol 值登记的名字，是全局环境的，可以在不同的 iframe 或 service worker 中取到同一个值。
+
+```javascript
+let s1 = Symbol.for('foo');
+let s2 = Symbol.for('foo');
+
+s1 === s2 // true
+```
+
+**内置的 Symbol 值**
+
+> * Symbol.hasInstance：当其他对象使用instanceof运算符，判断是否为该对象的实例时，会调用这个方法。
+```javascript
+class MyClass {
+  [Symbol.hasInstance](foo) {
+    return foo instanceof Array;
+  }
+}
+
+[1, 2, 3] instanceof new MyClass() // true
+```
+
+> * Symbol.isConcatSpreadable：表示该对象用于Array.prototype.concat()时，是否可以展开。
+```javascript
+let arr1 = ['c', 'd'];
+['a', 'b'].concat(arr1, 'e') // ['a', 'b', 'c', 'd', 'e']
+arr1[Symbol.isConcatSpreadable] // undefined
+
+let arr2 = ['c', 'd'];
+arr2[Symbol.isConcatSpreadable] = false;
+['a', 'b'].concat(arr2, 'e') // ['a', 'b', ['c','d'], 'e']
+```
+
+> * Symbol.species：创建衍生对象时，会使用该属性。创建衍生对象时就会使用这个属性返回的函数，作为构造函数。
+```javascript
+class MyArray extends Array {
+  static get [Symbol.species]() { return Array; }
+}
+
+const a = new MyArray();
+const b = a.map(x => x);
+
+b instanceof MyArray // false
+b instanceof Array // true
+```
+
+> * Symbol.match：当执行str.match(myObject)时，如果该属性存在，会调用它，返回该方法的返回值。
+```javascript
+String.prototype.match(regexp)
+// 等同于
+regexp[Symbol.match](this)
+```
+
+> * Symbol.replace：当该对象被String.prototype.replace方法调用时，会返回该方法的返回值。
+```javascript
+String.prototype.replace(searchValue, replaceValue)
+// 等同于
+searchValue[Symbol.replace](this, replaceValue)
+```
+
+> * Symbol.search：当该对象被String.prototype.search方法调用时，会返回该方法的返回值。
+```javascript
+String.prototype.search(regexp)
+// 等同于
+regexp[Symbol.search](this)
+```
+
+> * Symbol.split：当该对象被String.prototype.split方法调用时，会返回该方法的返回值。
+```javascript
+String.prototype.split(separator, limit)
+// 等同于
+separator[Symbol.split](this, limit)
+```
+
+> * Symbol.iterator：指向该对象的默认遍历器方法。
+```javascript
+const myIterable = {};
+myIterable[Symbol.iterator] = function* () {
+  yield 1;
+  yield 2;
+  yield 3;
+};
+
+[...myIterable] // [1, 2, 3]
+```
+
+> * Symbol.toPrimitive：该对象被转为原始类型的值时，会调用这个方法，返回该对象对应的原始类型值。
+```javascript
+let obj = {
+  [Symbol.toPrimitive](hint) {}
+};
+String(obj) // 'str'
+```
+
+> * Symbol.toStringTag：该对象上面调用Object.prototype.toString方法时，如果这个属性存在，它的返回值会出现在toString方法返回的字符串之中，表示对象的类型。也就是说，这个属性可以用来定制[object Object]或[object Array]中object后面的那个字符串。
+```javascript
+class Collection {
+  get [Symbol.toStringTag]() {
+    return 'xxx';
+  }
+}
+let x = new Collection();
+Object.prototype.toString.call(x) // "[object xxx]"
+```
+
+> * Symbol.unscopables：对象指定了使用with关键字时，哪些属性会被with环境排除。
+```javascript
+Array.prototype[Symbol.unscopables]
+
+// 没有 unscopables 时
+class MyClass {
+  foo() { return 1; }
+}
+
+var foo = function () { return 2; };
+
+with (MyClass.prototype) {
+  foo(); // 1
+}
+
+// 有 unscopables 时
+class MyClass {
+  foo() { return 1; }
+  get [Symbol.unscopables]() {
+    return { foo: true };
+  }
+}
+
+var foo = function () { return 2; };
+
+with (MyClass.prototype) {
+  foo(); // 2
+}
+```
+
+上面代码通过指定Symbol.unscopables属性，使得with语法块不会在当前作用域寻找foo属性，即foo将指向外层作用域的变量。
 
 # 总结
 
