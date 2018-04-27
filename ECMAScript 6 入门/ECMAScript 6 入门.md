@@ -588,6 +588,68 @@ f();
 // 等同于
 g(3);
 ```
+
+# 数组的扩展
+
+**扩展运算符**
+
+将一个数组转为用逗号分隔的参数序列。
+
+- 主要用于函数调用。
+- 可以放置表达式。
+```javascript
+const arr = [
+  ...(x > 0 ? ['a'] : []),
+  'b',
+];
+```
+
+**替代函数的 apply 方法**
+```javascript
+// ES5 的写法
+Math.max.apply(null, [14, 3, 77])
+
+// ES6 的写法
+Math.max(...[14, 3, 77])
+```
+
+**应用**
+
+- 复制数组
+- 合并数组
+- 与解构赋值结合
+- 将字符串转为真正的数组
+- 任何 Iterator 接口的对象，都可以用扩展运算符转为真正的数组。比如Map 和 Set 结构，Generator 函数
+
+> * Array.from(object)：将类似数组的对象和可遍历的对象转为真正的数组。
+> * Array.of([item1[, item2 [, . . . [, itemN]]]])：将类似数组的对象和可遍历的对象转为真正的数组。如果没有参数，就返回一个空数组。
+> * copyWithin(target[, start][, end])：将指定位置的成员复制到其他位置（会覆盖原有成员），然后返回当前数组。
+  > * target（必需）：从该位置开始替换数据。如果为负值，表示倒数。
+      start（可选）：从该位置开始读取数据，默认为 0。如果为负值，表示倒数。
+      end（可选）：到该位置前停止读取数据，默认等于数组长度。如果为负值，表示倒数。
+
+数组属性和方法|作用|返回|改变原值|例子
+:-|:-|:-|:-|:-
+Array.from(object)|将类似数组的对象和可遍历的对象转为真正的数组|新的数组|否|Array.from({ length: 3 });
+Array.of([item1[, item2 [, . . . [, itemN]]]])|将类似数组的对象和可遍历的对象转为真正的数组。如果没有参数，就返回一个空数组|新的数组|否|var {a, b, c} = {a: ["a"], b: ["b"], c: ["c"]};<br>var d = Array.of(a, b, c);
+copyWithin(target[, start][, end])|将指定位置的成员复制到其他位置，然后返回当前数组|当前数组|是|[1, 2, 3, 4, 5].copyWithin(0, 3)// [4, 5, 3, 4, 5]
+find(fn[, context])|用于找出第一个符合条件的数组成员。如果没有符合条件的成员，则返回undefined。|数组成员|否|[1, 4, -5, 10].find((n) => n < 0) // -5
+findIndex(fn[, context])|返回第一个符合条件的数组成员的位置。如果所有成员都不符合条件，则返回-1。|数值|否|[1, 5, 10, 15].findIndex(function(value, index, arr) { <br>   return value > 9;   <br>}) // 2
+fill(number[, start][, end])|使用给定值，填充一个数组。还可以接受第二个和第三个参数，用于指定填充的起始位置和结束位置。|新的数组|否|['a', 'b', 'c'].fill(7, 1, 2)<br>   // ['a', 7, 'c']
+entries()|对键值对的遍历|Iterator对象|否|for (let [index, elem] of ['a', 'b'].entries()) {<br>  console.log(index, elem);<br>  }<br>// 0 "a"<br>// 1 "b"
+keys()|对键名的遍历|Iterator对象|否|for (let index of ['a', 'b'].keys()) {<br>  console.log(index);<br>  }<br>// 0 <br>// 1 
+values()|对键值的遍历|Iterator对象|否|for (let elem of ['a', 'b'].values()) { {<br>  console.log(elem);<br>  }<br>// "a"<br>// "b"
+includes()|某个数组是否包含给定的值|布尔值|否|[1, 2, 3].includes(2)     // true
+
+**数组的空位**
+
+空位不是undefined，一个位置的值等于undefined，依然是有值的。空位是没有任何值，in运算符可以说明这一点。ES6 则是明确将空位转为undefined。
+
+```javascript
+0 in [undefined, undefined, undefined] // true
+0 in [, , ,] // false
+```
+
 # 总结
 
 **字符串方法扩展**
@@ -637,3 +699,17 @@ Math.tanh(x)|x的双曲正切|数值|否|
 Math.asinh(x)|x的反曲正弦|数值|否|
 Math.acosh(x)|x的反曲余弦|数值|否|
 Math.atanh(x)|x的反曲正切|数值|否|
+
+**数组方法**
+数组属性和方法|作用|返回|改变原值|例子
+:-|:-|:-|:-|:-
+Array.from(object)|将类似数组的对象和可遍历的对象转为真正的数组|新的数组|否|Array.from({ length: 3 });
+Array.of([item1[, item2 [, . . . [, itemN]]]])|将类似数组的对象和可遍历的对象转为真正的数组。如果没有参数，就返回一个空数组|新的数组|否|var {a, b, c} = {a: ["a"], b: ["b"], c: ["c"]};<br>var d = Array.of(a, b, c);
+copyWithin(target[, start][, end])|将指定位置的成员复制到其他位置，然后返回当前数组|当前数组|是|[1, 2, 3, 4, 5].copyWithin(0, 3)// [4, 5, 3, 4, 5]
+find(fn[, context])|用于找出第一个符合条件的数组成员。如果没有符合条件的成员，则返回undefined。|数组成员|否|[1, 4, -5, 10].find((n) => n < 0) // -5
+findIndex(fn[, context])|返回第一个符合条件的数组成员的位置。如果所有成员都不符合条件，则返回-1。|数值|否|[1, 5, 10, 15].findIndex(function(value, index, arr) { <br>   return value > 9;   <br>}) // 2
+fill(number[, start][, end])|使用给定值，填充一个数组。还可以接受第二个和第三个参数，用于指定填充的起始位置和结束位置。|新的数组|否|['a', 'b', 'c'].fill(7, 1, 2)<br>   // ['a', 7, 'c']
+entries()|对键值对的遍历|Iterator对象|否|for (let [index, elem] of ['a', 'b'].entries()) {<br>  console.log(index, elem);<br>  }<br>// 0 "a"<br>// 1 "b"
+keys()|对键名的遍历|Iterator对象|否|for (let index of ['a', 'b'].keys()) {<br>  console.log(index);<br>  }<br>// 0 <br>// 1 
+values()|对键值的遍历|Iterator对象|否|for (let elem of ['a', 'b'].values()) { {<br>  console.log(elem);<br>  }<br>// "a"<br>// "b"
+includes()|某个数组是否包含给定的值|布尔值|否|[1, 2, 3].includes(2)     // true
