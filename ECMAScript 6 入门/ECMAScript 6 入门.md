@@ -1232,6 +1232,54 @@ const p = Promise.race([p1, p2, p3]);
 > return()：如果for...of循环提前退出就会调用return方法。
 > throw()：throw方法主要是配合 Generator 函数使用，一般的遍历器对象用不到这个方法。
 
+# Generator 函数的语法
+
+提供的一种异步编程解决方案。
+```javascript
+function* helloWorldGenerator() {
+  yield 'hello';
+  yield 'world';
+  return 'ending';
+}
+
+var hw = helloWorldGenerator();
+
+hw.next()
+// { value: 'hello', done: false }
+
+hw.next()
+// { value: 'world', done: false }
+
+hw.next()
+// { value: 'ending', done: true }
+
+hw.next()
+// { value: undefined, done: true }
+```
+- function关键字与函数名之间有一个星号；
+- 函数体内部使用yield表达式，定义不同的内部状态。yield表达式只能用在 Generator 函数里面，用在其他地方都会报错。
+- Generator 函数就是遍历器生成函数，因此可以把 Generator 赋值给对象的Symbol.iterator属性，从而使得该对象具有 Iterator 接口。
+- for...of循环可以自动遍历 Generator 函数时生成的Iterator对象，且此时不再需要调用next方法。
+- yield表达式本身没有返回值，或者说总是返回undefined。next方法可以带一个参数，该参数就会被当作上一个yield表达式的返回值。
+```javascript
+function* foo(x) {
+  var y = 2 * (yield (x + 1));
+  var z = yield (y / 3);
+  return (x + y + z);
+}
+
+var b = foo(5);
+b.next() // { value:6, done:false }
+b.next(12) // { value:8, done:false }
+b.next(13) // { value:42, done:true }
+```
+
+> * Generator.prototype.throw(error)：接受一个参数，该参数会被catch语句接收，建议抛出Error对象的实例。
+> * Generator.prototype.return(str)：返回给定的值，并且终结遍历 Generator 函数。
+
+- yield*表达式，用来在一个 Generator 函数里面执行另一个 Generator 函数。
+- Generator 函数总是返回一个遍历器，ES6 规定这个遍历器是 Generator 函数的实例，也继承了 Generator 函数的prototype对象上的方法。
+- Generator 函数也不能跟new命令一起用，会报错。
 
 # 总结
 
