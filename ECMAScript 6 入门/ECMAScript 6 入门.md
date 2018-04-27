@@ -650,6 +650,120 @@ includes()|某个数组是否包含给定的值|布尔值|否|[1, 2, 3].includes
 0 in [, , ,] // false
 ```
 
+# 对象的扩展
+
+**属性的简洁表示法**
+
+- 属性简写。这时，属性名为变量名, 属性值为变量的值。 
+- 方法也可以简写。把"：function"写成"()"。
+- Generator 函数前面需要加上星号。
+
+**属性名表达式**
+
+作为对象的属性名，即把表达式放在方括号内。
+
+**方法的 name 属性**
+
+有两种特殊情况：bind方法创造的函数，name属性返回bound加上原函数的名字；Function构造函数创造的函数，name属性返回anonymous。
+
+**Object.assign**
+
+- 该参数不是对象，则会先转成对象，然后返回。
+- undefined和null无法转成对象，所以如果它们作为参数，就会报错。
+- 除了字符串会以数组形式，拷贝入目标对象，其他值都不会产生效果。
+- 不拷贝不可枚举的属性。
+- Symbol 值的属性，也会被Object.assign拷贝。
+
+注意点：
+
+- Object.assign方法实行的是浅拷贝。
+- 一旦遇到同名属性，Object.assign的处理方法是替换，而不是添加。
+- 可以用来处理数组，但是会把数组视为对象。
+- 只能进行值的复制，如果要复制的值是一个取值函数，那么将求值后再复制。
+
+**属性的可枚举性和遍历**
+
+目前，有四个操作会忽略enumerable为false的属性。
+
+- for...in循环：只遍历对象自身的和继承的可枚举的属性。
+- Object.keys()：返回对象自身的所有可枚举的属性的键名。
+- JSON.stringify()：只串行化对象自身的可枚举的属性。
+- Object.assign()： 忽略enumerable为false的属性，只拷贝对象自身的可枚举的属性。
+
+另外，ES6 规定，所有 Class 的原型的方法都是不可枚举的。
+
+**属性的遍历**
+
+- for...in：循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）。
+- Object.keys(obj)：返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名。
+- Object.getOwnPropertyNames(obj)：返回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名。
+- Object.getOwnPropertySymbols(obj)：返回一个数组，包含对象自身的所有 Symbol 属性的键名。
+- Reflect.ownKeys(obj)：返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举。
+
+以上的 5 种方法遍历对象的键名，都遵守同样的属性遍历的次序规则。
+
+- 首先遍历所有数值键，按照数值升序排列。
+- 其次遍历所有字符串键，按照加入时间升序排列。
+- 最后遍历所有 Symbol 键，按照加入时间升序排列。
+
+方法|实例属性|实例不可枚举属性|继承属性|继承不可枚举属性|Symbol|Symbol不可枚举属性
+:-|:-|:-|:-|:-|:-|:-
+for...in|是|否|是|否|否|否
+Object.keys(obj)|是|否|是|否|否|否
+Object.getOwnPropertyNames(obj)|是|是|是|是|否|否
+Object.getOwnPropertySymbols(obj)|否|否|否|否|是|是
+Reflect.ownKeys(obj)|是|是|是|是|是|是
+
+**__proto__属性**
+
+Object.setPrototypeOf()（写操作）、Object.getPrototypeOf()（读操作）、Object.create()（生成操作）代替。
+
+**super 关键字**
+
+指向当前对象的原型对象。super关键字表示原型对象时，只能用在对象的方法之中，用在其他地方都会报错。
+
+**对象的扩展运算符**
+
+将目标对象自身的所有可遍历的（enumerable）、但尚未被读取的属性，分配到指定的对象上面。
+```javascript
+let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
+x // 1
+y // 2
+z // { a: 3, b: 4 }
+```
+
+- 解构赋值。
+
+对象的扩展运算符（...）用于取出参数对象的所有可遍历属性，拷贝到当前对象之中。
+```javascript
+let z = { a: 3, b: 4 };
+let n = { ...z };
+n // { a: 3, b: 4 }
+```
+
+- 合并对象。这等同于使用Object.assign方法。
+- 后面可以跟表达式。
+- 后面是一个空对象，则没有任何效果。
+- 扩展运算符的参数是null或undefined，这两个值会被忽略，不会报错。
+
+**对象扩展**
+对象方法|作用|返回|改变原值|例子
+:-|:-|:-|:-|:-
+Object.is(obj1, obj2)|比较两个值是否严格相等。不同之处只有两个：一是+0不等于-0，二是NaN等于自身。|布尔值|否|Object.is(NaN, NaN) // true
+Object.assign(target[, source1[, source2 [, . . . [, sourceN]]]])|于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）|
+Object.getOwnPropertyDescriptor(obj, propertyName)|以获取该属性的描述对象|
+Object.keys(obj)|返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名|新的数组|否|
+Object.getOwnPropertyNames(obj)|返回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名|新的数组|否|
+Object.getOwnPropertySymbols(obj)|返回一个数组，包含对象自身的所有 Symbol 属性的键名|新的数组|否|
+Reflect.ownKeys(obj)|返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举|否|
+Object.getOwnPropertyDescriptors(obj)|返回某个对象属性的描述对象（非继承属性）|对象属性的描述对象|否|
+Object.setPrototypeOf(obj, prototype)|用来设置一个对象的prototype对象|原对象|是|const o = Object.setPrototypeOf({}, null);
+Object.getPrototypeOf(obj)|读取一个对象的原型对象|原型对象|否|var a = {a: "a"}; Object.getPrototypeOf(obj);
+Object.create(obj)|生成一个原型为obj的对象|对象|否|
+Object.keys(obj)|返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键名|数组|否|
+Object.values(obj)|返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值|对象|否|
+Object.entries(obj)|返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组|对象|否|
+
 # 总结
 
 **字符串方法扩展**
@@ -713,3 +827,30 @@ entries()|对键值对的遍历|Iterator对象|否|for (let [index, elem] of ['a
 keys()|对键名的遍历|Iterator对象|否|for (let index of ['a', 'b'].keys()) {<br>  console.log(index);<br>  }<br>// 0 <br>// 1 
 values()|对键值的遍历|Iterator对象|否|for (let elem of ['a', 'b'].values()) { {<br>  console.log(elem);<br>  }<br>// "a"<br>// "b"
 includes()|某个数组是否包含给定的值|布尔值|否|[1, 2, 3].includes(2)     // true
+
+**属性遍历方法**
+方法|实例属性|实例不可枚举属性|继承属性|继承不可枚举属性|Symbol|Symbol不可枚举属性
+:-|:-|:-|:-|:-|:-|:-
+for...in|是|否|是|否|否|否
+Object.keys(obj)|是|否|是|否|否|否
+Object.getOwnPropertyNames(obj)|是|是|是|是|否|否
+Object.getOwnPropertySymbols(obj)|否|否|否|否|是|是
+Reflect.ownKeys(obj)|是|是|是|是|是|是
+
+**对象扩展**
+对象方法|作用|返回|改变原值|例子
+:-|:-|:-|:-|:-
+Object.is(obj1, obj2)|比较两个值是否严格相等。不同之处只有两个：一是+0不等于-0，二是NaN等于自身。|布尔值|否|Object.is(NaN, NaN) // true
+Object.assign(target[, source1[, source2 [, . . . [, sourceN]]]])|于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）|
+Object.getOwnPropertyDescriptor(obj, propertyName)|以获取该属性的描述对象|
+Object.keys(obj)|返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名|新的数组|否|
+Object.getOwnPropertyNames(obj)|返回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名|新的数组|否|
+Object.getOwnPropertySymbols(obj)|返回一个数组，包含对象自身的所有 Symbol 属性的键名|新的数组|否|
+Reflect.ownKeys(obj)|返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举|否|
+Object.getOwnPropertyDescriptors(obj)|返回某个对象属性的描述对象（非继承属性）|对象属性的描述对象|否|
+Object.setPrototypeOf(obj, prototype)|用来设置一个对象的prototype对象|原对象|是|const o = Object.setPrototypeOf({}, null);
+Object.getPrototypeOf(obj)|读取一个对象的原型对象|原型对象|否|var a = {a: "a"}; Object.getPrototypeOf(obj);
+Object.create(obj)|生成一个原型为obj的对象|对象|否|
+Object.keys(obj)|返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键名|数组|否|
+Object.values(obj)|返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值|对象|否|
+Object.entries(obj)|返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组|对象|否|
