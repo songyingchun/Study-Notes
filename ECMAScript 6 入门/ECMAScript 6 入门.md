@@ -1179,7 +1179,7 @@ Reflect.setPrototypeOf(target, proto)|设置对象的__proto__属性|第一个�
 Reflect.apply(target, object, args)|等同于Function.prototype.apply.call(target, object, args)||否|const youngest = Reflect.apply(Math.min, Math, ages);
 Reflect.construct(target, args)|等同于new target(...args)||否|const instance = Reflect.construct(Greeting, ['张三']);
 
-# Promise
+# Promise对象
 
 - Promise对象代表一个异步操作，有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）。
 - 一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。
@@ -1207,6 +1207,31 @@ const p = Promise.race([p1, p2, p3]);
   > - 不带有任何参数返回一个resolved状态的 Promise 对象。
 > - Promise.reject(reason)：返回一个新的 Promise 实例，该实例的状态为rejected。
 > - Promise.try()：统一同步异步操作。
+
+# Iterator 和 for...of 循环
+
+遍历器为各种不同的数据结构提供统一的访问机制。
+
+- Iterator 接口主要供for...of消费。
+- ES6 规定，默认的 Iterator 接口部署在数据结构的Symbol.iterator属性，或者说，一个数据结构只要具有Symbol.iterator属性，就可以认为是“可遍历的”（iterable）。
+- Symbol.iterator属性本身是一个函数，就是当前数据结构默认的遍历器生成函数。执行这个函数，就会返回一个遍历器。该对象的根本特征就是具有next方法。每次调用next方法，都会返回一个代表当前成员的信息对象，具有value和done两个属性。
+- 原生具备 Iterator 接口的数据结构如下。Array、Map、Set、String、TypedArray、函数的 arguments 对象、NodeList 对象
+- 对于类似数组的对象（存在数值键名和length属性），部署 Iterator 接口，有一个简便方法，就是Symbol.iterator方法直接引用数组的 Iterator 接口。
+- 普通对象部署数组的Symbol.iterator方法，并无效果。必须部署了 Iterator 接口后才能使用。
+- 字符串是一个类似数组的对象，也原生具有 Iterator 接口。
+
+调用 Iterator 接口的场合：
+- for...of
+- 解构赋值。对数组和 Set 结构进行解构赋值时，会默认调用Symbol.iterator方法。
+- 扩展运算符
+- yield*
+- 任何接受数组作为参数的场合
+
+**遍历器对象的 return()，throw() **
+
+> return()：如果for...of循环提前退出就会调用return方法。
+> throw()：throw方法主要是配合 Generator 函数使用，一般的遍历器对象用不到这个方法。
+
 
 # 总结
 
