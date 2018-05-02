@@ -1281,6 +1281,97 @@ b.next(13) // { value:42, done:true }
 - Generator 函数总是返回一个遍历器，ES6 规定这个遍历器是 Generator 函数的实例，也继承了 Generator 函数的prototype对象上的方法。
 - Generator 函数也不能跟new命令一起用，会报错。
 
+# ~~Generator 函数的异步应用~~
+
+# async 函数
+
+一句话，它就是 Generator 函数的语法糖。
+
+- async函数就是将 Generator 函数的星号（*）替换成async，将yield替换成await。
+- async函数的执行，与普通函数一模一样。
+- async函数的await命令后面，可以是 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时等同于同步操作）。
+- 返回值是 Promise。如果不是，会被转成一个立即resolve的 Promise 对象。
+- await后面的异步操作出错，那么等同于async函数返回的 Promise 对象被reject。
+- await命令只能用在async函数之中，如果用在普通函数，就会报错。
+
+```javascript
+async function getStockPriceByName(name) {
+  const symbol = await getStockSymbol(name);
+  const stockPrice = await getStockPrice(symbol);
+  return stockPrice;
+}
+```
+
+for...of循环用于遍历同步的 Iterator 接口。新引入的for await...of循环，则是用于遍历异步的 Iterator 接口。
+
+```javascript
+async function f() {
+  for await (const x of createAsyncIterable(['a', 'b'])) {
+    console.log(x);
+  }
+}
+```
+
+## 异步 Generator 函数
+
+异步遍历器的设计目的之一，就是 Generator 函数处理同步操作和异步操作时，能够使用同一套接口。
+
+await命令用于将外部操作产生的值输入函数内部，yield命令用于将函数内部的值输出。
+
+```javascript
+function fetchRandom() {
+  const url = 'https://www.random.org/decimal-fractions/'
+    + '?num=1&dec=10&col=1&format=plain&rnd=new';
+  return fetch(url);
+}
+
+async function* asyncGenerator() {
+  console.log('Start');
+  const result = await fetchRandom(); // (A)
+  yield 'Result: ' + await result.text(); // (B)
+  console.log('Done');
+}
+
+const ag = asyncGenerator();
+ag.next().then(({value, done}) => {
+  console.log(value);
+})
+```
+
+## yield*
+
+- yield*语句也可以跟一个异步遍历器。
+
+# Class 的基本语法
+
+- constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。
+- 类必须使用new调用，否则会报错。
+- 类不存在变量提升（hoist），这一点与 ES5 完全不同。
+
+```javascript
+class Point {
+  constructor() {
+    // ...
+  }
+
+  toString() {
+    // ...
+  }
+
+  toValue() {
+    // ...
+  }
+
+  get prop() {
+    return 'getter';
+  }
+  
+  set prop(value) {
+    console.log('setter: '+value);
+  }
+}
+```
+
 # 总结
 
 **字符串方法扩展**
