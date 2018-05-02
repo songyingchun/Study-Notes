@@ -530,7 +530,7 @@ var EventUtil = {
 		}
 	},
 
-	selectText(textbox, startIndex, stopIndex) {
+	selectText(textbox, startIndex, stopIndex) {	
 		if (textbox.setSelectionRange) {
 			textbox.setSelectionRange(startIndex, stopIndex);
 		} else if (textbox.createTextRange) {
