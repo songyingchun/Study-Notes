@@ -1344,10 +1344,6 @@ ag.next().then(({value, done}) => {
 
 # Class 的基本语法
 
-- constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。
-- 类必须使用new调用，否则会报错。
-- 类不存在变量提升（hoist），这一点与 ES5 完全不同。
-
 ```javascript
 class Point {
   constructor() {
@@ -1371,6 +1367,80 @@ class Point {
   }
 }
 ```
+
+- 类和模块的内部，默认就是严格模式，所以不需要使用use strict指定运行模式
+- constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。
+- 类必须使用new调用，否则会报错。
+- 类不存在变量提升（hoist），这一点与 ES5 完全不同。
+- 一个方法前，加上static关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法”。父类的静态方法，可以被子类继承。静态方法也是可以从super对象上调用的。
+- 目前并不支持静态属性。
+- new.target属性用于构造函数。如果不是通过new命令调用的，new.target会返回undefined，因此这个属性可以用来确定构造函数是怎么调用的。子类继承父类时，new.target会返回子类。
+
+```javascript
+class Rectangle {
+  constructor(length, width) {
+    console.log(new.target === Rectangle);
+    // ...
+  }
+}
+
+class Square extends Rectangle {
+  constructor(length) {
+    super(length, length);
+  }
+}
+
+var obj = new Square(3); // 输出 false
+```
+
+# Class 的继承
+
+Class 可以通过extends关键字实现继承，这比 ES5 的通过修改原型链实现继承，要清晰和方便很多。
+
+```javascript
+class ColorPoint extends Point {
+  constructor(x, y, color) {
+    super(x, y); // 调用父类的constructor(x, y)
+    this.color = color;
+  }
+  toString() {
+    return this.color + ' ' + super.toString(); // 调用父类的toString()
+  }
+}
+```
+
+- ES5 的继承，实质是先创造子类的实例对象this，然后再将父类的方法添加到this上面（Parent.apply(this)）。ES6 的继承机制完全不同，实质是先创造父类的实例对象this（所以必须先调用super方法），然后再用子类的构造函数修改this。
+- 在子类的构造函数中，只有调用super之后，才可以使用this关键字。直接调用super()，super指向父类的构造函数，在这里相当于Parent.prototype.constructor.call(this)。调用super的属性和方法时，super指向父类的原型对象。如果super调用的是静态方法，super指向父类的构造函数。使用super的时候，必须显式指定是作为函数、还是作为对象使用
+
+**类的 prototype 属性和__proto__属性**
+
+大多数浏览器的 ES5 实现之中，每一个对象都有__proto__属性，指向对应的构造函数的prototype属性。Class 作为构造函数的语法糖，同时有prototype属性和__proto__属性，因此同时存在两条继承链。
+
+- 子类的__proto__属性，表示构造函数的继承，总是指向父类。
+- 子类prototype属性的__proto__属性，表示方法的继承，总是指向父类的prototype属性。
+
+```javascript
+class A {}
+
+class B extends A {}
+
+B.__proto__ === A // tru
+B.prototype.__proto__ === A.prototype // true
+```
+
+```javascript
+Object.setPrototypeOf(B.prototype, A.prototype);
+// 等同于
+B.prototype.__proto__ = A.prototype;
+
+Object.setPrototypeOf(B, A);
+// 等同于
+B.__proto__ = A;
+```
+
+作为一个对象，子类（B）的原型（__proto__属性）是父类（A）；作为一个构造函数，子类（B）的原型对象（prototype属性）是父类的原型对象（prototype属性）的实例。
+
+
 
 # 总结
 
