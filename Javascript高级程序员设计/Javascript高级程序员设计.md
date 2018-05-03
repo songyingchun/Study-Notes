@@ -772,6 +772,7 @@ Date 类型的 valueOf() 方法，则根本不返回字符串，而是返回日�
 ### RegExp 构造函数属性
 
 长属性名|短属性名|说明
+-|-|-
 input|$_|最近一次要匹配的字符串。Opera未实现此属性
 lastMatch|$&|最近一次的匹配项。Opera未实现此属性
 lastParen|$+|最近一次匹配的捕获组。Opera未实现此属性
@@ -4482,6 +4483,7 @@ valueOf()|返回对象的字符串、数值或布尔值表示。通常与 toStri
 
 **RegExp 构造函数属性**
 长属性名|短属性名|说明
+-|-|-
 input|$_|最近一次要匹配的字符串。Opera未实现此属性
 lastMatch|$&|最近一次的匹配项。Opera未实现此属性
 lastParen|$+|最近一次匹配的捕获组。Opera未实现此属性

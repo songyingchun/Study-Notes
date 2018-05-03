@@ -1395,8 +1395,21 @@ var obj = new Square(3); // 输出 false
 
 # Class 的继承
 
+涉及的知识：
+构造函数、原型和实例的关系：每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个指向原型对象的内部指针。
+
+```javascript
+function Person () {}
+
+Person.prototype // 每个构造函数都有一个原型对象，只有函数才有。涉及到prototype会被实例对象继承。
+Person.prototype.constructor // 原型对象都有一个指向构造函数的指针。
+Person.prototype.__proto__ // 每个对象都有一个原型，原型对象也有自已的原型。
+Person.__proto__ // 每个对象都有一个原型，继承自构造函数的原型对象。
+```
+
 Class 可以通过extends关键字实现继承，这比 ES5 的通过修改原型链实现继承，要清晰和方便很多。
 
+例子：
 ```javascript
 class ColorPoint extends Point {
   constructor(x, y, color) {
@@ -1410,7 +1423,7 @@ class ColorPoint extends Point {
 ```
 
 - ES5 的继承，实质是先创造子类的实例对象this，然后再将父类的方法添加到this上面（Parent.apply(this)）。ES6 的继承机制完全不同，实质是先创造父类的实例对象this（所以必须先调用super方法），然后再用子类的构造函数修改this。
-- 在子类的构造函数中，只有调用super之后，才可以使用this关键字。直接调用super()，super指向父类的构造函数，在这里相当于Parent.prototype.constructor.call(this)。调用super的属性和方法时，super指向父类的原型对象。如果super调用的是静态方法，super指向父类的构造函数。使用super的时候，必须显式指定是作为函数、还是作为对象使用
+- 在子类的构造函数中，只有调用super之后，才可以使用this关键字。直接调用super()，super指向父类的构造函数，在这里相当于Parent.prototype.constructor.call(this)。super调用的是静态方法，super指向父类的构造函数。调用super的属性和方法时，super指向父类的原型对象。如果使用super的时候，必须显式指定是作为函数、还是作为对象使用
 
 **类的 prototype 属性和__proto__属性**
 
@@ -1424,11 +1437,30 @@ class A {}
 
 class B extends A {}
 
-B.__proto__ === A // tru
-B.prototype.__proto__ === A.prototype // true
+B.__proto__ === A // true B继承A的静态属性和方法。当调用静态属性和方法，super指向父类。
+B.prototype.__proto__ === A.prototype // true B的实例继承A的实例。当调用继承属性和方法，super指向父类的原型对象。
 ```
 
 ```javascript
+class A {
+}
+
+class B {
+}
+
+// B 的实例继承 A 的实例
+Object.setPrototypeOf(B.prototype, A.prototype);
+
+// B 继承 A 的静态属性
+Object.setPrototypeOf(B, A);
+
+const b = new B();
+
+Object.setPrototypeOf = function (obj, proto) {
+  obj.__proto__ = proto;
+  return obj;
+}
+
 Object.setPrototypeOf(B.prototype, A.prototype);
 // 等同于
 B.prototype.__proto__ = A.prototype;
@@ -1440,7 +1472,203 @@ B.__proto__ = A;
 
 作为一个对象，子类（B）的原型（__proto__属性）是父类（A）；作为一个构造函数，子类（B）的原型对象（prototype属性）是父类的原型对象（prototype属性）的实例。
 
+```javascript
+Object.create(A.prototype);
+// 等同于
+B.prototype.__proto__ = A.prototype;
+```
 
+**原生构造函数的继承**
+Boolean()
+Number()
+String()
+Array()
+Date()
+Function()
+RegExp()
+Error()
+Object()
+
+- ES5 是先新建子类的实例对象this，再将父类的属性添加到子类上，由于父类的内部属性无法获取，导致无法继承原生的构造函数。ES6 允许继承原生构造函数定义子类，因为 ES6 是先新建父类的实例对象this，然后再用子类的构造函数修饰this，使得父类的所有行为都可以继承。
+
+```javascript
+function MyArray() {
+  Array.apply(this, arguments);   // 借用构造函数继承
+}
+
+MyArray.prototype = Object.create(Array.prototype, {
+  constructor: {
+    value: MyArray,
+    writable: true,
+    configurable: true,
+    enumerable: true
+  }
+});
+
+var colors = new MyArray();
+colors[0] = "red";
+colors.length  // 0
+
+colors.length = 0;
+colors[0]  // "red"
+```
+
+# 修饰器
+
+**类的修饰**
+
+- 修饰器是一个对类进行处理的函数。修饰器函数的第一个参数，就是所要修饰的目标类。
+- 修饰器对类的行为的改变，是代码编译时发生的。
+
+例子：
+```javascript
+@testable
+class MyTestableClass {
+  // ...
+}
+
+function testable(target) {
+  target.isTestable = true;
+}
+
+MyTestableClass.isTestable // true
+
+@decorator
+class A {}
+
+// 等同于
+
+class A {}
+A = decorator(A) || A;
+```
+
+**方法的修饰**
+
+- 修饰器第一个参数是类的原型对象，第二个参数是所要修饰的属性名，第三个参数是该属性的描述对象。
+
+```javascript
+class Person {
+  @readonly
+  name() { return `${this.first} ${this.last}` }
+}
+
+function readonly(target, name, descriptor){
+  descriptor.writable = false;
+  return descriptor;
+}
+```
+
+**为什么修饰器不能用于函数？**
+
+- 修饰器只能用于类和类的方法，不能用于函数，因为存在函数提升。
+
+# Module 的语法
+
+- CommonJS：用于服务器。CommonJS是同步加载模块。这种加载称为“运行时加载”，先整体加载fs模块（即加载fs的所有方法），生成一个对象（_fs），然后再从这个对象上面读取方法。
+
+CommonJS定义的模块分为:{模块引用(require)} {模块定义(exports)} {模块标识(module)}
+
+require()用来引入外部模块；exports对象用于导出当前模块的方法或变量，唯一的导出口；module对象就代表模块本身。
+
+```javascript
+// moduleA.js  
+module.exports = function( value ){  
+    return value * 2;  
+}
+
+// moduleB.js  
+var multiplyBy2 = require('./moduleA');  
+var result = multiplyBy2(4);
+```
+优点：
+服务器端便于重用。
+NPM中已经将近20w个模块包。
+简单并容易使用。
+
+缺点：
+同步的模块方式不适合不适合在浏览器环境中，同步意味着阻塞加载，浏览器资源是异步加载的。
+不能非阻塞的并行加载多个模块。
+
+- AMD：用于浏览器。AMD是"Asynchronous Module Definition"的缩写，意思就是"异步模块定义"。它采用异步方式加载模块，模块的加载不影响它后面语句的运行。
+
+
+```javascript
+require([module], callback);
+
+require(['math'], function (math) {
+　　math.add(2, 3);
+});
+```
+
+优点：
+适合在浏览器环境异步加载。
+并行加载多个模块。
+
+缺点：
+提高开发成本，代码阅读和书写比较困难。
+不符合通用的模块思维方式，是一种妥协的实现。
+
+- CMD：CMD规范和AMD相似，尽量保持简单，并且与CommonJS和NodeJS的Modules规范保持了很大的兼容性。
+
+```javascript
+define(function(require, exports, module) {  
+  var $ = require('jquery');  
+  var Spinning = require('./spinning');  
+  exports.doSomething = ...  
+  module.exports = ...  
+})  
+```
+优点：
+依赖就近，延迟执行。
+很容易在node中运行。
+
+缺点：
+依赖SPM打包，模块的加载逻辑偏重。
+
+- ES6从fs模块加载 3 个方法，其他方法不加载。这种加载称为“编译时加载”或者静态加载，即 ES6 可以在编译时就完成模块加载。
+
+```javascript
+// ES6模块
+import { stat, exists, readFile } from 'fs';
+```
+
+**export 命令**
+
+- export命令用于规定模块的对外接口，import命令用于输入其他模块提供的功能。
+
+写法1：
+```javascript
+// profile.js
+export var firstName = 'Michael';
+export var lastName = 'Jackson';
+export var year = 1958;
+
+export function multiply(x, y) {
+  return x * y;
+};
+```
+
+写法2：
+```javascript
+// profile.js
+var firstName = 'Michael';
+var lastName = 'Jackson';
+var year = 1958;
+
+export {firstName, lastName, year};
+```
+
+写法3：
+```javascript
+function v1() { ... }
+function v2() { ... }
+
+export {
+  v1 as streamV1,
+  v2 as streamV2,
+  v2 as streamLatestVersion
+};
+```
 
 # 总结
 
