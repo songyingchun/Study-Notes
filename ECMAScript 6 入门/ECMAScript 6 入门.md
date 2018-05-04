@@ -1586,11 +1586,10 @@ NPM中已经将近20w个模块包。
 简单并容易使用。
 
 缺点：
-同步的模块方式不适合不适合在浏览器环境中，同步意味着阻塞加载，浏览器资源是异步加载的。
+同步的模块方式不适合在浏览器环境中，同步意味着阻塞加载，浏览器资源是异步加载的。
 不能非阻塞的并行加载多个模块。
 
 - AMD：用于浏览器。AMD是"Asynchronous Module Definition"的缩写，意思就是"异步模块定义"。它采用异步方式加载模块，模块的加载不影响它后面语句的运行。
-
 
 ```javascript
 require([module], callback);
@@ -1635,40 +1634,225 @@ import { stat, exists, readFile } from 'fs';
 **export 命令**
 
 - export命令用于规定模块的对外接口，import命令用于输入其他模块提供的功能。
+- export可以直接输出声明，声明会转为接口对象；输出包含变量的对象；变量使用as关键字重命名的对象。
+- export语句输出的接口，与其对应的值是动态绑定关系，即通过该接口，可以取到模块内部实时的值。  
 
 写法1：
 ```javascript
-// profile.js
-export var firstName = 'Michael';
-export var lastName = 'Jackson';
-export var year = 1958;
+// 写法一
+export var m = 1;
 
-export function multiply(x, y) {
+// 写法二
+var m = 1;
+export {m};
+
+// 写法三
+var n = 1;
+export {n as m};
+```
+
+**import 命令**
+
+- 想为输入的变量重新取一个名字，import命令要使用as关键字，将输入的变量重命名。
+- import命令输入的变量都是只读的，因为它的本质是输入接口。也就是说，不允许在加载模块的脚本里面，改写接口。对象属性可以改写，但不建议。
+- import命令具有提升效果，会提升到整个模块的头部，首先执行。这种行为的本质是，import命令是编译阶段执行的，在代码运行之前。
+- import是静态执行，所以不能使用表达式和变量，这些只有在运行时才能得到结果的语法结构。
+- 模块的整体加载：可以使用整体加载，即用星号（*）指定一个对象，所有输出值都加载在这个对象上面。但是不允许改变那个对象。
+
+```javascript
+// 写法一
+import m from "./m.js";
+
+// 写法二
+import {m} from "./m.js";
+
+// 写法三
+import {n as m} from "./m.js";
+
+// 写法四
+import * as m from './m.js';
+console.log('圆面积：' + m.area(4));
+console.log('圆周长：' + m.circumference(14));
+
+// 下面两行都是不允许的
+m.foo = 'hello';
+m.area = function () {};
+```
+
+**export default 命令**
+
+用到export default命令，为模块指定默认输出。
+
+- 函数名在模块外部是无效的。加载的时候，视同匿名函数加载。
+- 直接export声明的变量会自动转为接口对象。
+- 一个模块只能有一个默认输出，因此export default命令只能使用一次。所以，import命令后面才不用加大括号，因为只可能唯一对应export default命令。
+- 本质上，export default就是输出一个叫做default的变量或方法，然后系统允许你为它取任意名字。它后面不能跟变量声明语句，因为export default命令的本质是将后面的值，赋给default变量，所以可以直接将一个值写在export default之后。
+
+```javascript
+// 第一组
+export default function crc32() { // 输出
+  // ...
+}
+
+import crc32 from 'crc32'; // 输入
+
+// 第二组
+export function crc32() { // 输出
+  // ...
+};
+
+import {crc32} from 'crc32'; // 输入
+
+// 写法一
+export default function () {
+  console.log('foo');
+}
+
+// 错误
+export default var a = 1;
+
+// 写法二
+export default function foo() {
+  console.log('foo');
+}
+
+// 写法三
+function add(x, y) {
   return x * y;
-};
+}
+export {add as default};
+// 等同于
+// export default add;
+
+import { default as foo } from 'modules';
+// 等同于
+// import foo from 'modules';
 ```
 
-写法2：
+**export 与 import 的复合写法**
 ```javascript
-// profile.js
-var firstName = 'Michael';
-var lastName = 'Jackson';
-var year = 1958;
+// 接口改名
+export { foo as myFoo } from 'my_module';   // foo和bar实际上并没有被导入当前模块，只是相当于对外转发了这两个接口，导致当前模块不能直接使用foo和bar。
 
-export {firstName, lastName, year};
+// 整体输出
+export * from 'my_module';
+
+// 默认接口的写法如下。
+export { default } from 'foo';
+
+// 具名接口改为默认接口的写法如下。
+export { es6 as default } from './someModule';
+
+// 等同于
+import { es6 } from './someModule';
+export default es6;
+
+// 默认接口也可以改名为具名接口。
+export { default as es6 } from './someModule';
+
+// 下面三种import语句，没有对应的复合写法。
+import * as someIdentifier from "someModule";
+import someIdentifier from "someModule";
+import someIdentifier, { namedIdentifier } from "someModule";
 ```
 
-写法3：
+**import()**
+
+import()函数，完成动态加载。
+
+# Module的加载实现
+
+**浏览器加载**
+- 浏览器加载 ES6 模块，也使用&lt;script>标签，但是要加入type="module"属性。
+  - 代码是在模块作用域之中运行，而不是在全局作用域运行。模块内部的顶层变量，外部不可见。
+  - 模块脚本自动采用严格模式，不管有没有声明use strict。
+  - 模块之中，可以使用import命令加载其他模块（.js后缀不可省略，需要提供绝对 URL 或相对 URL），也可以使用export命令输出对外接口。
+  - 模块之中，顶层的this关键字返回undefined，而不是指向window。也就是说，在模块顶层使用this关键字，是无意义的。
+  - 同一个模块如果加载多次，将只执行一次。
+
+**ES6 模块与 CommonJS 模块的差异**
+
+- CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。
+- CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。
+
+**Node 加载**
+
+- Node 要求 ES6 模块采用.mjs后缀文件名。也就是说，只要脚本文件里面使用import或者export命令，那么就必须采用.mjs后缀名。
+- ES6 模块之中，顶层的this指向undefined；CommonJS 模块的顶层this指向当前模块，这是两者的一个重大差异。
+- 以下这些顶层变量在 ES6 模块之中都是不存在的。
+arguments
+require
+module
+exports
+__filename
+__dirname
+
+**ES6 模块加载 CommonJS 模块**
+
+- CommonJS 模块的输出都定义在module.exports这个属性上面。Node 的import命令加载 CommonJS 模块，Node 会自动将module.exports属性，当作模块的默认输出，即等同于export default xxx。
+
 ```javascript
-function v1() { ... }
-function v2() { ... }
+// 写法一
+import baz from './a';
+// baz = {foo: 'hello', bar: 'world'};
 
-export {
-  v1 as streamV1,
-  v2 as streamV2,
-  v2 as streamLatestVersion
-};
+// 写法二
+import {default as baz} from './a';
+// baz = {foo: 'hello', bar: 'world'};
+
+// 写法三
+import * as baz from './a';
+
+// 不正确
+import { readFile } from 'fs';
+
+// 正确的写法一
+import * as express from 'express';
+const app = express.default();
+
+// 正确的写法二
+import express from 'express';
+const app = express();
 ```
+
+**CommonJS 模块加载 ES6 模块**
+
+- CommonJS 模块加载 ES6 模块，不能使用require命令，而要使用import()函数。ES6 模块的所有输出接口，会成为输入对象的属性。
+
+```javascript
+// es.mjs
+let foo = { bar: 'my-default' };
+export default foo;
+
+// cjs.js
+const es_namespace = await import('./es.mjs');
+```
+
+**CommonJS 模块的循环加载 §**
+
+- CommonJS 模块的重要特性是加载时执行，即脚本代码在require的时候，就会全部执行。一旦出现某个模块被"循环加载"，就只输出已经执行的部分，还未执行的部分不会输出。
+- CommonJS 输入的是被输出值的拷贝，不是引用。
+
+**ES6 模块的循环加载**
+
+- ES6 模块是动态引用。
+
+# ArrayBuffer
+
+二进制数组由三类对象组成
+- ArrayBuffer对象：代表内存之中的一段二进制数据，可以通过“视图”进行操作。“视图”部署了数组接口，这意味着，可以用数组的方法操作内存。
+- TypedArray视图：共包括 9 种类型的视图，比如Uint8Array（无符号 8 位整数）数组视图, Int16Array（16 位整数）数组视图, Float32Array（32 位浮点数）数组视图等等。
+- DataView视图：可以自定义复合格式的视图，比如第一个字节是 Uint8（无符号 8 位整数）、第二、三个字节是 Int16（16 位整数）、第四个字节开始是 Float32（32 位浮点数）等等，此外还可以自定义字节序。
+
+简单说，ArrayBuffer对象代表原始的二进制数据，TypedArray 视图用来读写简单类型的二进制数据，DataView视图用来读写复杂类型的二进制数据。
+
+- 二进制数组并不是真正的数组，而是类似数组的对象。
+
+**ArrayBuffer 对象**
+
+ArrayBuffer对象代表储存二进制数据的一段内存，它不能直接读写，只能通过视图（TypedArray视图和DataView视图)来读写，视图的作用是以指定格式解读二进制数据。
+
+
 
 # 总结
 
