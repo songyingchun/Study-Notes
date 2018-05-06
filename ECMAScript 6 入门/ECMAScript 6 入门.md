@@ -1852,6 +1852,7 @@ const es_namespace = await import('./es.mjs');
 
 ArrayBuffer对象代表储存二进制数据的一段内存，它不能直接读写，只能通过视图（TypedArray视图和DataView视图)来读写，视图的作用是以指定格式解读二进制数据。
 
+<<<<<<< HEAD
 > * TypedArray(buffer, byteOffset=0, length?)：
   > * 第一个参数（必需）：视图对应的底层ArrayBuffer对象。
   > * 第二个参数（可选）：视图开始的字节序号，默认从 0 开始。
@@ -2030,6 +2031,56 @@ DataView(ArrayBuffer buffer [, 字节起始位置 [, 长度]]);
 const buffer = new ArrayBuffer(24);
 const dv = new DataView(buffer);
 ```
+=======
+> * ArrayBuffer也是一个构造函数，可以分配一段可以存放数据的连续内存区域。
+```javascript
+// 分配一段可以存放数据的连续内存区域。
+const buf = new ArrayBuffer(32);
+
+// 为了读写这段内容，需要为它指定视图。
+const dataView = new DataView(buf);
+dataView.getUint8(0) // 0
+
+```
+
+另一种 TypedArray 视图，与DataView视图的一个区别是，它不是一个构造函数，而是一组构造函数，代表不同的数据格式。
+
+```javascript
+const buffer = new ArrayBuffer(12);
+
+const x1 = new Int32Array(buffer);
+x1[0] = 1;
+const x2 = new Uint8Array(buffer);
+x2[0]  = 2;
+
+x1[0] // 2
+
+const typedArray = new Uint8Array([0,1,2]);
+typedArray.length // 3
+
+typedArray[0] = 5;
+typedArray // [5, 1, 2]
+```
+
+> * ArrayBuffer.prototype.byteLength：返回所分配的内存区域的字节长度。
+> * ArrayBuffer.prototype.slice()：允许将内存区域的一部分，拷贝生成一个新的ArrayBuffer对象。
+> * ArrayBuffer.isView()：返回一个布尔值，表示参数是否为ArrayBuffer的视图实例。
+
+**TypedArray 视图**
+
+同一段内存，不同数据有不同的解读方式，这就叫做“视图”（view）。ArrayBuffer有两种视图，一种是 TypedArray 视图，另一种是DataView视图。前者的数组成员都是同一个数据类型，后者的数组成员可以是不同的数据类型。
+
+TypedArray 视图一共包括 9 种类型，每一种视图都是一种构造函数。
+- Int8Array：8 位有符号整数，长度 1 个字节。
+- Uint8Array：8 位无符号整数，长度 1 个字节。
+- Uint8ClampedArray：8 位无符号整数，长度 1 个字节，溢出处理不同。
+- Int16Array：16 位有符号整数，长度 2 个字节。
+- Uint16Array：16 位无符号整数，长度 2 个字节。
+- Int32Array：32 位有符号整数，长度 4 个字节。
+- Uint32Array：32 位无符号整数，长度 4 个字节。
+- Float32Array：32 位浮点数，长度 4 个字节。
+- Float64Array：64 位浮点数，长度 8 个字节。
+>>>>>>> f3c9b12b2809a8a3e71210eafbbde3be3bbbebf4
 
 
 
