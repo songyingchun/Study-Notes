@@ -283,6 +283,24 @@ ex是指所用字体中小写x的高度。
 
 用户将无法使用其浏览器中的“文本大小”菜单调整文本的大小。
 
+# 第5章 字体
+
+## 字体系列
+
+font-family:文档大部分采用某种serif字体。只有当一个字体名中有一个或多个空格，或者如果字体名包括#或￥之类的符号，才需要加引号。
+
+```css
+h1{font-family: Georgia, serif;}
+```
+
+## 字体大小
+
+
+名称|声明|值|初始值|应用于|继承性|计算值
+-|-|-|-|-
+字体风格|font-family|[[&lt;family-name&gt;&#124;&lt;generic-family&gt;],]* [&lt;family-name&gt;&#124;&lt;generic-family&gt;] &#124; inhert | 用户代理指定的值|所有元素|有|根据指定确定
+字体加粗|font-weight|normal&#124;bold&#124;bolder&#124;lighter&#124;100&#124;200&#124;300&#124;400&#124;500&#124;600&#124;700&#124;800&#124;900&#124;inherit|normal|所有元素|有|数字值
+字体大小|font-size|xx-small&#124;x-small&#124;small&#124;medium&#124;large&#124;x-large&#124;xx-large&#124;smaller&#124;larger&#124;&lt;length&lgt;&#124;&lt;percentage&gt;&#124;inherit|medium|所有元素|有|绝对长度
 
 
 # 总结
