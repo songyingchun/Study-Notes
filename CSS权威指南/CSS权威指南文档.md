@@ -242,38 +242,57 @@ h2:before{content: "}}"}; color: silver;
 body:after{content: "  The End."}
 ```
 
-名称|作用|符号|例子
+# 第3章 结构和层叠
+
+## 特殊性
+
+特殊性值表述为4个部分：0,0,0,0。
+
+* 对于选择器中给定的各个ID属性值，加0,1,0,0
+* 对于选择器中给定的各个类属性值、属性选择或伪类，加0,0,1,0
+* 对于选择器中给定的各个元素和伪元素，加0,0,0,1。
+* 结合符和通配选择器对特殊性没有任何贡献。
+* 内联样式，加1,0,0,0
+* 重要性!important并没有特殊性，但总会胜出。    
+
+## 继承
+
+继承的值没有特殊性。0特殊性比无特殊要强。
+
+# 总结
+
+名称|作用|符号|特殊性|例子
+-|-|-|-|-
+元素选择器|匹配文档元素的选择器||0,0,0,1|p{font-size: 12px;}|
+通配符选择器|匹配所有元素|*|0,0,0,0|* {color: red;}
+类选择器|匹配类名为class的选择器的元素|.|0,0,1,0|.warning{font-weight: bold;}
+ID选择器|匹配ID名为ID的选择器的元素|#|0,1,0,0|#warning{font-weight: bold;}
+属性值选择器|匹配属性值的选择器的元素|[]|0,0,1,0|h1[class]{color: silver;}
+部分属性值选择器|匹配部分属性值的选择器的元素|0,0,1,0|~=|p[class~="waring"]{font-weight: bold;}
+子串匹配头部属性选择器|匹配头部属性的选择器的元素|0,0,1,0|^=|[foo^="bar"]
+子串匹配尾部属性选择器|匹配尾部属性选择器的元素|0,0,1,0|$=|[foo$="bar"]
+包含子串匹配属性选择器|匹配包含子串匹配属性选择器的元素|0,0,1,0|*=|[foo*="bar"]
+特定属性选择器|匹配特定属性选择器的元素|&#124;=|0,0,1,0|*[lang|="en"]{color: white;}
+后代选择器|匹配后代元素|空格||ul em{color: gray;}  // 作为ul后代的em元素的文本变成灰色
+子元素选择器|匹配子元素|>||h1 > strong {color: red;}  // 作为h1子元素的strong元素的文本变成红色
+相邻兄弟选择器|匹配紧接着的元素|+||h1 + p {margin: 0;}  // 去除紧接在一个h1元素后出现的段落上边距
+
+伪类|描述|特殊性|例子
+-|-|-
+:link|未访问地址的所有锚。|0,0,1,0|
+:visited|已访问地址超链接的所有锚。|0,0,1,0|
+:focus|当前拥有输入焦点的元素。|0,0,1,0|
+:hover|鼠标指针停留在哪个元素上。|0,0,1,0|
+:active|被用户输入激活的元素。|0,0,1,0|
+:first-child|选择元素的第一个子元素|0,0,1,0|p:first-child{color: silver;}
+:lang()|根据语言来选择|0,0,1,0|*:lang(fr){font-style: italic;}
+
+伪元素|描述|特殊性|例子
 -|-|-|-
-元素选择器|匹配文档元素的选择器||p{font-size: 12px;}
-通配符选择器|匹配所有元素|*|* {color: red;}
-类选择器|匹配类名为class的选择器的元素|.|.warning{font-weight: bold;}
-ID选择器|匹配ID名为ID的选择器的元素|#|#warning{font-weight: bold;}
-属性值选择器|匹配属性值的选择器的元素|[]|h1[class]{color: silver;}
-部分属性值选择器|匹配部分属性值的选择器的元素|~=|p[class~="waring"]{font-weight: bold;}
-子串匹配头部属性选择器|匹配头部属性的选择器的元素|^=|[foo^="bar"]
-子串匹配尾部属性选择器|匹配尾部属性选择器的元素|$=|[foo$="bar"]
-包含子串匹配属性选择器|匹配包含子串匹配属性选择器的元素|*=|[foo*="bar"]
-特定属性选择器|匹配特定属性选择器的元素|&#124;=|*[lang|="en"]{color: white;}
-后代选择器|匹配后代元素|空格|ul em{color: gray;}  // 作为ul后代的em元素的文本变成灰色
-子元素选择器|匹配子元素|>|h1 > strong {color: red;}  // 作为h1子元素的strong元素的文本变成红色
-相邻兄弟选择器|匹配紧接着的元素|+|h1 + p {margin: 0;}  // 去除紧接在一个h1元素后出现的段落上边距
-
-伪类|描述|例子
--|-|-
-:link|未访问地址的所有锚。|
-:visited|已访问地址超链接的所有锚。|
-:focus|当前拥有输入焦点的元素。|
-:hover|鼠标指针停留在哪个元素上。|
-:active|被用户输入激活的元素。|
-:first-child|选择元素的第一个子元素|p:first-child{color: silver;}
-:lang()|根据语言来选择|*:lang(fr){font-style: italic;}
-
-伪元素|描述|例子
--|-|-
-:first-letter|匹配元素的首字母|p:first-letter{font-size: 200%;}
-:first-line|匹配第一行元素|p:first-line{color: purple;}
-:before|在元素前插入生成内容|h2:before{content: "}}"}; color: silver;
-:after|在元素后插入生成内容|body:after{content: "  The End."}
+:first-letter|匹配元素的首字母|0,0,0,1|p:first-letter{font-size: 200%;}
+:first-line|匹配第一行元素|0,0,0,1|p:first-line{color: purple;}
+:before|在元素前插入生成内容|0,0,0,1|h2:before{content: "}}"}; color: silver;
+:after|在元素后插入生成内容|0,0,0,1|body:after{content: "  The End."}
 
 
 
