@@ -327,11 +327,66 @@ h2{font: bold itatic 200%/1.2 Verdana, Helvetica, Arail, sans-serif};
 
 # 第6章 文本属性
 
-名称|声明|值|初始值|应用于|继承性|百分数|计算值
--|-|-|-|-|-|-|-
-缩进文本|text-indent|&lt;length&gt;&#124;&lt;percentage&gt;&#124;inherit|0|块级元素|有|相对于包含块的宽度|对于百分数值，要根据指定确定；对于长度值，则为绝对长度。
-水平对齐|text-align|left&#124;center&#124;right&#124;justify&#124;inherit|用户代理特定的值|块级元素|有|相对于包含块的宽度|要根据指定确定
-垂直对齐|line-height|&lt;length&gt;&#124;&lt;percentage&gt;&#124;&lt;number&gt;&#124;normal&#124;inherit|normal|所有元素|有|相对于元素的大小|计算长度和百分数值是绝对数值；否则，根据指定确定。
+## 行高
+
+[![行框图](http://p7qbd55hu.bkt.clouddn.com/%255%28P%29QG8SQRXR%29QP6GOQ3HD.png '行框图')](http://p7qbd55hu.bkt.clouddn.com/%255%28P%29QG8SQRXR%29QP6GOQ3HD.png'行框图')
+
+**行高和继承**
+
+line-height值从父元素继承时，要从父元素计算，而不是在子元素上计算。
+
+## 垂直对齐文本
+
+vertical-align:
+
+值|名称|作用
+-|-|-|-
+baseline|基线对齐|要求一个元素的基线与父元素的基线对齐。
+sub|上标|声明会使一个元素变成下标。这意味着其基线（或者如果这是一个替换元素，则是其底端）相对于其父元素的基线降低。
+super|下标|声明会使一个元素变成上标。这意味着其基线（或替换元素的底端）相对于其父元素的基线升高。
+bottom|行的底端对齐|将元素行内框的底端与行框的底端对齐。
+text-bottom|文本底端对齐|替换元素或任何其他类型的非文本元素会忽略这个值。对于这些元素，将考虑一个“默认”的文本框。这个默认框由父元素的font-size得到。要对齐的元素的行内框底端再与这个默认文本框的底端对齐。
+top|行的顶端对齐|与bottom刚好相反。
+text-top|文本顶端对齐|与text-bottom刚好相反。
+middle|居中对齐|行内元素框的中点与父元基线上方0.5ex处的一个点对齐，这里的1ex相对于父元素的font-size定义。
+百分数|百分数|会把元素的基线（或替换元素的底边）相对于父元素的基线升高或降低指定的量（你指定的百分数要计算为该元素line-height 的百分数，而不是相对于其父元素的line-height）。
+
+## 处理空白符
+
+white-space:
+
+值|空白符|换行符|自动换行
+-|-|-|-
+pre-line|合并|保留|允许
+normal|合并|忽略|允许
+nowrap|合并|忽略|不允许
+pre|保留|保留|不允许
+pre-wrap|保留|保留|允许
+
+## ~~unicode-bidi~~
+
+unicode-bidi：
+
+值|作用
+-|-|-|-
+normal|元素不会对双向算法打开附加的一层嵌套。对于行内元素，顺序的隐式重排会跨元素边界进行。
+embed|如果是一个行内元素，这个值对于双向算法会打开附加一层嵌套。这个嵌套层的方向由direction属性指定。会在元素内部隐式地完成顺序重排。这对应于在元素开始处增加一个LRE（对于direction:ltr:U+202A）或RLE（对于direction:rtl:U+202B），并在元素的最后增加一个PDF（U+202C）。
+bidi-override|这会为行内元素创建一个覆盖。对于块级元素，将为不在另一块中的行内后代创建一个覆盖。这说明，顺序重排在元素内部严格按direction属性进行；忽略了双向算法的隐式部分。这对应于在元素开始处增一个LRO（对于direction:ltr:U+202D）或RLO（对于direction:rtl:U+202E），并在元素最后增加一个PDF（U+202C）。
+
+名称|声明|说明|值|初始值|应用于|继承性|百分数|计算值
+-|-|-|-|-|-|-|-|-
+缩进文本|text-indent||&lt;length&gt;&#124;&lt;percentage&gt;&#124;inherit|0|块级元素|有|相对于包含块的宽度|对于百分数值，要根据指定确定；对于长度值，则为绝对长度。
+水平对齐|text-align||left&#124;center&#124;right&#124;justify&#124;inherit|用户代理特定的值|块级元素|有|相对于包含块的宽度|要根据指定确定
+行高|line-height|指文本基线之间的距离。控制了行间距，这是文本行之间超出字体大小的额外空间|&lt;length&gt;&#124;&lt;percentage&gt;&#124;&lt;number&gt;&#124;normal&#124;inherit|normal|所有元素|有|相对于元素的大小|计算长度和百分数值是绝对数值；否则，根据指定确定。
+垂直对齐|vertical-align|只应用于行内元素和替换元素。应用于表单元格时，只能识别baseline、top、middle和bottom|baseline&#124;sub&#124;super&#124;top&#124;text-top&#124;middle&#124;bottom&#124;text-bottom&#124;&lt;percentage&gt;&#124;&lt;length&gt;&#124;inherit|baseline|行内元素和表单元素|无|相对于元素的line-height|对于百分数和长度值，为绝对长度；否则，根据指定确定。
+字间隔|word-spacing|修改字间间隔|&lt;length&gt;&#124;&lt;normal&gt;&#124;inherit|normal|所有元素|有||对于normal，为绝对长度0；否则，是绝对长度
+字母间隔|letter-spacing|修改字符或字母之间的间隔|&lt;length&gt;&#124;&lt;normal&gt;&#124;inherit|normal|所有元素|有||对于长度值，为绝对长度；否则，为normal。
+文本转换|text-transform|处理文本的大小写|&#124;&lt;normal&gt;&#124;inherit|normal|所有元素|有||根据指定确定
+文本修饰|text-decoration|修饰文本|none&#124;[underline&#124;&#124;overline&#124;&#124;line-through&#124;&#124;blink]&#124;inherit|none|所有元素|无||根据指定确定
+文本阴影|text-shadow|文本阴影|none&#124;[&lt;color&gt;&#124;&#124;&lt;length&gt;&lt;length&gt;&lt;length&gt;?,]*[&lt;color&gt;&#124;&#124;;&lt;length&gt;&lt;length&gt;&lt;length&gt;?]&#124;inherit|none|所有元素|无||根据指定确定
+空白字符|white-space|对源文档的空格、换行和tab字符的处理|normal&#124;nowrap&#124;pre&#124;pre-wrap&#124;pre-line&#124;inherit|normal|所有元素|无|根据指定确定
+文本方向|direction|direction属性影响块级元素中文本的书写方向、表中列布局的方向、内容水平填充其元素框的方向，以及两端对齐元素中最后一行的位置。对行行内元素，只有当unicode-bidi属性设置为embed或bidi-override时才会应用direction属性|ltr&#124;rtl&#124;inherit|ltr|所有元素|有|根据指定确定
+Unicode方法处理方向性|unicode-bidi||normal&#124;embed&#124;bidi-override&#124;inherit|normal|所有元素|无|根据指定确定
 
 # 总结
 
