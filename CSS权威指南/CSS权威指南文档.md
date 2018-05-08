@@ -324,6 +324,15 @@ h2{font: bold itatic 200%/1.2 Verdana, Helvetica, Arail, sans-serif};
 调整字体大小|font-size-adjust|&lt;number&gt;&#124;none&#124;inherit|none|所有元素|有||
 字体|font|[[&lt;font-style&gt;&#124;&#124;&lt;font-varient&gt;&#124;&#124;&lt;font-weight&gt;]?&lt;font-size&gt;[/&lts;line-height&gt;]?&lt;font-family&gt;]&#124;caption&#124;icon&#124;menu&#124;message-box&#124;small-caption&#124;status-bar&#124;inherit|根据单个属性|所有元素|有|对于&lt;font-size&gt;要相对于父元素来计算；对于&lts;line-height&gt;则相对于元素的&lt;font-size&gts;来计算|见单个属性
 
+
+# 第6章 文本属性
+
+名称|声明|值|初始值|应用于|继承性|百分数|计算值
+-|-|-|-|-|-|-|-
+缩进文本|text-indent|&lt;length&gt;&#124;&lt;percentage&gt;&#124;inherit|0|块级元素|有|相对于包含块的宽度|对于百分数值，要根据指定确定；对于长度值，则为绝对长度。
+水平对齐|text-align|left&#124;center&#124;right&#124;justify&#124;inherit|用户代理特定的值|块级元素|有|相对于包含块的宽度|要根据指定确定
+垂直对齐|line-height|&lt;length&gt;&#124;&lt;percentage&gt;&#124;&lt;number&gt;&#124;normal&#124;inherit|normal|所有元素|有|相对于元素的大小|计算长度和百分数值是绝对数值；否则，根据指定确定。
+
 # 总结
 
 名称|作用|符号|特殊性|例子
