@@ -329,7 +329,7 @@ h2{font: bold itatic 200%/1.2 Verdana, Helvetica, Arail, sans-serif};
 
 ## 行高
 
-[![行框图](http://p7qbd55hu.bkt.clouddn.com/%255%28P%29QG8SQRXR%29QP6GOQ3HD.png '行框图')](http://p7qbd55hu.bkt.clouddn.com/%255%28P%29QG8SQRXR%29QP6GOQ3HD.png'行框图')
+[![行框图](http://p7qbd55hu.bkt.clouddn.com/%E8%A1%8C%E6%A1%86%E5%9B%BE.png '行框图')](http://p7qbd55hu.bkt.clouddn.com/%E8%A1%8C%E6%A1%86%E5%9B%BE.png'行框图')
 
 **行高和继承**
 
@@ -342,12 +342,12 @@ vertical-align:
 值|名称|作用
 -|-|-|-
 baseline|基线对齐|要求一个元素的基线与父元素的基线对齐。
-sub|上标|声明会使一个元素变成下标。这意味着其基线（或者如果这是一个替换元素，则是其底端）相对于其父元素的基线降低。
-super|下标|声明会使一个元素变成上标。这意味着其基线（或替换元素的底端）相对于其父元素的基线升高。
-bottom|行的底端对齐|将元素行内框的底端与行框的底端对齐。
-text-bottom|文本底端对齐|替换元素或任何其他类型的非文本元素会忽略这个值。对于这些元素，将考虑一个“默认”的文本框。这个默认框由父元素的font-size得到。要对齐的元素的行内框底端再与这个默认文本框的底端对齐。
-top|行的顶端对齐|与bottom刚好相反。
-text-top|文本顶端对齐|与text-bottom刚好相反。
+sub|上标|将元素的内容区和行内框下移。声明会使一个元素变成下标。这意味着其基线（或者如果这是一个替换元素，则是其底端）相对于其父元素的基线降低。
+super|下标|将元素的内容区和行内框上移。声明会使一个元素变成上标。这意味着其基线（或替换元素的底端）相对于其父元素的基线升高。
+bottom|行的底端对齐|将元素行内框的底端与包含该元素的行框的底端对齐。
+text-bottom|文本底端对齐|将元素行内框的底端与父元素内容区的底端对齐。替换元素或任何其他类型的非文本元素会忽略这个值。对于这些元素，将考虑一个“默认”的文本框。这个默认框由父元素的font-size得到。要对齐的元素的行内框底端再与这个默认文本框的底端对齐。
+top|行的顶端对齐|将元素行内框的顶端与包含该元素的行框的顶端对齐。
+text-top|文本顶端对齐|将元素行内框的顶端与父元素内容区的顶端对齐。
 middle|居中对齐|行内元素框的中点与父元基线上方0.5ex处的一个点对齐，这里的1ex相对于父元素的font-size定义。
 百分数|百分数|会把元素的基线（或替换元素的底边）相对于父元素的基线升高或降低指定的量（你指定的百分数要计算为该元素line-height 的百分数，而不是相对于其父元素的line-height）。
 
@@ -388,8 +388,115 @@ bidi-override|这会为行内元素创建一个覆盖。对于块级元素，将
 文本方向|direction|direction属性影响块级元素中文本的书写方向、表中列布局的方向、内容水平填充其元素框的方向，以及两端对齐元素中最后一行的位置。对行行内元素，只有当unicode-bidi属性设置为embed或bidi-override时才会应用direction属性|ltr&#124;rtl&#124;inherit|ltr|所有元素|有|根据指定确定
 Unicode方法处理方向性|unicode-bidi||normal&#124;embed&#124;bidi-override&#124;inherit|normal|所有元素|无|根据指定确定
 
+# 第7章 基本视觉格式化
+
+## 基本框
+
+各元素中心有一个内容区。这个内容区周围有可选的内边距、边框和外边框。
+
+[![内容区](http://p7qbd55hu.bkt.clouddn.com/%E5%86%85%E5%AE%B9%E5%8C%BA.png '内容区')](http://p7qbd55hu.bkt.clouddn.com/%E5%86%85%E5%AE%B9%E5%8C%BA.png'内容区')
+
+## 包含块
+
+每个元素都相对于其包含块摆放；包含块就是一个元素的“布局上下文”。包含块由最近的块级祖先框、表单元格或行内块祖先框的内容边界构成。
+```html
+<body>
+  <div>
+    <p>This is a paragraph.</p>
+  </div>  
+</body>
+```
+p元素的包含块是div元素
+
+概念|说明
+-|-
+正常流|指西方语言文本从左到右、从上到下显示，这也是我们熟悉的传统HTML文档的文本布局。要让一个元素不在正常流中，唯一的方法就是使之成为浮动或定位元素。
+非替换元素|如果元素的内容包含在文档中，称之为非替换元素。
+替换元素|这是指作为其他内容占位符的一个元素。
+块级元素|这是指段落、标题或div之类的元素。这些元素在正常流中时，会在其框之前和之后生成“换行”，所以处于正常流中的块级元素会垂直摆放。
+行内元素|指strong或span之类的元素。这些元素不会在之前或之后生成“行分隔符”，它们是块级元素的后代。
+根元素|位于文档树顶端的元素。在HTML文档中，这就是元素html。
+
+## 块级元素
+
+[![框模型](http://p7qbd55hu.bkt.clouddn.com/%E5%AE%8C%E6%95%B4%E7%9A%84%E6%A1%86%E6%A8%A1%E5%9E%8B.png '框模型')](http://p7qbd55hu.bkt.clouddn.com/%E5%AE%8C%E6%95%B4%E7%9A%84%E6%A1%86%E6%A8%A1%E5%9E%8B.png'框模型')
+
+一个元素的witdh定义为从左内边界到右内边界的距离，height是从上内边界到下内边界的距离。
+
+### 水平格式化
+
+用户以为width是指可见元素的宽度。即是左边框到右边框的宽度。CSS的width是指左外边框到右外边框的宽度。
+
+正常流中块级元素的水平部分总和就等于父元素的width。
+
+**水平属性**
+
+非浮动块级元素的水平位置和大小由七个属性决定：'margin-left'，'border-left'，'padding-left'，'width'，'padding-right'，'border-right'和'margin-right'。这七个和总是等于父元素的'宽度'。
+
+这7个属性中，中有3个属性可以设置为auto：width、margin-left、margin-right。其余属性必须设置为特定的值，或者默认宽度为0。
+
+**负外边距**
+
+通过指定负外边距得到更宽的子元素。
+
+**替换元素**
+
+非替换块元素的所有规则同样适用于替换块元素。只有一个例外：width: auto，元素的宽度则是内容的固有宽度。
+
+### 垂直格式化
+
+一个元素的默认高度由其内容决定。高度还会受内容宽度的影响；段落越窄，相应地就会越高，以便容纳其中所有的内联内容。
+
+元素内容的高度大于元素框的高度，用户代理的具体行为将取决于overflow属性的值。
+
+**垂直属性**
+
+也有7个相关属性：margin-top、border-top、padding-top、height、padding-bottom、border-bottom和margin-bototm。
+
+只有3个属性可以设置为auto:元素内容的height以及上、下边距。
+
+正常流中一个块元素的margin-top或margin-bottom设置为auto，它会自动计算为0。
+
+**百分数高度**
+
+将元素垂直居中的唯一办法就是把上、下外边距都设置为25%。
+
+**合并垂直外边距**
+
+两个或更多个相邻的垂直边距（即没有边界，填充或内容之间的内容）会折叠以使用边距值的最大值。相邻的两个元素加padding或border也不能不阻止。对于父子元素，在父元素上加上padding可以阻止。
+
+## 行内元素
+
+基本述语|说明
+-|-
+匿名文本|所有未包含在行内元素中的字符串。
+em框|em框在字体中定义，也称为字符框。
+内容区|非替换元素是em框；替换元素是元素固有高度再加上可能有的外边距、边框或内边距。
+行间距|行间距是font-size值和line-height值之差。行间距只应用于非替换元素。
+行内框|对于非替换元素，元素行内框的高度刚好等于line-height的值。对于替换元素，元素行内框的高度则恰好等于内容区的高度，因为行间距不应用到替换元素。
+行框|包含该行中出现的行内框的最高点和最低点的最小框。行框的上边界要位于最高行内框的上边界，而行框的底边要放在最低行内框的下边界。
+
+### 行内非替换元素
+
+[![行内框](http://p7qbd55hu.bkt.clouddn.com/%E8%A1%8C%E5%86%85%E6%A1%86.png '行内框')](http://p7qbd55hu.bkt.clouddn.com/%E8%A1%8C%E5%86%85%E6%A1%86.png '行内框')
+
+内容区加上行间距就等于行内框。行内框确定了整个行框的高度。行框定义为行中最高行内框的顶端的最低行内框端之间的距离。
+
+**垂直对齐**
+vertical-align: 
+值|说明
+-|-|-|-
+top|将元素行内框的顶端与包含该元素的行框的顶端对齐。
+bottom|将元素行内框的底端与包含该元素的行框的底端对齐。
+text-top|将元素行内框的顶端与父元素内容区的顶端对齐。
+text-bottom|将元素行内框的底端与父元素内容区的底端对齐。
+middle|将元素行内框的垂直中点与父元素基线上0.5ex处的一点对齐。
+super|下标|将元素的内容区和行内框上移。
+sub|上标|将元素的内容区和行内框下移。
+
 # 总结
 
+**选择器**
 名称|作用|符号|特殊性|例子
 -|-|-|-|-
 元素选择器|匹配文档元素的选择器||0,0,0,1|p{font-size: 12px;}|
@@ -422,6 +529,23 @@ ID选择器|匹配ID名为ID的选择器的元素|#|0,1,0,0|#warning{font-weight
 :first-line|匹配第一行元素|0,0,0,1|p:first-line{color: purple;}
 :before|在元素前插入生成内容|0,0,0,1|h2:before{content: "}}"}; color: silver;
 :after|在元素后插入生成内容|0,0,0,1|body:after{content: "  The End."}
+
+
+**文本属性**
+名称|声明|说明|值|初始值|应用于|继承性|百分数|计算值
+-|-|-|-|-|-|-|-|-
+缩进文本|text-indent||&lt;length&gt;&#124;&lt;percentage&gt;&#124;inherit|0|块级元素|有|相对于包含块的宽度|对于百分数值，要根据指定确定；对于长度值，则为绝对长度。
+水平对齐|text-align||left&#124;center&#124;right&#124;justify&#124;inherit|用户代理特定的值|块级元素|有|相对于包含块的宽度|要根据指定确定
+行高|line-height|指文本基线之间的距离。控制了行间距，这是文本行之间超出字体大小的额外空间|&lt;length&gt;&#124;&lt;percentage&gt;&#124;&lt;number&gt;&#124;normal&#124;inherit|normal|所有元素|有|相对于元素的大小|计算长度和百分数值是绝对数值；否则，根据指定确定。
+垂直对齐|vertical-align|只应用于行内元素和替换元素。应用于表单元格时，只能识别baseline、top、middle和bottom|baseline&#124;sub&#124;super&#124;top&#124;text-top&#124;middle&#124;bottom&#124;text-bottom&#124;&lt;percentage&gt;&#124;&lt;length&gt;&#124;inherit|baseline|行内元素和表单元素|无|相对于元素的line-height|对于百分数和长度值，为绝对长度；否则，根据指定确定。
+字间隔|word-spacing|修改字间间隔|&lt;length&gt;&#124;&lt;normal&gt;&#124;inherit|normal|所有元素|有||对于normal，为绝对长度0；否则，是绝对长度
+字母间隔|letter-spacing|修改字符或字母之间的间隔|&lt;length&gt;&#124;&lt;normal&gt;&#124;inherit|normal|所有元素|有||对于长度值，为绝对长度；否则，为normal。
+文本转换|text-transform|处理文本的大小写|&#124;&lt;normal&gt;&#124;inherit|normal|所有元素|有||根据指定确定
+文本修饰|text-decoration|修饰文本|none&#124;[underline&#124;&#124;overline&#124;&#124;line-through&#124;&#124;blink]&#124;inherit|none|所有元素|无||根据指定确定
+文本阴影|text-shadow|文本阴影|none&#124;[&lt;color&gt;&#124;&#124;&lt;length&gt;&lt;length&gt;&lt;length&gt;?,]*[&lt;color&gt;&#124;&#124;;&lt;length&gt;&lt;length&gt;&lt;length&gt;?]&#124;inherit|none|所有元素|无||根据指定确定
+空白字符|white-space|对源文档的空格、换行和tab字符的处理|normal&#124;nowrap&#124;pre&#124;pre-wrap&#124;pre-line&#124;inherit|normal|所有元素|无|根据指定确定
+文本方向|direction|direction属性影响块级元素中文本的书写方向、表中列布局的方向、内容水平填充其元素框的方向，以及两端对齐元素中最后一行的位置。对行行内元素，只有当unicode-bidi属性设置为embed或bidi-override时才会应用direction属性|ltr&#124;rtl&#124;inherit|ltr|所有元素|有|根据指定确定
+Unicode方法处理方向性|unicode-bidi||normal&#124;embed&#124;bidi-override&#124;inherit|normal|所有元素|无|根据指定确定
 
 
 
