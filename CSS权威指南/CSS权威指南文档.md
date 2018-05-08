@@ -293,15 +293,36 @@ font-family:文档大部分采用某种serif字体。只有当一个字体名中
 h1{font-family: Georgia, serif;}
 ```
 
-## 字体大小
+## 字体
 
+font: line-height是一个文本属性而不是字体属性。作为对font-size值的一个补充，并用一个斜线（/）与之分隔。
 
-名称|声明|值|初始值|应用于|继承性|计算值
--|-|-|-|-
-字体风格|font-family|[[&lt;family-name&gt;&#124;&lt;generic-family&gt;],]* [&lt;family-name&gt;&#124;&lt;generic-family&gt;] &#124; inhert | 用户代理指定的值|所有元素|有|根据指定确定
-字体加粗|font-weight|normal&#124;bold&#124;bolder&#124;lighter&#124;100&#124;200&#124;300&#124;400&#124;500&#124;600&#124;700&#124;800&#124;900&#124;inherit|normal|所有元素|有|数字值
-字体大小|font-size|xx-small&#124;x-small&#124;small&#124;medium&#124;large&#124;x-large&#124;xx-large&#124;smaller&#124;larger&#124;&lt;length&lgt;&#124;&lt;percentage&gt;&#124;inherit|medium|所有元素|有|绝对长度
+```css
+h2{font: bold itatic 200%/1.2 Verdana, Helvetica, Arail, sans-serif};
+```
 
+## @font-face规则
+
+```css
+@font-face{font-style: normal; font-family: "Times"; slope: -5;}
+```
+
+**字体下载**
+
+```css
+@font-face{font-family: "Scarborough Fair"; src: url(http://www.example.com/fonts/ps/scarborough.ps);}
+```
+
+名称|声明|值|初始值|应用于|继承性|百分数|计算值
+-|-|-|-|-|-|-|-
+字体系列|font-family|[[&lt;family-name&gt;&#124;&lt;generic-family&gt;],]* [&lt;family-name&gt;&#124;&lt;generic-family&gt;] &#124; inhert | 用户代理指定的值|所有元素|有||根据指定确定
+字体加粗|font-weight|normal&#124;bold&#124;bolder&#124;lighter&#124;100&#124;200&#124;300&#124;400&#124;500&#124;600&#124;700&#124;800&#124;900&#124;inherit|normal|所有元素|有||数字值
+字体大小|font-size|xx-small&#124;x-small&#124;small&#124;medium&#124;large&#124;x-large&#124;xx-large&#124;smaller&#124;larger&#124;&lt;length&lgt;&#124;&lt;percentage&gt;&#124;inherit|medium|所有元素|有|根据父元素的大小来计算|绝对长度
+字体风格|font-style|itatic&#124;obique&#124;normal&#124;inherit|normal|所有元素|有||根据指定确定
+字体变形|font-varient|small-caps&#124;normal&#124;inherit|normal|所有元素|有||根据指定确定
+字体拉伸|font-stretch|normal&#124;wider&#124;narrower&#124;ultra-condensed&#124;extra-condensed&#124;condensed&#124;semi-condensed&#124;semi-expanded&#124;expanded&#124;extra-expanded&#124;ultra-expanded&#124;herit|normal|所有元素|有||
+调整字体大小|font-size-adjust|&lt;number&gt;&#124;none&#124;inherit|none|所有元素|有||
+字体|font|[[&lt;font-style&gt;&#124;&#124;&lt;font-varient&gt;&#124;&#124;&lt;font-weight&gt;]?&lt;font-size&gt;[/&lts;line-height&gt;]?&lt;font-family&gt;]&#124;caption&#124;icon&#124;menu&#124;message-box&#124;small-caption&#124;status-bar&#124;inherit|根据单个属性|所有元素|有|对于&lt;font-size&gt;要相对于父元素来计算；对于&lts;line-height&gt;则相对于元素的&lt;font-size&gts;来计算|见单个属性
 
 # 总结
 
