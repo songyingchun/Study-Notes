@@ -560,7 +560,21 @@ IE6之前使用width和height来定义可见元素框的尺寸，而不是定义
 
 只包含文本的行，能改变行间距离的属性只有line-height、font-size和vertical-align。
 
+# 第9章 颜色和背景
 
+声明|值|初始值|应用于|继承性|百分数|计算值
+-|-|-|-|-|-|-
+color|&lt;color&gt;&#124;inherit|用户代理特定的值|所有元素|有||根据指定确定
+background-color|&lt;color&gt;&#124;transparent&#124;inherit|transparent|所有元素|无||根据指定确定
+background-image|&lt;uri&gt;&#124;none&#124;inherit|none|所有元素|无||绝对URI
+background-repeat|repeat&#124;repeat-x&#124;repeat-y&#124;no-repeat&#124;inherit|repeat|所有元素|无||根据指定确定
+background-position|[[&lt;percentage&gt;&#124;&lt;length&gt;&#124;left&#124;center&#124;right][&lt;percentage&gt;#124;&lt;length&gt;&#124;top&#124;center&#124;bottom]?]&#124;&#124;[[left&#124;center&#124;right]&#124;&#124;[top&#124;center&#124;bottom]]&#124;inherit|0% 0%|块级元素和替换元素|无|相对于元素和原图像上的相应点|如果指定了&lt;length&gt;，则为绝行长度偏移；否则，是百分数值。
+background-attachment|scroll&#124;fixed&#124;inherit|scroll|所有元素|无||根据指定确定
+background|[&lt;background-color&gt;&#124;&#124;&lt;background-image&gt;&#124;&#124;&lt;background-repeat&gt;&#124;&#124;&lt;background-attachment&#124;&#124;&lt;background-position&gt;]&#124;inherit|根据单个属性|所有元素|无|&lt;background-position&gt;允许的值|见单个属性
+
+边框颜色取自内容的颜色。
+
+背景色会影响内边距。
 
 # 总结
 
