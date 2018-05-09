@@ -506,11 +506,11 @@ line-height相对于元素的本身的font-size设置的，而不是相对于父
 line-height对图像的行内框没有任何影响。
 
 属性对元素的行框高度的影响：
-元素|line-height|margin|border|padding
--|-|-|-|-
-块级元素|否|是|是|是
-行内非替换元素|是|否|否|否
-行内替换元素|否|否|否|否
+元素|line-height|margin|border|padding|width、height
+-|-|-|-|-|-
+块级元素|否|是|是|是|是
+行内非替换元素|是|否|否|否|否
+行内替换元素|否|否|否|否|是
 
 ### 改变元素显示
 
@@ -531,6 +531,36 @@ display|none&#124;inline&#124;block&#124;inline-block&#124;list-item&#124;run-in
 这是一个块/行内元素混合，可以使某些块级元素成为下一个元素的行内部分。
 
 run-in框后面是一个块级框时才起作用。如果不是这样，run-in框本身将成为块级框。
+
+# 第8章 内边距、边框和外边框
+
+声明|值|初始值|应用于|继承性|百分数|计算值
+-|-|-|-|-|-|-
+width|&lt;length&gt;&#124;&lt;percentage&gt;&#124;auto&#124;inherit|auto|块级元素和替换元素|无|相对于包含块的width|对于auto和百分数值，根据指定确定；否则是一个绝对长度，除非元素不能应用该属性
+height|&lt;length&gt;&#124;auto&#124;inherit|auto|块级元素和替换元素|无|相对于包含块的height|对于auto和百分数值，根据指定确定；否则是一个绝对长度，除非元素不能应用该属性
+margin|[&lt;length&gt;&#124;&lt;percentage&gt;&#124;auto&#124;]{1, 4}&#124;inherit|未定义|所有元素|无|相对于包含块的width|见各个属性
+margin-top、margin-right、margin-bottom、margin-left|[&lt;length&gt;&#124;&lt;percentage&gt;&#124;auto&#124;]&#124;inherit|0|所有元素|无|相对于包含块的width|对于百分数，根据指定确定；否则，为绝对长度
+border-style|[none&#124;hidden&#124;dotted&#124;dashed&#124;solid&#124;double&#124;groove&#124;ridge&#124;inset&#124;outset]{1, 4}&#124;inherit|对简写属性没有定义|所有元素|无||见各个属性（border-top-style等）|
+border-top-style、border-right-style、border-bottom-style、border-left-style|none&#124;hidden&#124;dotted&#124;dashed&#124;solid&#124;double&#124;groove&#124;ridge&#124;inset&#124;outset&#124;inherit|none|所有元素|无||根据指定确定
+border-width|[thin&#124;medium&#124;thick&#124;&lt;length&gt;]{1, 4}&#124;inherit|对简写属性没有定义|所有元素|无|相对于包含块的width||见各个属性（border-top-width等）
+border-top-width、border-right-width、border-bottom-width、border-left-width|thin&#124;medium&#124;thick&#124;&lt;length&gt;&#124;inherit|medium|所有元素|无||绝对长度；如果边框的样式为none或hidden，则为0
+border-color|[&lt;color&gt;&#124;transparent]{1, 4}&#124;inherit|对简写属性没有定义|所有元素|无||相对于包含块的width|见各个属性（border-top-color等）
+border-top-color、border-right-color、border-bottom-color、border-left-color|&lt;color&gt;&#124;transparent&#124;inherit|元素的color值|所有元素|无||如果没有指定值，则使用同一元素的color属性的计算值；否则，根据指定确定
+border-top、border-right、border-bottom、border-left|[&lt;border-width&gt;&#124;&#124;&lt;border-style&gt;&#124;&#124;&lt;border-color&gt;]&#124;inherit|对简写属性未定义|所有元素|无||见单个属性（border-width等）
+border|[&lt;border-width&gt;&#124;&#124;&lt;border-style&gt;&#124;&#124;&lt;border-color&gt;]&#124;inherit|根据单个属性|所有元素|无||根据指定确定
+padding|[&lt;length&gt;&#124;&lt;percentage&gt;]{1, 4}&#124;inherit|对简写属性未定义|所有元素|无|相对于包含块的width|见单个属性（padding-top等）
+padding-top、padding-right、padding-bottom、padding-left|&lt;length&gt;&#124;&lt;percentage&gt;&#124;inherit|0|所有元素|无|相对于包含块的width|对于百分数值，根据指定确定；对于长度值，则为绝对长度。内边距绝对不能为负
+
+IE6之前使用width和height来定义可见元素框的尺寸，而不是定义元素框的内容。对行内非替换元素应用了width和height属性。
+
+允许为外边距指定少于4个值：
+如果缺少左外边距的值，则使用右外边距的值。
+如果缺少下外边距的值，则使用上外边距的值。
+如果缺少右外边距的值，则使用上外边距的值。
+
+只包含文本的行，能改变行间距离的属性只有line-height、font-size和vertical-align。
+
+
 
 # 总结
 
