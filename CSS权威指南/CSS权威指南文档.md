@@ -632,6 +632,61 @@ fixed|元素框的表现类似于absolute，不过其包含块是视察本身。
 
 定义了到其包含块的距离。
 
+**元素可见性**
+
+visibility属性可以继承
+
+**非替换元素的放置大小**
+
+left + margin-left + border-left-width + padding-left + width + padding-right + border-right-width + margin-right + right = 包含块的width
+
+将外边距设置为auto的绝对元素定位元素水平居中，这与正常流中auto外边距居中行为基本一样。在水平布局中，如果值设置为auto，right或left都可以根据其静态位置放置。
+但在垂直布局中，只有top可以取静态位置，出于某种原因，bottom做不到。
+
+```html
+水平居中：
+<div style="position: relative; width: 25em; border: 1px dotted; ">
+  An absolutely positioned element can have its content.
+  <span style="position: absolute; top: 0; left: 1em; right: 1em; width: 10em; margin: 0 auto; background: silver;">
+    shrink-wrapped
+  </span>
+  thanks to the way positioning rules work.
+</div>
+
+垂直居中：
+<div style="position: relative; width: 10em; height: 10em; border: 1px solid;">
+  <div style="position: absolute; left: 0; width: 100%; background: #CCC; top: 0; height: 5em; bottom: 0; margin: auto 0;">element</div>
+</div>
+```
+
+过度受限情况下忽略right的值
+
+**替换元素的放置和大小**
+
+替换元素有固有的高度和宽度，因此其大小不会改变。
+
+水平布局规则：
+1、 如果width设置为auto，width的实际使用值由元素内容的固有宽度决定。因此，如果有一个图像宽度是50像素，使用值则计算为50px。如果显式声明了width（也就是说，设置为100px或50%），则width设置为该值。
+2、 在从左向右读的语言中，如果left为auto，要把auto替换为静态位置。在从右向左读的语言中，则把right的auto值替换为静态位置。
+3、 如果left或right仍为auto（也就是说，未在上一步中被替换），则将margin-left或margin-right的auto的替换为0。
+4、 如果此时margin-left和margin-right都还定义为auto，则把它们设置为相等的值，从而将元素在其包含中居中。
+5、 在此之后，如果只剩下一个auto值，则将其修改为等于的余下部分（使等式满足）。
+
+垂直布局规则：
+1、如果height设置为auto，height的计算值由元素内容的固有高度确实。因此，对于一个50像素高的图像，其height计算为50px。如果height显式声明为某个值（100px或50%），则height会设置为该值。
+2、如果top的值为auto，将其替换为替换元素的静态位置。
+3、如果bottom值为auto，将其替换为替换元素的静态位置。
+4、如果此时margin-top和margin-bottom都还定义为auto，将其设置为相等的值，从而使元素在其包含块中居中。
+5、在此之后，如果仅剩下一个auto值，则将其修改为等于等式中的余下部分（使等式满足）
+
+### 相对定位
+
+会为其所有子元素建立一个新的包含块。这个包含块对应于该元素原来所在的位置。
+
+如果过度受限的相对定位，一个值会重置为另一个值的相反数。
+
+
+
 名称|声明|值|初始值|应用于|继承性|百分数|计算值
 -|-|-|-|-|-|-
 偏移属性|top、right、bottom、left|&lt;length&gt;&#124;&lt;percentage&gt;&#124;auto&#124;inherit|auto|定位元素|无|对于top和bottom，相对于包含块的高度；对于right和left，相对于包含块的宽度|对于static元素为auto；对于长度值，是相应的绝对长度；对于百分数值，则为指定的值；否则，为auto。
@@ -640,8 +695,7 @@ fixed|元素框的表现类似于absolute，不过其包含块是视察本身。
 内容溢出|overflow|visible&#124;hidden&#124;scroll&#124;auto&#124;inherit|visible|块级元素和替换元素|无||根据指定确定
 内容剪裁|clip|clip&#124;rect(top, right, bottom, left)&#124;auto&#124;inherit|auto|绝对定位元素|无||对于矩形，4个计算长度表示剪裁矩形区域的4个边；否则，根据指定确实。
 元素可见性|visibility|visible&#124;hidden&#124;collapse&#124;inherit|visible|所有元素|有||根据指定确定
-
-visibility属性可以继承
+z轴|z-index|integer&#124;auto&#124;inherit|auto|所有元素|无||根据指定确定
 
 # 总结
 

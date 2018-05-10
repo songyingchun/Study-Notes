@@ -29,13 +29,16 @@
 
 <body>
 
-    <div class="" style="overflow: hidden;">
-        <span class="left">
-            left
+        
+    <div style="position: relative;width: 10em; height: 10em; border: 1px solid;">
+        <div style="position: absolute; left: 0; width: 100%; background: #ccc; top: 0; height: 5em; bottom: 0; margin: auto 0;"></div>
+    </div>
+    <div style="position: relative; width: 25em; border: 1px dotted; ">
+        An absolutely positioned element can have its content.
+        <span style="position: absolute; top: 0; left: 1em; right: 1em; width: 10em; margin: 0 auto; background: silver;">
+            shrink-wrapped
         </span>
-        <span class="left">
-            rightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightrightright
-        </span>
+        thanks to the way positioning rules work.
     </div>
 </body>
 
