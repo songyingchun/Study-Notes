@@ -685,6 +685,16 @@ left + margin-left + border-left-width + padding-left + width + padding-right + 
 
 如果过度受限的相对定位，一个值会重置为另一个值的相反数。
 
+名称|声明|值|初始值|应用于|继承性|百分数|计算值
+-|-|-|-|-|-|-
+偏移属性|top、right、bottom、left|&lt;length&gt;&#124;&lt;percentage&gt;&#124;auto&#124;inherit|auto|定位元素|无|对于top和bottom，相对于包含块的高度；对于right和left，相对于包含块的宽度|对于static元素为auto；对于长度值，是相应的绝对长度；对于百分数值，则为指定的值；否则，为auto。
+限制最小宽度和高度|min-width、min-height|&lt;length&gt;&#124;&lt;percentage&gt;&#124;inherit|0|除了非替换行内元素和表单元素以外的所有元素|无|相对于包含块的宽度|对于百分数，根据指定确定；对于长度值，则为绝对长度；否则，为none。
+限制最大宽度和高度|max-width、max-height|&lt;length&gt;&#124;&lt;percentage&gt;&#124;inherit|0|除了非替换行内元素和表单元素以外的所有元素|无|相对于包含块的高度|对于百分数，根据指定确定；对于长度值，则为绝对长度；否则，为none。
+内容溢出|overflow|visible&#124;hidden&#124;scroll&#124;auto&#124;inherit|visible|块级元素和替换元素|无||根据指定确定
+内容剪裁|clip|clip&#124;rect(top, right, bottom, left)&#124;auto&#124;inherit|auto|绝对定位元素|无||对于矩形，4个计算长度表示剪裁矩形区域的4个边；否则，根据指定确实。
+元素可见性|visibility|visible&#124;hidden&#124;collapse&#124;inherit|visible|所有元素|有||根据指定确定
+z轴|z-index|integer&#124;auto&#124;inherit|auto|所有元素|无||根据指定确定
+
 # 第11章 表布局
 
 ## 表格式化
@@ -701,15 +711,56 @@ left + margin-left + border-left-width + padding-left + width + padding-right + 
 * 每个跨行或跨列的单元格是一个矩形框，其宽度和高度分别为一个或多个单元格。这个矩形框的顶行在作为该单元格父元素的行中。
 * 单元格框不能超出表或行组的最后一个行框。如果表结构可能造成这种情况，单元格则必须缩小，使之能放在包含它的表或行组中。
 
+**表显示方式**
+
 名称|声明|值|初始值|应用于|继承性|百分数|计算值
 -|-|-|-|-|-|-
-偏移属性|top、right、bottom、left|&lt;length&gt;&#124;&lt;percentage&gt;&#124;auto&#124;inherit|auto|定位元素|无|对于top和bottom，相对于包含块的高度；对于right和left，相对于包含块的宽度|对于static元素为auto；对于长度值，是相应的绝对长度；对于百分数值，则为指定的值；否则，为auto。
-限制最小宽度和高度|min-width、min-height|&lt;length&gt;&#124;&lt;percentage&gt;&#124;inherit|0|除了非替换行内元素和表单元素以外的所有元素|无|相对于包含块的宽度|对于百分数，根据指定确定；对于长度值，则为绝对长度；否则，为none。
-限制最大宽度和高度|max-width、max-height|&lt;length&gt;&#124;&lt;percentage&gt;&#124;inherit|0|除了非替换行内元素和表单元素以外的所有元素|无|相对于包含块的高度|对于百分数，根据指定确定；对于长度值，则为绝对长度；否则，为none。
-内容溢出|overflow|visible&#124;hidden&#124;scroll&#124;auto&#124;inherit|visible|块级元素和替换元素|无||根据指定确定
-内容剪裁|clip|clip&#124;rect(top, right, bottom, left)&#124;auto&#124;inherit|auto|绝对定位元素|无||对于矩形，4个计算长度表示剪裁矩形区域的4个边；否则，根据指定确实。
-元素可见性|visibility|visible&#124;hidden&#124;collapse&#124;inherit|visible|所有元素|有||根据指定确定
-z轴|z-index|integer&#124;auto&#124;inherit|auto|所有元素|无||根据指定确定
+显示方式|display|none&#124;inline&#124;block&#124;inline-block&#124;list-item&#124;run-in&#124;table&#124;inline-table&#124;table-row-group&#124;table-header-group&#124;table-footer-group&#124;table-row&#124;table-column-group&#124;table-column&#124;table-cell&#124;table-caption&#124;inherit|inline|所有元素|无||对于浮动、定位和根元素，计算值可变；否则，根据指定确定。
+
+属性|说明
+-|-
+inline-table|这个值指定一个元素定义了一个行内级表。这说明，该元素定义了一个生成行内框的矩形块。与之最接近的非表值是inline-block。最接近的HTML元素为table，不过，默认情况下HTML表不是行内元素。
+table-row|这个值指定一个元素是一个单元格的行。相应的HTML元素是tr元素。
+table-row-group|这个值指定一个元素是一个或多个行的组。相应的HTML值是tbody。
+table-header-group|这个值与table-row-group非常相似，只是视觉格式化方面有所不同。标题行组总是在所有其他行和行组之间显示（如果最上面有总标题，要在总标题之后显示）。打印时，如果一个表需要多页打印，用户代理可以在各页顶端重复标题行。规范没有定义如果为多个元素指定table-header-group值会发生什么情况。标题组可以包含多个行。与之对应的HTML值是thead。
+table-footer-group|这个值与table-footer-group非常相似，不过脚注行组总是在所有其他行之后显示，如果最下面有页脚标题，要在该总标题之前显示。打印时，如果一个表需要多页打印，用户代理可以在各页底端重复脚行。规范没有定义如果为多个元素指定table-footer-group值会有什么结果。与之对应的HTML元素是tfoot。
+table-column|这个值声明元素描述了一个单元格的列。按CSS的术语来说，有这个display值的元素并不显示，就好像它的display值为none一样。之所以存在这个值，主要是为了帮助定义列中单元格的表示。相应的HTML元素是col元素。
+table-column-group|这个值声明一个元素是一个或多个列的组。类似于table-column元素，table-column-group元素也不显示，不过这个值有助于定义列组中元素的表示。相应的HTML元素是colgroup元素。
+table-cell|这个值声明一个元素表示表中的单个单元格。HTML元素th和td都属于table-cell元素。
+table-caption|这个值定义一个表的总标题。
+
+```css
+table {display: table;}
+tr {display: table-row;}
+thead {display: table-header-group;}
+tbody {display: table-row-group;}
+tfoot {display: table-footer-group;}
+col {display: table-column;}
+colgroup {display: table-column-group;}
+td, th {display: table-cell;}
+caption {display: table-caption;}
+```
+
+对象插入规则：
+1、如果一个table-cell元素的父元素不是table-row元素，则会在该table-cell元素及其父元素之间插入一个匿名table-row对象。所插入的这个对象将包含该table-cell元素的所有连续兄弟。
+2、如果一个table-row元素的父元素不是table、inline-table或table-row-group元素，则会在该table-row元素及其父元素之间插入一个匿名table元素。插入的这个对象将包含该table-row元素的所有连续兄弟。
+3、如果一个table-column元素的父元素不是table、inline-table或table-column-group元素，则在该table-column元素及其父元素之间插入一个匿名table元素。
+4、如果一个table-row-group、table-header-group、table-footer-group、table-column-group或table-caption元素的父元素不是table元素，则在该元素及其父元素之间插入一个匿名table元素。
+5、如果一个table或inline-table元素的子元素不是table-row-group、table-header-group、table-footer-group、table-row或table-caption元素、则在该table元素与其子元素之间插入一个匿名table-row对象。这个匿名对象将包含该子元素的所有不是table-row-group、table-header-group、table-footer-group、table-row或table-caption元素的连续兄弟。
+6、如果一个table-row-group、table-header-group或table-footer-group元素的子元素不是table-row元素，则在该元素及其子元素之间插入一个匿名table-row对象。这个匿名对象包含该子元素的所有本身非table-row对象的连续兄弟。
+7、如果一个table-row元素的子元素不是table-cell元素，则在该元素和其子元素之间插入一个匿名table-cell对象。这个匿名对象包含该子元素的所有本身非table-cell元素的连续兄弟。
+
+
+声明|名称|值|初始值|应用于|继承性|百分数|计算值
+-|-|-|-|-|-|-
+caption|表标题|top&#124;bottom|top|display值为talbe-capiton的元素|有||根据指定确定。
+border-collapse|表单元格边框|collapse&#124;separate&#124;inherit|separate|display值为talbe或inline-table的元素|有||根据指定确定。
+border-spacing|边框间隔|<length><length>?&#124;inherit|0|display值为talbe或inline-table的元素|有||两个绝对长度
+empty-cells|处理空单元格|show&#124;hide&#124;inherit|0|display值为talbe或inline-table的元素|有||两个绝对长度
+
+**合并单元格边框**
+
+## 表大小
 
 # 总结
 
