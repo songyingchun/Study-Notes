@@ -750,7 +750,6 @@ caption {display: table-caption;}
 6、如果一个table-row-group、table-header-group或table-footer-group元素的子元素不是table-row元素，则在该元素及其子元素之间插入一个匿名table-row对象。这个匿名对象包含该子元素的所有本身非table-row对象的连续兄弟。
 7、如果一个table-row元素的子元素不是table-cell元素，则在该元素和其子元素之间插入一个匿名table-cell对象。这个匿名对象包含该子元素的所有本身非table-cell元素的连续兄弟。
 
-
 声明|名称|值|初始值|应用于|继承性|百分数|计算值
 -|-|-|-|-|-|-
 caption|表标题|top&#124;bottom|top|display值为talbe-capiton的元素|有||根据指定确定。
