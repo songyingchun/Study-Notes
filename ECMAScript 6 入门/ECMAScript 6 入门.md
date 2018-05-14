@@ -1852,54 +1852,184 @@ const es_namespace = await import('./es.mjs');
 
 ArrayBuffer对象代表储存二进制数据的一段内存，它不能直接读写，只能通过视图（TypedArray视图和DataView视图)来读写，视图的作用是以指定格式解读二进制数据。
 
-> * ArrayBuffer也是一个构造函数，可以分配一段可以存放数据的连续内存区域。
-```javascript
-// 分配一段可以存放数据的连续内存区域。
-const buf = new ArrayBuffer(32);
-
-// 为了读写这段内容，需要为它指定视图。
-const dataView = new DataView(buf);
-dataView.getUint8(0) // 0
-
-```
-
-另一种 TypedArray 视图，与DataView视图的一个区别是，它不是一个构造函数，而是一组构造函数，代表不同的数据格式。
+> * TypedArray(buffer, byteOffset=0, length?)：
+  > * 第一个参数（必需）：视图对应的底层ArrayBuffer对象。
+  > * 第二个参数（可选）：视图开始的字节序号，默认从 0 开始。
+  > * 第三个参数（可选）：视图包含的数据个数，默认直到本段内存区域结束。
 
 ```javascript
-const buffer = new ArrayBuffer(12);
+// 创建一个8字节的ArrayBuffer
+const b = new ArrayBuffer(8);
 
-const x1 = new Int32Array(buffer);
-x1[0] = 1;
-const x2 = new Uint8Array(buffer);
-x2[0]  = 2;
+// 创建一个指向b的Int32视图，开始于字节0，直到缓冲区的末尾
+const v1 = new Int32Array(b);
 
-x1[0] // 2
+// 创建一个指向b的Uint8视图，开始于字节2，直到缓冲区的末尾
+const v2 = new Uint8Array(b, 2);
 
-const typedArray = new Uint8Array([0,1,2]);
-typedArray.length // 3
-
-typedArray[0] = 5;
-typedArray // [5, 1, 2]
+// 创建一个指向b的Int16视图，开始于字节2，长度为2
+const v3 = new Int16Array(b, 2, 2);
 ```
 
-> * ArrayBuffer.prototype.byteLength：返回所分配的内存区域的字节长度。
-> * ArrayBuffer.prototype.slice()：允许将内存区域的一部分，拷贝生成一个新的ArrayBuffer对象。
-> * ArrayBuffer.isView()：返回一个布尔值，表示参数是否为ArrayBuffer的视图实例。
+视图还可以不通过ArrayBuffer对象，直接分配内存而生成　
 
-**TypedArray 视图**
+```javascript
+const f64a = new Float64Array(8);
+f64a[0] = 10;
+f64a[1] = 20;
+f64a[2] = f64a[0] + f64a[1];
+```　
 
-同一段内存，不同数据有不同的解读方式，这就叫做“视图”（view）。ArrayBuffer有两种视图，一种是 TypedArray 视图，另一种是DataView视图。前者的数组成员都是同一个数据类型，后者的数组成员可以是不同的数据类型。
+> * TypedArray(typedArray)：TypedArray 数组的构造函数，可以接受另一个 TypedArray 实例作为参数。
+```javascript
+const typedArray = new Int8Array(new Uint8Array(4));
+```
 
-TypedArray 视图一共包括 9 种类型，每一种视图都是一种构造函数。
-- Int8Array：8 位有符号整数，长度 1 个字节。
-- Uint8Array：8 位无符号整数，长度 1 个字节。
-- Uint8ClampedArray：8 位无符号整数，长度 1 个字节，溢出处理不同。
-- Int16Array：16 位有符号整数，长度 2 个字节。
-- Uint16Array：16 位无符号整数，长度 2 个字节。
-- Int32Array：32 位有符号整数，长度 4 个字节。
-- Uint32Array：32 位无符号整数，长度 4 个字节。
-- Float32Array：32 位浮点数，长度 4 个字节。
-- Float64Array：64 位浮点数，长度 8 个字节。
+> * TypedArray(arrayLikeObject)：构造函数的参数也可以是一个普通数组，然后直接生成 TypedArray 实例。
+```javascript
+const typedArray = new Uint8Array([1, 2, 3, 4]);
+```
+
+TypedArray 数组也可以转换回普通数组。
+```javascript
+const normalArray = [...typedArray];
+// or
+const normalArray = Array.from(typedArray);
+// or
+const normalArray = Array.prototype.slice.call(typedArray);
+```
+
+一个占据四个字节的 16 进制数0x12345678，决定其大小的最重要的字节是“12”，最不重要的是“78”。小端字节序将最不重要的字节排在前面，储存顺序就是78563412；大端字节序则完全相反，将最重要的字节排在前面，储存顺序就是12345678。目前，所有个人电脑几乎都是小端字节序，所以 TypedArray 数组内部也采用小端字节序读写数据，或者更准确的说，按照本机操作系统设定的字节序读写数据。
+
+**BYTES_PER_ELEMENT 属性**
+
+```javascript
+Int8Array.BYTES_PER_ELEMENT // 1
+Uint8Array.BYTES_PER_ELEMENT // 1
+Int16Array.BYTES_PER_ELEMENT // 2
+Uint16Array.BYTES_PER_ELEMENT // 2
+Int32Array.BYTES_PER_ELEMENT // 4
+Uint32Array.BYTES_PER_ELEMENT // 4
+Float32Array.BYTES_PER_ELEMENT // 4
+Float64Array.BYTES_PER_ELEMENT // 8
+```
+
+**ArrayBuffer 与字符串的互相转换**
+
+```javascript
+// ArrayBuffer 转为字符串，参数为 ArrayBuffer 对象
+function ab2str(buf) {
+  // 注意，如果是大型二进制数组，为了避免溢出，
+  // 必须一个一个字符地转
+  if (buf && buf.byteLength < 1024) {
+    return String.fromCharCode.apply(null, new Uint16Array(buf));
+  }
+
+  const bufView = new Uint16Array(buf);
+  const len =  bufView.length;
+  const bstr = new Array(len);
+  for (let i = 0; i < len; i++) {
+    bstr[i] = String.fromCharCode.call(null, bufView[i]);
+  }
+  return bstr.join('');
+}
+
+// 字符串转为 ArrayBuffer 对象，参数为字符串
+function str2ab(str) {
+  const buf = new ArrayBuffer(str.length * 2); // 每个字符占用2个字节
+  const bufView = new Uint16Array(buf);
+  for (let i = 0, strLen = str.length; i < strLen; i++) {
+    bufView[i] = str.charCodeAt(i);
+  }
+  return buf;
+}
+```
+
+**TypedArray.prototype.buffer**
+
+```javascript
+const a = new Float32Array(64);
+const b = new Uint8Array(a.buffer);
+```
+
+**TypedArray.prototype.byteLength**
+
+length属性表示 TypedArray 数组含有多少个成员。注意将byteLength属性和length属性区分，前者是字节长度，后者是成员长度。
+
+```javascript
+const a = new Int16Array(8);
+
+a.length // 8
+a.byteLength // 16
+```
+
+**TypedArray.prototype.set()**
+
+TypedArray 数组的set方法用于复制数组（普通数组或 TypedArray 数组），也就是将一段内容完全复制到另一段内存。
+
+set方法还可以接受第二个参数，表示从b对象的哪一个成员开始复制a对象。
+
+```javascript
+const a = new Uint8Array(8);
+const b = new Uint8Array(8);
+
+b.set(a);
+
+b.set(a, 2)
+```
+
+**TypedArray.prototype.subarray()**
+
+```javascript
+const a = new Uint16Array(8);
+const b = a.subarray(2,3);
+
+a.byteLength // 16
+b.byteLength // 2
+```
+
+**TypedArray.prototype.slice()**
+
+```javascript
+let ui8 = Uint8Array.of(0, 1, 2);
+ui8.slice(-1)
+// Uint8Array [ 2 ]
+```
+
+**TypedArray.of()**
+
+TypedArray 数组的所有构造函数，都有一个静态方法of，用于将参数转为一个 TypedArray 实例。
+```javascript
+Float32Array.of(0.151, -8, 3.7)
+// Float32Array [ 0.151, -8, 3.7 ]
+```
+
+**TypedArray.from()**
+
+静态方法from接受一个可遍历的数据结构（比如数组）作为参数，返回一个基于这个结构的 TypedArray 实例。
+
+from方法还可以接受一个函数，作为第二个参数，用来对每个元素进行遍历，功能类似map方法。
+
+```javascript
+Int8Array.of(127, 126, 125).map(x => 2 * x)
+// Int8Array [ -2, -4, -6 ]
+
+Int16Array.from(Int8Array.of(127, 126, 125), x => 2 * x)
+// Int16Array [ 254, 252, 250 ]
+```
+
+**DataView 视图**
+
+ArrayBuffer对象的各种 TypedArray 视图，是用来向网卡、声卡之类的本机设备传送数据，所以使用本机的字节序就可以了；而DataView视图的设计目的，是用来处理网络设备传来的数据，所以大端字节序或小端字节序是可以自行设定的。
+
+DataView视图本身也是构造函数，接受一个ArrayBuffer对象作为参数，生成视图。
+
+```javascript
+DataView(ArrayBuffer buffer [, 字节起始位置 [, 长度]]);
+
+const buffer = new ArrayBuffer(24);
+const dv = new DataView(buffer);
+```
 
 
 
