@@ -1,0 +1,107 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0;padding:0;}
+ul,ol{list-style:none;}
+a{text-decoration:none; color:#3e3e3e;}
+html{-ms-text-size-adjust:none;-webkit-text-size-adjust:none;text-size-adjust:none;}
+body{line-height:1.5; background:#f6f6f6; color:#3e3e3e;}
+body,button,input,select,textarea{'wenquanyi micro hei',tahoma,'hiragino sans gb',stheiti,\5FAE\8F6F\96C5\9ED1,\5B8B\4F53,sans-serif,font-family:'微软雅黑';}
+b,strong{font-weight:bold;}
+i,em{font-style:normal;}
+table{border-collapse:collapse;border-spacing:0;}
+table th,table td{border:1px solid #ddd;padding:5px;}
+table th{font-weight:inherit;border-bottom-width:2px;border-bottom-color:#ccc;}
+img{border:0 none;width:auto\9;max-width:100%;vertical-align:middle;}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;vertical-align:baseline;}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;}
+button[disabled],input[disabled]{cursor:default;}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}
+input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+input{line-height:normal!important; outline:none;}
+}
+select[size],select[multiple],select[size][multiple]{border:1px solid #AAA;padding:0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block;}
+audio,canvas,video,progress{display:inline-block;}
+.ycenter{display:-webkit-box; -webkit-box-orient:horizontal; -webkit-box-pack:center; -webkit-box-align:center; display:-moz-box; -moz-box-orient:horizontal; -moz-box-pack:center; -moz-box-align:center; 
+display:-o-box; -o-box-orient:horizontal; -o-box-pack:center; -o-box-align:center; display:-ms-box; -ms-box-orient:horizontal; -ms-box-pack:center; -ms-box-align:center; display:box; box-orient:horizontal; box-pack:center; box-align:center;}
+.clearfix::after{clear: both; content: " "; display: block; height: 0; overflow: hidden;}
+input{outline: none; -webkit-appearance: none; appearance: none;}
+.overhidden{overflow: hidden; position: fixed;}
+.hide{display: none !important;}
+.g-doc{margin:0 auto; max-width:7.5rem;}
+
+.area02{height: 1.7rem; background: #dadbdf;}
+.area02 ul{padding: 0 0.2rem; display: flex; flex-wrap:wrap; justify-content:center;}
+.area02 li{border:2px solid #3e3e3e; width: 2.25rem; text-align: center; height: 0.45rem; line-height: 0.5rem; font-size: 0.22rem; color: #3e3e3e; margin: 0.1rem 0.06rem 0; flex: 1; padding: 0 0.4rem; white-space: nowrap;}
+.area02 li.current{background: #3e3e3e; color: #fff;}
+.boxms{width: 100%; height: 1.38rem; background: #dadbdf;}
+.boxmsfix{position: fixed; left: 0; top: 0; z-index: 102;}
+.area03{position: relative;}
+.area03 span{position: absolute; color: #3e3e3e; font-size: 0.24rem; line-height: 0.4rem; width: 100%; left: 0; top: 2.74rem; text-align: center;}
+.area06{position: relative;}
+.area06 .btn{position: absolute; width: 2.8rem; height: 0.78rem; right: 0.54rem;}
+.area06 .btn01{bottom: 2.8rem;}
+.area06 .btn02{bottom: 1.5rem;}
+.area06 span{position: absolute; font-size: 0.22rem; line-height: 0.34rem; border: 0.02rem solid #3e3e3e; padding: 0.02rem 0.28rem; left: 0.6rem; bottom: 0.8rem;}
+.area07{background: #dadbdf; position: relative;}
+.area07 ul{padding-left: 0.1rem; box-sizing: border-box;}
+.area07 li{float: left; width: 3.25rem; height: 3.76rem; background: #fff; margin: 0 0.2rem 0.2rem;}
+.area07 .pic{margin: 0.09rem; position: relative;}
+.area07 .pic a{position: absolute; width: 0.96rem; height: 0.96rem; background: #3e3e3e; border-radius: 50%; right: 0; bottom: 0;display: none;}
+.area07 .pic i{position: absolute; width: 0.24rem; height: 0.24rem; background: url(../images/zan.jpg) no-repeat; background-size: 100%; left: 0; right: 0; margin: auto; top: 0.22rem;}
+.area07 .pic span{display: block; padding-top: 0.47rem; text-align: center; color: #fff; font-size: 0.22rem;}
+.area07 .pic .cured{background: #929292;}
+.area07 .pic .cured i{width: 0.26rem; background: url(../images/zaned.jpg) no-repeat; background-size: 100%;}
+.area07 .pic .cured span{ color: #424242;}
+.area07 .txt{padding: 0.12rem 0.09rem 0.02rem; line-height: 0.3rem; font-size: 0.22rem;}
+.area07 .meto{padding-top: 0.12rem;display: none;}
+.area07 .meto em{float: right; color: #747474; margin-right: 0.09rem;}
+.area08{position: relative;}
+.area08 span{position: absolute; width: 5.6rem; font-size: 0.22rem; line-height: 0.36rem; left: 1.58rem; top: 3.38rem;}
+.area09{position: relative;}
+.area09 .main{position: absolute; left: 0; top: 0; width: 100%;}
+.area09 .picbox{height: 4.38rem;}
+.area09 .txt{padding-top:0.22rem; font-size: 0.22rem; line-height: 0.36rem; text-align: center;}
+.area09 .boxMain{width: 100%; height: 100%;}
+.area09 .newindex{width: 6.38rem; margin: 0.13rem auto 0; position: relative;}
+.area09 .newindex .btn{position: absolute; width: 0.61rem; height: 0.86rem; top: 0; bottom: 0; margin: auto; z-index: 99;}
+.area09 .newindex .btnl{left: -0.35rem; background: url(../images/left.png) no-repeat; background-size: 100%;}
+.area09 .newindex .btnr{right: -0.35rem; background: url(../images/right.png) no-repeat; background-size: 100%;}
+
+/*弹框弹层*/
+.cover{position: fixed; z-index: 998; width: 100%; height: 100%; left: 0; top:0; bottom: 0; right: 0; margin: auto; max-width: 7.5rem; background: rgba(0,0,0,0.6); display: none;}
+.pop{position: fixed; z-index: 999; left: 0; top:0; bottom: 0; right: 0; margin: auto; width: 6.9rem; height: 4.74rem;}
+.pop i{position: absolute; width: 0.74rem; height: 0.74rem; right: 0.08rem; top: 0.1rem;}
+.pop span{position: absolute; width: 3.63rem; left: 2.94rem; top: 1.5rem; font-size: 0.22rem; line-height: 0.38rem;}
+.poptxt{position: fixed; width: 100%; line-height: 0.5rem; height: 0.5rem; text-align: center; top: 0; bottom: 0; margin: auto; left: 0; right: 0; z-index: 110; display: none;}
+.poptxt span{display: inline-block; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.28rem; padding: 0 0.2rem; border-radius: 0.08rem;}
+.newpop{position: fixed; z-index: 9999; left: 0; top:0; bottom: 0; right: 0; margin: auto; width: 6.9rem; height: 6.36rem; background: #fff;}
+.closeBtn{position: absolute; width: 0.75rem; height: 0.75rem; background: url(../images/closeBtn.png) no-repeat; background-size: 100%; right: 0.08rem; top: 0.1rem;}
+.sidebox{width: 5.64rem; height: 4.3rem; margin: 1.02rem auto 0; position: relative;}
+.sidemain{width: 100%; height: 100%; overflow: hidden;}
+.sidemain li{text-align: center;}
+.sidemain li span{display: none;}
+.newpop p.tit{line-height: 0.4rem; height: 2rem; padding: 0.2rem 0.63rem 0.4rem; font-size: 0.22rem; background: #fff;}
+
+.sidebox .btn{position: absolute; width: 0.61rem; height: 0.86rem; top: 0; bottom: 0; margin: auto; z-index: 99;}
+.sidebox .btnl01{left: -0.5rem; background: url(../images/left.png) no-repeat; background-size: 100%;}
+.sidebox .btnr01{right: -0.5rem; background: url(../images/right.png) no-repeat; background-size: 100%;}
+
+.lins{position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 3;}
+.lins span{position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto; line-height: 1.5rem; font-size: 0.6rem; text-align: center; height: 4.8rem; color: #fff; width: 100%;}
+.whitedo{position: fixed; width: 6.38rem; height: 3.16rem; background: #fff; z-index: 999; left: 0; right: 0; top: 0; bottom: 0; margin: auto;}
+
+.whitedo .closeBtn{right: -0.2rem; top: -0.94rem; background: url(../images/whiteBtn.png) no-repeat; background-size: 100%;}
+.whitedo span{display: block; height: 100%; line-height: 3.16rem; text-align: center; font-size: 0.2rem;}
+
+.npBtn{height: 0.5rem; text-align: center; vertical-align: middle; padding: 0.3rem 0 0.4rem;
+    background: #d5d5d9; /* For browsers that do not support gradients */  
+    background: -webkit-linear-gradient(#dadbdf, #d5d5d9); /* For Safari 5.1 to 6.0 */  
+    background: -o-linear-gradient(#dadbdf, #d5d5d9)); /* For Opera 11.1 to 12.0 */  
+    background: -moz-linear-gradient(#dadbdf, #d5d5d9)); /* For Firefox 3.6 to 15 */  
+    background: linear-gradient(#dadbdf, #d5d5d9)); /* Standard syntax */  
+    }
+.npBtn a{display: inline-block; height: 0.5rem; line-height: 0.5rem; text-align: center; color: #fff; width: 1.66rem; background: #2e2e2e; font-size: 0.3rem; margin: 0 0.08rem;}
+.pageBox{width: 7.5rem; overflow: hidden;}
