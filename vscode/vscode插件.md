@@ -15,3 +15,7 @@
 * view in brower
 打开浏览器
 
+* code Runner
+
+* debug for chrome
+

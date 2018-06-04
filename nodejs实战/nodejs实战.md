@@ -24,3 +24,91 @@ Node的事件轮询：
 （2）解析后的代码，调用Node API。
 （3）libuv库负责Node API的执行。它将不同的任务分配给不同的线程，形成一个Event Loop（事件循环），以异步的方式将任务的执行结果返回给V8引擎。
 （4）V8引擎再将结果返回给用户。
+
+## DIRT程序
+Node所针对的应用程序有一个专门的简称：DIRT。它表示数据密集型实时（data-intensive real-time）程序。
+
+## 事件驱动
+
+从事件角度说，事件驱动程序的基本结构是由一个事件收集器、一个事件发送器和一个事件处理器组成。
+事件收集器专门负责收集所有事件，包括来自用户的（如鼠标、键盘事件等）、来自硬件的（如时钟事件等）和来自软件的（如操作系统、应用程序本身等）。
+事件发送器负责将收集器收集到的事件分发到目标对象中。
+事件处理器做具体的事件响应工作，它往往要到实现阶段才完全确定，因而需要运用虚函数机制（函数名往往取为类似于HandleMsg的一个名字）。
+
+## hello World HTTP 服务器
+```js
+var http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(200, {"Content-type": "text/plain"});
+    res.end("Hello World\n");
+}).listen(3000);
+console.log("Server running at http://localhost:3000/");
+```
+
+事件驱动
+```js
+var http = require('http');
+var server = http.createServer();
+server.on('request', function (req, res) {
+    res.writeHead(200, {
+        'Content-Type': 'text/plain'
+    });
+    res.end('Hello World\n');
+});
+server.listen(3000);
+console.log("Server running at http://localhost:3000/");
+```
+
+## 流数据
+
+可以把数据流看成特殊的数组，只不过数组中的数据分散在空间上，而数据流中的数据是分散在时间上的。通过将数据一块一块地传送，开发人员可以每收到一块数据就开始处理，而不用等所有数据都到了再做处理。
+
+```js
+var stream = fs.createReadStream('./resource.json');
+stream.on('data', function (chunk) {
+    console.log(chunk);
+});
+
+stream.on('end', function () {
+    console.log('finished');
+})
+```
+
+只要有新的数据块准备好，就会激发data事件，当所有数据块都加载完之后，会激发一个end事件。
+
+可读和可写数据流可以连接起来形成管道。
+
+```js
+var http = require('http');
+var fs = require('fs');
+var server = http.createServer();
+
+server.on('request', function (req, res) {
+    res.writeHead(200, {
+        'Content-Type': 'image/png'
+    });
+    fs.createReadStream('./image.png').pipe(res);
+})
+
+server.listen(3000);
+```
+
+数据从文件中读进来（fs.createReadStream），然后数据随着进来就被送到（.pipe）客户端（res）。
+
+## 小结
+
+* 构建在JavaScript之上
+* 事件触发和异步的
+* 专为数据密集型实时程序设计的
+
+# 构建有多个房间的聊天室程序
+
+访问内存（RAM）要比访问文件系统快得多，所以Node程序通常会把常用的数据缓存到内存里。
+
+# Node编程基础
+
+## Node功能的组织及重用
+
+如果模块返回的函数或变量不止一个，通过设定exports对象的属性来指明它们。如果只返回一个函数或变量，则可以设定module.exports属性。
+
+require是Node中少数几个同步I/O操作之一。
