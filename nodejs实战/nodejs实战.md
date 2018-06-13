@@ -109,6 +109,127 @@ server.listen(3000);
 
 ## Node功能的组织及重用
 
-如果模块返回的函数或变量不止一个，通过设定exports对象的属性来指明它们。如果只返回一个函数或变量，则可以设定module.exports属性。
+### module.exports
 
+如果模块返回的函数或变量不止一个，通过设定exports对象的属性来指明它们。如果只返回一个函数或变量，则可以设定module.exports属性。
+```javascript
+// 多个变量
+exports.canadianToUs = function () {}
+exports.USToCanadian = function () {}
+
+// 一个变量
+module.exports = function () {}
+module.exports = exports = function () {}
+```
 require是Node中少数几个同步I/O操作之一。
+
+### 用node_modules重用模块
+1、开始在程序文件同一目录下查找
+2、在当前目录下的node_modules目录下查找
+3、父目录查找
+4、环境变量NODE_PATH指定的目录查找
+
+### 找到模块目录
+1、查找package.json文件
+2、package.json有main指定的文件
+3、查找index.js文件
+
+## 异步编程技术
+
+用回调处理一次性事件
+
+用事件发射器处理重复性事件
+
+# 构建Node Web程序
+
+## HTTP服务器的基础知识
+
+HTTP请求生命周期：
+1、HTTP客户端，发起一个HTTP请求。
+2、Node接受连接，以及发送给HTTP服务器的请求数据。
+3、HTTP服务器解析完HTTP头，将控制权交给请求回调函数。
+4、请求回调执行应用逻辑。
+5、响应通过HTTP服务器送回去，由它为客户端构造格式正确的HTTP响应。
+
+## 构建RESTful Web服务
+表征状态转移REST。
+
+data事件默认地提供Buffer对象。最好将流编码设定为ascii或utf8，这样data事件会给出字符串。
+```javascript
+req.setEncoding('utf8');
+```
+
+POST 向待办事项清单添加事项；
+GET 显示当前事项列表，或者显示某一事项的详情；
+DELETE 从待办事项清单中移除事项；
+PUT 修改已有事项。
+
+__dirname的值是该文件所在目录路径。
+
+req.method属性查看用哪个http方法
+
+第一次调用res.write()时会写入带有默认域的响应头和传给它的数据。
+
+设定Content-Length头
+```javascript
+res.setHeader('Content-Length', Buffer.byteLength(body));
+```
+
+fs.ReadStream:高层流式硬盘访问，从硬盘中读取文件的过程中会发射出data事件。
+```javascript
+var stream = fs.createReadStream(path);
+stream.on('data', function (chunk) {
+    res.write(chunk);
+});
+
+stream.on('end', function () {
+    res.end();
+});
+```
+
+Stream.pipe()：优化数据传输
+```javascript
+var stearm = fs.createReadStream(path);
+
+stream.pipe(res);
+```
+
+# 存储Node程序中的数据
+存储数据而无需安装和配置DBMS；
+用关系型数据库存储数据，具体说就是MySQL和PostgreSQL；
+用NoSQL数据库存储数据，具体说就是Redis、MonogoDB和Mongoose。
+
+## 无服务器的数据存储
+
+### 内存存储
+```javascript
+var http = require('http');
+var counter = 0;
+
+var server = http.createServer(function (req, res) {
+    counter++;
+    res.write('I have been accessed ' + counter + ' times.');
+    res.end();
+}).listen(8888);
+```
+
+### 基于文件的存储
+将数据存储于本地
+
+## 关系型数据库管理系统
+
+### MySQL
+安装
+```nodejs
+npm install mysql
+```
+
+## NoSQL数据库
+
+### Redis
+Redis非常适合处理那些不需要长期访问的简单数据存储
+
+# Connect 
+Connect是一个框架，它使用被称为中间件的模块化组件，以可重用的方式实现Web程序中的逻辑。在Connect中，中间件组件是一个函数，它拦截HTTP服务器提供的请求和响应对象，执行逻辑，然后或者结束响应，或者把它传递给下一个中间件组件。Connect用分派器把中间件“连接”在一起。
+在Connect中，可以使用自己编写的中间件，但它也提供了几个常用的组件，可以用来帮求日志、静态文件服务、请求体解析、会话管理等。
+

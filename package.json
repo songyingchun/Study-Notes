@@ -2,7 +2,6 @@
   "name": "study-notes",
   "version": "1.0.0",
   "description": "学习笔记",
-  
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +11,7 @@
     "url": "git+https://github.com/songyingchun/Study-Notes.git"
   },
   "private": true,
-  "keywords:": "study note", 
+  "keywords:": "study note",
   "author": {
     "name": "songyingchun",
     "email": "419973879@qq.com",
@@ -22,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/songyingchun/Study-Notes/issues"
   },
-  "homepage": "https://github.com/songyingchun/Study-Notes#readme"
+  "homepage": "https://github.com/songyingchun/Study-Notes#readme",
+  "dependencies": {
+    "mysql": "^2.15.0"
+  }
 }
