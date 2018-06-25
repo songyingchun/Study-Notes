@@ -233,3 +233,143 @@ Redis非常适合处理那些不需要长期访问的简单数据存储
 Connect是一个框架，它使用被称为中间件的模块化组件，以可重用的方式实现Web程序中的逻辑。在Connect中，中间件组件是一个函数，它拦截HTTP服务器提供的请求和响应对象，执行逻辑，然后或者结束响应，或者把它传递给下一个中间件组件。Connect用分派器把中间件“连接”在一起。
 在Connect中，可以使用自己编写的中间件，但它也提供了几个常用的组件，可以用来帮求日志、静态文件服务、请求体解析、会话管理等。
 
+## Connect的工作机制
+在Connect中，中间件组件是一个JavaScript函数，按惯例会接受三个参数：一个请求对象，一个响应对象，还有一个通常命名为next的参数，它是一个回调函数，表明这个组件已经完成了它的工作，可以执行下一个中间件组件了。
+
+1、中间件可以链式调用，但是链式调用不是必须的。
+```javascript
+var app = connect();
+app.use(logger).use(hello).listen(3000);
+```
+2、中间件链式调用时，某个中间件不调用next()，后续的中间件都不会被调用。
+
+3、中间件可以挂载，给中间件一个管理区。
+```javascript
+connect()
+    .use('/admin/', restrice);
+```
+
+小结：构建中间件让程序更加模块化、更加灵活。如何将中间件挂载到特定的根URL下，从而在程序内创建程序。可配置的中间件，可以接受设定参数，从而根据不同的用途进行调整。
+
+# Connect自带的中间件
+
+## cookieParse():解析HTTP cookie
+
+# Express
+
+Express3.0 
+
+基于环境的配置
+
+app.configure()：所有环境
+```javascript   
+app.configure(function(){
+  app.set('title', 'My Application');
+})
+
+// 开发环境
+app.configure('development', function(){
+  app.set('db uri', 'localhost/dev');
+})
+
+// 只用于生产环境
+app.configure('production', function(){
+  app.set('db uri', 'n.n.n.n/prod');
+})
+```
+
+app.set(name, value): 将设置项name的值设为value。
+app.get(name): 获取设置项 name 的值。
+```javascript
+app.set('title', 'My Site');
+app.get('title');
+// => "My Site"
+```
+
+app.enable(name)：将设置项 name 的值设为 true 。
+```javascript
+app.enable('trust proxy');
+app.get('trust proxy');
+// => true
+```
+app.disable(name)：将设置项 name 的值设为 false 。
+```javascript
+app.disable('trust proxy');
+app.get('trust proxy');
+// => false
+```
+
+app.enabled(name):检查设置项 name 是否已启用。
+```javascript
+app.enabled('trust proxy');
+// => false
+
+app.enable('trust proxy');
+app.enabled('trust proxy');
+// => true
+```
+
+app.disabled(name):检查设置项 name 是否已禁用。
+```javascript
+app.disabled('trust proxy');
+// => true
+
+app.enable('trust proxy');
+app.disabled('trust proxy');
+// => false
+```
+## 渲染视图
+
+### 视图系统配置
+
+改变查找目录
+```javascript
+app.set('views', __dirname + '/views');
+```
+
+在生产环境中会默认启用view cache设定。
+
+### 视图查找
+
+查找视图的过程跟Node的require()工作机制类似。当res.render()或app.render()被调用时，Express会先检查是否有文件在这个绝对路径上。接着会找视图目录设定的相对路径。最后，Express会尝试使用index文件。
+
+### 把数据输出到视图中
+
+photo.js
+
+```javascript
+// express 4.0
+var express = require('express');
+var router = express.Router();
+
+router.get('/', function (req, res, next) {
+    res.render('photos', {
+        title: 'photos',
+        photos: photos
+    });
+});
+
+module.exports = router;
+```
+
+app.js
+```javascript
+var app = express();
+var photosRouter = require('./routes/photos');
+
+app.use('/photos', photosRouter);
+```
+
+向默认只会向视图中输出一个程序级变量settings，
+app.js
+```javascript
+app.set('title', 'My Application');
+```
+photos.ejs
+```
+<title><%= settings.title%></title>
+```
+
+Express内部：
+app.locals.settings = app.settings;
+
