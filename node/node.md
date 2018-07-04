@@ -50,3 +50,49 @@ npm publish
 npm update
 npm --force unpublish
 
+9.mp4
+Express：
+1. 依赖中间件
+2. 接收请求
+get/post/use
+get('/地址', function (req, res) {})
+3. 非破坏式的
+req.url
+4. static用法 
+const static = require('epress-static');
+server.use(static('./www'));
+
+10.mp4
+1. GET 无需中间件
+req.query
+
+POST 需要'body-parser'
+server.use(bodyParser.urlencoded({
+    limit: 2*1024*1024
+}));  // 解析数据
+
+server.use(function (req) {
+    req.body;
+})
+
+2. 链式操作:调用next
+```javascript
+server.get('/', function (req, res, next) {
+    next();
+});
+server.post('/', function (req, res, next) {
+    next();
+});
+server.use('/', function (req, res, next) {
+    next();
+});
+```
+
+3. 中间件(body-parser)、自己写中间件
+
+11.mp4
+cookie: 在浏览器保存一些数据，每次请求都会带过来
+“不安全，有限（4K）”
+session：保存在服务器
+“安全、无限”
+
