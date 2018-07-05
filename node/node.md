@@ -50,7 +50,7 @@ npm publish
 npm update
 npm --force unpublish
 
-9.mp4
+# 9.mp4
 Express：
 1. 依赖中间件
 2. 接收请求
@@ -62,7 +62,7 @@ req.url
 const static = require('epress-static');
 server.use(static('./www'));
 
-10.mp4
+# 10.mp4
 1. GET 无需中间件
 req.query
 
@@ -90,9 +90,37 @@ server.use('/', function (req, res, next) {
 
 3. 中间件(body-parser)、自己写中间件
 
-11.mp4
+# 11.mp4
 cookie: 在浏览器保存一些数据，每次请求都会带过来
 “不安全，有限（4K）”
 session：保存在服务器
 “安全、无限”
 
+session: 基于cookie实现的
+ *cookie中会有一个session的ID，服务器利用session找到session文件、读取、写入
+
+隐患：session劫持
+
+cookie:
+1. cookie空间非常小-省着用
+2. 安全性非常差
+
+res.secret = '签名'
+a.发送cookie(名字，值，{path: '/': maxAge: 毫秒, signed: true});
+
+b.读取cookie
+cookie-parser
+
+server.use(cookieParser('签名'));
+server.use(function (req, res) {
+    req.cookies 
+    req.signedCookies
+});
+
+c.删除cookie
+server.use(function (req, res) {
+    res.clearCookie('user');
+});
+
+session: 
+cookie-session:
