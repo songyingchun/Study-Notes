@@ -124,3 +124,12 @@ server.use(function (req, res) {
 
 session: 
 cookie-session:
+
+# 12.mp4 模板引擎
+jade-破坏式、侵入式、强依赖
+ejs-温和、非侵入式、弱依赖
+
+jade
+```
+
+```
