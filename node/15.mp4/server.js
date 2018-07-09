@@ -5,6 +5,7 @@ const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const jade = require('jade');
+const multer = require('multer');
 
 var server = express();
 
@@ -27,10 +28,14 @@ server.use(bodyParser.urlencoded({
     extended: false
 }));
 
+server.use(multer({
+    dest: './www/upload'
+}).any());
+
 // 用户登录
 server.use('/', function (req, res, next) {
     res.cookie();
-    console.log(req.query, req.body, req.cookie, req.session);
+    console.log(req.query, req.body, req.files, req.cookie, req.session);
 });
 
 // 4.static数据

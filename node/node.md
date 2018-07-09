@@ -133,3 +133,19 @@ jade
 ```
 
 ```
+
+# 15.mp4 综合
+body-parser 解析post数据 application/x-www-form-urlencoded
+server.use(bodyParser.urlencode());
+
+multer      解析post文件 multerpart/form-data
+var obj = multer({dest: "upload/"});
+
+server.use(obj.any());
+server.use(function (req, res) {
+    req.files[0].originalname
+    req.files[0].path
+})
+
+把扩展名加上
+var newName = file.path + pathLib.parse(file.originalname).ext
