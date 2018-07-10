@@ -149,3 +149,49 @@ server.use(function (req, res) {
 
 把扩展名加上
 var newName = file.path + pathLib.parse(file.originalname).ext
+
+# 16.mp4
+模板引擎：适配
+1. consolidate
+```javascript
+consolidate=require
+server.set('view engine', 'html');
+server.set('views', '模板文件目录');
+server.engine('html', consolidate.ejs);
+
+server.get('/', function (req, res) {
+    res.render('模板文件', 数据);
+});
+```
+
+route-路由：
+把不同的目录，对应到不同的模块
+
+xxx.com/aaa/        mod1
+xxx.com/news/       mod_news
+        post                news_post
+        list                news_list
+        content             news_content
+xxx.com/user/       mod_users
+
+server.get();
+server.use();
+server.post();
+
+Router-迷你server
+router.get();
+router.post();
+router.use();
+
+Router-拆
+/user/...       mod_user
+/item/...       mod_item
+
+// 1.创建router
+var router = express.Router();
+// 2.把router添加到server
+server.use('/user', router);
+
+// 3.router内部
+router.get('/1.html');
+router.post('/2.html');
