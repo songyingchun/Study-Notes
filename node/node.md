@@ -259,3 +259,26 @@ SELECT * FROM `user_table`;
 SQL标准写法
 1.关键字大写
 2.库、表、字段需要加上
+
+# 19.mp4 搭表
+数据字典-数据定出来
+
+1. banner
+    ID 
+    title 标题 varchar(32)
+    sub_title 副标题 varchar(16)
+    src 图片地址 varchar(64)
+2. 文章
+    ID 
+    author 作者 varchar(16)
+    author_src 作者头像 varchar(64)
+    title 标题  varchar(32)
+    post_time 发布时间（s）int
+    content 内容 text
+    n_like 赞 int
+3. 用户
+    ID 
+    username 用户名 varchar(32)
+    password 密码 varchar(32)
+    src 头像 varchar(64)
+# 20.mp4
