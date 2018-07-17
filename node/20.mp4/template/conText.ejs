@@ -7,6 +7,25 @@
     <title>Document</title>
 </head>
 <body>
-    article
+    
+    <div class="content">
+        <div class="header clear">
+            <h2><img src="<%= article_data.author.author_src%>" alt=""></h2>
+            <p>
+                <%= article_data.author%>
+            </p>
+            <div class="cont">
+                <h3>
+
+                </h3>
+                <div class="time">
+                    <%= article_data.sData%>
+                </div>
+            </div>
+            <div class="text-box">
+                <%- article_data.content%>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

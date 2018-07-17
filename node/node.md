@@ -250,8 +250,10 @@ INSERT INTO 表 (字段列表) VALUES(值)
 INSERT INTO `user_table` (`ID`, `username`, `password`) VALUES(1, 'blue', '123456');
 
 删-DELETE
+DELETE FROM 表 WHERE 条件
 
 改-UPDATE
+UPDATE 表 SET 字段=值，字段=值... WHERE 条件
 
 查-SELECT
 SELECT * FROM `user_table`;
@@ -282,3 +284,105 @@ SQL标准写法
     password 密码 varchar(32)
     src 头像 varchar(64)
 # 20.mp4
+
+# 23.mp4
+WHERE age>18
+WHERE age<=18
+WHERE age>=18 AND score<60
+WHERE age>=18 OR score<60
+
+ORDER 排序
+ORDER BY age ASC（升序）/DESC（降序）
+ORDER BY price ASC, sales DESC
+
+GROUP 聚合-相同的
+SELECT class, COUNT(class) FROM student_table GROUP BY class; 
+SELECT class, AVG(score) FROM student_table GROUP BY class; 
+
+每个班级的最高分、最低分
+SELECT class, MAX(score), MIN(score) FROM student_table GROUP BY class;
+SELECT name, SUM(price) FROM student_table GROUP BY name;
+
+# 26.mp4
+LIMIT-限制输出
+分页：
+1.所有数据输出
+2.后台只给一丁点数据
+
+SELECT class, COUNT(class) FROM student_table WHERE score>60 GROUP BY class ORDER BY COUNT(class) DESC LIMIT 2;
+
+子句之间是有顺序：
+WHERE GROUP ORDER LIMIT
+筛选 合并 排序 限制
+
+# 27.mp4
+1.数据字典
+    admin_tabla     管理员用户表
+        ID
+        username    varchar(32)
+        password    varchar(32)
+
+        
+    banner_table    焦点图表
+        ID
+        title       varchar(32)
+        description varchar(300)
+        href        varchar(300)
+
+    intro_table     产品介绍表
+       ID   
+       title        varchar(32)
+       description  varchar(200)
+       href         varchar(300)
+
+    custom_evaluation_table     用户评价表
+        ID 
+        title       varchar(32)
+        description varchar(200)
+        src         varchar(300)
+
+    news_table      新闻表
+        ID
+        title       varchar(100)
+        summary     varchar(500)
+        href        varchar(300)
+        ico_src     varchar(300)
+        big_pic_src     varchar(300)
+        content     text
+
+    blog_table      博文表
+        ID
+        title       varchar(100)
+        pic_src     varchar(300)
+        pic_big_src varchar(300)
+        summary     varchar(500)
+        content     text
+        post_time   timestramp
+        author      varchar(32)
+        n_view      int
+
+    contact_table   地址表
+        ID
+        street      varchar(50)
+        phone       varchar(20)
+        fax         varchar(20)
+        email       varchar(32)
+        weibo       varchar(40)
+        wx          varchar(40)
+        map?        ?
+
+    msg_table       发送信息表
+        ID 
+        name        varchar(16)
+        email       varchar(64)       
+        phone       varchar(20)
+        subject     text
+
+    aboutus_talbe   关于我们表
+        ID
+        title       varchar(200)
+        content     text    
+        pic_src     varchar(300)
+        href        varchar(300)
+
+2.后台接口
