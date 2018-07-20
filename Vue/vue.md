@@ -157,6 +157,59 @@ var app7 = new Vue({
 ### 实例生命周期钩子
 created钩子可以用来在一个实例被创建之后执行代码：
 
+init Events & Lifecycle -> beforeCreate -> 
+init injections & reactivity -> created ->
+Compile template -> beforeMount ->
+create vm.$el -> mounted ->
+beforeMount ->
+Virtual DOM re-render and patch -> updated ->
+beforeDestroy ->
+Teardown watchers, child components and event listeners -> destroyed
+
+## 模板语法
+
+### 插值
+
+#### 文本
+Mustache 标签将会被替代为对应数据对象上 msg 属性的值。无论何时，绑定的数据对象上 msg 属性发生了改变，插值处的内容都会更新。
+
+v-once：当数据改变时，插值处的内容不会更新。
+
+#### 原始HTML
+v-html：为了输出真正的 HTML，你需要使用 v-html 指令。
+
+#### 特性
+v-bind: Mustache 语法不能作用在 HTML 特性上，遇到这种情况应该使用 v-bind 指令
+
+#### 使用 JavaScript 表达式
+对于所有的数据绑定，Vue.js 都提供了完全的 JavaScript 表达式支持
+
+## 指令
+
+### 参数
+v-bind：指令可以用于响应式地更新 HTML。
+
+v-on 指令，它用于监听 DOM 事件。
+### 修饰符
+指明的特殊后缀，用于指出一个指令应该以特殊方式绑定
+v-on:submit.prevent
+
+## 缩写
+
+### v-bind缩写
+
+v-bind:href -> :href
+
+v-on:click -> @click
+
+# 计算属性和侦听器
+
+## 计算属性
+
+对于任何复杂逻辑，你都应当使用计算属性。
+
+## 计算属性缓存 vs 方法
+计算属性是基于它们的依赖进行缓存的。计算属性只有在它的相关依赖发生改变时才会重新求值。这就意味着只要 message 还没有发生改变，多次访问 reversedMessage 计算属性会立即返回之前的计算结果，而不必再次执行函数。
 
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html
