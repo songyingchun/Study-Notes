@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/angular.js"></script>
+    <script>
+        angular.module('app', [])
+            .controller('index', function ($scope, $http) {
+                $http.get('/get_banners').then(function (res) {
+                    $scope.banners = res.data;
+                    for (var i = 0; i < $scope.banners.length; i++) {
+                        $scope.banners[i].hide = true;
+                    }
+                    $scope.banners[0].hide = false;
+                }, function () {
+                    alert("获取数据失败");
+                });
+
+                $http.get('/get_custom_evaluations').then(function (res) {
+                    $scope.custom = res.data;
+                }, function () {
+                    alert("获取数据失败");
+                });
+            });
+    </script>
+</head>
+<body ng-controller="index">
+    <ul>
+        <li ng-show="item.hide" ng-repeat="item in banners">
+            <h2>
+                {{item.title}}
+            </h2>
+            <p>
+                {{item.description}}
+            </p>
+            <h3 class="da-link">
+                <a href="{{item.href}}" class="fa-btn">view more</a>
+            </h3>
+        </li>
+    </ul>
+    <ul>
+        <li ng-repeat="item in custom">
+            <div class="left">
+                <img src="upload/{{item.src}}" alt="">
+            </div>
+            <h4>
+                <a href="#"></a>
+            </h4>
+            <p>
+                {{item.description}}
+            </p>
+
+        </li>
+    </ul>
+</body>
+</html>
