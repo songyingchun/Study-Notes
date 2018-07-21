@@ -2767,7 +2767,7 @@
                 }
             }
         }
-        callHook(vm, 'beforeMount');
+        callHook(vm, 'beforeMount');        // beforeMount
 
         var updateComponent;
         /* istanbul ignore if */
@@ -5325,7 +5325,7 @@
     function createComment(text) {
         return document.createComment(text)
     }
-
+    // 创建多一份
     function insertBefore(parentNode, newNode, referenceNode) {
         parentNode.insertBefore(newNode, referenceNode);
     }

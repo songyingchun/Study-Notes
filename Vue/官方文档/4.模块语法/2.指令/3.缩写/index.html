@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <a :href="url">12313</a>
+        <a @click="doSomething">点我</a>
+    </div>
+    <script src="../../../js/vue.js"></script>
+    <script>    
+    var vm = new Vue({
+        el: '#box',
+        data: {
+            url: 'http://www.baidu.com'
+        },
+        methods: {
+            doSomething() {
+                console.log('doSomething');
+            }
+        }
+    });
+    </script>
+</body>
+</html>
