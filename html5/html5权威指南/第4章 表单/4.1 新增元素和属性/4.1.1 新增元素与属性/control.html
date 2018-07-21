@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="testform">
+        <label id="label">邮编：
+            <input type="txt_zip" maxlength="6" name="" value="">
+            <small>请输入六位数字</small>
+        </label>
+        <input type="button" name="" value="设置默认值" onclick="setValue()">
+    </form>
+    <script>
+        function setValue() {
+           var label = document.getElementById('label');
+           var textbox = label.control;
+           textbox.value = '213001'; 
+        }    
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" name="" value="打开对话框" onclick="document.getElementById('dg').show()">
+    <dialog id="dg" style="width: 9%; text-align: center;">
+        <h1>用户登录</h1>
+        <main>
+            <form>
+                <label for="txtName" value="用户名："/>
+                <input type="text" name="" id="txtName" value=""><br />
+                <input type="button" name="" value="登录">
+                <input type="button" name="" value="关闭" onclick="document.getElementById('dg').close()" />
+            </form>
+        </main>
+    </dialog>
+</body>
+</html>

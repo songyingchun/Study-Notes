@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>progress</title>
+</head>
+<body>
+    <section>
+        <progress id="p" max="100">
+            <span>0</span>%
+        </progress>
+        <input type="button" name="" value="请点击" onclick="button_onclick()">
+    </section>
+    <script>
+        function button_onclick() {
+            var progressBar = document.getElementById('p');
+
+            progressBar.getElementsByTagName('span')[0].textContent = "0";
+            var i = 0;
+            var timer = setInterval(function (params) {
+                i++;
+                if(i > 100) {
+                    clearInterval(timer);
+                }else {
+                   updateProgress(i); 
+                }
+            }, 100);
+
+            function updateProgress (newValue) {
+                var progressBar = document.getElementById('p');
+
+                progressBar.value = newValue;
+                progressBar.getElementsByTagName('span')[0].textContent = newValue;
+            }
+        }
+    </script>
+</body>
+</html>

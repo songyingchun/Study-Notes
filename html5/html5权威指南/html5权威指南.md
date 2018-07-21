@@ -206,10 +206,317 @@ form|reset|按下input type=reset按钮或触发reset方法时触发
 article元素代表文档、页面或应用程序中独立的、完整的、可以独自被外部引用的内容。通常有自己的标题，还可以有自己的脚注。
 ```html
 <article>
-
+    <header>
+        <h1>苹果</h1>
+        <p>发表日期：<time pubdate="pubdate">2010/10/09</time></p>
+    </header>
+    <p><b>苹果</b>，植物类水果</p>
+    <footer>
+        <p><small>著作权归***</small></p>
+    </footer>
+    <section>
+        
+    </section>
 </article>
 ```
 
+### section元素
+section元素用来对网站或应用程序中页面上的内容进行分块或者对文章进行分段。section的内容可以单独存储到数据库中或输出到word文档上。
+不推荐为那些没有标题的内容使用section。section元素内一定要有h1~h6。h1元素一般用来显示文字标题。
+```html
+<section>
+    <h1>苹果</h1>
+    <p>
+        <b>苹果</b>，植物类水果
+    </p>
+</section>
+```
 
+artcile和section的区别：想将一块内容分成几段时，应当使用section元素进行分段。如果一块内容相对来说比较独立，完整的时候，应该使用article元素。
 
+### nav元素
+作为页面导航的链接组
+
+```html
+<nav>
+    <ul>
+        <li>
+            <a href="/">主页</a>
+        </li>
+        <li>
+            <a href="/events">文档</a>
+        </li>
+    </ul>
+</nav>
+```
+
+### aside元素
+当前页面或文章的附属信息部分
+1. 当前文章有关的参考资料、名词解释，在article里用。
+2. 在article外，用于页面或站点全局的附属信息部分。
+
+```html
+<article>
+    ...
+    <aside>
+        <h1>名词解释</h1>
+        <dl>
+            <dt>F#</dt>
+            <dd>F#是指xxx</dd>
+        </dl>
+        <dl>
+            <dt>词法闭包</dt>
+            <dd>语法闭包是指xxx</dt>
+        </dl>
+    </aside>
+    ...
+</article>
+```
+
+### time元素
+
+```html
+<time datetime="2010-11-14">2010年11月13日</time>
+```
+
+### pubdate属性
+表示文章发布时间
+```html
+<time datetime="2010-11-14" pubdate>2010年11月13日</time>
+```
+
+## 新增的非主体结构元素
+
+### header元素
+具有引导和导航作用的结构元素
+```html
+<header><h1>页面标题</h1></header>
+```
+
+### footer元素
+表示脚注
+
+### address元素
+表示联系信息
+
+### main元素
+表示网页中的主要内容。每个网页内部只能放置一个main元素。
+
+## HTML5中网页的结构
+h1元素一般用来显示文字标题，section里必放。header元素要定义网页标题的整个内容。header中也可以放h1~h6
+```html
+<header>
+    <img src="" alt="">
+</header>
+<section>
+    <h2>企业描述</h2>
+    （正文）
+</section>
+```
+
+# 第4章 表单及其他新增和改良元素
+
+## 新增元素与属性
+
+### 新增属性
+1. form属性：为input、textarea指定表单
+2. formaction属性：单击不同提交按钮提交到不同的页面
+```html
+<form action="a.jsp">
+    <input type="submit" name="" formaction="b.jsp" value="">
+</form>
+```
+3. formmethod属性：单击不同提交按钮用不同方式提交
+```html
+<form action="a.jsp">
+    <input type="submit" name="" formaction="b.jsp" formmethod="GET" value="">
+    <input type="submit" name="" formaction="b.jsp" formmethod="post" value="">
+</form>
+```
+4. formenctype：对表单元素分别指定不同的编码方式
+html4:
+x-www-form-urlencoded：当表单元素用get时，浏览器用x-www-form-urlencoded编码方式把表单数据转换成一个字符串（?name=value&name2=value2...）
+multipart/form-data：不对字符编码，在使用包含文件上传控件的表单时，必须使用该值
+text/plain：不对表单数据中的特殊字符进行编码
+
+```html
+<form action="a.jsp">
+    <input type="file" name="" value="">
+    <input type="submit" value="上传" formaction="uploadFile.jsp" formenctype="multipart/form-data">
+</form>
+```
+
+5. formtarget：可以对多个提交按钮指定在何处打开表单提交后所需要加载的页面。
+```html
+<form action="a.jsp">
+    <input type="file" name="" value="">
+    <input type="submit" value="提交" formtarget="_target">
+</form>
+```
+
+6. autofocus: 自动获取光标。
+
+7. required： 提示用户必须输入内容。
+
+8. labels：代表该元素所绑定的标签元素所构成的集合
+
+9. control：label元素上控制的元素
+```html
+<label id="label">邮编：
+    <input type="txt_zip" maxlength="6" name="" value="">
+    <small>请输入六位数字</small>
+</label>
+```
+
+```javascript
+var label = document.getElementById('label');
+var textbox = label.control;
+```
+
+10. placeholder: 提示输入的数据
+
+11. list：类似select，当获取焦点才显示。input的list值为datalist的id值
+```html
+text:<input type="text" name="greeting" list="greetings" value="">
+<datalist id="greetings" style="display: none;">
+    <option value="Good Morning">Good Morning</option>
+    <option value="Good Afternoon">Good Afternoon</option>
+    <option value="Good Eventing">Good Eventing</option>
+</datalist>
+```
+
+12. autocomplete：辅助输入所用的自动完成功能。可以为on或off或""。
+
+13. pattern: 将属性值设为某个格式的正则表达式，在提交时会对这些进行检查。
+```html
+<form>
+    <input type="text" pattern="[0-9][A-Z]{3}" name="part" value="" />
+    <input type="submit" name="" value="提交">
+</form>
+```
+
+14. selectionDirection: 当用户正向取文字时为forward，反向时为backward。
+```javascript
+var control = document.forms[0]['text'];
+var Direction = control.selectionDirection;
+```
+
+15. indeterminate：尚未明确是否选取
+
+16. img元素width、height
+
+17. textarea的maxlength和wrap属性
+wrap属性可指定值为soft与hard。当值为hard时，向textarea元素中输入的文字个数超出使用textarea元素的cols属性所限定的每行中可显示文字个数而导致文字换行时，提交表单时会在换行处加入一个换行标志。当属性值为soft时，不加入换行标志。为hard时，必须指定cols值。
+
+### 改良input元素种类
+
+种类|说明
+search|用于搜索
+tel|用于电话
+url|输入正确url格式的文字
+email|输入正确email格式
+date、month、week、time、datetime-local|各种日期与时间输入文本框
+number|数值输入框
+range|输入一段范围数值的文本框
+color|颜色选择文本框
+
+用于输入日期与时间的元素都有一个step属性、stepUp(number)、stepDown(number)。
+
+## 表单验证
+
+1. 自动验证：pattern
+2. 取消验证：novalidate=true
+3. 显式验证：用Js
+
+## 增强的页面元素
+
+### figure与figcaption
+
+figure元素用来表示网页上一块独立的内容，将其从网页上移除后不会对网页上的其他内容产生任何影响。
+figure可以表示图片、统计图或代码示例。
+
+figcaption元素表示figure元素的标题。
+```html
+<figure>
+    <img src="s1.jpg" alt="">
+    <figcaption>森林</figcaption>
+</figure>
+```
+
+### details与summary
+details元素为一种用于标识该元素内部的子元素可以展开、收缩显示的元素。该元素有个open属性，为false时，内部的子元素收缩不显示。
+summary元素属于details元素，在用鼠标单击summary元素的文字时，details元素中的其他所有元素从属元素将会展开或收缩。
+```html
+<details id="details" ontoggle="details_ontoggle(this)" style="cursor: pointer;">
+    <summary>精武风云</summary>
+    <p id="p" style="visibility: hidden;">陈真</p>
+</details>
+```
+```javascript
+function details_ontoggle(detail) { 
+    var p = document.getElementById('p');
+    if(detail.open) {
+        p.style.visibility = "visible";
+    }else {
+        p.style.visibility = "hidden";
+    }
+}
+```
+
+### mark
+吸引当前用户的注意
+```html
+<mark>syc</mark>123
+```
+
+### progress
+表示一个任务的进程
+
+### meter
+表示规定范围内的数量值。
+```html
+<meter value="91" min="0" max="100" low="40" height="90" optimum="100"></meter>A+
+```
+
+### dialog
+表示一个对话框
+
+### a
+a元素添加download属性
+
+### ol
+添加start和reversed属性
+
+### cite
+cite元素表示作品
+
+### iframe
+增加sandbox属性
+1. 页面中的插件被禁用
+2. 页面中的表单被禁止提交
+3. js被禁止运行
+4. 禁止加载该页面来自服务器的内容，同时禁止加载该页面的cookie或Storage中的内容
+
+sandbox="allow-forms"：允许提交表单
+sandbox="allow-scripts"：允许执行script
+sandbox="allow-same-origin"：允许加载该页面来自服务器的内容
+sandbox="allow-top-navigation"：允许a链接到其他页面
+
+# 第5章 绘制图形
+
+## anvas的基础知识
+
+1. 取得canvas
+2. 取得上下文
+3. 填充与绘制边框
+4. 设定绘图样式
+5. 指定线宽
+6. 指定颜色值
+7. 绘制矩形
+ 
+### 绘制矩形
+
+```javascript
+
+```
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form id="testform">
+        <label for="txt_name" id="label"></label>
+        <input type="" name="" id="txt_name" value="">
+        <input type="button" id="btnValidate" name="" value="验证" onclick="Validate()" />
+    </form>
+    <script>
+    function Validate() {
+        var txtName = document.getElementById("txt_name")
+        var button = document.getElementById("btnValidate");
+        var form = document.getElementById("testform");
+
+        if(txtName.value.trim() === "") {
+            if(txtName.labels.length == 1) {
+                var label = document.createElement("label");
+                label.setAttribute("for", "txt_name");
+                form.insertBefore(label, button);
+                txtName.labels[1].innerHTML = "请输入姓名";
+                txtName.labels[1].setAttribute("style", "font-size:9px;color:red;");
+            }
+        }else if(txtName.labels.length > 1) {
+            form.removeChild(txtName, labels[1]);
+        }   
+    }    
+    </script>
+</body>
+</html>
