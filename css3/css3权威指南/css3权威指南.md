@@ -8,7 +8,7 @@ css3
 [att^=val]: 开头为val
 [att$=val]: 结尾为val
 
-### 伪类选择器
+## 结构性伪类选择器
 a:link
 a:visited
 a:hover
@@ -56,7 +56,28 @@ only-child 相当于:nth-child(1):nth-last-child(1) 只有一个子元素
 
 ## UI元素状态伪类选择器
 
+:hover
+:active
+:focus
+:enabled
+:disabled
+:read-only 只读状态
+:read-write 非只读状态
+:checked 表单radio单选框或checkbox复选框片于选择状态
+::selection 当前元素被鼠标选中的状态
+:default 打开页面默认处于选择状态的单选框或复选框
+:indeterminate 没有被选中的单选框
+:invalid required、pattern属性检查或元素内容不符合规定
+:valid required、pattern属性检查或元素内容符合规定
+:required 允许使用required属性并指定该属性
+:optional 允许使用required属性并未指定该属性
+:in-range 有效值被限定在一段范围之内，实际值在范围之内
+:out-of-range 有效值被限定在一段范围之内，实际值在范围之外
 
+## 通用兄弟元素选择器
+~
+
+# 
 
 
 
