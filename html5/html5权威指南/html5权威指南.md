@@ -521,3 +521,544 @@ sandbox="allow-top-navigation"：允许a链接到其他页面
 ```
 
 # 第六章 多媒体
+
+## 多媒体播放
+
+### 属性
+src、
+autoplay、
+preload=none（不加载）/metadata（预加载元数据）/auto（加载全部）、
+loop、
+controls、
+error、
+networkState：0（元素处于初始状态）、1（尚未建立网络连接）、2（媒体数据加载中）、3（不执行加载）
+currentSrc：读取播放中媒体数据的URL
+buffered：
+readyState：0（没有数据）、1（没有有效的数据）、2（没获取到下一帧）、3（可以播放）、4（有足够的后续数据）
+played、paused、ended
+defaultPlaybackRate：读取或修改媒体默认的播放速率。
+volume、muted
+
+### 事件
+laodstart：浏览器开始在网上寻找媒体数据
+progress：浏览器正在获取媒体数据
+play：即将开始播放
+pause：暂停播放
+loadeddata：浏览器已加载完毕当前播放位置的媒体数据，准备播放
+playing：正在播放
+canplay：能够播放，播放时需要缓冲
+canplaythrough：能够播放，播放时不需要缓冲
+seeking：值为true时，正在请求数据
+seeked：值为false时，停止请求数据
+ended：播放结束后停止播放
+
+## 添加字幕
+
+### track元素
+src：字幕文件的存放路径
+srclang：字幕文件的语言
+king：subtitles（翻译）/captions（）指定字幕文件的种类
+
+# 第七章 History API
+
+## 示例
+
+### History API
+pushState(state, title, url)：创建新的历史状态，所以你会发现“后退”按钮也能使用了。按下“后退”按钮，会触发 window 对象的 popstate 事件。 popstate事件的事件对象有一个 state 属性，这个属性就包含着当初以第一个参数传递给 pushState() 的状态对象。
+history.replaceState(statusObject, title)：传入的参数与 pushState() 的前两个参数相同。调用这个方法不会在历史状态栈中创建新状态，只会重写当前状态。
+
+# 第八章 本地存储Web Storage
+
+## Web Storage
+cookie的问题：
+大小：cookie被限制在4KB。
+带宽：cookie是随HTTP事务一起发送的，会浪费一部分发送cookie使用的带宽。
+复杂性：正确操作cookie很难。
+
+sessionStorage：保存在session对象中。指进入网站到浏览器关闭所经过的这段时间。
+localStorage：保存在客户端本地硬件设备。
+sessionStorage为临时保存，localStorage为永久保存。
+
+## 本地数据库
+
+### SQLLite：通过SQL语言来访问的文件型SQL数据库
+创建数据库
+```javascript
+let db = openDatabase("MySql", "1.0", "我的数据库描述", 1024 * 1024);
+```
+
+创建表
+create table
+```javascript
+const USER_TABLE_SQL = "create table if not exists userTable (id integer primary key autoincrement,username varchar(12),password varchar(16),info text)";
+db.transaction(tx => {
+    tx.executeSql(USER_TABLE_SQL, [],
+        (tx, result) => {
+            alert('创建user表成功:' + result);
+        }, (tx, error) => {
+            alert('创建user表失败:' + error.message);
+        })
+})
+```
+
+### executeSql语句
+
+增
+```javascript
+const INSERT_USER_SQL = "insert into userTable (username, password,info) values(?,?,?)";
+db.transaction(tx => {
+    tx.executeSql(INSERT_USER_SQL,
+        [user.username, user.password, user.info],
+        (tx, result) => {
+            alert('添加数据成功:');
+        }, (tx, error) => {
+            alert('添加数据失败:' + error.message);
+        })
+})
+```
+
+删
+```javascript
+const DELETE_USER_SQL = "delete from userTable where username = ?";
+db.transaction(tx => {
+    tx.executeSql(DELETE_USER_SQL, [user.username],
+        (transaction, resultSet) => {
+            alert("删除数据成功")
+        }, (transaction, error) => {
+            alert("删除数据失败:" + error.message)
+        })
+});
+```
+
+查
+```javascript
+const QUERY_USER_SQL = "select * from userTable";
+ db.transaction(tx => {
+    tx.executeSql(QUERY_USER_SQL, [],
+        (tx, result) => {
+            console.log(result);
+        },
+        (tx, error) => {
+            console.log('查询失败: ' + error.message)
+        })
+})
+```
+
+改
+```javascript
+const UPDATE_USER_SQL = "update userTable set password = ? where username = ?";
+db.transaction(tx => {
+    tx.executeSql(UPDATE_USER_SQL, [user.password, user.username],
+        (tx, result) => {
+            alert("修改数据成功")
+        }, (tx, error) => {
+            alert("修改数据失败:" + error.message)
+        })
+})
+```
+
+## indexedDB数据库
+
+### indexedDB数据库的基本概念
+indexedDB是一种存储在客户端本地的NoSQL数据库
+
+连接数据库
+
+```javascript
+var dbName = 'syc';
+var dbVersion = 20180722
+var db = indexedDB.open(dbName, dbVersion);
+```
+
+关闭数据库
+```javascript
+db.close();
+```
+
+更新数据库
+```javascript
+db.onupgradeneeded = function (e) {
+    alert('旧版本号：' + e.oldVersion);
+    alert('新版本号：' + e.newVersion);
+};
+```
+
+创建数据库
+```javascript
+dbContent.onupgradeneeded = function (e) {
+    idb = e.target.result;
+    var tx = e.target.transaction;
+    var name = 'user'
+    var optionalParameters = {
+        keyPath: 'userId',
+        atuoIncrement: false
+    };
+
+    var store = idb.createObjectStore(name, optionalParameters);
+    alert('创建成功');
+}
+```
+
+创建索引
+```javascript
+dbContent.onupgradeneeded = function (e) {
+    idb = e.target.result;
+    var tx = e.target.transaction;
+    var name = 'user'
+    var optionalParameters = {
+        keyPath: 'userId',
+        atuoIncrement: false
+    };
+
+    var store = idb.createObjectStore(name, optionalParameters);
+    alert('创建成功');
+
+    var name = 'userNameIndex';
+    var keyPath = 'username';
+
+    var optionalParameters = {
+        unique: false,
+        multiEntry: false
+    }
+
+    var idx = store.createIndex(name, keyPath, optionalParameters);
+
+    alert('索引创建成功');
+}
+```
+
+### 使用事务
+
+连接事务
+```javascript
+var storeName = ['Users'];
+var mode = "readonly";      // 只读事务
+var tx = idb.transaction(storeName, mode);
+```
+
+中断事务
+```javascript
+tx.abort();
+```
+### 保存数据
+```javascript
+var tx = idb.transaction(['customers'], 'readwrite');       // 开启事务
+var store = tx.objectStore('customers');
+var value = {
+    userId: 1,
+    userName: '张三',
+    address: '住址1'
+}
+var req = store.put(value);
+```
+
+### 获取数据
+
+```javascript
+var req = store.get(1);
+this.result.userName;
+
+var req = store.get('张三');
+```
+
+# 第9章 离线应用程序
+
+本地缓存是为了整个Web应用程序服务的。
+
+## mainfest文件
+以清单的形式列举了需要被缓存或不需要被缓存的资源文件的文件名称，以及这些资源文件的访问路径。
+可以为每一个页面单独指定一个mainfest文件，也可以对整个Web应用程序指定一个总的mainfest文件。
+
+```javascript
+CACHE MANIFEST
+CACHE:
+other.html
+hello.js
+images/myphoto.jpg
+NETWORK:
+http://www.songyingchun.com
+*
+FALLBACK:
+online.js locale.js
+CACHE:
+newhello.html
+newhello.js
+```
+
+```html
+<html mainfest="hello.mainfest"></html>
+```
+
+## applicationCache对象
+浏览器对本地缓存进行更新，会触发这个事件
+```javascript
+applicationCache.onUpdateReady = function () {
+    alert('');
+}
+```
+
+### swapCache方法
+```javascript
+applicationCache.onUpdateReady = function () {
+    applicationCache.swapCache();
+    location.reload();
+}
+```
+
+# 第10章 文件API
+
+## ArrayBuffer对象与ArrayBufferView对象
+
+### ArrayBuffer对象
+一个ArrayBuffer对象代表一个固定长度的用于装载数据的缓存区。
+```javascript
+var buf = new ArrayBuffer(32);
+```
+
+### ArrayBufferView对象
+ArrayBufferView对象以一种准确的格式来表示ArrayBuffer对象缓存区中的数据。
+```javascript
+var Int32Array = new Int32Array(ArrayBuffer);
+```
+
+### DataView对象
+提供直接存取ArrayBuffer缓存区中数据的一些方法。
+
+```javascript
+var view = new DataView(buffer, byteOffset, byteLength);
+```
+
+## Blob对象
+代表原始二进制数据。file对象也继承了Blob对象。有两个属性,size属性表示Blob对象的字节长度，type属性表示Blob的MIME类型。
+
+### 创建Blob对象
+var blob = new Blob([blobParts, type]);
+
+## FileReader对象
+用于捕获读取文件时的状态
+
+readAsDataURL:将Blob对象或文件中的数据读取为一串Data URL字符串，该方法事实上将数据以一种特殊格式的URL地址形式直接读入页面。
+readAsText:将Blob对象或文件中的数据以文本方式读取，读取的结果即这个文本文件中的内容。
+readAsBinaryString:这个方法将Blob对象或文件中的数据读取为二进制字符串，通常我们将它传送到服务器端，服务器端可以通过这段字符串存储文件。
+readAsArrayBuffer:该方法将Blob对象或文件中的数据读取为一个ArrayBuffer对象。
+
+事件：
+onabort:数据读取中断时触发
+onerror:数据读取出错时触发
+onloadstart:数据读取开始时触发
+onabort:数据读取中
+onload:数据读取成功完成时触发
+onloaded:数据读取完成时触发，无论成功或失败
+
+## FileSystem API
+当应用程序需要使用大的二进制数据
+
+创建
+```javascript
+window.webkitRequestFileSystem(window.TEMPORARY, 1024 * 1024, function (fs) {
+    fs.root.getFile('a.txt', {
+        create: true,
+    }, function (fileEntry) {
+        console.log(fileEntry);
+    }, function (e) {
+        console.error(e);
+    });
+},
+```
+
+写入
+```javascript
+fileEntry.createWriter(function (fileWriter) {
+    fileWriter.onwriteend = function (e) {
+        document.getElementById('result').innerHTML = '成功';
+    }
+    fileWriter.onerror = function (e) {
+        document.getElementById('result').innerHTML = '失败';
+    }
+    var blob = new Blob(['测试']);
+    fileWriter.write(blob);
+});
+```
+
+追加数据
+```javascript
+fileWriter.seek(fileWriter.length);
+var blob2 = new Blob(['追加数据']);
+fileWriter.write(blob2);
+```
+
+读取文件
+```javascript
+fileEntry.file(function (file) {
+
+}, function (e) {
+    
+})
+```
+
+删除文件
+```javascript
+fileEntry.remove(function (file) {
+
+}, function (e) {
+    
+})
+```
+
+创建目录
+```javascript
+fs.root.getDirectory('test', {create: true}, function (dirEntry) {
+
+}, function (e) {
+    
+});
+```
+
+读取目录内容
+```javascript
+var dirReader = fs.root.createReader();
+dirReader.readEntries(function (){}, function () {});
+```
+
+删除目录内容
+```javascript
+dirEntry.remove(function () {}, function (){});
+```
+
+# 第11章 通信
+
+## 跨文档消息传输
+
+message事件：不同源之间可以互相通信 
+```javascript
+window.addEventListener('message', functioin () {
+
+}, false);
+
+otherWindow.postMessage(message, targetOption);
+```
+
+### 通道通信
+```javascript
+var mc = new MessageChannel();
+```
+
+## WebSocket通信
+在服务器与客户端之间建立一个非HTTP的双向连接。客户端发送信息时，无需重新建立连接。
+### 使用WebSocket
+
+创建WebSocket
+```javascript
+var webSocket = new WebSocket("ws://locahost:8005/socket");
+```
+
+发送
+```javascript
+webSocket.send("data");
+```
+
+接收
+```javascript
+webSocket.onmessage = function (event) {
+    var data = event.data;
+}
+```
+
+关闭
+```javascript
+webSocket.close();
+```
+
+### Server-Send Events API
+```javascript
+var source = new EventSource("test.php");
+source.onmessage = function (event) {
+    document.getElementById('result').innerHTML += event.data;
+}
+```
+
+# 第12章 WebRTC
+
+实现音频和视频的实时通信
+
+## getUserMedia方法访问本地设备
+```javascript
+var video = document.getElementById('myVideo');
+navigator.getUserMedia({
+    video: true, 
+    auido: false
+}, function (stream) {
+    alert(stream);
+    video.src = URL.createObjectURL(stream);
+}, function (err) {
+    alert(err);
+    console.error(err);
+});
+```
+
+# 第14章 WebWorker
+创建后台线程
+main.js
+```javascript
+var worker = new Worker('worker.js');
+worker.onmessage = function () {
+    
+}
+```
+child.js
+```javascript
+worker.postMessage(message);
+```
+适用场合：
+文字格式化处理
+拼写检查
+分析视频和音频数据
+大数据处理和分析 
+canvas图像数据的运算及生成处理
+
+## SharedWorker
+多个页面共用一个后台线程
+```javascript
+var worker = new ShareWorker(url, [name]);
+```
+
+# 第15章 获取地理位置
+
+## Geolocation API
+
+### 取得当前地理位置
+
+```javascript
+navigator.geolocation.getCurrentPostion(function (postion) {
+    
+});
+```
+
+# 第16章 拖放API与通知API
+
+在元素上设置draggable为true,并监听被拖放元素的dragstart事件、拖放目录元素的dragend事件。
+
+```javascript
+var source = document.getElementById('dragme');
+
+source.addEventListener('dragstart', function (ev) {
+    var dt = ev.dataTransfer;
+    dt.effectAllowed = "none";
+
+    dt.setData("text/plain", "drame");
+}, false);
+
+var dest = document.getElementById('text');
+
+dest.addEventListener('drop', function (ev) {
+    var dt = ev.dataTransfer;
+    var text = dt.getData('text/plain');
+
+    dest.textContent += text;
+
+    ev.preventDefault();
+
+    ev.stopPropagation();
+}, false);
+```
+

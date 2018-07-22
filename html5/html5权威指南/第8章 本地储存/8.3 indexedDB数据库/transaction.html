@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" name="" value="升级" onclick="createObjectStore()" />
+    <script>
+        function createObjectStore() {
+            var dbName = 'indexedDBTest';
+            var dbVersion = 20150306;
+
+            var idb;
+
+            var dbContent = indexedDB.open(dbName, dbVersion);
+
+            dbContent.onsuccess = function (e) {
+                alert('成功');
+            }
+
+            dbContent.onsuccess = function (e) {
+                alert('失败');
+            }
+
+            dbContent.onupgradeneeded = function (e) {
+                idb = e.target.result;
+                var storeName = ['Users'];
+                var mode = "readonly";      // 只读事务
+                // var mode = "readwrite"      // 读写事务
+                var tx = idb.transaction(storeName, mode);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

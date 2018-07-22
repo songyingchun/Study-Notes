@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <textarea id="text" rows="" cols=""></textarea>
+    <button type="" id="btndownload" onclick="Blob_test()">下载</button>
+    <output name="" id="result" for=""></output>
+    <script>
+    function Blob_test() {
+        var text = document.getElementById('text').value;
+        var blob;
+        var result = document.getElementById('result');
+        if(!window.Blob) {
+            result.innerHTML = '失败';
+        }else {
+            blob = new Blob([text]);
+        }
+
+        if(window.URL) {
+            result.innerHTML = '<a download href="' + window.URL.createObjectURL(blob) + '" target="_blank">下载</a>';
+        }
+    }
+    </script>
+</body>
+</html>

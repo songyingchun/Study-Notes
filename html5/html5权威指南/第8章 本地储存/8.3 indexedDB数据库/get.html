@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var dbName = 'indexedDBTest2';
+        var dbVersion = 20180722;
+
+        var idb;
+
+        var dbContent = indexedDB.open(dbName, 1);
+
+        dbContent.onsuccess = function (e) {
+            idb = e.target.result;
+            var tx = idb.transaction(['customers'], 'readwrite');       // 开启事务
+            var store = tx.objectStore('customers');
+            var req = store.get(1);
+
+            req.onsuccess = function () {
+                if(this.result == undefined) {
+                    alert('没有符合条件的数据');
+                }else {
+                    alert('获取数据成功', this.result.userName);
+                }
+            }
+        }
+
+        dbContent.onerror = function (e) {
+            alert('失败');
+        }
+
+        dbContent.onupgradeneeded = function (event) {
+            var db = event.target.result;
+
+            // 创建一个对象存储空间来持有有关我们客户的信息。
+            // 我们将使用 "ssn" 作为我们的 key path 因为它保证是唯一的。
+            var objectStore = db.createObjectStore("customers", { keyPath: "ssn" });
+
+            // 创建一个索引来通过 name 搜索客户。
+            // 可能会有重复的，因此我们不能使用 unique 索引。
+            objectStore.createIndex("name", "name", { unique: false });
+
+            // 创建一个索引来通过 email 搜索客户。
+            // 我们希望确保不会有两个客户使用相同的 email 地址，因此我们使用一个 unique 索引。
+            objectStore.createIndex("email", "email", { unique: true });
+
+            // 在新创建的对象存储空间中保存值
+            for (var i in customerData) {
+                objectStore.add(customerData[i]);
+            }
+        };
+
+    </script>
+</body>
+
+</html>

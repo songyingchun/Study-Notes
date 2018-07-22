@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        文件名：<input type="text" id="FileName" value="test.txt"><br>
+        文件大小：<input type="text" id="FileSize" value="1024" /> Bytes<br>
+        <input type="button" name="" value="创建文件" onclick="createFile()">
+    </form>
+    <output id="result"></output>
+    <script>
+        function createFile() {
+            window.webkitRequestFileSystem(window.TEMPORARY, 1024 * 1024, function (fs) {
+                var filename = document.getElementById('FileName').value;
+                fs.root.getFile(filename, {
+                    create: true,
+                }, function (fileEntry) {
+                    console.log(fileEntry);
+                    var text = fileEntry.fullPath;
+                    text += fileEntry.name;
+                    document.getElementById("result").innerHTML = text;
+                    alert('创建成功');
+                });
+            }, function (e) {
+                var msg = '';
+                switch (e.code) {
+                    case FileError.QUOTA_EXCEEDED_ERROR:
+                        msg = '空间有限';
+                        break;
+                    case FileError.NOT_FOUND_ERR:
+                        msg = '未找到文件';
+                        break;
+                    case FileError.INVALLD_MODIFICATION_ERR:
+                        msg = '不能被执行';
+                        break;
+                    case FileError.INVALLD_STATE_ERR:
+                        msg = '状态无效';
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
