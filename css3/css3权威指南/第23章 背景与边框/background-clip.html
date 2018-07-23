@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        background-color: black;
+        border: dashed 15px green;
+        padding: 30px;
+        color: white;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    div.div1{
+        background-clip: border;
+        -moz-background-clip: border;
+        -webkit-background-clip: border;
+    }
+
+    div.div2{
+        background-clip: padding;
+        -moz-background-clip: padding;
+        -webkit-background-clip: padding;
+    }
+    </style>
+</head>
+<body>
+    <div class="div1">示例文字1</div>
+    <div class="div2">示例文字2</div>
+</body>
+</html>
