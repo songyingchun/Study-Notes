@@ -13,9 +13,12 @@
     <script>
         setTimeout(function () {
             history.pushState({name:"Nicholas"}, "Nicholas' page", "nicholas.html");
-            console.log("ok");
+            console.log("ok 1");
+            
+            history.pushState({ name: "Nicholas2" }, "Nicholas' page", "nicholas2.html");
+            console.log("ok 2");
 
-            history.replaceState({name:"Nicholas2"}, "Nicholas' page", "nicholas2.html");
+            history.replaceState({name:"Nicholas3"}, "Nicholas' page", "replaceNicholas2.html");
         }, 5000);
         EventUtil.addHandler(window, "popstate", function (event) {
             var state = event.state;

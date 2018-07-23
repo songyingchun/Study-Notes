@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        文件名：
+        <input type="text" id="FileName" value="test.txt">
+        <br> 文件大小：
+        <input type="text" id="FileSize" value="1024" /> Bytes
+        <br>
+        <input type="button" name="" value="读取文件" onclick="readFile()">
+    </form>
+    <output id="result"></output>
+    <script>
+        function readFile() {
+            window.webkitRequestFileSystem(window.PERSISTENT, 1024 * 1024, function (fs) {
+                var filename = document.getElementById('FileName').value;
+                fs.root.getFile(filename, {
+                    create: false,
+                }, function (fileEntry) {
+                    fileEntry.file(function (file) {
+                        var reader = new FileReader();
+                        reader.onloaded = function (e) {
+                            var txtArea = document.getElementById('textarea');
+                            txtArea.value = this.result;
+                            document.body.appendChild(txtArea);
+                        }
+                        reader.readAsText(file);
+                    });
+                });
+            }, function (e) {
+                var msg = '';
+                switch (e.code) {
+                    case FileError.QUOTA_EXCEEDED_ERROR:
+                        msg = '空间有限';
+                        break;
+                    case FileError.NOT_FOUND_ERR:
+                        msg = '未找到文件';
+                        break;
+                    case FileError.INVALLD_MODIFICATION_ERR:
+                        msg = '不能被执行';
+                        break;
+                    case FileError.INVALLD_STATE_ERR:
+                        msg = '状态无效';
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

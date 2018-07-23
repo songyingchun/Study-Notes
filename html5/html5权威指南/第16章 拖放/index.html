@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="dragme" draggable="true" style="width: 200px; height: 200px; border: 1px solid gray;">drame</div>
+    <div id="text" style="width: 200px; height: 200px; border: 1px solid gray;">text</div>
+    <script>
+        window.onload = init;
+        function init() {
+            var source = document.getElementById('dragme');
+            var dest = document.getElementById('text');
+
+            source.addEventListener('dragstart', function (ev) {
+                var dt = ev.dataTransfer;
+                dt.effectAllowed = "All";
+
+                dt.setData("text/plain", "drame");
+            }, false);
+
+            dest.addEventListener('dragend', function (ev) {
+                ev.preventDefault();
+            }, false);
+
+            dest.addEventListener('drop', function (ev) {
+                var dt = ev.dataTransfer;
+                var text = dt.getData('text/plain');
+
+                dest.textContent += text;
+
+                ev.preventDefault();
+
+                ev.stopPropagation();
+            }, false);
+        }
+
+        document.ondragover = function (e) {
+            e.preventDefault();
+        }
+
+        document.ondrap = function (e) {
+            e.preventDefault();
+        }
+
+
+    </script>
+</body>
+
+</html>

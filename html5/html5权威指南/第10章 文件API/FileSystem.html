@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <output name="" id="result" for=""></output>
+    <script>
+        var fs = null;
+        if (window.webkitRequestFileSystem) {
+            initFs();
+
+            function initFs() {
+                window.webkitRequestFileSystem(window.TEMPORARY, 1024 * 1024,
+                    function (filesystem) {
+                        fs = filesystem;
+                    }, function (e) {
+                        var msg = '';
+                        switch (e.code) {
+                            case FileError.QUOTA_EXCEEDED_ERROR:
+                                msg = '空间有限';
+                                break;
+                            case FileError.NOT_FOUND_ERR:
+                                msg = '未找到文件';
+                                break;
+                            case FileError.INVALLD_MODIFICATION_ERR:
+                                msg = '不能被执行';
+                                break;
+                            case FileError.INVALLD_STATE_ERR:
+                                msg = '状态无效';
+                                break;
+                            default:
+                                break;
+                        }
+                    });
+            }
+        }
+    </script>
+</body>
+
+</html>

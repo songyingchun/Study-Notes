@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body onload="window_onload()">
+    <script>
+    function window_onload() {
+        var mc, portMessageHandler;
+        mc = new MessageChannel();
+
+        window.parent.postMessage('子页面1已加载完', 'http://192.168.31.131/Study-Notes/html5/html5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/%E7%AC%AC11%E7%AB%A0%20%E9%80%9A%E4%BF%A1/parent.html', [mc.port2]);
+
+        portMessageHandler = function (portMsgEvent) {
+            alert(portMsgEvent.data);
+        }
+
+        mc.port1.addEventListener('message', portMessageHandler, false);
+
+        mc.port1.start();
+    }
+    </script>
+</body>
+</html>

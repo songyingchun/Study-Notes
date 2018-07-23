@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <video id="myVideo" width="" height="" autoplay controls>
+        
+    </video>
+    <script>
+        var video = document.getElementById('myVideo');
+        navigator.getUserMedia({
+            video: true, 
+            auido: false
+        }, function (stream) {
+            alert(stream);
+            video.src = URL.createObjectURL(stream);
+        }, function (err) {
+            alert(err);
+            console.error(err);
+        });
+    </script>
+</body>
+</html>

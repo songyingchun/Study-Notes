@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    1
+    <button onclick="changeUrl()">按钮</button>
+    <script>
+        function changeUrl() {
+            var stateObj = { foo: 'bar' };
+            window.history.pushState(stateObj, null, '2.html'); // 这将让浏览器的地址栏显示http://mozilla.org/bar.html，但不会加载bar.html页面也不会检查bar.html是否存在。
+        }
+        window.addEventListener('popstate', function (event) {
+            if(event.state) {
+                
+            }
+        }, false);
+    </script>
+</body>
+</html>

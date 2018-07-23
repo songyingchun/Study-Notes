@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="message"></div>
+    <input id="text" type="text"></input>
+    <button id="connect" onclick="connect()">建立连接</button>
+    <button id="send" onclick="send()">发送数据</button>
+    <button id="disconnect" onclick="disconnect()">断开连接</button>
+    <script>
+        var readyState = new Array('正在连接', '已建立连接', '正在关闭连接', '已关闭连接');
+        var host = 'wss://echo.websocket.org';
+        var webSocket = new WebSocket(host);
+
+        function connect() {
+            try {
+                var message = document.getElementById('message');
+                message.innerHTML += '<p>Socket状态：' + readyState[webSocket.readyState] + '</p>';
+                webSocket.onopen = function () {
+                    message.innerHTML += '<p>Socket状态：' + readyState[webSocket.readyState] + '</p>';
+                }
+                webSocket.onmessage = function (msg) {
+                    message.innerHTML += '<p>接收信息：' + msg.data + '</p>';
+                }
+                webSocket.onclose = function () {
+                    message.innerHTML += '<p>Socket状态：' + readyState[webSocket.readyState] + '</p>';
+                }
+            } catch (e) {
+                message.innerHTML += '<p>连接错误</p>';
+            }
+
+
+        }
+
+        function send() {
+            var text = document.getElementById('text').value;
+            var message = document.getElementById('message');
+            if (text == '') {
+                message.innerHTML += '<p>请输入一些文字</p>';
+                return;
+            }
+
+            try {
+                webSocket.send(text);
+                message.innerHTML += '<p>发送数据：' + text + '</p>';
+            } catch (e) {
+                message.innerHTML += '<p>发送数据错误</p>';
+            }
+            document.getElementById('text').value = "";
+        }
+
+        function disconnect() {
+            webSocket.close();
+        }
+
+    </script>
+</body>
+
+</html>
