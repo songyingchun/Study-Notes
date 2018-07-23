@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul id="v-for-object" class="demo">
+            <li v-for="(item, index) in items" :key="item.id">
+                {{ item }} {{index}}
+            </li>
+        </ul>
+    </div>
+
+    <script src="../../js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#v-for-object',
+            data: {
+                items: ['a', 'b', 'c']
+            }
+        });
+
+        vm.items[1] = 'x' // 不是响应性的
+        vm.items.length = 2 // 不是响应性的
+
+        Vue.set(vm.items, 0, 'x') // 响应性的
+        vm.items.splice(1, 1, 'xx') // 响应性的
+        vm.$set(vm.items, 2, 'xxx') // 响应性的
+    </script>
+</body>
+
+</html>
