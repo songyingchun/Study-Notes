@@ -393,7 +393,68 @@ index、key
 v-for 正在更新已渲染过的元素列表时，它默认用“就地复用”策略。
 为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 key 属性。理想的 key 值是每项都有的且唯一的 id。
 
+## 数组更新检测
 
+### 变异方法
+push()、pop()、shift()、unshift()、splice()、sort()、reverse()
+
+### 注意事项
+不能触发状态更新
+1. 用索引直接设置一个项时，vm.items[indexOfItem] = newValue;
+2. 修改数组长度时，vm.items.length = newLength;
+
+解决第一类问题：
+```javascript
+// 用set方法
+Vue.set(vm.items, indexOfItem, newValue);
+vm.$set(vm.items, indexOfItem, newValue);
+// 用变异方法
+vm.items.splice(indexOfItem, 1, newValue);
+```
+
+解决第二类问题：
+```javascript
+vm.items.splice(newLength)
+```
+
+## 对象更改检测注意事项
+
+Vue不能检测对象属性的添加或删除。
+对于已经创建的实例，Vue 不能动态添加根级别的响应式属性。
+
+即不能随意添加属性，只能添加到已创建的对象中。
+
+```javascript
+var vm = new Vue({
+    el: "#app",
+    data: {
+        a: 1,
+        userProfile: {
+            name: 'Anika'
+        }
+    }
+});
+// 全局方法
+Vue.set(vm.userProfile, 'age', 27);
+// 或者
+vm.$set(vm.userProfile, 'age', 27);
+// 添加多个属性
+vm.userProfile = Object.assign({}, vm.userProfile, {
+  age: 27,
+  favoriteColor: 'Vue Green'
+})
+// 直接赋值
+vm.userProfile = {
+  age: 27,
+  favoriteColor: 'Vue Green'
+}
+```
+
+## 显示过滤/排序结果
+要显示一个数组的过滤或排序副本，而不实际改变或重置原始数据。在这种情况下，可以创建返回过滤或排序数组的计算属性。
+
+## v-for with v-if
+v-for优先级高于v-if
 
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html

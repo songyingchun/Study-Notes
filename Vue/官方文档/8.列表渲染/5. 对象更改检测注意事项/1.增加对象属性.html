@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{userProfile.name}}{{userProfile.age}}</p>
+    </div>
+    <script src="../../js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                a: 1,
+                userProfile: {
+                    name: 'Anika'
+                }
+            }
+        });
+        // 为已创建的对象userProfile添加属性
+        Vue.set(vm.userProfile, 'age', 27);
+        // 
+        vm.userProfile = Object.assign({}, vm.userProfile, {
+            age: 29,
+            favoriteColor: 'Vue Green'
+        });
+        // 
+        vm.userProfile = {
+            age: 30,
+            name: "syc"
+        }
+        console.log(vm);
+    </script>
+</body>
+
+</html>

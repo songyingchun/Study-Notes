@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 创建一个数组
+    var obj = {
+        _syc: "syc",
+        get syc () {
+            console.log("getter");
+            return this._syc;
+        },
+        set syc (newValue) {
+            this._syc = newValue;
+        },
+        _list: [1, 2, 3],
+        get list () {
+            return this._list;
+        },
+        set list (newValue) {
+            this._list = newValue;
+        },
+        _test: {
+            a: 2
+        },
+        get test () {
+            return this._test;
+        },
+        set test (newValue) {
+            this._test = newValue;
+        },
+    };
+    // 设置数组属性描述符
+    // Reflect.defineProperty(obj, "syc", {
+    //     get syc () {
+    //         console.log("getter");
+    //         return this._syc;
+    //     },
+    //     set syc (newValue) {
+    //         this._syc = newValue;
+    //     }
+    // });
+    // Reflect.defineProperty(obj, "list", {
+    //     get list () {
+    //         return this._list;
+    //     },
+    //     set list (newValue) {
+    //         this._list = newValue;
+    //     }
+    // });
+    // 改变数据的成员
+    obj.syc = "syc2";
+    obj.test = {a: 2};
+    console.log(obj.syc, obj.test);
+
+    var list = obj.list;
+
+    Reflect.defineProperty(list, "0", {
+        get () {
+            return this[0];
+        },
+        set (newValue) {
+            this[0] = newValue;
+        }
+    });
+    list[0] = 3;
+    console.log(list);
+    </script>
+</body>
+</html>
