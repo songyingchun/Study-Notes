@@ -350,3 +350,123 @@ transition: background-color 1s linear;
 transition: property duration timing-function,
         property duration timing-function,
         property duration timing-function;
+
+## animation
+transition只能指定属性的开始值和结束值，然后在这两个属性值之间进行平滑过渡的方式来实现动画效果。
+animation通过定义多个关键帧以及定义每个关键帧中元素的属性值来实现更为复杂的动画效果。
+```css
+@keyframes mycolor{
+    0% {background:red;}
+    40% {background:darkblue;}
+    70% {background:yellow;}
+    100% {background:red;}
+}
+div:hover{
+    animation-name: mycolor;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+}
+```
+
+# 布局相关样式
+
+
+
+## 多栏布局
+
+使用float或position时左右两栏或多栏中底部不能对齐。多栏布局可以解决。
+
+多栏布局可以将一个元素中的内容分为两栏或多栏显示。
+column-count:指定栏目数
+column-width:指定栏目宽度
+column-gap:指定栏目之间的距离
+column-rule:指定栏目之间的间隔线
+```css
+div{
+    column-count: 2;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-width: 20em;
+    -webkit-column-width: 20em;
+    -moz-column-width: 20em;
+}
+```
+
+## 盒布局
+
+使用float或position时左右两栏或多栏中底部不能对齐。多栏布局可以解决。
+
+```css
+#container{
+    display: box;
+    display: -webkit-box;
+    display: -moz-box;
+}
+```
+
+多栏布局指定一个统一的宽度，栏与栏之间的宽度是一样的。另外，多栏布局不能指定什么栏显示什么内容。比较适合显示文章内容。
+
+## 弹性盒布局
+```css
+#container{
+    display: flex;
+}
+#content{
+    flex: 1;
+}
+```
+### 改变元素的排列顺序
+
+order
+```css
+#content{
+    order: 1;
+}
+```
+
+### 改变元素的排列方向
+flex-direction：row(横向)/row-reverse(反向)/column(纵向)/column-reverse(纵向反向) 
+
+```css
+#container{
+    display: flex;
+    flex-direction: column;
+}
+```
+
+### 指定元素的宽度和高度
+flex-grow、flex-shrink
+区别在于当元素排列方向为横向排列时，如果子元素的width样式属性值的总和小于容器元素的宽度值，必须通过flex-grow来调整子元素宽度。如果大于容器的宽度值，通过flex-shrink来调整。
+
+flex: flex-grow flex-shrink flex-basis; 默认flex-grow、flex-shrink为1，flex-basis为0。
+```css
+flex: 1 3 250px;
+```
+### 换行
+flex-warp:nowrap（不换行）、wrap（换行）、wrap-reverse（换行反向）
+
+合并flex-direction、flex-wrap
+flex-flow: flex-direction flex-wrap
+
+```css
+flex-flow: row wrap;
+```
+
+### 指定水平方向与垂直方向的对齐方向
+
+指定如何布局容器除了子元素之外的main axis轴方向上的剩余空白部分。
+justify-content:flex-start/flex-end/center/space-between/space-around
+
+指定子元素的对齐方式，指定的是cross axis。
+align-items:flex-start/flex-end/center/baseline/stretch
+
+指定子元素的对齐方式
+align-self:flex-start/flex-end/center/baseline/stretch/auto
+
+align-items被指定为容器元素的样式属性，用于指定所有子元素的对齐方式。而align-self属性被用于单独指定某个子元素的对齐方式
+
+当进行多行布局时，可以使用align-content属性指定各行对齐方式
+align-content:flex-start/flex-end/center/space-between/space-around
+
+## calc方法
+
