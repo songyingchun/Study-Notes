@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container {
+            display: flex;
+            border: 5px solid blue;
+            flex-direction: row;
+            width: 500px;
+            height: 300px;
+        }
+        #text-a,#text-b,#text-c{
+            box-sizing: border-box;
+            font-size: 1.5em;
+            font-weight: bold;
+            width: 250px;
+            flex-shrink: 1;
+        }
+        #text-a{
+            background: orange;
+        }
+        #text-b{
+            background: yellow;
+            flex-shrink: 3;
+        }
+        #text-c{
+            background: limegreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="text-a">示例文字A</div>
+        <div id="text-b">示例文字B</div>
+        <div id="text-c">示例文字C</div>
+    </div>
+</body>
+
+</html>
