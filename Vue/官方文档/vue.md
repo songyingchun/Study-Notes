@@ -211,5 +211,189 @@ v-on:click -> @click
 ## 计算属性缓存 vs 方法
 计算属性是基于它们的依赖进行缓存的。计算属性只有在它的相关依赖发生改变时才会重新求值。这就意味着只要 message 还没有发生改变，多次访问 reversedMessage 计算属性会立即返回之前的计算结果，而不必再次执行函数。
 
+## 计算属性 vs 侦听属性
+当你有一些数据需要随着其它数据变动而变动时
+
+## 计算属性的 setter 
+计算属性默认只有 getter ，不过在需要时你也可以提供一个 setter ：
+
+# Class与Style绑定
+
+## 绑定 HTML Class
+v-bind:class="" 
+
+对象写对象字符串,对象属性值只能为true/false
+```html
+<div v-bind:class="{ active: isActive, active2: isActive }"></div>
+```
+```javascript
+data: {
+  isActive: true
+}
+```
+
+写对象，对象属性值只能是true/false
+```html
+<div v-bind:class="classObject"></div>
+```
+```javascript
+data: {
+  classObject: {
+    active: true,
+    'text-danger': false
+  }
+}
+```
+
+数组直接写数组成员对象字符串，对象成员的值只能true/false
+```html
+<div v-bind:class="[{active: active}, {errorClass: errorClass}]"></div>
+```
+```javascript
+data: {
+  errorClass: true
+  active: true
+}
+```
+
+数组成员，成员可以指定类名
+```html
+<div v-bind:class="[activeClass, errorClass]"></div>
+```
+```javascript
+data: {
+  activeClass: 'active',
+  errorClass: 'text-danger'
+}
+```
+
+三元表达式
+```html
+<div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
+```
+
+混合
+```html
+<div v-bind:class="[{ active: isActive }, errorClass]"></div>
+```
+
+## 绑定内联样式
+
+### 对象语法
+v-bind:style=""
+
+直接写对象字符串
+```html
+<div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+```
+
+写对象
+```html
+<div v-bind:style="styleObject"></div>
+```
+
+多重值
+```html
+<div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
+```
+
+# 条件渲染
+v-if=""、v-show=""、v-for=""
+
+## v-if
+```html
+<template v-if="ok">
+  <h1>Title</h1>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
+</template>
+```
+
+## v-else
+```html
+<div v-if="Math.random() > 0.5">
+  Now you see me
+</div>
+<div v-else>
+  Now you don't
+</div>
+```
+
+## v-else-if
+```html
+<div v-if="type === 'A'">
+  A
+</div>
+<div v-else-if="type === 'B'">
+  B
+</div>
+<div v-else-if="type === 'C'">
+  C
+</div>
+<div v-else>
+  Not A/B/C
+</div>
+```
+
+## v-show
+
+v-if是真正的渲染。v-show是基于css进行切换。需求频繁切换，v-show好; 很少改变，用v-if。
+
+v-show 不支持 <template> 元素，也不支持 v-else。
+
+## v-if与v-for
+v-for比v-if有更高的优先级
+
+# 列表渲染
+
+## v-for
+v-for 指令需要使用 item in items 形式的特殊语法，items 是源数据数组并且 item 是数组元素迭代的别名。
+```html
+<ul id="example-1">
+  <li v-for="item in items">
+    {{ item.message }}
+  </li>
+</ul>
+```
+v-for 块中，我们拥有对父作用域属性的完全访问权限。
+```html
+<ul id="example-2">
+  <li v-for="(item, index) in items">
+    {{ parentMessage }} - {{ index }} - {{ item.message }}
+  </li>
+</ul>
+```
+用 of 替代 in 作为分隔符
+```html
+<ul id="example-2">
+  <li v-for="(item, index) of items">
+      {{ parentMessage }} - {{ index }} - {{ item.message }}
+  </li>
+</ul>
+``` 
+
+一个对象的v-for
+```html
+<ul id="v-for-object" class="demo">
+  <li v-for="value in object">
+    {{ value }}
+  </li>
+</ul>
+```
+
+index、key
+```html
+<div v-for="(value, key, index) in object">
+  {{ index }}. {{ key }}: {{ value }}
+</div>
+```
+
+## key
+
+v-for 正在更新已渲染过的元素列表时，它默认用“就地复用”策略。
+为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 key 属性。理想的 key 值是每项都有的且唯一的 id。
+
+
+
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html

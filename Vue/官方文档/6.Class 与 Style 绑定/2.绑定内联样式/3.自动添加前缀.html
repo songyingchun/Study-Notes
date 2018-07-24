@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-bind:style="[baseStyles]"></div>
+    </div>
+
+    <script src="../../js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                baseStyles: {
+                    color: 'red',
+                    fontSize: '13px',
+                    transform: 'translate(100px, 100px)'
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
