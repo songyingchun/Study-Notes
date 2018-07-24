@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #container{
+        width: 500px;
+        background-color: pink;
+    }
+
+    #foo{
+        width: calc(50% - 100px);
+        background-color: green;
+    }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="foo">示例Div</div>
+    </div>
+    <br>
+    <input type="button" name="" value="修改div宽度" onclick="changeWidth()">
+    <script>
+    function changeWidth () {
+        document.getElementById('container').style.width = "1000px";
+    }
+    </script>
+</body>
+</html>

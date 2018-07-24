@@ -138,7 +138,7 @@ plaintext、使用"text/plain"MIME类型代替。
 1. 表单相关的属性
 autofocus：对input（type=text/select/textarea/button）元素可用，自动获焦
 placeholder：对input（type=text/textarea）元素可用，提示输入
-form：对input、output、select、textarea、button、fieldset元素可用，指定属性哪个表单
+form：对input、output、select、textarea、button、fieldset元素可用，指定属于哪个表单
 required：检查元素内一定要有输入内容
 
 autocomplete（datalist）、min、max、multiple、pattern与step。
@@ -181,7 +181,6 @@ document.designMode = "on"
 按tab让窗口或页面中的控件获取焦点、每个控件的tabindex表示是第几个访问的。
 
 ## 新增事件
-
 
 对象事件|触发
 window|beforeprint|打印前触发
