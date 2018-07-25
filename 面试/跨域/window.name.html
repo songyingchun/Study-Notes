@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        alert(window.name);
+        window.name = "我是b.html页面";
+        setTimeout(function () {
+            window.location.href = "./b.html";
+        }, 3000)
+    </script>
+</body>
+</html>
