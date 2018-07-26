@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        display: flex;
+        flex-direction: row;
+    }
+    figure{
+        width: 50%;
+        text-align: center;
+    }
+    figure:nth-child(2){
+        filter: grayscale(100%);
+        -webkit-filter: grayscale(100%);
+    }
+    </style>
+</head>
+<body>
+    <div>
+        <figure>
+            <img src="Penguins.jpg" alt="">
+            <figcaption>原始图片</figcaption>
+        </figure>
+        <figure>
+            <img src="Penguins.jpg" alt="">
+            <figcaption>使用灰度滤镜</figcaption>
+        </figure>
+    </div>
+    <script>
+        
+    </script>
+</body>
+</html>

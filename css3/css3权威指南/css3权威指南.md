@@ -553,5 +553,53 @@ resize: both;
 
 initial: 取消这个属性
 ```css
-
+font-size: 3em;
+font-size: initial;
 ```
+
+grayscale灰度滤镜:对图片有效
+```css
+filter: grayscale(50%);
+```
+
+sepia滤镜：
+```css
+filter: grayscale(50%);
+```
+
+saturate饱和度滤镜：
+```css
+filter: saturate(250%);
+```
+
+hue-rotate滤镜：
+```css
+filter: hue-rotate(90deg);
+```
+
+invert颜色翻转滤镜：
+```css
+filter: invert(100%);
+```
+
+opacity透明度滤镜：
+```css
+filter: opacity(50%);
+```
+
+opacity对比度滤镜：
+```css
+filter: constrast(50%);
+```
+
+blur模糊滤镜：
+```css
+filter: blur(2px);
+```
+
+drop-shadow模糊滤镜：
+```css
+filter: drop-shadow(2px 2px 2px purple);
+```
+
+# 第29章 综合实例
