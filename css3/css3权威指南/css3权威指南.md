@@ -471,3 +471,87 @@ align-content:flex-start/flex-end/center/space-between/space-around
 自动计算元素的宽度、高度等数值类型的样式属性值。
 
 # media queries
+
+## 使用
+
+@media 设备类型 and (设备特性) (样式代码)
+
+设备类型|说明
+-|-
+all|所有设备
+screen|电脑显示器
+print|打印用纸或打印预览视图
+handheld|便携设备
+tv|电视机类型的设备
+speech|语音和音频合成器
+braille|盲人用点字法触觉回馈设备
+embossed|盲文打印机
+projection|各种投影设备
+tty|使用固定密度文字栅格的媒介，比如电传打字机和终端
+
+设备特性：(min-width: 400px)
+设备特性|可指定值|是否允许使用min/max前缀|特性说明
+-|-|-|-
+width|长度单位|允许|窗口宽度
+height|长度单位|允许|窗口高度
+device-width|长度单位|允许|设备屏幕分辨率的宽度值
+device-height|长度单位|允许|设备屏幕分辨率的高度值
+orientation|portrait、landscape|不允许|浏览器窗口的方向是纵向还是横向，当窗口的高度值大于等于宽度值时，该特性值为portrait，否则为landscape。
+aspect-ratio|比例值，如16/9|允许|屏幕分辨率的纵横比，比例值为浏览器窗口的宽度值/高度值
+device-aspect-ratio|比例值，如16/9|允许|屏幕分辨率的纵横比，比例值为设备屏幕分辨率的宽度值/高度值
+color|整数值|允许|设备使用多少位的颜色值，如果不是彩色设备，该值为0
+color-index|整数值|允许|色彩表中的色彩数
+monochrome|整数值|允许|单色帧缓冲器中每像素的字节数
+resolution|分辨率值，臂如300dpi|允许|设备分辨率
+scan|只能指定两个值：progressive或interlace|不允许|电视机类型设备的扫描方式。progressive表示逐行扫描，interlace表示隔行扫描。
+grid|只能指定两个值：0或1|不允许|设备是基于栅格还是基于位图。基于栅格时该值为1，否则该值为0。
+
+```css
+@media screen and (max-width: 639px) {样式代码}
+
+@media handheld and (min-width: 360px), screnn and (min-width: 480px) {样式代码}
+```
+
+可以在表达式中加上not(反操作)或only（）
+```css
+@media screen and (max-width: 639px) {样式代码}
+```
+
+对外部样式表的作用
+```css
+@import ulr(color.css) screen and (min-width: 1000px) {样式代码}
+```
+
+# 第28章 CSS3的其他重要样式和属性
+
+## 颜色相关样式
+
+### 利用alpha通道来设定颜色
+
+1. 对RGB颜色设定alpha通道
+```css
+background-color: rgba(255, 0, 0, 0.5);
+```
+
+2. 对HSL(色度、饱和度、亮度)颜色设定alpha通道
+H(色度)：0或360表示红，120表示绿，240表示蓝。于360，取余数
+S(饱和度)：0%-100%
+L(亮度)：0%-100%
+
+```css
+background-color: rgba(255, 0, 0, 0.5);
+```
+
+outline: outline-color outline-style outline-width; 在元素周围绘制一条轮廓线，可以起到突出元素的作用。
+outline-offset: 紧贴着边框外围绘制一条轮廓线。
+
+resize：通过拖动的方式来修改元素的尺寸。主要用于使用overflow属性的任何容器元素中。
+```css
+overflow: auto;
+resize: both;
+```
+
+initial: 取消这个属性
+```css
+
+```
