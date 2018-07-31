@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <custom-input v-model="searchText" v-on:input="onEnlargeText"></custom-input>
+    </div>
+    <script src="../../../js/vue.js"></script>
+    <script>
+        Vue.component('custom-input', {
+            props: ['value'],
+            template:
+                `
+                <input
+                    v-bind:value="value"
+                    v-on:input="$emit('input', $event.target.value)"
+                >
+                `
+        });
+        new Vue({
+            el: '#box',
+            data: {
+                searchText: 123
+            },
+            methods: {
+                onEnlargeText: function (enlargeAmount) {
+                    console.log(enlargeAmount);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

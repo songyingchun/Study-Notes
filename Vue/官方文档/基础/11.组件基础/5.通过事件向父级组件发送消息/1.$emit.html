@@ -10,7 +10,7 @@
 
 <body>
     <div id="box">
-        <blog-post v-for="post in posts" :key="post.id" :post2="post"></blog-post>
+        <blog-post v-for="post in posts" :key="post.id" :post2="post" v-on:enlarge-text="onEnlargeText"></blog-post>
     </div>
     <script src="../../../js/vue.js"></script>
     <script>
@@ -19,8 +19,11 @@
             template:
                 `
                     <div class="blog-post">
-                    <h3>{{ post2.title }}</h3>
-                    <div v-html="post2.content"></div>
+                        <h3>{{ post2.title }}</h3>
+                        <div v-html="post2.content"></div>
+                        <button v-on:click="$emit('enlarge-text', $event, 0.1)">
+                            Enlarge text
+                        </button>
                     </div>
                 `
         });
@@ -31,7 +34,14 @@
                     { id: 1, title: 'My journey with Vue', content: '<div class="syc1">syc1</div>' },
                     { id: 2, title: 'Blogging with Vue', content: '<div class="syc1">syc2</div>' },
                     { id: 3, title: 'Why Vue is so fun', content: '<div class="syc1">syc3</div>' }
-                ]
+                ],
+                postFontSize: 0
+            },
+            methods: {
+                onEnlargeText: function (ev, enlargeAmount) {
+                    this.postFontSize += enlargeAmount;
+                    console.log(enlargeAmount);
+                }
             }
         });
     </script>

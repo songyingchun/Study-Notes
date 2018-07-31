@@ -572,6 +572,8 @@ Vue.component('my-component-name', {
 
 ### 通过 Prop 向子组件传递数据
 
+props: ['title']
+
 ```javascript
 Vue.component('blog-post', {
   props: ['title'],
@@ -580,6 +582,94 @@ Vue.component('blog-post', {
 ```
 
 ### 单个根元素
+每个组件必须只有一个根元素
+
+### 通过事件向父级组件发送消息
+$emit
+
+### 通过插槽分发内容
+slot: 把组件的内容保存在slot中
+```html
+<div id="box">
+    <alert-box>
+        Something bad happened.
+    </alert-box>
+</div>
+```
+```javascript
+Vue.component('alert-box', {
+    template: `
+        <div class="demo-alert-box">
+            <strong>Error!</strong>
+            <slot></slot>
+        </div>
+    `
+});
+```
+
+### 动态组件
+is
+
+### 解析 DOM 模板时的注意事项
+
+有些 HTML 元素，诸如 <ul>、<ol>、<table> 和 <select>，对于哪些元素可以出现在其内部是有严格限制的。而有些元素，诸如 <li>、<tr> 和 <option>，只能出现在其它某些特定的元素内部。
+
+# 深入了解组件
+
+## 组件注册
+
+### 组件名大小写
+
+kebab-case(短横线分隔命名)
+```javascript
+Vue.component('my-component-name', { /* ... */ })
+```
+
+PascalCase(驼峰式命名)
+
+```javascript
+Vue.component('my-component-name', { /* ... */ })
+```
+
+### 全局注册
+```javascript
+Vue.component('my-component-name', {
+  // ... 选项 ...
+});
+```
+
+### 局部注册
+```javascript
+new Vue({
+  el: '#app'
+  components: {
+    'component-a': ComponentA,
+    'component-b': ComponentB
+  }
+})
+```
+
+## prop
+
+### Prop 的大小写 (camelCase vs kebab-case)
+
+html里可以小写，prop里可以小写，模板里一定要大写
+```html
+<div id="box">
+  <component-a :post-title="'title'"></component-a>
+</div>
+```
+
+```javascript
+Vue.component('component-a', {
+  props: ['post-title'],
+  template: '<div class="syc">{{postTitle}}</div>'
+});
+```
+
+### Prop 类型
+
+
 
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html
