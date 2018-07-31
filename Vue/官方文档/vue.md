@@ -704,6 +704,57 @@ computed: {
 ```
 
 ### Prop 验证
+```javascript
+Vue.component('my-component', {
+  props: {
+    // 基础的类型检查 (`null` 匹配任何类型)
+    propA: Number,
+    // 多个可能的类型
+    propB: [String, Number],
+    // 必填的字符串
+    propC: {
+      type: String,
+      required: true
+    },
+    // 带有默认值的数字
+    propD: {
+      type: Number,
+      default: 100
+    },
+    // 带有默认值的对象
+    propE: {
+      type: Object,
+      // 对象或数组且一定会从一个工厂函数返回默认值
+      default: function () {
+        return { message: 'hello' }
+      }
+    },
+    // 自定义验证函数
+    propF: {
+      validator: function (value) {
+        // 这个值必须匹配下列字符串中的一个
+        return ['success', 'warning', 'danger'].indexOf(value) !== -1
+      }
+    }
+  }
+})
+```
+
+### 类型检查
+
+type:
+String
+Number
+Boolean
+Array
+Object
+Date
+Function
+Symbol
+
+### 非 Prop 的特性
+
+一个非 prop 特性是指传向一个组件，但是该组件并没有相应 prop 定义的特性。
 
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html
