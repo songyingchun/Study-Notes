@@ -551,7 +551,35 @@ v-model: 在表单 <input>、<textarea> 及 <select> 元素上创建双向数据
 组件是可复用的Vue实例。所以它们与 new Vue 接收相同的选项，例如 data、computed、watch、methods 以及生命周期钩子等。
 
 ### 组件的复用
+你每用一次组件，就会有一个它的新实例被创建。
 
+一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝。
+
+### 组件的组织
+
+两种组件的注册类型：全局注册和局部注册。
+
+全局注册的
+```javascript
+Vue.component('my-component-name', {
+  // ... options ...
+})
+```
+
+全局注册的组件可以用在其被注册之后的任何 (通过 new Vue) 新创建的 Vue 根实例，也包括其组件树中的所有子组件的模板中。
+
+也包括其组件树中的所有子组件的模板中。
+
+### 通过 Prop 向子组件传递数据
+
+```javascript
+Vue.component('blog-post', {
+  props: ['title'],
+  template: '<h3>{{ title }}</h3>'
+})
+```
+
+### 单个根元素
 
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html
