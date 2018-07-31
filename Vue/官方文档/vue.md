@@ -668,8 +668,42 @@ Vue.component('component-a', {
 ```
 
 ### Prop 类型
+类型检查和其它 prop 验证。
+```javascript
+props: {
+  title: String,
+  likes: Number,
+  isPublished: Boolean,
+  commentIds: Array,
+  author: Object
+}
+```
 
+### 单向数据流
 
+每次父级组件发生更新时，子组件中所有的 prop 都将会刷新为最新的值。这意味着你不应该在一个子组件内部改变 prop。
+
+1. 在data创建一个新属性，等于该props值
+```javascript
+props: ['initialCounter'],
+data: function () {
+  return {
+    counter: this.initialCounter
+  }
+}
+```
+
+2. prop 以一种原始的值传入且需要进行转换。在这种情况下，最好使用这个 prop 的值来定义一个计算属性。
+```javascript
+props: ['size'],
+computed: {
+  normalizedSize: function () {
+    return this.size.trim().toLowerCase()
+  }
+}
+```
+
+### Prop 验证
 
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html
