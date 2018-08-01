@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <!-- <text-document :title="doc.title" @update:title="doc.title = $event"></text-document> -->
+        <!-- <text-document v-bind:title.sync="doc.title"></text-document> -->
+        <text-document v-bind.sync="doc"></text-document>
+    </div>
+    <script src="../../../js/vue.js"></script>
+    <script>
+        // 全局注册
+        Vue.component('text-document', {
+            props:['title'],
+            data: function () {
+                return {
+                    newTitle: "syc2"
+                }
+            },
+            methods: {
+
+            },  
+            template: `<div @click='$emit("update:title", newTitle)'>{{title}}</div>`
+        });
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                doc: {
+                    title: "syc"
+                }
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

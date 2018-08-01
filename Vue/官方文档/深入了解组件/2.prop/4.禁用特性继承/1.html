@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <bootstrap-date-input data-date-picker="activated" type="text" value="1213" class="date-picker-theme-dark" style="background: red;"></bootstrap-date-input>
+        <base-input v-model="username" class="username-input" placeholder="Enter your username" @input="input"></base-input>
+    </div>
+    <script src="../../../js/vue.js"></script>
+    <script>
+        // 全局注册
+        Vue.component('bootstrap-date-input', {
+            props: ['post-title'],
+            template: '<input type="date" class="form-control" />',
+            inheritAttrs: false,
+        });
+        // 
+        Vue.component('base-input', {
+            inheritAttrs: false,
+            props: ['label', 'value'],
+            template: `
+                <label>
+                {{ label }}
+                <input
+                    v-bind="$attrs"
+                    v-bind:value="value"
+                    v-on:input="$emit('input', $event.target.value)"
+                >
+                </label>
+            `
+        });
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                activated: "activated",
+                username: "syc"
+            },
+            methods:{
+                input: function (value) {
+                    console.log(value)
+                }
+            }
+        });
+        console.log(vm);
+    </script>
+</body>
+
+</html>

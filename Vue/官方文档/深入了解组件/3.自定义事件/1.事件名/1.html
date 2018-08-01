@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <my-component v-on:my-event="doSomething"></my-component>
+    </div>
+    <script src="../../../js/vue.js"></script>
+    <script>
+    // 全局注册
+    Vue.component('my-component', {
+        props:{
+
+        },
+        data: function () {
+            return {
+
+            }
+        },
+        methods: {
+            emit: function () {
+                this.$emit('my-event', '测试');
+            }
+        },
+        template: `<div class="div-template" @click="$emit('my-event', '测试')">123</div>`
+    });
+    var vm = new Vue({
+        el: "#box",
+        data: {
+            title: 123
+        },
+        methods: {
+            doSomething: function (data) {
+                console.log(data);
+            }
+        }
+    })
+    </script>
+</body>
+</html>

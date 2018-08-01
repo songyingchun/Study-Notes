@@ -755,6 +755,58 @@ Symbol
 ### 非 Prop 的特性
 
 一个非 prop 特性是指传向一个组件，但是该组件并没有相应 prop 定义的特性。
+而这些特性会被添加到这个组件的根元素上。
+
+### 替换/合并已有的特性
+
+对于绝大多数特性来说，从外部提供给组件的值会替换掉组件内部设置好的值。
+class 和 style 特性会稍微智能一些，即两边的值会被合并起来。
+
+### 禁用特性继承
+template上的根元素不会继承其他特性，只会继承class、style特性。
+
+inheritAttrs: false;
+```javascript
+ Vue.component('bootstrap-date-input', {
+    props: ['post-title'],
+    template: '<input type="date" class="form-control" />',
+    inheritAttrs: false,
+});
+```
+
+$attrs: 该属性包含了传递给一个组件的特性名和特性值。
+props: ['value'] value指向组件的value特性值。
+
+## 自定义事件
+
+### 事件名
+跟组件和 prop 不同，事件名不会被用作一个 JavaScript 变量名或属性名，所以就没有理由使用 camelCase 或 PascalCase 了。
+
+事件名不存在任何自动化的大小写转换。而是触发的事件名需要完全匹配监听这个事件所用的名称。
+
+始终使用 kebab-case 的事件名。
+
+### 自定义组件的 v-model
+```javascript
+model: {
+  prop: 'checked',
+  event: 'change'
+}
+```
+
+### 将原生事件绑定到组件
+
+.native修饰符: 组件的根元素上直接监听一个原生事件。
+$listeners属性
+
+### .sync 修饰符
+.sync :title和@:updata:title 的组合写法
+
+```html
+<text-document :title="doc.title" @update:title="doc.title = $event"></text-document>
+<text-document :title.sync="doc.title"></text-document>
+<text-document v-bind.sync="doc"></text-document>
+```
 
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html
