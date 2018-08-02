@@ -808,5 +808,109 @@ $listeners属性
 <text-document v-bind.sync="doc"></text-document>
 ```
 
+## 插槽
+
+### 插槽内容
+
+Vue 实现了一套内容分发的 API，将<slot> 元素作为承载分发内容的出口。
+
+### 具名插槽
+
+在组件元素内部定义，内容的父元素指定插槽名slot="xxx"。
+在模板中写入slot元素，并设置特性name=xxx
+
+```html
+<base-layout :title="title">
+    <template slot="header">
+        <h1>Here might be a page title</h1>
+    </template>
+    <p>A paragraph for the main content.</p>
+    <p>And another one.</p>
+    <template slot="main">
+        <h1>Here's some main info</h1>
+    </template>
+    <template slot="footer">
+        <p>Here's some contact info</p>
+    </template>
+</base-layout>
+```
+```javascript
+components: {
+    "base-layout": {
+        template: `
+        <div class="container">
+            <header>
+                <slot name="header"></slot>
+            </header>
+            <main>
+                <slot name="main"></slot>
+            </main>
+            <footer>
+                <slot name="footer"></slot>
+            </footer>
+        </div>`
+    }
+}
+```
+
+### 编译作用域
+
+父组件模板的所有东西都会在父级作用域内编译；子组件模板的所有东西都会在子级作用域内编译。
+
+### 作用域插槽
+
+slot-scope="slotProps"  在组件上使用传递父组件的数据。在模板上定义todo才能用在组件的作用域内。
+v-bind:todo="todo" 在模板上使用父组件的数据
+
+```html
+<todo-list v-bind:todos="todos">
+    <!-- 将 `slotProps` 定义为插槽作用域的名字 -->
+    <template slot-scope="slotProps">
+        <!-- 为待办项自定义一个模板，-->
+        <!-- 通过 `slotProps` 定制每个待办项。-->
+        <!-- todo从模板定义的v-bind:todo中来-->
+        <span v-if="slotProps.todo.isComplete">✓</span> 
+        {{ slotProps.todo.text }}
+    </template>
+</todo-list>
+```
+
+```javascript
+template: 
+`<ul>
+    <li
+        v-for="todo in todos"
+        v-bind:key="todo.id"
+    >
+        <slot v-bind:todo="todo">
+            
+        </slot>
+    </li>
+</ul>`
+```
+
+### 解构slot-scope
+
+作用域插槽支持解构
+
+```html
+<todo-list v-bind:todos="todos">
+    <!-- 将 `slotProps` 定义为插槽作用域的名字 -->
+    <template slot-scope="{todo}">
+        <!-- 为待办项自定义一个模板，-->
+        <!-- 通过 `slotProps` 定制每个待办项。-->
+        <!-- todo从模板定义的v-bind:todo中来-->
+        <span v-if="todo.isComplete">✓</span> 
+        {{ todo.text }}
+    </template>
+</todo-list>
+```
+
+疑问：既然在slot中已经有变量todo，为什么还要解构它？
+
+## 动态组件 & 异步组件
+
+### 在动态组件上使用keep-alive
+
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <todo-list v-bind:todos="todos">
+            <!-- 将 `slotProps` 定义为插槽作用域的名字 -->
+            <template slot-scope="slotProps">
+                <!-- 为待办项自定义一个模板，-->
+                <!-- 通过 `slotProps` 定制每个待办项。-->
+                <span v-if="slotProps.todo.isComplete">✓</span>
+                {{ slotProps.todo.text }}
+            </template>
+        </todo-list>
+    </div>
+    <script src="../../../js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#box",
+            data: {
+               todos: [{ text: 1, isComplete: true }, { text: 2, isComplete: false }, { text: 3, isComplete: true }]
+            },
+            components: {
+                "todo-list": {
+                    props: {
+                        todos: Array
+                    },
+                    data: function () {
+                        return {
+                            
+                        }
+                    },
+                    template: `
+                    <ul>
+                        <li
+                            v-for="todo in todos"
+                            v-bind:key="todo.id"
+                        >
+                            <slot v-bind:todo="todo"></slot>
+                        </li>
+                    </ul>`
+                }
+            }
+        })
+    </script>
+</body>
+</html>
