@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <base-layout>
+            123123123
+        </base-layout>
+    </div>
+    <script src="../../../js/vue.js">
+        
+    </script>
+    <script>
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                title: "my title"
+            },
+            components: {
+                "base-layout": {
+                    props: {
+                        title: {
+                            type: String,
+                            default: '100'
+                        }
+                    },
+                    data: function () {
+                        return {
+
+                        }
+                    },
+                    template: `
+                    <div class="container">
+                        1123123<slot></slot>
+                    </div>`
+                }
+            }
+        })
+    </script>
+</body>
+</html>

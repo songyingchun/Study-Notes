@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <google-map>
+            <!-- <template slot="google-map"> -->
+                <google-map-region>
+                    <!-- <template slot="google-map-region"> -->
+                        <google-map-markers></google-map-markers>
+                    <!-- </template> -->
+                </google-map-region>
+            <!-- </template> -->
+        </google-map>
+    </div>
+    <script src="../../../js/vue.js">
+
+    </script>
+    <script>
+        new Vue({
+            el: '#box',
+            data: {
+                cityBoundaries: "cityBoundaries",
+                iceCreamShops: "iceCreamShops"
+            },
+            components: {
+                'google-map': {
+                    mounted: function () {
+                        console.log(this.$parent);
+                    },
+                    methods: {
+                        getMap: function () {
+                            console.log("getMap");
+                        }
+                    },
+                    provide: function () {
+                        return {
+                            getMap: this.getMap
+                        }
+                    },
+                    template: `
+                        <div class="google-map">google-map<slot></slot></div>
+                    `
+                },
+                'google-map-region': {
+                    mounted: function () {
+                        console.log(this.$parent);
+                    },
+                    template: `
+                        <div class="google-map-region">google-map-region<slot></slot></div>
+                    `
+                },
+                'google-map-markers': {
+                    mounted: function () {
+                    },
+                    inject: ['getMap'],
+                    template: `
+                        <div class="google-map-markers" @click="getMap">google-map-markers</div>
+                    `
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>

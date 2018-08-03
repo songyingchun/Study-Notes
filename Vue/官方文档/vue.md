@@ -912,5 +912,88 @@ template:
 
 ### 在动态组件上使用keep-alive
 
+包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。
+
+```html
+<keep-alive>
+  <component v-bind:is="currentTabComponent"></component>
+</keep-alive>
+```
+
+### 异步组件
+
+Vue 允许你以一个工厂函数的方式定义你的组件，这个工厂函数会异步解析你的组件定义。Vue 只有在这个组件需要被渲染的时候才会触发该工厂函数，且会把结果缓存起来供未来重渲染。
+
+```javascript
+Vue.component('async-example', function (resolve, reject) {
+  setTimeout(function () {
+    // 向 `resolve` 回调传递组件定义
+    resolve({
+      template: '<div>I am async!</div>'
+    })
+  }, 1000)
+})
+```
+
+### 处理加载状态
+```javascript
+const AsyncComponent = () => ({
+  // 需要加载的组件 (应该是一个 `Promise` 对象)
+  component: import('./MyComponent.vue'),
+  // 异步组件加载时使用的组件
+  loading: LoadingComponent,
+  // 加载失败时使用的组件
+  error: ErrorComponent,
+  // 展示加载时组件的延时时间。默认值是 200 (毫秒)
+  delay: 200,
+  // 如果提供了超时时间且组件加载也超时了，
+  // 则使用加载失败时使用的组件。默认值是：`Infinity`
+  timeout: 3000
+})
+```
+
+## 访问元素&组件
+
+### 访问根实例 
+
+this.$root
+
+### 访问父级组件实例
+
+this.$parent
+
+### 访问子组件实例或子元素
+
+this.$refs: 如果是组件，则返回组件的实例。如果是元素，则返回这个元素。
+
+### 依赖注入
+
+provide：父组件提供方法
+inject：子组件注入方法
+
+优点：
+祖先组件不需要知道哪些后代组件使用它提供的属性
+后代组件不需要知道被注入的属性来自哪里
+
+缺点：
+提供的属性是非响应式的
+
+## 程序化的事件侦听器
+
+用$once绑定hook:beforeDestory事件。
+
+在Vue实例销毁前
+```javascript
+this.$once('hook:beforeDestroy', function () {
+  picker.destroy()
+})
+```
+
+## 循环引用
+
+### 递归组件
+
+
+
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html

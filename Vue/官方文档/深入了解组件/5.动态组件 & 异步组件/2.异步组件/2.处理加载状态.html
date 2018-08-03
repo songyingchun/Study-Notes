@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <async-example></async-example>
+    </div>
+    <script src="../../../js/vue.js">
+
+    </script>
+    <script>
+        new Vue({
+            el: '#box',
+            components: {
+                'async-example': (resolve)=> ({
+                    // 需要加载的组件 (应该是一个 `Promise` 对象)
+                    component:resolve({
+                        data: function () {
+                            return {
+                                count: 10
+                            }
+                        },
+                        template: '<div>I am async!{{count}}</div>',
+                    }),
+                    // 异步组件加载时使用的组件
+                    loading: {
+                        
+                    },
+                    // 加载失败时使用的组件
+                    error: '',
+                    // 展示加载时组件的延时时间。默认值是 200 (毫秒)
+                    delay: 200,
+                    // 如果提供了超时时间且组件加载也超时了，
+                    // 则使用加载失败时使用的组件。默认值是：`Infinity`
+                    timeout: 3000
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>
