@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <unique-name-of-my-component></unique-name-of-my-component>
+    </div>
+    <script src="../../../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#box',
+            components: {
+                'unique-name-of-my-component': {
+                    name: 'stack-overflow',
+                    template: `<div><stack-overflow></stack-overflow></div>`
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

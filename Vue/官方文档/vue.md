@@ -993,7 +993,95 @@ this.$once('hook:beforeDestroy', function () {
 
 ### 递归组件
 
+组件是可以在它们自己的模板中调用自身的。请确保递归调用是条件性的 (例如使用一个最终会得到 false 的 v-if)。
 
+## 模板定义的替代品
+
+### 内联模板
+
+这个组件将会使用其里面的内容作为模板，而不是将其作为被分发的内容。
+
+<inline-template>
+
+## X-Templates
+
+在一个 <script> 元素中，并为其带上 text/x-template 的类型，然后通过一个 id 将模板引用过去。
+
+<script type="text/x-template" id="hello-world-template">
+  <p>Hello hello hello</p>
+</script>
+
+## 控制更新
+
+### 强制更新
+
+$forceUpdate 手动更新
+
+### 通过 v-once 创建低开销的静态组件
+
+组件包含了大量静态内容。你可以在根元素上添加 v-once 特性以确保这些内容只计算一次然后缓存起来。
+
+```javascript
+Vue.component('terms-of-service', {
+  template: `
+    <div v-once>
+      <h1>Terms of Service</h1>
+      ... a lot of static content ...
+    </div>
+  `
+})
+```
+
+## 过渡 & 动画
+
+### 进入/离开 & 列表过渡
+
+#### 过渡的类名
+
+在transition组件上定义特性 name="v"
+
+```html
+<transition name="v"></transition>
+```
+v-enter:定义进入过渡的开始状态。
+v-enter-active:定义进入过渡生效时的状态。
+v-enter-to:定义进入过渡的结束状态。
+v-leave:定义离开过渡的开始状态。
+v-leave-active:定义离开过渡生效时的状态。
+v-leave-to:定义离开过渡的结束状态。
+
+v-enter/v-leave-to 状态一样 
+v-enter-active/v-leave-active 状态一样
+v-enter-to/v-leave 状态一样
+
+css中定义开始状态v-enter/v-leave-to，生效状态v-enter-active/v-leave-active
+
+#######css动画
+
+CSS 动画用法同 CSS 过渡，区别是在动画中 v-enter 类名在节点插入 DOM 后不会立即删除，而是在 animationend 事件触发时删除。
+
+#### 自定义过渡的类名
+
+enter-class
+enter-active-class
+enter-to-class
+leave-class
+leave-active-class
+leave-to-class
+
+#### 显性的过渡持续时间
+
+```html
+<transition :duration="1000">...</transition>
+```
+
+#### JavaScript 钩子
+
+可以在属性中声明 JavaScript 钩子。
+当只用 JavaScript 过渡的时候，在 enter 和 leave 中必须使用 done 进行回调。否则，它们将被同步调用，过渡会立即完成。
+推荐对于仅使用 JavaScript 过渡的元素添加 v-bind:css="false"，Vue 会跳过 CSS 的检测。这也可以避免过渡过程中 CSS 的影响。
+
+### 初始渲染的过渡
 
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html
