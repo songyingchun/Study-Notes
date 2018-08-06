@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../../js/vue.js">
+
+    </script>
+    <script>
+        var mixin = {
+            data: function () {
+                return {
+                    message: 'hello',
+                    foo: 'abc',
+                    obj: {
+                        a: 1,
+                        c: 'c'
+                    }
+                }
+            }
+        }
+
+        new Vue({
+            mixins: [mixin],
+            data: function () {
+                return {
+                    message: 'goodbye',
+                    bar: 'def',
+                    obj: {
+                        a: 1,
+                        b: 'b'
+                    }
+                }
+            },
+            created: function () {
+                console.log(this.$data)
+                // => { message: "goodbye", foo: "abc", bar: "def" }
+            }
+        })
+    </script>
+</body>
+
+</html>

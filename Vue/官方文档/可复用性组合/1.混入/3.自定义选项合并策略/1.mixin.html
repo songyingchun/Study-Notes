@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../../js/vue.js">
+
+    </script>
+    <script>
+        Vue.config.optionMergeStrategies.myOption = function (toVal, fromVal) {
+            // return mergedVal
+        }
+    
+        const merge = Vue.config.optionMergeStrategies.computed
+        Vue.config.optionMergeStrategies.vuex = function (toVal, fromVal) {
+            if (!toVal) return fromVal
+            if (!fromVal) return toVal
+            return {
+                getters: merge(toVal.getters, fromVal.getters),
+                state: merge(toVal.state, fromVal.state),
+                actions: merge(toVal.actions, fromVal.actions)
+            }
+        }
+    </script>
+</body>
+
+</html>

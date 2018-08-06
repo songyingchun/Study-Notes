@@ -608,8 +608,8 @@ Vue.component('alert-box', {
 ```
 
 ### 动态组件
-is
-
+:is="component-name"
+ 
 ### 解析 DOM 模板时的注意事项
 
 有些 HTML 元素，诸如 <ul>、<ol>、<table> 和 <select>，对于哪些元素可以出现在其内部是有严格限制的。而有些元素，诸如 <li>、<tr> 和 <option>，只能出现在其它某些特定的元素内部。
@@ -1083,5 +1083,79 @@ leave-to-class
 
 ### 初始渲染的过渡
 
+appear 特性设置节点在初始渲染的过渡
+
+### 多个元素的过渡
+
+使用 v-if/v-else
+
+#### 过滤模式
+
+mode="out-in"/"in-out"
+
+### 多个组件过渡
+
+我们只需要使用动态组件 :is
+
+### 列表过渡
+
+<transition-group>组件
+
+不同于 <transition>，它会以一个真实元素呈现：默认为一个 <span>。你也可以通过 tag 特性更换为其他元素。
+过渡模式不可用，因为我们不再相互切换特有的元素。
+内部元素 总是需要 提供唯一的 key 属性值。
+
+### 可复用的过渡
+
+要创建一个可复用过渡组件，你需要做的就是将 <transition> 或者 <transition-group> 作为根组件，然后将任何子组件放置在其中就可以了。
+
+
+# 可复用性 & 组合
+
+## 混入
+
+### 基础
+
+当组件使用混入对象时，所有混入对象的选项将被混入该组件本身的选项。
+
+### 选项合并
+
+在和组件的数据发生冲突时以组件数据优先。
+同名钩子函数将混合为一个数组，因此都将被调用。混入对象的钩子将在组件自身钩子之前调用。
+methods, components 和 directives，将被混合为同一个对象。两个对象键名冲突时，取组件对象的键值对。
+
+## 自定义指令
+
+### 简介
+
+### 钩子函数
+
+一个指令定义对象可以提供如下几个钩子函数 (均为可选)：
+bind: 只调用一次，指令第一次绑定到元素时调用。
+inserted: 被绑定元素插入父节点时调用。
+update：所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。
+componentUpdated：指令所在组件的 VNode 及其子 VNode 全部更新后调用。
+unbind：只调用一次，指令与元素解绑时调用。
+
+### 钩子函数参数
+
+el：指令所绑定的元素，可以用来直接操作 DOM 。
+binding：一个对象。
+vnode：Vue 编译生成的虚拟节点。
+oldVnode：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。
+
+## 渲染函数 & JSX
+
+### 虚拟 DOM
+
+Vue 通过建立一个虚拟 DOM 对真实 DOM 发生的变化保持追踪。
+
+### 约束
+
+VNodes 必须唯一
+
+```javascript
+return createElement('h1', this.blogTitle)
+```
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html

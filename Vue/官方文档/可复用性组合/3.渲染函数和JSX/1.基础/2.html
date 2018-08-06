@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <anchored-heading :level="1">Hello world!<h1>{{ blogTitle }}</h1></anchored-heading>
+    </div>
+    <script src="../../../js/vue.js">
+
+    </script>
+    <script>
+        Vue.component('anchored-heading', {
+            data: function () {
+                return {
+                    blogTitle: 'blogTitle1212'
+                }
+            },
+            render: function (createElement) {
+                return createElement(
+                    'h' + this.level,   // tag name 标签名称
+                    this.$slots.default // 子组件中的阵列
+                )
+            },
+            props: {
+                level: {
+                    type: Number,
+                    required: true
+                }
+            }
+        });
+        new Vue({
+            el: '#box'
+        })
+    </script>
+</body>
+
+</html>

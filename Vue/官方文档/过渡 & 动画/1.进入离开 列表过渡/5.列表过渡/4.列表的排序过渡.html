@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .sudoku-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 auto;
+        }
+
+        .cell {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 45px;
+            height: 45px;
+            border: 1px solid #aaa;
+            margin-right: -1px;
+            margin-bottom: -1px;
+        }
+
+        .cell:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        .cell:nth-child(27n) {
+            margin-bottom: 0;
+        }
+
+        .cell-move {
+            transition: transform 1s;
+        }
+        .cell:nth-child(1n) {
+            background: green;
+        }
+        .cell:nth-child(2n) {
+            background: blueviolet;
+        }
+        .cell:nth-child(3n) {
+            background: bisque;
+        }
+        .cell:nth-child(4n) {
+            background: palevioletred;
+        }
+        button{
+            position: fixed;
+            top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="sudoku-demo" class="demo">
+        <strong>Lazy Sudoku</strong>
+        <p>Keep hitting the shuffle button until you win.</p>
+        <button v-on:click="shuffle">
+            Shuffle
+        </button>
+
+        <transition-group class="sudoku-container" name="cell" tag="p">
+            <div v-for="cell in cells" :data-id="cell.id" v-bind:key="cell.id" class="cell">
+                {{ cell.number }}
+            </div>
+        </transition-group>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#sudoku-demo',
+            data: {
+                cellLength: 20,
+                cells: Array.apply(null, { length: 40 * 40 })
+                    .map(function (_, index) {
+                        return {
+                            id: index,
+                            number: Math.floor(Math.random() * 40 * 40)
+                        }
+                    })
+            },
+            methods: {
+                shuffle: function () {
+                    this.cells = _.shuffle(this.cells)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

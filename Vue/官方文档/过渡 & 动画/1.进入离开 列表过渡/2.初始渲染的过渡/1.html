@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity .5s;
+        }
+
+        .fade-enter,
+        .fade-leave-to
+        /* .fade-leave-active below version 2.1.8 */
+
+            {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <button v-on:click="show = !show">
+            Toggle
+        </button>
+        <transition appear appear-class="custom-appear-class" appear-to-class="custom-appear-to-class" appear-active-class="custom-appear-active-class">
+            <p v-if="show">hello</p>
+        </transition>
+        <transition appear v-on:before-appear="customBeforeAppearHook" v-on:appear="customAppearHook" v-on:after-appear="customAfterAppearHook" v-on:appear-cancelled="customAppearCancelledHook">
+            <p v-if="show">hello</p>
+        </transition>
+    </div>
+    <script src="../../js/vue.js">
+
+    </script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                show: true
+            },
+            methods: {
+                customBeforeAppearHook: function () {
+                    console.log('customBeforeAppearHook');
+                },
+                customAppearHook: function () {
+                    console.log('customAppearHook');
+                },
+                customAfterAppearHook: function () {
+                    console.log('customAfterAppearHook');
+                },
+                customAppearCancelledHook: function () {
+                    console.log('customAppearCancelledHook');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

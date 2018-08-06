@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../../js/vue.js">
+
+    </script>
+    <script>
+        var mixin = {
+            created: function () {
+                console.log('混入对象的钩子被调用')
+            }
+        }
+
+        new Vue({
+            mixins: [mixin],
+            created: function () {
+                console.log('组件钩子被调用')
+            }
+        })
+    </script>
+</body>
+
+</html>
