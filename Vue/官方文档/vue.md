@@ -1157,5 +1157,71 @@ VNodes 必须唯一
 ```javascript
 return createElement('h1', this.blogTitle)
 ```
+
+### 使用 JavaScript 代替模板功能
+
+#### v-if 和 v-for
+```html
+<ul v-if="items.length">
+  <li v-for="item in items">{{ item.name }}</li>
+</ul>
+<p v-else>No items found.</p>
+```
+javascript写成：
+```javascript
+props: ['items'],
+render: function (createElement) {
+  if (this.items.length) {
+    return createElement('ul', this.items.map(function (item) {
+      return createElement('li', item.name)
+    }))
+  } else {
+    return createElement('p', 'No items found.')
+  }
+}
+```
+
+#### v-model
+
+```javascript
+props: ['value'],
+render: function (createElement) {
+  var self = this
+  return createElement('input', {
+    domProps: {
+      value: self.value
+    },
+    on: {
+      input: function (event) {
+        self.$emit('input', event.target.value)
+      }
+    }
+  })
+}
+```
+
+#### 事件 & 按键修饰符
+
+.passive &
+.capture !
+.once ~
+.capture.once or .once.capture ~!
+
+```javascript
+on: {
+  '!click': this.doThisInCapturingMode,
+  '~keyup': this.doThisOnce,
+  '~!mouseover': this.doThisOnceInCapturingMode
+}
+```
+
+.stop 等效于 event.stopPropagation()
+.prevent 等效于 event.preventDefault()
+.self 等效于 if (event.target !== event.currentTarget) return
+
+#### 插槽
+
+
+
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html
