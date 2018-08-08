@@ -1221,7 +1221,38 @@ on: {
 
 #### 插槽
 
+this.$slots.default 获取 VNodes 列表中的静态内容。
+this.$scopedSlots 中获得能用作函数的作用域插槽
 
+### JSX
+```javascript
+new Vue({
+  el: '#demo',
+  render: function (h) {
+    return (
+      <AnchoredHeading level={1}>
+        <span>Hello</span> world!
+      </AnchoredHeading>
+    )
+  }
+})
+```
+
+### 函数式组件
+
+functional: true 这意味它是无状态 (没有响应式数据)
+
+组件需要的一切都是通过上下文传递:
+
+props: 提供所有 prop 的对象。
+children：VNode 子节点的数组。
+slots：返回所有插槽的对象的函数。
+data：传递给组件的数据对象，作为 createElement 的第二个参数传入组件。
+parent：对父组件的引用。
+listeners：一个包含了所有在父组件上注册的事件侦听器的对象。
+injections：如果使用了 inject 选项，则该对象包含了应当被注入的属性。
+
+在添加 functional: true 之后，锚点标题组件的 render 函数之间简单更新增加 context 参数，this.$slots.default 更新为 context.children，之后this.level 更新为 context.props.level。
 
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html

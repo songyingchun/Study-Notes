@@ -17,7 +17,7 @@
                 <!-- 通过 `slotProps` 定制每个待办项。-->
                 <span v-if="slotProps.todo.isComplete">✓</span>
                 {{ slotProps.todo.text }}
-                <child></child>
+                <child :slotProps="slotProps"></child>
             </template>
         </todo-list>
     </div>
@@ -29,32 +29,42 @@
                 todos: [{ text: 1, isComplete: true }, { text: 2, isComplete: false }, { text: 3, isComplete: true }]
             },
             components: {
-                "child": {
-                    template: `<div>123123</div>`
+                'child': {
+                    props: ['slotProps'],
+                    render: function (createElement) {
+                        return createElement('div', {
+                            // pass `scopedSlots` in the data object
+                            // in the form of { name: props => VNode | Array<VNode> }
+                            scopedSlots: {
+                                default: function (props) {
+                                    return createElement('span', props.text)
+                                }
+                            }
+                        })
+                    }
                 },
                 "todo-list": {
                     props: {
                         todos: Array
                     },
+                    template: `
+                    <ul>
+                        <li
+                            v-for="todo in todos"
+                            v-bind:key="todo.id"
+                        >
+                            <slot v-bind:todo="todo"></slot>
+                            <child v-bind:todo="todo"></child>
+                        </li>
+                    </ul>`,
                     render: function (createElement) {
                         console.log(this);
                         return createElement('ul', [
-                            this.todos.map((item, index)=>{
-                                return createElement('li',
-                                    [
-                                        this.$scopedSlots.default({
-                                            todo: item
-                                        }),
-                                        createElement('child', {
-                                            // pass `scopedSlots` in the data object
-                                            // in the form of { name: props => VNode | Array<VNode> }
-                                            scopedSlots: {
-                                                default: function (props) {
-                                                    return createElement('span', props.text)
-                                                }
-                                            }
-                                        })
-                                    ]
+                            this.todos.map((item, index) => {
+                                return createElement('li', [
+                                    this.$scopedSlots.default({
+                                        todo: item
+                                    })]
                                 )
                             })
                         ])

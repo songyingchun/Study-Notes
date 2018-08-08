@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <smart-list :items="items" :isOrdered="isOrdered">
+
+        </smart-list>
+    </div>
+    <script src="../../../js/vue.js">
+        
+    </script>
+    <script>
+        new Vue({
+            el: '#box',
+            data: {
+                items: [1, 2, 3],
+                isOrdered: true
+            },
+            components: {
+                'child': {
+                    render: function (createElement) {
+                        return createElement('div', '132123');
+                    }
+                },
+                'smart-list': {
+                    functional: true,
+                    props: {
+                        items: {
+                            type: Array,
+                            required: true
+                        },
+                        isOrdered: Boolean
+                    },
+                    render: function (createElement, context) {
+                        function appropriateListComponent() {
+                            var items = context.props.items
+
+                            if (items.length === 0) return EmptyList
+                            if (typeof items[0] === 'object') return TableList
+                            if (context.props.isOrdered) return OrderedList
+
+                            return 'div';
+                        }
+
+                        return createElement(
+                            appropriateListComponent(),
+                            context.data,
+                            context.children
+                        )
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
