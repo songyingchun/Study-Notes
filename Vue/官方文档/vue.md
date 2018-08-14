@@ -1254,5 +1254,52 @@ injections：如果使用了 inject 选项，则该对象包含了应当被注�
 
 在添加 functional: true 之后，锚点标题组件的 render 函数之间简单更新增加 context 参数，this.$slots.default 更新为 context.children，之后this.level 更新为 context.props.level。
 
+# 插件
+
+## 开发插件
+
+1.添加全局方法或者属性，如: vue-custom-element
+2.添加全局资源：指令/过滤器/过渡等，如 vue-touch
+3.通过全局 mixin 方法添加一些组件选项，如: vue-router
+4.添加 Vue 实例方法，通过把它们添加到 Vue.prototype 上实现。
+5.一个库，提供自己的 API，同时提供上面提到的一个或多个功能，如 vue-router
+
+```javascript
+MyPlugin.install = function (Vue, options) {
+  // 1. 添加全局方法或属性
+  Vue.myGlobalMethod = function () {
+    // 逻辑...
+  }
+
+  // 2. 添加全局资源
+  Vue.directive('my-directive', {
+    bind (el, binding, vnode, oldVnode) {
+      // 逻辑...
+    }
+    ...
+  })
+
+  // 3. 注入组件
+  Vue.mixin({
+    created: function () {
+      // 逻辑...
+    }
+    ...
+  })
+
+  // 4. 添加实例方法
+  Vue.prototype.$myMethod = function (methodOptions) {
+    // 逻辑...
+  }
+}
+```
+
+## 使用插件
+
+```javascript
+// 调用 `MyPlugin.install(Vue)`
+Vue.use(MyPlugin)
+```
+
 # 资料：
 https://cn.vuejs.org/v2/guide/index.html

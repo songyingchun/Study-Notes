@@ -10,8 +10,9 @@
 
 <body>
     <div id="box">
-        <my-functional-button functional>
-            <button class="btn btn-primary" v-bind="data.attrs" v-on="listeners">
+        <my-functional-button functional :syc="syc" @click="abc">
+            <button class="btn btn-primary" v-bind="syc" v-on="listeners">
+                123
                 <slot/>
             </button>
         </my-functional-button>
@@ -25,11 +26,25 @@
             render: function (createElement, context) {
                 // 完全透明的传入任何特性、事件监听器、子结点等。
                 return createElement('button', context.data, context.children);
+            },
+            data: function () {
+                return {
+                    
+                }
             }
         })
         new Vue({
             el: '#box',
             data: {
+                syc: {
+                    
+                }
+            },
+            methods: {
+                abc: 
+                    function () {
+                        console.log(123);
+                    }
                 
             }
         })

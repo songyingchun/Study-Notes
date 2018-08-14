@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <my-functional-component>
+            <p slot="foo">
+                first
+            </p>
+            <p>second</p>
+        </my-functional-component>
+    </div>
+    <script src="../../../../js/vue.js">
+
+    </script>
+    <script>
+        Vue.component('my-functional-button', {
+            functional: true,
+            render: function (createElement, context) {
+                // 完全透明的传入任何特性、事件监听器、子结点等。
+                return createElement('button', context.data, context.children);
+            },
+            data: function () {
+                return {
+                    
+                }
+            }
+        })
+        new Vue({
+            el: '#box',
+            data: {
+                syc: {
+                    
+                }
+            },
+            methods: {
+                abc: 
+                    function () {
+                        console.log(123);
+                    }
+                
+            }
+        })
+    </script>
+</body>
+
+</html>
