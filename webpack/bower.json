@@ -1,0 +1,20 @@
+{
+  "name": "webpack",
+  "homepage": "https://github.com/songyingchun/Study-Notes",
+  "authors": [
+    "songyingchun <419973879@qq.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.17.0"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
