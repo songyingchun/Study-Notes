@@ -188,3 +188,52 @@ devServer: {
 ```
 
 3. webpack-dev-middleware
+
+# 模块热替换
+
+## 启用 HMR
+webpack.config.js
+```javascript
+const webpack = require('webpack');
+devServer: {
+    hot: true
+},
+plugins: [
+    new webpack.HotModuleReplacementPlugin()
+]
+```
+index.js
+```js
+if (module.hot) {
+    module.hot.accept(['./print.js'], function () {
+        // console.log('Accepting the updated printMe module!');
+        // printMe();
+    })
+}
+```
+# tree shaking
+
+## 将文件标记为无副作用(side-effect-free)
+package.json
+```js
+"sideEffects": false
+```
+
+## 压缩输出
+```js
+mode: "production"
+```
+
+# 生产环境构建
+
+## 指定环境
+webpack.prod.js
+```js
+new webpack.DefinePlugin({
+   'process.env.NODE_ENV': JSON.stringify('production')
+})
+```
+
+# 代码分离
+
+## 入口起点
