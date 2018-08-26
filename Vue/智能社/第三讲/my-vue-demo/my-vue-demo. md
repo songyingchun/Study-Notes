@@ -1,0 +1,149 @@
+开发工具：
+webpack
+
+核心模块：
+vue
+
+目录结构：  
+    |-App.vue 应用文件入口
+    |-app.js 入口文件
+    |-package.json 工程化配置文件
+    |-postcss.config.js postcss配置文件
+    |-.babelrc
+    |-webpack.common.js
+    |-webpack.dev.js
+    |-webpack.prod.js
+    |-.gitignore
+    |-.eslintrc.js
+    |-src
+        |-common
+            |-images
+            |-script
+            |-style
+            |-plugins
+        |-components
+        |-router
+        |-views
+    |-index.html
+
+package.json 
+```cmd
+npm init --yes
+```
+```js
+{
+    "name": "my-vue-demo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "webpack-dev-server --open"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "clean-webpack-plugin": "^0.1.19",
+        "html-webpack-plugin": "^3.2.0",
+        "webpack": "^4.17.1",
+        "webpack-cli": "^3.1.0",
+        "webpack-dev-server": "^3.1.5"
+    }
+}
+```
+
+webpack.config.js 配置
+开发依赖:
+webpack
+webpack-cli
+webpac-dev-server
+clean-webpack-plugin
+vue-loader
+vue-template-compiler
+css-loader
+vue-style-loader
+sass-loader
+scss-loader
+node-sass
+postcss-loader
+postcss-import
+postcss-preset-env
+postcss-cssnext 
+autoprefixer 
+postcss-px2rem
+cssnano
+sugarss
+html-webpack-plugin
+babel-loader
+babel-core
+babel-preset-env
+ts-loader
+file-loader
+url-loader
+webpack-merge
+uglifyjs-webpack-plugin
+csv-loader 
+xml-loader
+papaparse
+webpack-mainfest-plugin
+pug
+pug-plain-loader
+mini-css-extract-plugin
+eslint
+eslint-loader
+eslint-plugin-vue
+stylelint
+stylelint-plugin-vue
+
+生产依赖：
+vue
+vue-router
+vue-resource
+
+```cmd
+module.exports = {
+    entry: './main.js',
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist')
+    },
+    devtool: 'inline-source-map',
+    plugins:[
+        new HtmlWebpackPlugin(),
+        new CleanWebpackPlugin(['dist'])
+    ]
+}
+```
+
+资料：https://www.webpackjs.com/guides/getting-started/
+
+.babelrc
+```cmd
+{
+    "presets": [
+        "env"
+    ]
+}
+```
+
+.postcss.config.js
+```cmd
+module.exports = {
+    parser: 'sugarss',
+    plugins: {
+        'postcss-import': {},
+        'postcss-preset-env': {},
+        'cssnano': {}
+    }
+}
+```
+
+.gitignore
+```cmd
+preview
+.DS_Store
+node_modules/
+npm-debug.log
+.idea/
+```
