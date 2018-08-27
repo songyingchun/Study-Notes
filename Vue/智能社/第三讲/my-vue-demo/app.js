@@ -4,6 +4,8 @@ import router from 'src/router/router';
 
 const app = new Vue({
     el: 'app',
-    render: x => x(App),
-    router: router
+    components: {
+        App
+    },
+    router
 });

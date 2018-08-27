@@ -23,6 +23,7 @@ vue
             |-plugins
         |-components
         |-router
+            |-router.config.js
         |-views
     |-index.html
 

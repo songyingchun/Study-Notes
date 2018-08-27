@@ -1,16 +1,12 @@
 <template>
     <div class="home">
-        <v-nav></v-nav>
-        home
+        新闻
     </div>
 </template>
 
 <script>
-    import nav from 'components/nav';
     export default {
-        components: {
-            'v-nav': nav,
-        }
+
     }
 </script>
 
