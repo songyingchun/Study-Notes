@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+  class Promise2{
+    constructor(fn){
+      const _this=this;
+      this.__queue=[];
+      this.__succ_res=null;
+      this.__erro_res=null;
+      this.status='';
+      fn(function (...arg){
+        _this.__succ_res=arg;
+        _this.status='succ';
+        _this.__queue.forEach(json=>{
+          json.fn1(...arg);
+        });
+      }, function (...arg){
+        _this.__erro_res=arg;
+        _this.status='error';
+        _this.__queue.forEach(json=>{
+          json.fn2(...arg);
+        });
+      });
+
+      then(fn1, fn2){
+        if(this.status=='succ'){
+          fn1(...this.__succ_res);
+        }else if(...this.__erro_res=='error'){
+          fn2(...this.__error_res);
+        }else{
+          this.__queue.push({fn1, fn2});
+        }
+      }
+    }
+  }
+
+  let p=new Promise2(function (resolve, reject){
+    setTimeout(function(){
+      resolve(12);
+    }, 500)
+  });
+
+  p.then(function (num){
+    alert(num);
+  }, function (){
+    alert('错误');
+  })
+  </script>
+</body>
+</html>

@@ -9,18 +9,20 @@
 </head>
 
 <body>
+    <div>aaa</div>
     <script>
-        function* show(num1, num2) {
+        function* show(a, b) {
             alert('a');
-            let a = yield;
+            console.log(a, b)
+            let c = yield;
+            console.log(c);
             alert('b');
-            alert(a);
-            alert(num1);
         }
 
-        let gen = show(10, 20);
-        gen.next(12);
-        gen.next(5);
+        let obj = show(12, 5);
+
+        let res1 = obj.next();
+        let res2 = obj.next(888);
     </script>
 </body>
 
