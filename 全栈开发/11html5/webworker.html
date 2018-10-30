@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    window.onload=function(){
+      let oBtn=document.getElementById('btn1');
+      let oTxt1=document.getElementById('txt1');
+      let oTxt2=document.getElementById('txt2');
+
+      oBtn.onclick=function(){
+        let n1=parseInt(oTxt1.value);
+        let n2=parseInt(oTxt2.value);
+
+        // 1.创建于进程
+        let w=new Worker('w1.js');
+
+        // 2.发送
+        w.postMessage({n1, n2});
+
+        // 6.接收结果
+        w.onmessage=function(ev){
+          console.log(ev.data);
+        }
+      }
+    }
+  </script>
+  <input type="text" id="txt1">
+  <input type="text" id="txt2">
+  <input type="button" value="计算" id="btn1">
+</body>
+</html>

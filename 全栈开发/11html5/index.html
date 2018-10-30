@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" name="" value="定id" id="btn1">
+  <script>
+    window.onload=function () {
+      let oBtn=document.getElementById('btn1');
+      oBtn.onclick=function(){
+        if(window.navigator.geolocation){
+          var watchID=navigator.geolocation.getCurrentPosition(res=>{},()=>{
+            alert('失败');
+          },{
+            /*
+            enableHighAccuracy,    // 高精度模式
+            timeout,               // 超时间
+            maximumAge             // 缓存
+            */
+            frequency: 1000
+          });
+        }else{
+          alert('不支持定位')
+        }
+        navigator.geolocation.clearWatch(watchID);
+      }
+    }
+  </script>
+</body>
+</html>
