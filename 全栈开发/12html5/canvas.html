@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  body{background:black;text-align:center;}
+  #c1{background:white;}
+  </style>
+</head>
+<body>
+  <script type="text/javascript">
+  window.onload=function(){
+    let oC=document.getElementById('c1');
+    let gd=oC.getContext('2d');
+    // 路径操作-ps里面的选取一样
+    gd.moveTo(100,100);
+    gd.lineTo(300,200);
+    gd.lineTo(130,360);
+    gd.moveTo(100,100);
+    // 描边
+    gd.strokeStyle='red';
+    gd.stroke();
+    // 填充
+    gd.fillStyle='yellow';
+    gd.fill();
+  }
+  </script>
+  <canvas id="c1" width="800" height="600">
+    您的浏览器并不支持，请<a href="http://chrome.com/">下载最新版本</a>
+  </canvas>
+</body>
+</html>

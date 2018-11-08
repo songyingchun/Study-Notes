@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  #div1{
+    width:400px;
+    height:200px;
+    background:#ccc;
+    border:1px solid black;
+    margin: 50px auto 0;
+    text-align:center;
+    line-height:200px;
+  }
+  </style>
+</head>
+<body>
+  <script type="text/javascript">
+    window.onload=function(){
+      let oDiv=document.getElementById('div1');
+      let img1=document.getElementById('img1');
+        //ondragenter 进入
+        //ondragleave 离开
+        //ondragover  悬停
+        //ondrop      松开鼠标，如果dropover不阻止默认事件，drop压根不会发生
+        oDiv.ondragenter=function(){
+          oDiv.innerHTML='释放鼠标';
+        }
+        oDiv.ondragleave=function(){
+          oDiv.innerHTML='将文件拖拽至此区域';
+        }
+        oDiv.addEventListener('dragover',function(ev){
+            console.log('dragover');
+            ev.preventDefault();
+        },false);
+        oDiv.addEventListener('drop',function(ev){
+            ev.preventDefault();
+            let oFile=ev.dataTransfer.files[0];
+            let reader=new FileReader();
+            reader.onload=function(){
+              console.log(this.result);
+              alert(this.result[0]);
+            }
+            reader.onerror=function(){
+              alert('读取失败了')
+            }
+            reader.readAsBinaryString(oFile);
+        },false);
+      }
+  </script>
+  <div id="div1">将文件拖拽至止区域</div>
+  <img src="" id="img1" alt="">
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" value="ajax请求" id="btn1">
+  <input type="text">
+  <script type="text/javascript">
+    window.onload=function(){
+      var oBtn=document.getElementById('btn1');
+      var oF1=document.getElementById('f1');
+      oBtn.onclick=function(){
+        var formData=new FormData();
+        formData.set('f1',oF1);
+        var xhr=new XHRHttpRequest();
+
+        xhr.open('post','1.php',true);
+        xhr.send(formData);
+
+        xhr.onreadystatechange=function(){
+          if(xhr.readyState==4){
+            if(xhr.status>=200&&xhr.status<300 || xhr.status==304){
+              alert(xhr.responseText);
+            }else{
+              alert('错了');
+            }
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
