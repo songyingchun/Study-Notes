@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style media="screen">
+    .box{width:200px;height:200px;background:yellow;text-align:center;line-height:200px;margin:100px auto 0;}
+
+  </style>
+</head>
+<body>
+  <script type="text/javascript">
+  window.onload=function(){
+    let oDiv=document.querySelector('.box');
+
+    let old_ang=45;
+
+    oDiv.addEventListener('touchstart',function(ev){
+      if(ev.targetTouches.length>=2){
+        //2个手指
+        let a=ev.targetTouches[0].clientX-ev.targetTouches[1].clientX;
+        let b=ev.targetTouches[0].clientY-ev.targetTouches[1].clientY;
+
+        let ang=Math.atan2(b,a);
+
+        let startAng=old_ang;
+
+        function fnMove(ev){
+          if(ev.targetTouches.length>=2){
+            let a=ev.targetTouches[0].clientX-ev.targetTouches[1].clientX;
+            let b=ev.targetTouches[0].clientY-ev.targetTouches[1].clientY;
+
+            let ang2=Math.atan2(b,a)*180/Math.PI;
+            old_ang=startAng+ang2-ang;
+            oDiv.style.transform=`rotate(${old_ang+ang2-ang}deg)`;
+          }
+        }
+        function fnEnd(){
+          oDiv.removeEventListener('touchmove',fnMove,false);
+          oDiv.removeEventListener('touchend',fnEnd,false);
+        }
+
+        oDiv.addEventListener('touchmove',fnMove,false);
+        oDiv.addEventListener('touchend',fnEnd,false);
+      }
+
+    },false);
+  }
+  </script>
+  <div class="box">
+    文字各种文字
+  </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    window.onload=function(){
+      let oC=document.getElementById('c1');
+      let gd=oC.getContext('2d');
+
+      let oBtn1=document.getElementById('btn1');
+      let oBtn2=document.getElementById('btn2');
+      let oBtn3=document.getElementById('btn3');
+      let oBtn4=document.getElementById('btn4');
+      let oImg1=document.getElementById('img1');
+      let oImg=new Image();
+      oImg.src='2.jpg';
+      oImg.onload=function(){
+        gd.drawImage(oImg,0,0);
+
+        let imageData=gd.getImageData(0,0,oC.width,oC.height);
+
+        //data[(r*w+c)*4]
+        // 变灰
+        oBtn1.onclick=function(){
+          for(let r=0;r<oC.height;r++){
+            for(let c=0;c<oC.width;c++){
+              let avg=imageData.data[(r*oC.width+c)*4]+imageData.data[(r*oC.width+c)*4+1]+imageData.data[(r*oC.width+c)*4+2];
+              imageData.data[(r*oC.width+c)*4]=imageData.data[(r*oC.width+c)*4+1]=imageData.data[(r*oC.width+c)*4+2]=avg;
+            }
+          }
+
+          gd.putImageData(imageData,0,0);
+        }
+        // 变黄
+        oBtn2.onclick=function(){
+          for(let r=0;r<oC.height;r++){
+            for(let c=0;c<oC.width;c++){
+              let avg=imageData.data[(r*oC.width+c)*4]+imageData.data[(r*oC.width+c)*4+1]+imageData.data[(r*oC.width+c)*4+2];
+              imageData.data[(r*oC.width+c)*4]=imageData.data[(r*oC.width+c)*4+1]=avg;
+              imageData.data[(r*oC.width+c)*4+2]=0;
+            }
+          }
+
+          gd.putImageData(imageData,0,0);
+        }
+        // 变绿
+        oBtn3.onclick=function(){
+          for(let r=0;r<oC.height;r++){
+            for(let c=0;c<oC.width;c++){
+              let avg=imageData.data[(r*oC.width+c)*4]+imageData.data[(r*oC.width+c)*4+1]+imageData.data[(r*oC.width+c)*4+2];
+              imageData.data[(r*oC.width+c)*4+1]=imageData.data[(r*oC.width+c)*4+2]=avg;
+              imageData.data[(r*oC.width+c)*4]=0;
+            }
+          }
+
+          gd.putImageData(imageData,0,0,0,100);
+        }
+        // 原图
+        oBtn4.onclick=function(){
+          let str=oC.toDataURL();
+
+          alert(str);
+          oImg1.src=str;
+        }
+      }
+
+    }
+  </script>
+  <input type="button" name="" value="变灰" id="btn1">
+  <input type="button" name="" value="变黄" id="btn2">
+  <input type="button" name="" value="变绿" id="btn3">
+  <input type="button" name="" value="原图" id="btn4"><br>
+  <canvas id="c1" width="800" height="600"></canvas>
+  <img src="" id="img1" alt="">
+</body>
+</html>

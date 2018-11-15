@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    //2.连接到服务器
+    let ws=new WebSocket('ws://localhost:8080/');
+    ws.onopen=function(){
+      alert('连接已打开');
+    }
+    ws.onmessage=function(){
+
+    }
+    ws.onclose=function(){
+      alert('连接已断开');
+    }
+    ws.onerror=function(){
+      alert('连接出错');
+    }
+  </script>
+</body>
+</html>
