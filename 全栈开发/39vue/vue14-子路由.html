@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript" src="vue.js">
+
+  </script>
+  <script type="text/javascript" src="vue-router.js">
+
+  </script>
+  <script type="text/javascript">
+  window.onload=function(){
+    //1.声明路由
+    let r1=new VueRouter({
+      routes:[
+        {
+          path:'/user/:id',
+          component:{
+            template:
+            `<div>
+              <h4>当前用户：{{$route.params.id}}</h4>
+              <router-view></router-view>
+            </div>
+            `},
+          children:[
+            {
+              path:'info',
+              component:{template: '<div>用户信息</div>'}
+            },
+            {
+              path:'pass',
+              component:{template: '<div>修改密码</div>'}
+            }
+          ]
+        },
+      ]
+    });
+    //2.调用路由
+    let vm=new Vue({
+      el: '#div1',
+      router: r1,
+      methods:{
+
+      }
+    })
+  }
+  </script>
+  <div id="div1">
+    <router-link to="/user/33214/info">用户1信息</router-link>
+    <router-link to="/user/33214/pass">用户1密码</router-link>
+    <router-link to="/user/77512/info">用户2信息</router-link>
+    <router-link to="/user/77512/pass">用户2密码</router-link>
+    <router-view></router-view>
+  </div>
+</body>
+</html>

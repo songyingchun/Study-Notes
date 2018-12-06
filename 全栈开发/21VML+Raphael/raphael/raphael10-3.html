@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript" src="raphael.js">
+
+  </script>
+  <script type="text/javascript">
+    window.onload=function(){
+      let paper=Raphael(0,50,800,600);
+      let path=paper.path('M 100 100 L 200 100 M 100 120 L 200 120 M 100 140 L 200 140');
+      path.attr('stroke-width','10');
+      path.hover(function(){
+        this.animate({'path':'M 100 140 L 200 100 M 150 120 L 150 120 M 100 100 L 200 140'},700,'bounce');
+      },function(){
+        this.animate({'path':'M 100 100 L 200 100 M 100 120 L 200 120 M 100 140 L 200 140'},700,'bounce');
+      })
+    }
+  </script>
+  <!-- <input type="button" id="btn1" value="点击"> -->
+</body>
+</html>

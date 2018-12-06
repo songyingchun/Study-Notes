@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  *{margin:0; padding:0; list-style:none;}
+  #ul1 li{height:30px; position:relative;border:1px solid black;}
+  #ul1 li .content{position:relative;background:white;z-index: 2;line-height: 30px;}
+  #ul1 li .btns{position: absolute;z-index: 1;right: 0;top: 0;line-height: 30px;overflow: hidden;height: 30px;}
+  #ul1 li .a.btn_read{background:blue;color:white;}
+  </style>
+</head>
+<body>
+  <script type="text/javascript" src="hammer.js"></script>
+  <script type="text/javascript">
+    window.onload=function(){
+      let aLi=document.querySelectorAll('#ul1 li');
+      Array.from(aLi).forEach(li=>{
+        let hammer=new Hammer(li);
+
+        let content=li.children[0];
+        let aBtn=li.children[1].children;
+
+        let disX=0;
+        let x=0;
+
+        hammer.on('panstart', function(ev){
+          disX=ev.center.x-x;
+        });
+
+        hammer.on('panmove',function(ev){
+          x=ev.center.x-disX;
+
+          if(x>0){
+            x=0;
+          }else{
+            Array.from(aBtn).forEach(btn=>{
+              btn.style.width=x/2+'px';
+            });
+
+            content.style.transform=`translateX(${x}px)`;
+          }
+        });
+
+        hammer.on('panend',ev=>{
+          if(-x<50){
+            x=0;
+          }else{
+            x=-100;
+            Array.from(aBtn).forEach(btn=>{
+              btn.style.transition=`0.3s all ease`;
+              btn.style.width='50px';
+            });
+          }
+          content.style.transition=`0.3s all ease`;
+          content.style.transform=`translateX(${x}px)`;
+        });
+        
+        content.addEventListener('transitionend',()=>{
+
+        },false);
+      });
+    }
+  </script>
+  <div id="ul1">
+    <li>
+      <div class="content">短信1</div>
+      <div class="btns">
+        <a href="#">删除</a>
+        <a href="#">已读</a>
+      </div>
+    </li>
+    <li>
+      <div class="content">短信2</div>
+      <div class="btns">
+        <a href="#">删除</a>
+        <a href="#">已读</a>
+      </div>
+    </li>
+    <li>
+      <div class="content">短信3</div>
+      <div class="btns">
+        <a href="#">删除</a>
+        <a href="#">已读</a>
+      </div>
+    </li>
+    <li>
+      <div class="content">短信4</div>
+      <div class="btns">
+        <a href="#">删除</a>
+        <a href="#">已读</a>
+      </div>
+    </li>
+    <li>
+      <div class="content">短信5</div>
+      <div class="btns">
+        <a href="#">删除</a>
+        <a href="#">已读</a>
+      </div>
+    </li>
+  </div>
+</body>
+</html>

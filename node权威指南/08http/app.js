@@ -1,0 +1,11 @@
+require('http').createServer().on('request',(req,res)=>{
+  if(req.url!='/favicon.ico'){
+    req.on('data',(data)=>{
+      console.log('服务器接收到数据：'+decodeURIComponent(data));
+    });
+    req.on('end',(data)=>{
+      console.log('客户端请求数据已全部接收完毕');
+    });
+  }
+  res.end();
+}).listen(9000);

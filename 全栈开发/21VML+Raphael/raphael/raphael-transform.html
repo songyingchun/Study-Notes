@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript" src="raphael.js">
+
+  </script>
+  <script type="text/javascript">
+    window.onload=function(){
+      let paper=Raphael(0,50,800,600);
+      let types=['linear','easeIn','easeOut','easeInOut','backIn','backOut','elastic','bounce'];
+      let oBtn=document.getElementById('btn1');
+
+      // 图形
+      let rects=types.map((type,index)=>{
+        var rect=paper.rect(0,60*index,50,50);
+        rect.attr('fill','yellow');
+
+        return rect;
+      });
+
+      //
+      oBtn.onclick=function(){
+        rects.forEach((rect,index)=>{
+          rect.animate({x:600},3000,types[index]);
+        });
+      }
+    }
+  </script>
+  <input type="button" id="btn1" value="点击">
+</body>
+</html>

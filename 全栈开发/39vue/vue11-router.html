@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript" src="vue.js">
+
+  </script>
+  <script type="text/javascript" src="vue-router.js">
+
+  </script>
+  <script type="text/javascript">
+  window.onload=function(){
+    //1.声明路由
+    let r1=new VueRouter({
+      routes:[
+        {path:'/user', component:{template: '<div>用户名</div>'}},
+        {path:'/article', component:{template: '<div>文章列表</div>'}},
+      ]
+    });
+    //2.调用路由
+    let vm=new Vue({
+      el: '#div1',
+      router: r1,
+    })
+  }
+  </script>
+  <div id="div1">
+    <router-link to="/user">用户</router-link>
+    <!-- <a href="#/user">用户</a> -->
+    <router-link to="/article">文章</router-link>
+    <!-- <a href="#/article">文章</a> -->
+    <router-view></router-view>
+  </div>
+</body>
+</html>

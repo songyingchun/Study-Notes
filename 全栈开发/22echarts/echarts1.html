@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .box{width:800px;height:600px;border:1px solid #000;}
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <script type="text/javascript" src="echarts.js">
+
+  </script>
+  <script type="text/javascript">
+  const $=document.querySelectorAll.bind(document);
+  window.onload=function(){
+    let oBox=$('.box')[0];
+    let option = {
+        title:{
+          text:'北京人口',
+          subtext:'2017'
+        },
+        legend:{
+          data:['男','女']
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            name:'男',
+            data: [120, 200, 150, 80, 70, 110, 130],
+            type: 'bar'
+        },{
+            name:'女',
+            data: [120, 200, 150, 80, 70, 110, 130],
+            type: 'bar'
+        }],
+        animationEasing: 'elasticOut'
+    };
+    let charts=echarts.init(oBox);
+    charts.setOption(option);
+  }
+  </script>
+</body>
+</html>

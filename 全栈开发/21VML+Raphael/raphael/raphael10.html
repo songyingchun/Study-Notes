@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript" src="raphael.js">
+
+  </script>
+  <script type="text/javascript">
+    window.onload=function(){
+      let paper=Raphael(0,50,800,600);
+      let rect=paper.rect(100,100,300,200);
+      rect.attr('fill','yellow');
+
+      rect.click(function(){
+        this.animate({'fill':'green'},2000);
+      })
+    }
+  </script>
+  <!-- <input type="button" id="btn1" value="点击"> -->
+</body>
+</html>

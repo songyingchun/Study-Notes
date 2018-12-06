@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    window.onload=function(){
+      let oL=document.getElementById('l1');
+
+      oL.onmouseover=function(){
+        this.style.stroke='yellow';
+      }
+
+      oL.onmouseout=function(){
+        this.style.stroke='yellow';
+      }
+    }
+  </script>
+</head>
+<body>
+  <svg width="800" height="600">
+    <line x1="100" y1="100" x2="400" y2="300" style="stroke:red;stroke-width:20" onmouseover="this.style.stroke='green';"></line>
+  </svg>
+</body>
+</html>

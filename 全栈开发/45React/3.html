@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Hello React!</title>
+<script src="browser.js"></script>
+<!-- <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script> -->
+<!-- <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script> -->
+<script src="react.development.js" charset="utf-8"></script>
+<script src="react-dom.development.js" charset="utf-8"></script>
+</head>
+<body>
+
+<div id="example"></div>
+<script type="text/babel">
+class Test extends React.Component{
+  constructor(...args){
+    super(...args);
+    this.props.a++;
+    this.props.b++;
+  }
+
+  fn(){
+    alert(this.a);
+  }
+
+  render(){
+    return <div>
+        <span>1213</span>
+        <input type="button" value="按钮" onClick={this.fn.bind(this)}/>
+      </div>;
+  }
+}
+
+window.onload=function(){
+  let oDiv=document.getElementById('example');
+  ReactDOM.render(
+      <Test a={12} b={5}></Test>,
+      oDiv
+  );
+}
+</script>
+
+</body>
+</html>

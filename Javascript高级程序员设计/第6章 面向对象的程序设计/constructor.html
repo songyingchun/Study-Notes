@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  // function Test(){}
+  // var constructor=Test.prototype.constructor;
+  // console.log(constructor in Test.prototype);
+  // console.log(Test.prototype.hasOwnProperty('constructor'));
+  // console.log(Object.getOwnPropertyDescriptor(Test.prototype, 'constructor'));
+  // console.log(Object.getOwnPropertyDescriptor(Test.prototype, '__proto__'));
+
+  function Person(){}
+  Person.prototype.sayName=function(){
+    alert(this.name);
+  }
+
+  var friend1 = new Person();
+  // console.log(friend.__proto__);
+  Person.prototype = {
+    constructor: Person,
+    name : "Nicholas",
+    age : 29,
+    job : "Software Engineer",
+    sayName : function () {
+      alert(this.name);
+    }
+  };
+  console.log(friend1.sayName===Person.prototype.sayName);
+  console.log(Object.getPrototypeOf(friend1)===friend1.__proto__);
+  console.log(Object.getPrototypeOf(friend1)===Person.prototype);
+  // console.log(friend1.__proto__===Person.prototype);
+  // console.log(friend.__proto__);
+  
+
+  </script>
+</body>
+</html>

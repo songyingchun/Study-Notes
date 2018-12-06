@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .box{width:800px;height:600px;border:1px solid #000;}
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <script type="text/javascript" src="echarts.js">
+
+  </script>
+  <script type="text/javascript">
+  const $=document.querySelectorAll.bind(document);
+  window.onload=function(){
+    let oBox=$('.box')[0];
+    let option = {
+        title:{
+          text:'北京人口',
+          subtext:'2017'
+        },
+        series: [
+          {
+            type:'pie',
+            name:'学历比例',
+            data:[
+              {name:'小学',value:350},
+              {name:'中学',value:350},
+              {name:'大学',value:350},
+              {name:'硕士',value:350},
+              {name:'博士',value:350},
+            ]
+          }
+        ]
+    };
+    let charts=echarts.init(oBox);
+    charts.setOption(option);
+  }
+  </script>
+</body>
+</html>

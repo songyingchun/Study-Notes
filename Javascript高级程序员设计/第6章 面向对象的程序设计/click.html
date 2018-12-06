@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" value="点击" id="btn1">
+  <script type="text/javascript">
+    let oBtn=document.getElementById('btn1');
+
+    oBtn.onclick=function(e){
+      console.log(e);
+      console.log(MouseEvent.prototype.isPrototypeOf(e));
+      console.log(UIEvent.prototype.isPrototypeOf(e));
+    }
+  </script>
+</body>
+</html>

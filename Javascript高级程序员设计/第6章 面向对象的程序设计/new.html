@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script charset="utf-8">
+    function Test(name,age){
+      this.name=name;
+      this.age=age;
+    }
+    var test1=new Test('syc', 27);
+    console.log(Test, test1);
+    console.log(test1 instanceof Test);
+    // 伪造New
+    function likeTest(name,age){
+      //1.创建新对象
+      var likeThis=Object.create(null);
+      console.log(likeThis);
+      //2.构造函数作用域赋给新对象
+      //i.自定义属性
+      likeThis.name=name;
+      likeThis.age=age;
+      //ii.继承属性
+      likeThis.__proto__=likeTest.prototype;
+      //3.执行函数代码
+      //4.返回新对象
+      return likeThis;
+    }
+
+    var test1=likeTest('syc', 27);
+    console.log(likeTest, test1);
+    console.log(test1 instanceof likeTest);
+
+    // 返回其他类型的对象
+    function Test2(name,age){
+      return [];
+    }
+    console.log(new Test2());
+  </script>
+</body>
+</html>

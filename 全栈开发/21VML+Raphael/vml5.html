@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v="urn:schemas-microsolft-com:vml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  v\:* { behavior: url(#default#VML); position:absolute;}
+  </style>
+</head>
+<body>
+  <v:shape style="width:1000px;height:1000px;" path="M 200 100 L 300 400 100 400 X"></v:shape>
+  <canvas id="canvas"></canvas>
+  <script type="text/javascript">
+    window.onload=function(){
+      var oShape=document.createElement('v:shape');
+
+      oShape.style.width='1000px';
+      oShape.style.height='1000px';
+
+      oShape.path='M 100 100 L 400 100 400 300 100 300 X';
+      document.body.appendChild(oShape);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript" src="raphael.js">
+
+  </script>
+  <script type="text/javascript">
+  window.onload=function(){
+    let paper=Raphael(100,100,800,600);
+
+    //图形
+    let rect=paper.rect(100,100,400,300);
+
+    rect.attr('fill','#CCC');
+
+    //事件
+    function fnClick(){
+      alert('abc');
+      rect.unclick();
+      this.attr({'fill':'red',width:'200',height:'150'});
+    }
+    rect.click(fnClick);
+
+    //样式
+  }
+  </script>
+</body>
+</html>

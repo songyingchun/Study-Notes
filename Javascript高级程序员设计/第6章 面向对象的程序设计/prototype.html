@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Test(){}
+    //1.属性
+    Test.prototype.a=12;
+    //2.方法
+    Test.prototype.run=function(){}
+
+    // console.log({Test});
+    console.log(Test.prototype);
+    // 模拟prototype
+    var obj=Object.create(null);
+    obj.a=12;
+    obj.run=function(){
+
+    }
+    obj.constructor=Test;
+    obj.__proto__=Object.prototype;
+    // console.log(obj);
+    //
+    function Test1(){}
+    Test.prototype.constructor=Test1;
+    Test.prototype=Test1.prototype;
+    Test.prototype.b=5;
+    console.log(Test1.prototype.b);
+    console.log(new Test() instanceof Test)
+    console.log(new Test() instanceof Test1)
+    console.log(Test.prototype.isPrototypeOf(new Test));
+    console.log(Test1.prototype.isPrototypeOf(new Test));
+    console.log(new Test());
+
+    //
+    function Test3(){
+
+    }
+    function Test4(){
+
+    }
+    Test4.prototype=new Test3;
+    var test4=new Test4();
+    console.log(test4 instanceof Test3);
+    console.log(test4 instanceof Test4);
+    console.log(Test3.prototype.isPrototypeOf(new Test4));
+    console.log(Test4.prototype.isPrototypeOf(new Test4));
+
+    function Test5(){
+
+    }
+    function Test6(){
+
+    }
+    for(var key in Test6.prototype){
+      Test5.prototype[key]=Test6.prototype[key];
+    }
+    Test5.prototype.constructor=Test6.prototype.constructor;
+    Test5.prototype.__proto__=Test6.prototype.__proto__;
+    console.log(Test5.prototype,Test6.prototype);
+    console.log(new Test5() instanceof Test5)
+    console.log(new Test5() instanceof Test6)
+    console.log(Test5.prototype.isPrototypeOf(new Test5));
+    console.log(Test6.prototype.isPrototypeOf(new Test5));
+  </script>
+</body>
+</html>

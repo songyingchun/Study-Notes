@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+  // ES7
+  let json={};    // 被监控
+  let p=new Proxy(json,{
+    get(){
+      alert('有人获取东西')
+    },
+    set(){
+      alert('有人要设置东西')
+    }
+  });
+  p.a=12;
+  </script>
+</body>
+</html>
