@@ -1,10 +1,8 @@
 <template>
     <div id="app" data-attr="inner-app">
         <!-- element测试 -->
-        <form-test>
-
-        </form-test>
-
+        <form-test :title="titleVar"></form-test>
+        <k-button @lalala="handleClick"></k-button>
         <Win>
             <template slot="head">
                 head
@@ -14,11 +12,7 @@
             <template slot="foot">
                 foot
             </template>
-            
         </Win>
-
-        <img alt="Vue logo" src="./assets/logo.png">
-        <HelloWorld msg="Welcome to Your Vue.js App" />
         <!-- 条件语句 -->
         <p v-if="showName">{{name}}</p>
         <!-- 循环语句 -->
@@ -37,11 +31,17 @@
     import HelloWorld from './components/HelloWorld.vue'
     import Cart from './components/Cart.vue';
     import FormTest from './components/FormTest.vue';
+    import KButton from './components/Button.vue';
     import axios from 'axios';
     import Win from './components/Win.vue';
 
     export default {
         name: 'app',
+        provide () {
+            return {
+                someValue: '来自'
+            }
+        },
         data() {
             return {
                 name: '开课吧购物中',
@@ -49,13 +49,16 @@
                 text: '',
                 goods: [
                     
-                ]
+                ],
+                titleVar: '',
+                foo: {bar: 1}
             }
         },
         components: {
             HelloWorld,
             Cart,
             FormTest,
+            KButton,
             Win
         },
         async created() {
@@ -69,6 +72,9 @@
                 //获取goods中对应项
                 const good = this.goods[i];
                 this.$bus.$emit('addCart', good, this.$bus);
+            },
+            handleClick(obj) {
+                console.log(obj);
             }
         }
     }
